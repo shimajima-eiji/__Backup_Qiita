@@ -1,0 +1,2 @@
+# GithubPages_Household202201
+とりあえずサクッと公開できる環境を整備
