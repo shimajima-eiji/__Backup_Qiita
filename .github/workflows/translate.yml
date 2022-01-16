@@ -18,7 +18,7 @@ jobs:
       # リポジトリ内のファイルをwebpに変換する。
       # 後で使うのでteeで結果とファイルを出力している
       - name: run curl
-        run: curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/main/for_WSL/translate.sh | sh -s -- README.md | tee translate.log
+        run: curl -sf https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/shimajima-eiji-patch-1/for_WSL/translate.sh | sh -s -- README.md | tee translate.log
         
       # webp変換した場合のみ処理する
       - name: Commit files
