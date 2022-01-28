@@ -20,6 +20,7 @@ jobs:
       - name: curl
         run: |
           curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/translate/translate_path.py >run.py 
+          cat run.py
           ls
 
       - name: 翻訳
