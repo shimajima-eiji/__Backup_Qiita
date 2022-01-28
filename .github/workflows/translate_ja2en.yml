@@ -12,14 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run a one-line script
+      - name: 環境構築
         run: |
           sudo apt install python3 pip curl
           pip install requests pathlib git+https://github.com/alainrouillon/py-googletrans@feature/enhance-use-of-direct-api googletrans==4.0.0-rc1
 
-      - name: Run a multi-line script
+      - name: curl
         run: |
           curl -sf https://raw.githubusercontent.com/shimajima-eiji/__Operation-Maintenance/main/translate/translate_path.py >run.py 
+          ls
+
+      - name: 翻訳
+        run: |
           python3 run.py https://script.google.com/macros/s/{{ secrets.GASID }}/exec .
           rm run.py
           
