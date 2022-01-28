@@ -26,7 +26,7 @@ jobs:
       - name: 翻訳
         run: |
           pwd
-          python3 run.py https://script.google.com/macros/s/{{ secrets.GASID }}/exec $(pwd)
+          python3 run.py "https://script.google.com/macros/s/${{ secrets.GASID }}/exec" "$(pwd)"
           rm run.py
           
           ls
