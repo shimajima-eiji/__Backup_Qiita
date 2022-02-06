@@ -1,2 +1,3 @@
-# Github Pages content
-Since it takes too long to execute the translation script, change to the operation to store the file under docs
+# Development · Debugging repository
+We will mainly develop in this repository.
+You can also use Github Pages for HTML debugging.
