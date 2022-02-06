@@ -24,7 +24,7 @@ jobs:
           
       - name: 翻訳
         run: |
-          python3 run.py "https://script.google.com/macros/s/${{ secrets.GASID }}/exec" "$(pwd)"
+          python3 run.py "https://script.google.com/macros/s/${{ secrets.GASID }}/exec" "$(pwd)/${{ secrets.TRANSLATE_PATH }}"
           echo "[exist check] _en.file"
           ls
           echo
