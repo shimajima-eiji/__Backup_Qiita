@@ -1,0 +1,59 @@
+<p>こんな感じですかね。</p>
+
+<div class="code-frame" data-lang="python"><div class="highlight"><pre><code><span class="n">cache</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">(</span><span class="s">'input num: '</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">'登録済み'</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cache</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">'登録しました'</span>
+    <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="nb">EOFError</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="k">print</span> <span class="n">cache</span>
+</code></pre></div></div>
+
+<hr>
+
+<blockquote>
+<p>例ではprintで濁していますが、順番を気にし始めるとややこしくなりそうな気がしました。以下サイトも参考にしてやってみます。</p>
+</blockquote>
+
+<p>順序を気にするのなら組み込み辞書も不適かと。</p>
+
+<hr>
+
+<blockquote>
+<p>ご指摘のTrue/Falseはif notを使わないように配慮したのと、== Falseを書いて== Trueを書かないのが気持ち悪く感じたぐらいです。</p>
+</blockquote>
+
+<p>複合的な条件ならまだしも、単項の条件式でnotを使いたくないというのはよく分かりません。<br>
+どうしてもnotを使いたくないのなら、処理の順序を逆転させればよかったのでは。</p>
+
+<div class="code-frame" data-lang="python"><div class="highlight"><pre><code><span class="k">def</span> <span class="nf">uniq</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cache</span><span class="p">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cache</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<p>個人的には可読性以上に、無駄な比較が生じることが気になります。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>(Python27)&gt;python -m timeit "True"
+10000000 loops, best of 3: 0.0255 usec per loop
+
+(Python27)&gt;python -m timeit "True == True"
+10000000 loops, best of 3: 0.0581 usec per loop
+</code></pre></div></div>
+
+<hr>
+
+<p><a href="https://qiita.com/nomurasan/items/492e10e3a534eae8fca1" id="reference-7811650f0d183c490470">直前の記事</a>も拝見しましたが、Python3.xならば<a href="https://docs.python.jp/3/library/functools.html#functools.lru_cache" rel="nofollow noopener" target="_blank">functools.lru_cache</a>で解決しそうな内容ですね。</p>
+
+<p>引数がハッシュ可能である必要があるのでリストは放り込めませんが...<br>
+引数に破壊的な操作をしなくて良いのであれば、タプルにしてしまえばよいかと。</p>

@@ -1,0 +1,119 @@
+<p>掲題の要望自体はタスクスケジューラを使えばできます。<br>
+ここではwindowsバッチで書いてますが、exeに引数渡していい感じに使えるならそうしましょう。</p>
+
+<h1>
+<span id="やりかた" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%8B%E3%81%9F"><i class="fa fa-link"></i></a>やりかた</h1>
+
+<p>windowsスタートメニュー<br>
+→全てのプログラム<br>
+　→アクセサリ<br>
+ 　　→システムツール<br>
+   　　→タスクスケジューラ</p>
+
+<p>タスクスケジューラライブラリ上で右クリックし、基本タスクを作成します。</p>
+
+<p>1.名前。なんでもいいです<br>
+2.トリガー。見たままです。ここではテストをするので、リアルタイムに近い場所を設定しておきましょう。<br>
+3.操作。プログラムの開始→それぞれ設定します。デスクトップにショートカット張ってプロパティ設定して動いたらそれを入れてください。<br>
+4.実際に動くことを確認してください。<br>
+5.動くことを確認できたらトリガーを指定時間にします。</p>
+
+<h1>
+<span id="使用例" class="fragment"></span><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B"><i class="fa fa-link"></i></a>使用例</h1>
+
+<p>たとえば、お子さまにパソコンを使わせたいけど、時間を過ぎたら強制的に落として寝かせる、という運用を考えた場合、以下の運用をするといいです。</p>
+
+<p>まずはお子さまがパソコンを使うためには、親がログインしてあげるという運用対処を行います。（ここでは説明を省略します）<br>
+次に強制的にマシンを落とすものを作りましょう。</p>
+
+<div class="code-frame" data-lang="bat">
+<div class="code-lang"><span class="bold">shutdown.bat</span></div>
+<div class="highlight"><pre><code><span class="nb">shutdown</span> <span class="na">-s -t </span><span class="m">0</span>
+</code></pre></div>
+</div>
+
+<p>これは、実行すると即時シャットダウンをします。<br>
+動かすときは他のプログラムが起動していないことを確認してください。</p>
+
+<p>念のため、テスト用のファイルを置いておきます。</p>
+
+<div class="code-frame" data-lang="bat">
+<div class="code-lang"><span class="bold">test.bat</span></div>
+<div class="highlight"><pre><code><span class="nb">echo</span> <span class="s2">"実行完了"</span>
+<span class="nb">pause</span>
+</code></pre></div>
+</div>
+
+<p>タスクスケジューラからtest.batのフルパスを設定して、実行完了が表示されれば成功です。<br>
+shutdown.batにパスを変えて、そちらも動くことを確認してみましょう。<br>
+（実行したらパソコンが落ちますので、他のアプリケーションは終了させておきます）</p>
+
+<h1>
+<span id="応用編" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8%E7%B7%A8"><i class="fa fa-link"></i></a>応用編</h1>
+
+<p>というか本編。<br>
+同じようにファイルを定期的にバックアップする仕組みを作っておきます。<br>
+gitとかsvnが出てる中でこんなアホな事をするのはどうなんだ？と思うんですが、サードパーティーを入れられない環境もあります。<br>
+前時代的ではありますが、いつか困るだろうなので備忘録として残してます。</p>
+
+<div class="code-frame" data-lang="bat">
+<div class="code-lang"><span class="bold">backup.bat</span></div>
+<div class="highlight"><pre><code><span class="c">rem batで実行。powershellなり他のが使えるならその方がいい。</span>
+<span class="c">rem 宗教戦争になるが、よく分からない場合はperlオススメ</span>
+
+@echo <span class="na">off</span>
+<span class="k">if</span> <span class="s2">"</span><span class="err">%</span><span class="s2">~1"</span> <span class="o">==</span> <span class="s2">"download"</span> <span class="k">goto</span> <span class="kd">download</span>
+<span class="k">if</span> <span class="s2">"</span><span class="err">%</span><span class="s2">~1"</span> <span class="o">==</span> <span class="s2">"upload"</span> <span class="k">goto</span> <span class="kd">upload</span>
+<span class="k">exit</span>
+
+<span class="c">rem dateで取得する時にファイル名に使えないアレコレをYYYYmmddにする</span>
+<span class="kd">set</span> <span class="kd">day</span><span class="o">=</span><span class="vm">%date</span>:<span class="o">~</span><span class="m">0</span><span class="o">,</span><span class="m">4</span><span class="vm">%%date</span>:<span class="o">~</span><span class="m">5</span><span class="o">,</span><span class="m">2</span><span class="vm">%%date</span>:<span class="o">~</span><span class="m">8</span><span class="o">,</span><span class="m">2</span><span class="err">%</span>
+
+<span class="kd">set</span> <span class="kd">backupfromF</span><span class="o">=</span><span class="s2">"バックアップ元フォルダ"</span>
+<span class="kd">set</span> <span class="kd">backuptoF</span><span class="o">=</span><span class="s2">"バックアップ先フォルダ"</span>
+
+<span class="c">rem バックアップ先を日付管理などで保存。いい感じに改変推奨</span>
+<span class="nl">:download</span>
+<span class="nb">mkdir</span> <span class="nv">%backuptoF%</span>\<span class="nv">%day%</span>
+<span class="nb">xcopy</span> <span class="na">/e </span><span class="nv">%backupfromF%</span> <span class="nv">%backuptoF%</span>\<span class="nv">%day%</span>
+<span class="k">exit</span>
+
+<span class="c">rem バックアップ元に復元する。こっちは特に意識していない</span>
+<span class="nl">:upload</span>
+<span class="nb">xcopy</span> <span class="na">/e </span><span class="nv">%backuptoF%</span>\<span class="nv">%day%</span> <span class="nv">%backupfromF%</span>
+<span class="k">exit</span>
+</code></pre></div>
+</div>
+
+<h1>
+<span id="注意というか忠告" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F%E3%81%A8%E3%81%84%E3%81%86%E3%81%8B%E5%BF%A0%E5%91%8A"><i class="fa fa-link"></i></a>注意、というか忠告</h1>
+
+<p>タスクスケジューラやcronでrmコマンドを実施するのは心底おススメしません。<br>
+renameとかmvで保持しておいて、本当に削除して大丈夫なのか、確認しましょう。</p>
+
+<h1>
+<span id="大事なことなのでもう一度" class="fragment"></span><a href="#%E5%A4%A7%E4%BA%8B%E3%81%AA%E3%81%93%E3%81%A8%E3%81%AA%E3%81%AE%E3%81%A7%E3%82%82%E3%81%86%E4%B8%80%E5%BA%A6"><i class="fa fa-link"></i></a>大事なことなのでもう一度</h1>
+
+<p>batでやるならshell系使える環境を作って、そっちでやった方がいいと、個人的には思います。<br>
+Windowsならpowershellとか、そういうのを使うと文字列処理などでぐぬぬする事が比較的少ないと思います。</p>
+
+<h1>
+<span id="20171130-別解windows-subsystem-for-linux" class="fragment"></span><a href="#20171130-%E5%88%A5%E8%A7%A3windows-subsystem-for-linux"><i class="fa fa-link"></i></a>[2017/11/30] 別解　Windows Subsystem for Linux</h1>
+
+<p>この記事を見ている人はLinuxに慣れてる人だと思うので、こういうのはアリだと思います。<br>
+クライアントがWindows10 Pro版だよ～って人はこっちが断然オススメ！</p>
+
+<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/95837a309f4bc8a0dbae"></qiita-embed-ogp></p>
+
+<h1>
+<span id="20211207-別解-windows-subsystem-for-linux" class="fragment"></span><a href="#20211207-%E5%88%A5%E8%A7%A3-windows-subsystem-for-linux"><i class="fa fa-link"></i></a>[2021/12/07] 別解 Windows Subsystem for Linux</h1>
+
+<p>WSLにcron入れる必要なくね？という当たり前の事に当時気付きませんでした。<br>
+「これ(batからshellファイルを実行させる)をするんだ！」という目線で考えると視野が狭まって良くないですね。。</p>
+
+<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/68a5ee741eb04ab50714"></qiita-embed-ogp></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

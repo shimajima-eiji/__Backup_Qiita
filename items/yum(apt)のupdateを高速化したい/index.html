@@ -1,0 +1,89 @@
+<p>Dockerコンテナを建てる時にとりあえず入れている<br>
+<code><br>
+yum update &amp;&amp; yum -y upgrade<br>
+</code><br>
+を、コンテナを作るたびに実施させていたら、これだけで時間を多く取られる事になります。<br>
+また、実行したタイミングによって、開発中も保守中も常にバージョンが安定しない可能性があるので、これを解消しようという狙いです。<br>
+Dockerfile自体はgitなりでバージョンを管理している想定です。</p>
+
+<h1>
+<span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h1>
+
+<p><a href="https://orebibou.com/2015/04/ubuntu-server-14-04-lts%E3%81%A7apt%E3%82%B5%E3%83%BC%E3%83%90apt%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%83%9F%E3%83%A9%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="autolink" rel="nofollow noopener" target="_blank">https://orebibou.com/2015/04/ubuntu-server-14-04-ltsでaptサーバaptリポジトリミラーサーバを構築/</a><br>
+<a href="https://yosida95.com/2013/05/19/003744.html" class="autolink" rel="nofollow noopener" target="_blank">https://yosida95.com/2013/05/19/003744.html</a><br>
+を参考に進めてます。</p>
+
+<p>作業をする前に136GB以上の容量を確保しておく、ぐらいでしょうか。<br>
+構築時に恐ろしく時間が掛かるので、気長にやりましょう。</p>
+
+<p>構築自体は難しくないんですが、運用を考えた時に落とし穴が多いので、その話を。</p>
+
+<h1>
+<span id="運用のイメージについて" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E3%81%AE%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>運用のイメージについて</h1>
+
+<h2>
+<span id="yumaptのミラーをローカルに持つ" class="fragment"></span><a href="#yumapt%E3%81%AE%E3%83%9F%E3%83%A9%E3%83%BC%E3%82%92%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AB%E6%8C%81%E3%81%A4"><i class="fa fa-link"></i></a>yum(apt)のミラーをローカルに持つ</h2>
+
+<p>このコンテナ（サーバー）でupdate &amp;&amp; upgradeを実施するタイミングを管理するために準備する。<br>
+実施タイミングが手動なら手動でも良いでしょう。</p>
+
+<h2>
+<span id="lan内のコンテナはyumaptを見るようにする" class="fragment"></span><a href="#lan%E5%86%85%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AFyumapt%E3%82%92%E8%A6%8B%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>LAN内のコンテナはyum(apt)を見るようにする</h2>
+
+<p>外のサーバーにデータを取りに行くのと比べるまでもなく速くなりました。<br>
+また、例えば1時間ずれただけでバージョンが更新されていた、なんてウッカリもないです。<sup id="fnref1"><a href="#fn1" title="バージョンの差異はない：aptサーバーが同期してるので運用を間違えなければおかしくならないはず。">1</a></sup></p>
+
+<h2>
+<span id="普通にyumapt" class="fragment"></span><a href="#%E6%99%AE%E9%80%9A%E3%81%AByumapt"><i class="fa fa-link"></i></a>普通にyum(apt)</h2>
+
+<p>サクッと書いてますが、ちゃんと切り替え出来てるよね？という確認をしたい場合は一時的にyum(apt)サーバーのバージョンを古くして、そちらと同じバージョンになっている事を確認する必要があります。<br>
+あるいは、一週間寝かすぐらいがいいと思います。</p>
+
+<p>が、本記事としては、そんな確認のために時間を掛けるよりは、起こっちゃったら環境を作り直したほうがなんぼか早いんじゃないでしょうか？<br>
+取り返しがつく範囲での運用が前提です。<sup id="fnref2"><a href="#fn2" title="取り返しがつく運用：データは割れ物だと思って運用してほしいものです…">2</a></sup></p>
+
+<h1>
+<span id="サーバーをupdateした場合" class="fragment"></span><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92update%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>サーバーをupdateした場合</h1>
+
+<p>運用として、</p>
+
+<ul>
+<li>全部updateする</li>
+<li>来るべき時まで触らない</li>
+</ul>
+
+<p>が考えられますが、さっさと上げてバグ取りした方が有意義な気がします。<br>
+というのも、いつの間にかバージョンが大きく変わって修正箇所が大量に！なんてことも考えられるからです。<sup id="fnref3"><a href="#fn3" title="全然メンテされてない某バージョン管理サーバーのバージョンアップが恐ろしく大変だったのも、今となってはいい思い出">3</a></sup><br>
+サーバーの数が多ければ多いほど大変な作業になります。<br>
+<strong>ウッカリupdate &amp;&amp; upgradeが出来たから大丈夫、と思って運用を継続すると気付かないところにバグがあった、なんてことも。</strong><br>
+１サーバーずつupdate &amp;&amp; upgradeして、運用に問題がない事を確認した方が安全です。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p><a href="https://orebibou.com/2015/04/ubuntu-server-14-04-lts%E3%81%A7apt%E3%82%B5%E3%83%BC%E3%83%90apt%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%83%9F%E3%83%A9%E3%83%BC%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="autolink" rel="nofollow noopener" target="_blank">https://orebibou.com/2015/04/ubuntu-server-14-04-ltsでaptサーバaptリポジトリミラーサーバを構築/</a><br>
+<a href="https://yosida95.com/2013/05/19/003744.html" class="autolink" rel="nofollow noopener" target="_blank">https://yosida95.com/2013/05/19/003744.html</a></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>バージョンの差異はない：aptサーバーが同期してるので運用を間違えなければおかしくならないはず。 <a href="#fnref1">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>取り返しがつく運用：データは割れ物だと思って運用してほしいものです… <a href="#fnref2">↩</a></p>
+</li>
+
+<li id="fn3">
+<p>全然メンテされてない某バージョン管理サーバーのバージョンアップが恐ろしく大変だったのも、今となってはいい思い出 <a href="#fnref3">↩</a></p>
+</li>
+
+</ol>
+</div>

@@ -1,0 +1,48 @@
+<p><a href="">似たようなタイトルの記事</a><sup id="fnref1"><a href="#fn1" title="【同リンク有】似たようなタイトルの記事：Windows(10 pro)でGitlabを運用したいのでDocker for Windowsで環境を作ってみたけど運用できなかった話">1</a></sup>を書いてますが、今回はアプローチを変えてチャレンジしました。<br>
+今度はDocker for WindowsではなくてBash on Ubuntu on Windowsです。要は「既にGitlabがサポートする<sup id="fnref2"><a href="#fn2" title="Gitlabがサポートするディストリビューション：厳密に言うと純正のUbuntuではないので対象外だと思います。">2</a></sup>ディストリビューションがあるんだからそれを使おう」</p>
+
+<h1>
+<span id="windows10-proでgitlabを運用したいのでbash-on-ubuntu-on-windowsで環境を作ってみた" class="fragment"></span><a href="#windows10-pro%E3%81%A7gitlab%E3%82%92%E9%81%8B%E7%94%A8%E3%81%97%E3%81%9F%E3%81%84%E3%81%AE%E3%81%A7bash-on-ubuntu-on-windows%E3%81%A7%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F"><i class="fa fa-link"></i></a>Windows(10 pro)でGitlabを運用したいのでBash on Ubuntu on Windowsで環境を作ってみた</h1>
+
+<p>結論からいうと、なんか上手くいってるっぽいんですがipからのログインが出来ませんでした。</p>
+
+<div class="code-frame" data-lang="shell">
+<div class="code-lang"><span class="bold">commands.sh</span></div>
+<div class="highlight"><pre><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>curl openssh-server ca-certificates postfix
+curl <span class="nt">-s</span> https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | <span class="nb">sudo </span>bash
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>gitlab-ce
+<span class="nb">sudo </span>gitlab-ctl reconfigure
+</code></pre></div>
+</div>
+
+<p>なんか出来そうな気がするんですが……</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p><qiita-embed-ogp src="https://about.gitlab.com/installation/#ubuntu"></qiita-embed-ogp></p>
+
+<h1>
+<span id="類似記事" class="fragment"></span><a href="#%E9%A1%9E%E4%BC%BC%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>類似記事</h1>
+
+<p><a href="https://qiita.com/nomurasan/items/a4291f5a18f3b6cc1525" id="reference-5edaffb0597ffc85331e">Windows(10 pro)でGitlabを運用したいのでVagrant+VirtualBoxで環境を作って運用できた話</a><br>
+<a href="https://qiita.com/nomurasan/items/a2cdaa55aa00fd44e29e" id="reference-2d1aecf61671e48fe3b6">Windows(10 pro)でGitlabを運用したいのでDocker for Windowsで環境を作ってみたけど運用できなかった話</a><br>
+【ココ】Windows(10 pro)でGitlabを運用したいのでBash on Ubuntu on Windowsで環境を作ってみたけど運用できなかった話</p>
+
+<h1>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h1>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【同リンク有】<a href="">似たようなタイトルの記事：Windows(10 pro)でGitlabを運用したいのでDocker for Windowsで環境を作ってみたけど運用できなかった話</a> <a href="#fnref1">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>Gitlabがサポートするディストリビューション：厳密に言うと純正のUbuntuではないので対象外だと思います。 <a href="#fnref2">↩</a></p>
+</li>
+
+</ol>
+</div>

@@ -1,0 +1,153 @@
+<p>SeleniumBuilderがFirefox48系に淘汰されたため、これを機会にIDEに乗り換えることにしました。<br>
+とはいえ、既存のシステムを改修する必要があるため、色々と問題になりそうな部分を調査してみます。</p>
+
+<p>今回のテーマはこちら</p>
+
+<ul>
+<li>フレームの切り替え</li>
+<li>ウィンドウ(タブ含む）の切り替え</li>
+</ul>
+
+<p>たぶん沼だと思います。</p>
+
+<h1>
+<span id="前提条件" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><i class="fa fa-link"></i></a>前提条件</h1>
+
+<p>フロントをFrameで作るな！<br>
+と言いたい所ですが、これは出来ないものとしてください…</p>
+
+<h1>
+<span id="調査環境" class="fragment"></span><a href="#%E8%AA%BF%E6%9F%BB%E7%92%B0%E5%A2%83"><i class="fa fa-link"></i></a>調査環境</h1>
+
+<ul>
+<li>Firefox46.0.1</li>
+<li>SeleniumIDE2.1.1.1-signed</li>
+<li>SeleniumBuilder2.3.5</li>
+</ul>
+
+<h1>
+<span id="本題フレーム" class="fragment"></span><a href="#%E6%9C%AC%E9%A1%8C%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0"><i class="fa fa-link"></i></a>本題：フレーム</h1>
+
+<p>ログインしてその先のフレームページのリンクをクリックして<br>
+フレームのレイアウトイメージとしてはこんな感じ</p>
+
+<ul>
+<li>(root)
+
+<ul>
+<li>main
+
+<ul>
+<li>nav</li>
+<li>contains</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>思わず画面ごと叩き割りたくなりますが、ここはぐっと堪えます。<br>
+こういうレイアウトの画面に対してSeleniumIDEからアプローチします。</p>
+
+<p>（作るのが面倒だったので某サイトさまのページレイアウトをローカルに作成して使用しています）</p>
+
+<h2>
+<span id="selenium-ide" class="fragment"></span><a href="#selenium-ide"><i class="fa fa-link"></i></a>Selenium IDE</h2>
+
+<p><a href="https://camo.qiitausercontent.com/fa371d64a4a1dd2fc4c26123c531f667d3499437/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f36316139336430372d396536322d356534652d323661342d3362396163316133396135302e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F61a93d07-9e62-5e4e-26a4-3b9ac1a39a50.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=e2b622b10b04c82efae98882503dd616" alt="ide.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/61a93d07-9e62-5e4e-26a4-3b9ac1a39a50.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F61a93d07-9e62-5e4e-26a4-3b9ac1a39a50.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=fa46821e49aaa9081fb1087f32bdc17a 1x" loading="lazy"></a></p>
+
+<h2>
+<span id="selenium-builder" class="fragment"></span><a href="#selenium-builder"><i class="fa fa-link"></i></a>Selenium Builder</h2>
+
+<p><a href="https://camo.qiitausercontent.com/a6fa550065909ec8dadd70af46468c9ffa5190bb/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f62616261623331382d303435622d366232352d373236332d6230616332303565353332662e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbabab318-045b-6b25-7263-b0ac205e532f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c2c790601d68087b375c187943b1e056" alt="builder.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/babab318-045b-6b25-7263-b0ac205e532f.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbabab318-045b-6b25-7263-b0ac205e532f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=7743d5029c53913b6fed56c1597b3f12 1x" loading="lazy"></a></p>
+
+<h1>
+<span id="本題ウィンドウ" class="fragment"></span><a href="#%E6%9C%AC%E9%A1%8C%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6"><i class="fa fa-link"></i></a>本題：ウィンドウ</h1>
+
+<p>では、同じようにウィンドウを使ってみましょう。</p>
+
+<h2>
+<span id="selenium-ide-1" class="fragment"></span><a href="#selenium-ide-1"><i class="fa fa-link"></i></a>Selenium IDE</h2>
+
+<p>色々やってうまくいかなかったので、秘伝のタレをいただきました！<br>
+<a href="http://blog.mogya.com/2009/07/selenuimtarget-blank.html" rel="nofollow noopener" target="_blank">もぎゃろぐ さま</a></p>
+
+<p><a href="https://camo.qiitausercontent.com/b32388b6fe562772ea192d7d099882c3ce62ad93/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f66326231343531322d306534312d343534632d313834622d3931393639323764313939642e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ff2b14512-0e41-454c-184b-9196927d199d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=46ae452c2d0c5231b9f2b12baef639b6" alt="windowide.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/f2b14512-0e41-454c-184b-9196927d199d.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ff2b14512-0e41-454c-184b-9196927d199d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=7e9628d4a0747169623706cbff012483 1x" loading="lazy"></a></p>
+
+<h2>
+<span id="selenium-builder-1" class="fragment"></span><a href="#selenium-builder-1"><i class="fa fa-link"></i></a>Selenium Builder</h2>
+
+<p>コツはswitchToWindowByIndex。ウィンドウの変更ではうまく出来ません（名前がないため）<br>
+<a href="https://camo.qiitausercontent.com/b41faa7b38e03743d59b79765a68ae5f57cbe050/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f35613563363832312d666432662d383135342d363334632d3866323666396631666564312e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5a5c6821-fd2f-8154-634c-8f26f9f1fed1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=48e4b61e4ed1d927f081f488c4de0e92" alt="windowbuilder.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/5a5c6821-fd2f-8154-634c-8f26f9f1fed1.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5a5c6821-fd2f-8154-634c-8f26f9f1fed1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=85f14e4e860b5915090a4999c77b0203 1x" loading="lazy"></a></p>
+
+<p>とりあえずこれで行けるっちゃ行けます。<br>
+たぶん秘伝のタレをいい感じに使えばBuilderでも使えるんじゃないでしょうか。<br>
+（需要があるかどうかは別として）</p>
+
+<p>とはいえ、フレームやウィンドウの処理はホント魔窟です…<br>
+可能ならdivなりsectionなりで組み替えて欲しいです…</p>
+
+<h1>
+<span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h1>
+
+<p>ビデンスを取得するという意味では、これらの方法では結構怪しいです。<br>
+試しに取れるのか検証してみました。<br>
+（面倒なのでこれまたコンテンツ丸コピしちゃってます。画面が見えるとアレなのでなんとなく雰囲気を感じ取ってください）</p>
+
+<h2>
+<span id="frame" class="fragment"></span><a href="#frame"><i class="fa fa-link"></i></a>frame</h2>
+
+<h3>
+<span id="selenium-ide-2" class="fragment"></span><a href="#selenium-ide-2"><i class="fa fa-link"></i></a>Selenium IDE</h3>
+
+<p>キャプチャソースです。<br>
+<a href="https://camo.qiitausercontent.com/1bd81cf0502480821c25ad5bfc2b164c5bdaa866/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f37653731643665392d333366392d636534372d646465382d3335656162346635626138302e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7e71d6e9-33f9-ce47-dde8-35eab4f5ba80.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b5578504d3c94a2740a6f9f3d87f6b44" alt="captIDE.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/7e71d6e9-33f9-ce47-dde8-35eab4f5ba80.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7e71d6e9-33f9-ce47-dde8-35eab4f5ba80.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=7ca9d21c6db791bfd9c0bfcd5005aa3e 1x" loading="lazy"></a></p>
+
+<p>outframe<br>
+<a href="https://camo.qiitausercontent.com/636ccbaeb0078cfc6dc07ffcc01653e9e7eecc7d/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f62616362633637372d376532372d643166342d626134322d3639633530333733616363352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbacbc677-7e27-d1f4-ba42-69c50373acc5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=646f6188b4e8edf00db62dbecf4cb31e" alt="outframe.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/bacbc677-7e27-d1f4-ba42-69c50373acc5.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbacbc677-7e27-d1f4-ba42-69c50373acc5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=b3f63e7dbd5080479678be109da19eb1 1x" loading="lazy"></a></p>
+
+<p>inframe<br>
+<a href="https://camo.qiitausercontent.com/2631ddbdf200822ce9565c4b730695fdda38c5b4/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f31663033353863372d353337342d306638382d333662312d3333373038303731393132632e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F1f0358c7-5374-0f88-36b1-33708071912c.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b7fe93086a64e1825b83b41e5c800db1" alt="inframe.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/1f0358c7-5374-0f88-36b1-33708071912c.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F1f0358c7-5374-0f88-36b1-33708071912c.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=0cd868f5d125a96b4fe0969c31f0ce59 1x" loading="lazy"></a></p>
+
+<p>何となく分かりますかね？<br>
+outframeの外側がinframeに見つからないのを雰囲気で感じてもらえれば。</p>
+
+<h3>
+<span id="selenium-builder-2" class="fragment"></span><a href="#selenium-builder-2"><i class="fa fa-link"></i></a>Selenium Builder</h3>
+
+<p>こちらはどのパターンでもIDEのoutframeと同じ結果を返します。</p>
+
+<p><a href="https://camo.qiitausercontent.com/7625ddcf36e4eb7a97073dda29a1f726f7372254/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f30646330343138322d643635612d643431632d386134622d6131373838323664623964312e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0dc04182-d65a-d41c-8a4b-a178826db9d1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1632937a62c752030f40317ffb647b62" alt="captBuilder.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/0dc04182-d65a-d41c-8a4b-a178826db9d1.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0dc04182-d65a-d41c-8a4b-a178826db9d1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=e48e7d6e2afcf6f0794d8a787d0d9f66 1x" loading="lazy"></a></p>
+
+<h2>
+<span id="window" class="fragment"></span><a href="#window"><i class="fa fa-link"></i></a>window</h2>
+
+<h3>
+<span id="selenium-ide-3" class="fragment"></span><a href="#selenium-ide-3"><i class="fa fa-link"></i></a>Selenium IDE</h3>
+
+<p>秘伝のタレの味が強すぎたようです。ちょっとエビデンスとして使用するのは辛いレベル。<br>
+黒塗りは私がやったのではありません。</p>
+
+<p><a href="https://camo.qiitausercontent.com/1ad9d6b7823d07e3225dfd01416884a772cf9888/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f38666433313363322d323930382d393832332d626563612d6332616339393538353437392e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8fd313c2-2908-9823-beca-c2ac99585479.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=498c4a8b8569c1f323fe370b7bde15cc" alt="bokashi.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/8fd313c2-2908-9823-beca-c2ac99585479.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8fd313c2-2908-9823-beca-c2ac99585479.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=7934c24267737b43c2b1fb4fa6010fe6 1x" loading="lazy"></a></p>
+
+<h3>
+<span id="selenium-builder-3" class="fragment"></span><a href="#selenium-builder-3"><i class="fa fa-link"></i></a>Selenium Builder</h3>
+
+<p>想定していた結果はこちら。<br>
+背景黒にならず、きちんと取れている事を確認します（ボカシてるので確認も何もないですが）</p>
+
+<p><a href="https://camo.qiitausercontent.com/636ccbaeb0078cfc6dc07ffcc01653e9e7eecc7d/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f62616362633637372d376532372d643166342d626134322d3639633530333733616363352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbacbc677-7e27-d1f4-ba42-69c50373acc5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=646f6188b4e8edf00db62dbecf4cb31e" alt="outframe.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/bacbc677-7e27-d1f4-ba42-69c50373acc5.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbacbc677-7e27-d1f4-ba42-69c50373acc5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=b3f63e7dbd5080479678be109da19eb1 1x" loading="lazy"></a></p>
+
+<h1>
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h1>
+
+<p>エビデンス取得を考慮する場合（というか大半？）は吟味したほうがいいです。<br>
+場合によっては外から画面キャプチャ撮るぐらいの方がいいかもしれませんね。</p>
+
+<p><a href="http://qiita.com/nomurasan/items/21c9dabe898dfebe2a5c" id="reference-e16729732ef4c1594d35">→書きました。<br>
+SeleniumIDE・Builderのイケてないキャプチャ機能を改修する</a></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

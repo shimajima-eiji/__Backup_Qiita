@@ -1,0 +1,115 @@
+<p>元々某質問コミュニティに投げようと思った内容でしたが、とりあえず自己解決できたのでこっちに持ってきます。</p>
+
+<h1>
+<span id="要件" class="fragment"></span><a href="#%E8%A6%81%E4%BB%B6"><i class="fa fa-link"></i></a>要件</h1>
+
+<p>大量の行（およそ100万行）があるファイルの内容を精査してTrue,Falseの結果を返す、という事をやりたいのですが、100行の中に非常に多くの重複があり、実は1万項目だけ処理すればよい場合があります。</p>
+
+<p>要件は以下の通りです。</p>
+
+<ol>
+<li>Trueになった行の総数（重複含む）が知りたい</li>
+<li>一度精査した内容が次の行以降で見つかった場合、処理はせず当該箇所と同じ結果を返したい</li>
+</ol>
+
+<h1>
+<span id="サンプル" class="fragment"></span><a href="#%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB"><i class="fa fa-link"></i></a>サンプル</h1>
+
+<p>簡単ですが、以下のようなテキストファイルを用意します。</p>
+
+<div class="code-frame" data-lang="text">
+<div class="code-lang"><span class="bold">sample.txt</span></div>
+<div class="highlight"><pre><code>aaa
+aa1
+a1a
+aaa
+1aa
+1aa
+aa1
+</code></pre></div>
+</div>
+
+<p>↓</p>
+
+<div class="code-frame" data-lang="text">
+<div class="code-lang"><span class="bold">result.txt</span></div>
+<div class="highlight"><pre><code>2,aaa,[1,4]
+2,aa1,[2,7]
+1,a1a,[3]
+2,1aa,[5,6]
+</code></pre></div>
+</div>
+
+<h1>
+<span id="私の考え" class="fragment"></span><a href="#%E7%A7%81%E3%81%AE%E8%80%83%E3%81%88"><i class="fa fa-link"></i></a>私の考え</h1>
+
+<p>単純に書けば</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">try1.py</span></div>
+<div class="highlight"><pre><code><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">fileline</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">fileline</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">ここで重複チェック</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">なんかすっごい複雑で重たい処理</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">'%d %s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">fileline</span><span class="p">)</span>
+</code></pre></div>
+</div>
+
+<p>で、とりあえず要件は満たせそうなのですが、重複チェックをどうやってやるべきか悩んでいます。<br>
+馬鹿正直にやるなら</p>
+
+<div class="code-frame" data-lang="text">
+<div class="code-lang"><span class="bold">try1.pyの続き</span></div>
+<div class="highlight"><pre><code>def checker(fileline, checklist):
+    for list_row in checklist:
+        if line == list_row:
+            return True
+
+    checklist.append(fileline)
+    return False
+</code></pre></div>
+</div>
+
+<p>みたいな関数なりを作って比較させれば良いのでしょうが、結局ファイル内の全件チェックが前提であることと、forの中でforを回すというのが個人的にはイケてない感じがすごくあります。</p>
+
+<h1>
+<span id="私の実装" class="fragment"></span><a href="#%E7%A7%81%E3%81%AE%E5%AE%9F%E8%A3%85"><i class="fa fa-link"></i></a>私の実装</h1>
+
+<p>が、他に方法も思い当たらないのでとりあえず実装したのが以下。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">try2.py</span></div>
+<div class="highlight"><pre><code><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sample.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">checker</span><span class="p">(</span><span class="n">fileline</span><span class="p">,</span> <span class="n">filerow</span><span class="p">,</span> <span class="n">checklist</span><span class="p">):</span>
+    <span class="n">list_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">list_row</span> <span class="ow">in</span> <span class="n">checklist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fileline</span> <span class="o">==</span> <span class="n">list_row</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">checklist</span><span class="p">[</span><span class="n">list_cnt</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">checklist</span><span class="p">[</span><span class="n">list_cnt</span><span class="p">][</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">filerow</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="n">list_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">checklist</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">fileline</span><span class="p">,</span><span class="nb">list</span><span class="p">()])</span>
+    <span class="n">checklist</span><span class="p">[</span><span class="n">list_cnt</span><span class="p">][</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">filerow</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">checklist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">fileline</span> <span class="ow">in</span> <span class="n">f</span><span class="p">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">checker</span><span class="p">(</span><span class="n">fileline</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">checklist</span><span class="p">):</span>
+        <span class="n">checklist</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">なんかすっごい複雑で重たい処理</span><span class="p">)</span><span class="n">の結果</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">'%d %s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">fileline</span><span class="p">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="k">print</span> <span class="n">checklist</span>
+<span class="c1">#for row in checklist:
+#    print row[]  #細かいものが欲しい場合
+</span></code></pre></div>
+</div>
+
+<p>上記のような出力は確かに得られるんだけど……う～ん。<br>
+絶対他にいい方法があるはず。</p>

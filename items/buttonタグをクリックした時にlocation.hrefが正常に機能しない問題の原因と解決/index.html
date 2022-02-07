@@ -1,0 +1,35 @@
+<p>私の環境だけだと思うんですが、不可解な現象に出くわしたので備忘録。</p>
+
+<h1>
+<span id="tldr-原因と解決" class="fragment"></span><a href="#tldr-%E5%8E%9F%E5%9B%A0%E3%81%A8%E8%A7%A3%E6%B1%BA"><i class="fa fa-link"></i></a>TL:DR 原因と解決</h1>
+
+<p>buttonタグはonclickを書いてもsubmitを無効にしないとスクリプトが実行されない。<br>
+そのため、<code>&lt;button type='button' onclick='...'&gt;</code>としなければならなかった。</p>
+
+<h1>
+<span id="経緯と再現" class="fragment"></span><a href="#%E7%B5%8C%E7%B7%AF%E3%81%A8%E5%86%8D%E7%8F%BE"><i class="fa fa-link"></i></a>経緯と再現</h1>
+
+<p>ボタンをクリックするとページジャンプ！をやりたいので、<br>
+<code>location.href='(ジャンプ先)'</code>を指定。<br>
+サクッとサンプルページを作りたいので、ローカルで環境を作ってVivaldi2.10...で実施。<br>
+ディレクトリ構造は以下の通り。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code># tree
+.
+├── index.html
+└── jump.html
+</code></pre></div></div>
+
+<p>たとえば、index.htmlからjump.htmlにリンクさせたいケースがあったとする。<br>
+aタグで指定した時はjump.htmlにジャンプできているとして、問題は</p>
+
+<ul>
+<li>
+<code>&lt;input type='button' onclick='...'&gt;</code>ならjump.html</li>
+<li>
+<code>&lt;button onclick='...'&gt;</code>ならindex.html <strong>?</strong>
+</li>
+</ul>
+
+<p>にジャンプする。<br>
+幾つかのサイトを参考にしたが、<strong>submitについて言及されておらず気付かないとハマるため</strong>、書き残しておく。</p>

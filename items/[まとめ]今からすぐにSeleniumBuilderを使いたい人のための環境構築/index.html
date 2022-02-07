@@ -1,0 +1,88 @@
+
+<h1>
+<span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>はじめに</h1>
+
+<p><strong>正直おすすめしません。</strong><br>
+大事なことなので、一番最初に書きました。<br>
+<strong>正直おすすめしません。</strong></p>
+
+<h2>
+<span id="まじめに" class="fragment"></span><a href="#%E3%81%BE%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>まじめに</h2>
+
+<p>この記事は非エンジニアの方がSeleniumBuilderというツールを使ってブラウザテストをいい感じにやりたい！というケースを想定して書いていますので、エンジニアの方々には退屈かもしれません。</p>
+
+<h1>
+<span id="対象" class="fragment"></span><a href="#%E5%AF%BE%E8%B1%A1"><i class="fa fa-link"></i></a>対象</h1>
+
+<ul>
+<li>プログラマーになろうと思ってCとかJavaとか勉強して挫折した人</li>
+<li>JavaScriptで何を勉強したらいいか分からない人</li>
+<li>プログラムの何が面白いのか分からない人</li>
+</ul>
+
+<h1>
+<span id="とても-とても-だいじなこと" class="fragment"></span><a href="#%E3%81%A8%E3%81%A6%E3%82%82-%E3%81%A8%E3%81%A6%E3%82%82-%E3%81%A0%E3%81%84%E3%81%98%E3%81%AA%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>とても とても だいじなこと</h1>
+
+<p>そもそもSeleniumBuilder自体が非エンジニアに優しくないです。<br>
+<strong>この記事はSeleniumBuilderの記事ですが、通常はSeleniumIDEを使うことをお勧めします。</strong><br>
+<a href="https://addons.mozilla.org/ja/firefox/addon/selenium-ide/" rel="nofollow noopener" target="_blank">SeleniumIDE(要Firefox)</a></p>
+
+<p>それでもSeleniumBuilderを選択する方は下を読み進めてもらっても大丈夫です。</p>
+
+<h1>
+<span id="環境構築" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89"><i class="fa fa-link"></i></a>環境構築</h1>
+
+<p>ここが一番難しいです。出来たらテンションあげていいです。</p>
+
+<h2>
+<span id="firefox4601をインストール" class="fragment"></span><a href="#firefox4601%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>Firefox46.0.1をインストール</h2>
+
+<p>まずFirefoxの古いバージョンをダウンロードします。<br>
+<strong>最新版以前のFirefoxには、最新版で解消済みの脆弱性が解消されていない場合がありますので、今後Firefoxを使用する時は絶対に安全な環境でのみ使用してください。</strong><br>
+<a href="https://ftp.mozilla.org/pub/firefox/releases/46.0.1/" rel="nofollow noopener" target="_blank">firefox46.0.1</a><br>
+たとえばwindowsユーザーならwin32,win64とあって、さらにEMEか無印かとありますので、それぞれ対応している環境のリンクを押しましょう。<br>
+<a href="http://japan.cnet.com/news/service/35047914/" rel="nofollow noopener" target="_blank">EMEについてはこちらが参考になります。(CNET)</a></p>
+
+<p>インストール時に色々聞かれるものは「はい」で進めて大丈夫です。</p>
+
+<h2>
+<span id="seleniumbuilder235を入れる" class="fragment"></span><a href="#seleniumbuilder235%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B"><i class="fa fa-link"></i></a>SeleniumBuilder2.3.5を入れる</h2>
+
+<p>なお、SeleniumBuilderの最新版は3.0.9ですが、2.3.5と互換性はありません。<br>
+導入は以下をご覧ください。<br>
+<a href="http://qiita.com/mihonak/items/28258ec5c242dfe5fe5e" id="reference-4ef1b837b0563726331a">Selenium Builder がローカル実行出来なくて暫定対応</a></p>
+
+<p>読んでてちょっと難度が高いかな？とは思ったんですが、ここは頑張って乗り切ってください。<br>
+ヒントは、英語のページを開いた時に即行で閉じないことです。英文を読まなくてもなんとなく雰囲気で分かる努力をしましょう。<br>
+ここが挫折ポイント１です。挫折したら<a href="https://addons.mozilla.org/ja/firefox/addon/selenium-ide/" rel="nofollow noopener" target="_blank">SeleniumIDE</a>にしましょう。</p>
+
+<h1>
+<span id="構築終わり" class="fragment"></span><a href="#%E6%A7%8B%E7%AF%89%E7%B5%82%E3%82%8F%E3%82%8A"><i class="fa fa-link"></i></a>構築終わり</h1>
+
+<p>おめでとうございます！<br>
+これであなたもエンジニアの仲間入りを果たしました。<br>
+Firefoxが起動できたら、Ctrl+Alt+Bとかで起動して白枠左下の言語を日本語に変えて再起動をしたら何となくさわれると思います。<br>
+SeleniumBuilderの使い方については探すより自分で確かめた方がいいです。資料がないので。</p>
+
+<h2>
+<span id="対象がおかしくない" class="fragment"></span><a href="#%E5%AF%BE%E8%B1%A1%E3%81%8C%E3%81%8A%E3%81%8B%E3%81%97%E3%81%8F%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>対象がおかしくない？</h2>
+
+<p>SeleniumBuilderには、記録画面からコマンド-&gt;記録-&gt;スクリプトの保存というものがあって、この中に直接JavaScriptを書き込む事が出来ます。<br>
+JavaScriptの実行結果をreturnすることでSeleniumの変数に値を持たせる事も出来ますし、基本的に１行しか書けないのでエラーにすぐ気付けます。ついでにいうと、画面の状態が見えるので画面キャプチャをすればプログラマーに助けを求めるのが簡単になります。</p>
+
+<p>そういったアプローチから、プログラミングに対する敷居を下げられればと思ってます。</p>
+
+<h1>
+<span id="最後に" class="fragment"></span><a href="#%E6%9C%80%E5%BE%8C%E3%81%AB"><i class="fa fa-link"></i></a>最後に</h1>
+
+<p>大事な事なのでもう一度書きます。<br>
+Firefox46.0.1は最新版までに解決されている既知を含めた脆弱性に対応できません。<br>
+<strong>つまり、大変危険です。</strong></p>
+
+<p>上で書いたとおり、正直おすすめしてないのはそういう問題も含めています。<br>
+当たり前ですが、問題が生じたとしても自己責任です。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

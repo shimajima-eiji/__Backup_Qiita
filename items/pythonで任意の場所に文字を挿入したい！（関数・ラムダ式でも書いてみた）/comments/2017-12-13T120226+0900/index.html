@@ -1,0 +1,9 @@
+<p>クラスにしてみたり</p>
+
+<div class="code-frame" data-lang="pycon"><div class="highlight"><pre><code>&gt;&gt;&gt; class String(str):
+...     def insert(self, index, insertee):
+...         return self[:index] + insertee + self[index:]
+... 
+&gt;&gt;&gt; String('test').insert(2, '--hoge--')
+'te--hoge--st'
+</code></pre></div></div>

@@ -1,0 +1,174 @@
+
+<h2>
+<span id="ごあいさつ" class="fragment"></span><a href="#%E3%81%94%E3%81%82%E3%81%84%E3%81%95%E3%81%A4"><i class="fa fa-link"></i></a>ごあいさつ</h2>
+
+<p>古い記事を参考にしながら試行錯誤をしていたが、既にリンク切れになっていたりもっと良い物が出ていたりしたので、古い記事を修正するより新しく出した方がわかりやすいな、と思って新記事にしてます。<br>
+似たような記事はいくつか出してますが、ここでは過去の記事を見なくても良いよう、重複を含む事にしました。<br>
+必要であれば適宜参考リンクを張りますが、原則リンク先から引用する形でまとめておきたいと思います。<br>
+（後日、自分で見たときに絶対にハマるだろうことを見越して）</p>
+
+<h2>
+<span id="本稿のゴール" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E3%82%B4%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>本稿のゴール</h2>
+
+<ul>
+<li>WSLをリセット・クリーンインストールした後でも<strong>安心・安全</strong>な状態で稼働できるようにする</li>
+<li>同じディストリビューションなら使い回せるように手順やコードを整備する</li>
+</ul>
+
+<h2>
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+
+<p>環境が壊れるかもしれないので、はじめてやる場合は使っていないディストリビューションでやりましょう。<br>
+Windows10 ProユーザーならHyper-Vも使えますので、いきなり手元にできあがっている開発環境を使って動かなくなって困るような状況にしないように注意しましょう。</p>
+
+<h2>
+<span id="前提" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>前提</h2>
+
+<ul>
+<li>本稿ではUbuntuでやってます。</li>
+<li>事前にWindows側のWSL関連の設定を完了されているものとします。</li>
+<li>再起動もお忘れなく！</li>
+<li><strong>どうせ後で削除（修復・リセット）をするだろうと考えているので動けばOKの現場猫主義な構築です。</strong></li>
+</ul>
+
+<h2>
+<span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h2>
+
+<h3>
+<span id="1-なにはともあれapt" class="fragment"></span><a href="#1-%E3%81%AA%E3%81%AB%E3%81%AF%E3%81%A8%E3%82%82%E3%81%82%E3%82%8Capt"><i class="fa fa-link"></i></a>1. なにはともあれ、<code>apt</code>
+</h3>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sudo apt update &amp;&amp; \
+sudo apt upgrade -y
+</code></pre></div></div>
+
+<p>説明不要ですね。<br>
+<code>echo (password) | sudo -S</code>で実行するとパスワード入力をスキップできます。<br>
+念の為、<code>history -c</code>をやっておくとウッカリパスワードを流出！という事も防げます。（※悪用厳禁）</p>
+
+<p>初回実施時は<code>sudo apt autoremove -y</code>は要らないですが、気がついたタイミングで使われなくなったパッケージを削除しておきましょう。</p>
+
+<h3>
+<span id="2-linuxbrewをインストールする" class="fragment"></span><a href="#2-linuxbrew%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>2. linuxbrewをインストールする</h3>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+
+# 実行後に ==&gt; Next steps:が出てくるので、その手順を実施
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' &gt;&gt; /home/ubuntu/.profile
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+sudo apt install build-essential
+
+brew update  # Already up-to-date.と出力されるはずだが、何らかの成功メッセージが表示されれば完了
+</code></pre></div></div>
+
+<p>これで心置きなく、(brewが使えるようになったので)Mac環境の記事も参照できるようになります。</p>
+
+<h4>
+<span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h4>
+
+<p>updateはaptとbrewの両方を実施する必要があります。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>brew upgrade
+</code></pre></div></div>
+
+<p><code>brew update</code>はbrew自体の更新で、upgradeはbrew自体とパッケージも含みます。<br>
+なので、基本的には<code>brew upgrade</code>だけで良さそうです。</p>
+
+<p>ウッカリやりがちですが、<code>apt install</code>より<code>brew install</code>を心がけたほうが、せっかくのbrewを活かしやすいです。</p>
+
+<h4>
+<span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意！</h4>
+
+<p><code>brew</code>は<code>sudo</code>で実行できません。<br>
+つまり<code>brew</code>で入れたパッケージを<code>sudo</code>で実行できません。</p>
+
+<p>よくあるのが、<code>npm</code>やら<code>gem</code>で入れたパッケージをグローバルで使いたい場合やどうしても<code>sudo</code>を求められる場合は<code>brew</code>で入れることができません。<br>
+あえて使い分けるなら、globalで実行するものは環境に依存しないもの、brewで実行するもの(local)は環境に依存するものとして管理するとバージョン差異を吸収できます。</p>
+
+<h3>
+<span id="3-開発環境を整備する" class="fragment"></span><a href="#3-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%92%E6%95%B4%E5%82%99%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3. 開発環境を整備する</h3>
+
+<p><strong>長期的に運用するなら、運用専門のディストリビューションを決めてそちらで使ったほうが良いです。</strong><br>
+というのも、linuxbrew + anyenv + ○○envの構成は、パッケージ管理のアプローチが冗長すぎてパスで躓く事が考えられます。<br>
+（例：<code>github-changes</code>、<code>github_changelog_generator</code>）</p>
+
+<p>こういう可能性もあるので、凝った運用をする場合はパッケージ管理しすぎ問題を回避する方が望ましいでしょう。<br>
+とはいえ、anyenv自体は非常に便利で使い勝手が良く、これ自体が干渉することはないのでお使いの環境にあった構成をするのが良いでしょう。</p>
+
+<h4>
+<span id="30-anyenvを導入する前に" class="fragment"></span><a href="#30-anyenv%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB"><i class="fa fa-link"></i></a>3.0. anyenvを導入する前に</h4>
+
+<ol>
+<li>まずは<code>brew</code>で環境を整えてみて、動く状態を作ります。</li>
+<li>動くものをanyenvで実行するディストリビューションに移行し、環境を作ります。</li>
+<li>anyenvで入れた環境で動けばOK、動かなければ再検討をする</li>
+</ol>
+
+<p>ぐらいで良いでしょう。<br>
+何度も言いますが、<strong>凝った運用をしなければ</strong>anyenvは非常に便利です。</p>
+
+<h4>
+<span id="31-anyenvをインストールする" class="fragment"></span><a href="#31-anyenv%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.1. anyenvをインストールする</h4>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>brew install anyenv 
+</code></pre></div></div>
+
+<p>超簡単！</p>
+
+<h4>
+<span id="32-anyenvを使えるようにする" class="fragment"></span><a href="#32-anyenv%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.2. anyenvを使えるようにする</h4>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>anyenv install --init
+echo 'export PATH="$HOME/.anyenv/bin:$PATH"' &gt;&gt;~/.profile
+echo eval "$(anyenv init -)" &gt;&gt;~/.profile
+source ~/.profile
+</code></pre></div></div>
+
+<p>これは上記コマンドを実行した後にも、コンソール上で実施するように促されるのでおそらく大丈夫。</p>
+
+<h4>
+<span id="33-お好みのenvをインストールする" class="fragment"></span><a href="#33-%E3%81%8A%E5%A5%BD%E3%81%BF%E3%81%AEenv%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.3. お好みの○○envをインストールする</h4>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>anyenv install -l
+</code></pre></div></div>
+
+<p>でインストールできるものが一覧表示されるので、任意で入れていきましょう。<br>
+試しに、rbenvを入れてrubyを使えるようにしてみます。</p>
+
+<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/5c7f70d7c0979b478639"></qiita-embed-ogp></p>
+
+<h3>
+<span id="4-dockerを入れる" class="fragment"></span><a href="#4-docker%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B"><i class="fa fa-link"></i></a>4. Dockerを入れる</h3>
+
+<p>厳密に言うとWSLにDockerではなく、WindowsのHyper-VにDockerを入れるのでPro限定です。<br>
+解説すると長くなるので、別記事にします（後日：参考リンクのみ）</p>
+
+<p><qiita-embed-ogp src="https://blog.ecbeing.tech/entry/2021/09/07/150000"></qiita-embed-ogp></p>
+
+<h2>
+<span id="ubuntuを削除初期化したい時は" class="fragment"></span><a href="#ubuntu%E3%82%92%E5%89%8A%E9%99%A4%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%97%E3%81%9F%E3%81%84%E6%99%82%E3%81%AF"><i class="fa fa-link"></i></a>Ubuntuを削除・初期化したい時は</h2>
+
+<p><qiita-embed-ogp src="https://zenn.dev/kawacdev/articles/3de7892fd13df3"></qiita-embed-ogp></p>
+
+<ol>
+<li>Windows10のコントロールパネルを開く</li>
+<li>アプリ</li>
+<li>アプリと機能</li>
+<li>Ubuntu
+
+<ol>
+<li>詳細オプション</li>
+</ol>
+</li>
+<li>修復、あるいはリセット。場合によりアンインストール</li>
+</ol>
+
+<p>ここで削除したディストリビューションは「MS Sore」を開いて検索すればまたダウンロード・インストールできます。<br>
+※Windowsの再起動が必要な事もあります。</p>
+
+<h2>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h2>
+
+<ul>
+<li><a href="https://fukatsu.tech/linuxbrew" rel="nofollow noopener" target="_blank">Linuxbrewのインストール方法(執筆時点の最終更新日:2019/4/6)</a></li>
+</ul>

@@ -1,0 +1,114 @@
+<p>画面だけを見てバリデーションできたらいいんですが、Seleniumの画面以外を見る必要があるテストケースの場合に使えます。<br>
+Seleniumのキャプチャ機能はあくまでもSeleniumが持っているページオブジェクトの情報しか見れないんですよね。<br>
+それってどうなの？というシーンがあった時に使えるテクニックです。</p>
+
+<h1>
+<span id="前提条件" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><i class="fa fa-link"></i></a>前提条件</h1>
+
+<p>マルチモニターで実施しないでください。winshotの仕様（？）でスクリーンショットが撮れません。<br>
+PrintScreenキーとはまた違うのかな、という気がします。</p>
+
+<h1>
+<span id="環境" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83"><i class="fa fa-link"></i></a>環境</h1>
+
+<h2>
+<span id="selenium側" class="fragment"></span><a href="#selenium%E5%81%B4"><i class="fa fa-link"></i></a>Selenium側</h2>
+
+<p>Firefox46.0.1<br>
+SeleniumIDE2.1.1.1-signed<br>
+SeleniumBuilder2.3.5<br>
+（アウトプットできればなんでもいいです）</p>
+
+<h2>
+<span id="環境側" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E5%81%B4"><i class="fa fa-link"></i></a>環境側</h2>
+
+<p>windows系(検証環境はwindows10)<br>
+FWatch：ファイルの出力を監視してコマンドを実行します<br>
+winshot：今ディスプレイ（モニター）で見えている画面を撮ります</p>
+
+<h1>
+<span id="ダウンロードなど" class="fragment"></span><a href="#%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%AA%E3%81%A9"><i class="fa fa-link"></i></a>ダウンロードなど</h1>
+
+<p>この辺からどうぞ<br>
+<a href="http://fwatch.osdn.jp/" rel="nofollow noopener" target="_blank">FWatch ファイル監視について</a><br>
+<a href="http://forest.watch.impress.co.jp/library/software/winshot/" rel="nofollow noopener" target="_blank">窓の杜</a></p>
+
+<h1>
+<span id="実施手順" class="fragment"></span><a href="#%E5%AE%9F%E6%96%BD%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>実施手順</h1>
+
+<p>まずはサクッとインストールしてください。<br>
+<strong>インストール先はProgram Files...ではないほうが良いです。半角スペースがエラーの原因になります。</strong></p>
+
+<p>FWatchから設定します。<br>
+まずは開きましょう。アプリを間違えないでください。</p>
+
+<p><a href="https://camo.qiitausercontent.com/d03c919a8bcdbd2e7b278c7539c6f30cd9d54fcc/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f39376637306439392d636661342d383035392d356139322d6337663764383331633536302e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F97f70d99-cfa4-8059-5a92-c7f7d831c560.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=44af50103350fca644fdd1aaad8aec14" alt="fwatch.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/97f70d99-cfa4-8059-5a92-c7f7d831c560.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F97f70d99-cfa4-8059-5a92-c7f7d831c560.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=1e1270dd8f4ecb568c06b85c478a6e6f 1x" loading="lazy"></a></p>
+
+<p>追加ボタンをポチッと</p>
+
+<p><a href="https://camo.qiitausercontent.com/04536816c0c62641d398f8d26d3dc5cd1d161c73/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f33343932333930612d313731662d393831652d613061382d3136373264353630396530322e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F3492390a-171f-981e-a0a8-1672d5609e02.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0943e974533f9f23c1cd7848e81982d8" alt="fwatch_add.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/3492390a-171f-981e-a0a8-1672d5609e02.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F3492390a-171f-981e-a0a8-1672d5609e02.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=27a33542d31eba3e82327f483f436d87 1x" loading="lazy"></a></p>
+
+<p>監視するフォルダにseleniumでcaptを撮るフォルダ<br>
+アプリケーションのパスに実行するコマンドを入れます。<br>
+ここではbatですね。</p>
+
+<h1>
+<span id="batでwinshotを実行する" class="fragment"></span><a href="#bat%E3%81%A7winshot%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>batでwinshotを実行する</h1>
+
+<p>batの中身はこれです。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>C:\winshot\WinShot.exe -J -D -X
+</code></pre></div></div>
+
+<h2>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h2>
+
+<p><a href="http://anosonote.hatenablog.com/entry/2015/07/13/205726" rel="nofollow noopener" target="_blank">Windowsでコマンドを使って画面キャプチャする方法</a></p>
+
+<h1>
+<span id="使ってみよう" class="fragment"></span><a href="#%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86"><i class="fa fa-link"></i></a>使ってみよう！</h1>
+
+<p>とりあえず、なんちゃってで実施しましょうか。<br>
+監視フォルダに設定した場所に新しくファイルを作るなりコピーするなりやってみてください。<br>
+そうすると、FWatchが動いてアプリケーションのbatをキックし、winshotを実行すると思います。<br>
+winshotで取得したファイルはwinshotのインストールフォルダに保存されます。</p>
+
+<h1>
+<span id="seleniumで連携しよう" class="fragment"></span><a href="#selenium%E3%81%A7%E9%80%A3%E6%90%BA%E3%81%97%E3%82%88%E3%81%86"><i class="fa fa-link"></i></a>seleniumで連携しよう！</h1>
+
+<p>手作業でファイルを置きましたが、今度はSelenium側の設定をしましょう。<br>
+これは敢えて手順とか書きません。出来ますよね？</p>
+
+<h1>
+<span id="ファイルがスタックされる" class="fragment"></span><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%95%E3%82%8C%E3%82%8B"><i class="fa fa-link"></i></a>ファイルがスタックされる</h1>
+
+<p>WSxxxxxx.JPGでどんどんファイルがたまってくるんですが、なんのこっちゃ分からんです、という状況になります、たぶん。<br>
+bat側にテストファイルを理解できるようにしてあげるのが良いでしょう。</p>
+
+<p>Atest_EOF.pngみたいな名前でSeleniumからキャプチャファイルを吐き出して、batはファイル名にEOF.pngが含まれていたら、今まで取得したものをまとめてフォルダ管理する、とか出来るといい感じになります。<br>
+フォルダ名はとりあえずAtest_YYYYmmddHHMMSSとかにすると重複することがないでしょう。<br>
+（本当はいいネーミングが欲しいんですが、とりあえず暫定で）</p>
+
+<h1>
+<span id="ではやってみましょう" class="fragment"></span><a href="#%E3%81%A7%E3%81%AF%E3%82%84%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%82%87%E3%81%86"><i class="fa fa-link"></i></a>では、やってみましょう</h1>
+
+<p>batの中身を色々といい感じに改修していい感じに見せてる例<br>
+（全部echoでごまかしてますが、こういう運用とかはいいと思います）</p>
+
+<p><a href="https://camo.qiitausercontent.com/63f5031542c80d0a21c23176c168d52f132f7f6e/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f30336533303565652d636264392d633033622d653931662d3061313363613936303636352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F03e305ee-cbd9-c03b-e91f-0a13ca960665.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=9ba85f61e4d0415362f1274396029f75" alt="command.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/03e305ee-cbd9-c03b-e91f-0a13ca960665.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F03e305ee-cbd9-c03b-e91f-0a13ca960665.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=b3a9f43e0fc38a268250cc840f658fd6 1x" loading="lazy"></a></p>
+
+<p>なんかコマンドエラーになってますが、特に意味はありません。</p>
+
+<h1>
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h1>
+
+<p>今回はSeleniumで運用しましたが、FWatchからのwinshotは汎用性高いです。<br>
+Linuxシステムで.lockファイルとかつくる仕組みは結構ありますが、考え方はそれに近くて、ファイルを検知したらキックするというだけでかなり価値が高いのではないでしょうか？</p>
+
+<p>windowsでもcronみたいな事を手軽に出来るというのはなかなかない気がします。<br>
+この方法もいいですが、もっとスマートな方法もありそうな気がします。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

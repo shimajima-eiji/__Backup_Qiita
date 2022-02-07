@@ -1,0 +1,105 @@
+<p><a href="https://qiita.com/nomurasan/items/a4291f5a18f3b6cc1525" id="reference-8e88e46173b99f36adac">WindowsでもGitlabを使いたい！</a>という記事を書いたんですが、結局使えなかったのでより欲望に忠実なタイトルに変えて書き直します。<br>
+事実上、やり直しです。</p>
+
+<h1>
+<span id="windows10-proでgitlabを運用したいのでhyper-vで環境を作って運用している話" class="fragment"></span><a href="#windows10-pro%E3%81%A7gitlab%E3%82%92%E9%81%8B%E7%94%A8%E3%81%97%E3%81%9F%E3%81%84%E3%81%AE%E3%81%A7hyper-v%E3%81%A7%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E9%81%8B%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E8%A9%B1"><i class="fa fa-link"></i></a>Windows(10 pro)でGitlabを運用したいのでHyper-Vで環境を作って運用している話</h1>
+
+<p><strong>今まさに運用している話</strong>です。<br>
+出来そうな話は卒業しました。</p>
+
+<h1>
+<span id="hyper-vで環境を作る" class="fragment"></span><a href="#hyper-v%E3%81%A7%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>Hyper-Vで環境を作る</h1>
+
+<p><a href="https://qiita.com/nomurasan/items/3c58b964943a24751802" id="reference-1d5b979385eadc0fefac">Hyper-Vで構築した環境でインターネット接続が出来るようにする</a>方法を記事に書いていますので、この辺りのをサクッとやっちゃってください。</p>
+
+<h1>
+<span id="gitlabをインストールする" class="fragment"></span><a href="#gitlab%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>gitlabをインストールする</h1>
+
+<p>私はUbuntuでやってますので、Ubuntuで説明しますが、CentOSでもできると思います。<br>
+<a href="https://about.gitlab.com/installation/#ubuntu" class="autolink" rel="nofollow noopener" target="_blank">https://about.gitlab.com/installation/#ubuntu</a></p>
+
+<p>この手順でやると、他でイメージをもらった時の最新版(7.9など）ではなく、きちんと最新版<sup id="fnref1"><a href="#fn1" title="執筆時点では10.5.3です。タイトルの通り。">1</a></sup>でした。<br>
+ただ、以下は気を付けてください。</p>
+
+<div class="code-frame" data-lang="shell">
+<div class="code-lang"><span class="bold">Install.sh</span></div>
+<div class="highlight"><pre><code>curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | <span class="nb">sudo </span>bash
+<span class="nb">sudo </span><span class="nv">EXTERNAL_URL</span><span class="o">=</span><span class="s2">"http://（ブラウザでアクセスするためのURL。IPでも可）"</span> apt-get <span class="nb">install </span>gitlab-ce
+</code></pre></div>
+</div>
+
+<p>変更点は、gitlab-<strong>ee</strong>ではなくgitlab-<strong>ce</strong>です。<br>
+気付かずにうっかりやらかしました。</p>
+
+<h1>
+<span id="gitlabを起動する" class="fragment"></span><a href="#gitlab%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>gitlabを起動する</h1>
+
+<p>インストールしただけでは起動できてないかもしれません。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sudo gitlab-ctl reconfigure
+sudo gitlab-ctl restart
+</code></pre></div></div>
+
+<p>を実施しておくといいかもしれません。</p>
+
+<h1>
+<span id="gitlabにログインする" class="fragment"></span><a href="#gitlab%E3%81%AB%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>gitlabにログインする</h1>
+
+<p>7.9とは画面が異なります。<br>
+パスワードを設定するところから始めるみたいです。<br>
+ここで設定するユーザーは「root」です。<br>
+パッと見分からないので気を付けて。</p>
+
+<h1>
+<span id="gitlab10を日本語化する" class="fragment"></span><a href="#gitlab10%E3%82%92%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%8C%96%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>gitlab10を日本語化する</h1>
+
+<p>ログイン後、画面右上のアバターからSetting、<br>
+画面を開いたらPreferred languageのプルダウンを「日本語」とします。<br>
+ほとんど英語のままですが、メインで使うプロジェクトの画面では日本語になっています。</p>
+
+<h2>
+<span id="ちょっとぐっちーな" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%90%E3%81%A3%E3%81%A1%E3%83%BC%E3%81%AA"><i class="fa fa-link"></i></a>ちょっとぐっちーな</h2>
+
+<p>こんな形で日本語になる前はもっと大変でした。<br>
+詳しくはgitlab 日本語あたりで眺めてほしいんですが、こういう裏側があって今のような形に落ち着いているんだなぁ、というのが見えると現状の翻訳だけでもだいぶ使いやすくなっている方です。</p>
+
+<h1>
+<span id="gitlabからgit-cloneしてみる" class="fragment"></span><a href="#gitlab%E3%81%8B%E3%82%89git-clone%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>gitlabからgit cloneしてみる</h1>
+
+<p>gitlabの使い方は省略します。githubと似たようなものなので、日本語にもなってるし何となくフィーリングで。</p>
+
+<p>私はTortoiseGitで実施していますが、Git for Windowsとかでもできます。<br>
+git clone時にユーザーアカウントとパスワードを求められますが、gitlabの設定をしたものを使うとcloneできます。<br>
+URLは各プロジェクトに依存します。その辺りはgithubと同じです。<br>
+TortoiseGitユーザーはhttpを使います。</p>
+
+<h1>
+<span id="git-pushしてみる" class="fragment"></span><a href="#git-push%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>git pushしてみる</h1>
+
+<p>cloneしたらpushしましょう。<br>
+そこまで確認できれば大丈夫です。</p>
+
+<h1>
+<span id="windowsを再起動して使えるか確認してみる" class="fragment"></span><a href="#windows%E3%82%92%E5%86%8D%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%8B%E7%A2%BA%E8%AA%8D%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>Windowsを再起動して使えるか確認してみる</h1>
+
+<p>同じことをやってみます。<br>
+ここまで確認できたら運用できるレベルではないでしょうか。</p>
+
+<h1>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h1>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>執筆時点では10.5.3です。タイトルの通り。 <a href="#fnref1">↩</a></p>
+</li>
+
+</ol>
+</div>

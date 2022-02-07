@@ -1,0 +1,87 @@
+
+<h2>
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+
+<p>WSLをクリーンインストールする場合はWSLの機能に依存しない方法を検討すべき</p>
+
+<p>言われてみれば当たり前なんですが、何とか環境構築しようと頭を凝り固めてしまったので、戒めとして記します。</p>
+
+<h2>
+<span id="発端" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF"><i class="fa fa-link"></i></a>発端</h2>
+
+<ul>
+<li>私はWSLを愛用している</li>
+<li>頻繁にWSLをリセットする運用をしており、githubに草をはやしていたスクリプトが飛んだ</li>
+<li>気づいた頃に作り直すも、githubが荒野になっていた</li>
+</ul>
+
+<p>ループ。</p>
+
+<p>つまり「WSLにCron入れて実行すればよくね？」では、WSLをリセットする度に環境構築しなければならないし、そのためShellを使うことはできない<sup id="fnref1"><a href="#fn1" title="普段はMacを使うのですが、凝った開発をする時はWindowsを使っているため、このような状態になっています。">1</a></sup>という問題があります。<br>
+そのために、windowsで実行する場合は<code>bat</code>、MacやLinuxで実行する場合は<code>sh</code>を使う事になります。</p>
+
+<h2>
+<span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h2>
+
+<p>Windowsだと<br>
+1. batを作る<br>
+1. タスクスケジューラを設定する（プログラム: batのパス）</p>
+
+<p>Macだと<br>
+1. shを作る<br>
+1. cronを設定する</p>
+
+<p>どちらも共通して</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>git clone
+echo %date / echo $(date "+%Y/%m/%d")
+git add～push
+del リポジトリ / rm -rf リポジトリ
+</code></pre></div></div>
+
+<p>やってる事は同じですが、書き方がbat,shの作法で異なります。</p>
+
+<h2>
+<span id="ハマったポイント" class="fragment"></span><a href="#%E3%83%8F%E3%83%9E%E3%81%A3%E3%81%9F%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>ハマったポイント</h2>
+
+<p>「WSLでcron動かせばよくね？」と考えたあたりから怪しくなりました。<br>
+気付けば上の通りシンプルですが、WSLで定期実行したいものがあったので、どうしてもcronから抜け出せなかったです。</p>
+
+<p>たとえば「WSLで動かしたいshellがあり、WSLの状況を気にせずクリーンインストールした後でも動かせるようにしたい」という要件であれば</p>
+
+<ol>
+<li>shを作る</li>
+<li>タスクスケジューラを設定する（後述）</li>
+</ol>
+
+<p>上記と比較すると、作ったファイルがbatかshかの違いですが、タスクスケジューラの設定を</p>
+
+<ul>
+<li>プログラム: <code>wsl</code>
+</li>
+<li>引数の追加: <code>/mnt/.../フルパス</code>
+</li>
+</ul>
+
+<p>としましょう。</p>
+
+<p>なお、powershellでもできますが、実行権限の制御をする必要があり面倒くさいので慣れていないならbatで完結させる事をおすすめします。</p>
+
+<h2>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h2>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<h3>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>普段はMacを使うのですが、凝った開発をする時はWindowsを使っているため、このような状態になっています。 <a href="#fnref1">↩</a></p>
+</li>
+
+</ol>
+</div>

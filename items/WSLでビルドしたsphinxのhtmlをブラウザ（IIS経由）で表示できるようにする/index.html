@@ -1,0 +1,155 @@
+
+<h1>
+<span id="謝辞" class="fragment"></span><a href="#%E8%AC%9D%E8%BE%9E"><i class="fa fa-link"></i></a>謝辞</h1>
+
+<p>Windows10に入れられるUbuntuの名称が変わっていたようで、Windows Subsystem for Linux(WSL)と呼ぶのが正しいようです。<br>
+途中で気付いて旧称のBash on Windows on Ubuntu(BoWoU)を使っていたため、後に一括変換で直したのでおかしな表現があるかもしれません。<br>
+最近までBoWoUと思っていたばかりに、そのように略した記事を置いてるのが結構恥ずい…</p>
+
+<p>気付いた方は適宜WSLと読み替えてもらえると喜びます。</p>
+
+<h1>
+<span id="wslでビルドしたsphinxのhtmlをブラウザiis経由で表示できるようにする" class="fragment"></span><a href="#wsl%E3%81%A7%E3%83%93%E3%83%AB%E3%83%89%E3%81%97%E3%81%9Fsphinx%E3%81%AEhtml%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6iis%E7%B5%8C%E7%94%B1%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>WSLでビルドしたsphinxのhtmlをブラウザ（IIS経由）で表示できるようにする</h1>
+
+<p>まずはじめに、掲題のようなケースならIISなんて使ってないでapacheとかnginxとかでWebサーバーを立てて使った方がいいです。<br>
+が、今回は制限の下で実施してます。</p>
+
+<h2>
+<span id="当然の疑問のqa" class="fragment"></span><a href="#%E5%BD%93%E7%84%B6%E3%81%AE%E7%96%91%E5%95%8F%E3%81%AEqa"><i class="fa fa-link"></i></a>当然の疑問のQ&amp;A</h2>
+
+<h3>
+<span id="なぜ置くだけではだめなのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E7%BD%AE%E3%81%8F%E3%81%A0%E3%81%91%E3%81%A7%E3%81%AF%E3%81%A0%E3%82%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜ置くだけではだめなのか？</h3>
+
+<p>システム直下にファイルを置いて、Windows側で動いているシステムにファイルを読ませる時に、権限がないのでこれらのファイルを読みに行けないのです。<br>
+たとえば、sphinxでビルドしたhtmlファイルをブラウザから見に行きたい、という事が考えられますが、Windows側でこれらのファイルに権限がないため、存在しないものとして振舞います。<br>
+Windows側の管理者権限をもったプロセスがファイルを操作しないと、</p>
+
+<h3>
+<span id="powershellでsphinxをビルドすればよいのでは" class="fragment"></span><a href="#powershell%E3%81%A7sphinx%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%81%99%E3%82%8C%E3%81%B0%E3%82%88%E3%81%84%E3%81%AE%E3%81%A7%E3%81%AF"><i class="fa fa-link"></i></a>Powershellでsphinxをビルドすればよいのでは？</h3>
+
+<p>全くもってその通りです。<br>
+当初はsphinx、というかドキュメントは後からゆっくりやろうと思ったツケがきました。<br>
+というのも、makeファイルとかパッケージ管理がつらくて、WSLでやった方が楽<sup id="fnref1"><a href="#fn1" title="【WSLでやった方が楽】pip install sphinxが優秀すぎた">1</a></sup>だったのでPowershellを選択しませんでした。<br>
+その割にはIISは使ってるのでなんだこれは、となりますが…。</p>
+
+<h1>
+<span id="wslからwindowsのアクセス権限エラーを回避してファイルを格納する" class="fragment"></span><a href="#wsl%E3%81%8B%E3%82%89windows%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%A8%A9%E9%99%90%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%97%E3%81%A6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>WSLからWindowsのアクセス権限エラーを回避してファイルを格納する</h1>
+
+<p>では、本題を。</p>
+
+<p>まずはじめに、置くだけなら/mnt/c/Windows/...とかに直接置けばやりたい事はできると思います。<br>
+あるいは、WSLを管理者権限で実行してから同じようにコマンドを実行するのでも良いかと思います。</p>
+
+<p>それでもダメだった方が対象です。<br>
+が、正直な話をすると開発環境を作るためだとか、大人の事情で仕方なくやる場合以外は素直にVagrantとか、Hyper-Vとかがあるのでそっちの方がいいですよ。<br>
+大事なことなので二回目です。</p>
+
+<h1>
+<span id="作業環境" class="fragment"></span><a href="#%E4%BD%9C%E6%A5%AD%E7%92%B0%E5%A2%83"><i class="fa fa-link"></i></a>作業環境</h1>
+
+<div class="code-frame" data-lang="shell">
+<div class="code-lang"><span class="bold">tree.command</span></div>
+<div class="highlight"><pre><code><span class="o">(</span>root<span class="o">)</span>
+├── call.sh
+├── 01_wsl_startup_cmd.bat
+├── 02_cmd_startup_psh.bat
+└── 03_psh_execute_command.bat
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="shell">
+<div class="code-lang"><span class="bold">call.sh</span></div>
+<div class="highlight"><pre><code><span class="c"># 予めsphinx関連のmakeを実行しておく</span>
+
+<span class="nb">cd</span> <span class="si">$(</span><span class="nb">dirname</span> <span class="k">${</span><span class="nv">0</span><span class="k">}</span><span class="si">)</span>
+<span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/01_bow_run_cmd.bat
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="batchfile">
+<div class="code-lang"><span class="bold">01_wsl_startup_cmd.bat</span></div>
+<div class="highlight"><pre><code><span class="na">/mnt/c/Windows/System</span><span class="m">32</span><span class="na">/cmd</span>.exe <span class="na">/k </span><span class="kd">C</span>:\\<span class="o">(</span><span class="kd">root</span>までのWindows形式のフルパス<span class="o">)</span>\\02_cmd_startup_psh.bat
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="batchfile">
+<div class="code-lang"><span class="bold">02_cmd_startup_psh.bat</span></div>
+<div class="highlight"><pre><code><span class="kd">powershell</span> <span class="nb">start</span><span class="na">-process </span><span class="s2">"03_psh_execute_command.bat"</span> <span class="na">-verb </span><span class="nb">runas</span>
+<span class="k">exit</span>
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="batchfile">
+<div class="code-lang"><span class="bold">03_psh_execute_command.bat</span></div>
+<div class="highlight"><pre><code><span class="o">(</span><span class="kd">Windows</span>コマンド<span class="o">)</span> \<span class="o">(</span><span class="kd">sphinx</span>でビルドしたディレクトリのフルパス）\ <span class="kd">C</span>:\inetpub\wwwroot\sphinx
+</code></pre></div>
+</div>
+
+<h2>
+<span id="解説" class="fragment"></span><a href="#%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>解説</h2>
+
+<p>まずは通常通りsphinxでドキュメントファイルを作成します。<br>
+sphinxについては色々な場所で公開されている、すばらしい記事を参照してください。</p>
+
+<p>call.shはドキュメントファイルがビルド出来た後からの実施です。<br>
+call.shにはWSLからbatファイルを実行させるようにしていますが、実際はただのテキストをコマンドラインに流しているだけです。<br>
+. xxx.sh のような形で実行していると思ってください。</p>
+
+<p>なお、WSLからexeを起動できますが、起動したexeを操作することはできません。<br>
+今回はcmd.exeなので、cmd自身に終了コマンドを実行させてWSLを復帰させています。<sup id="fnref2"><a href="#fn2" title="【WSLを復帰させる】02_cmd_startup_psh.batにexitを書いているためです。01_wsl_startup_cmd.batにexitとしても実行されません。">2</a></sup></p>
+
+<p>あとはファイルをだれが実行しているのか、というだけです。<br>
+02.batを実行するのはcmdではなくpowershellでもいいんですが、WSLからwindowsの管理者権限で実行させることが出来なかったので、</p>
+
+<ul>
+<li>01_callfrom_WSL: windowsで実行できるcmdを呼ぶ</li>
+<li>02_callfrom_cmd: windowsの管理者権限を持たせてpshを呼ぶ</li>
+<li>03_callfrom_psh: 管理権限を持っているのでコマンドを実行する</li>
+</ul>
+
+<p>と、役割分担させています。</p>
+
+<h1>
+<span id="ハマりどころ" class="fragment"></span><a href="#%E3%83%8F%E3%83%9E%E3%82%8A%E3%81%A9%E3%81%93%E3%82%8D"><i class="fa fa-link"></i></a>ハマりどころ</h1>
+
+<p>powershellを使った事がないので、cmdを使わずpowershellで一本にしよう、というのが高い敷居になりました。<br>
+実装中はよく混乱させられたので、早いタイミングで上記のようにそれぞれの目標を明確化しました。<br>
+後述のメモの通り、なんとかならないかなぁ、と思ったものですが…</p>
+
+<p>あと、どのタイミングをWSLが持つのか、Windowsが持つのかは意識しながらパスを書きましょう。<br>
+スラッシュとバックスラッシュ、<strong>バックスラッシュの場合は個数にも注意が必要です。</strong></p>
+
+<h1>
+<span id="メモ" class="fragment"></span><a href="#%E3%83%A1%E3%83%A2"><i class="fa fa-link"></i></a>メモ</h1>
+
+<p><a href="https://qiita.com/resolver/items/7187bd6ee8016ee5c741" id="reference-3e5867f46861d4bc9893">参考先</a>でも紹介されている通り、batが複数あるのは運用上思うところがあるので、01_bow_run_cmd.batはshでもいいと思います。<br>
+が、ここではよく分からない事になりそう<sup id="fnref3"><a href="#fn3" title="【よく分からない事になりそう】windowsの権限をどうにか回避するためにやってる事なので、WSLからもbatをshとして呼び出します。">3</a></sup>なので拡張子をbatで統一して説明しますが、実際に運用する時はいい感じにしておかないと混乱します。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p><a href="https://qiita.com/resolver/items/7187bd6ee8016ee5c741">管理者権限でbatを実行したい時にやッた事</a></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【WSLでやった方が楽】pip install sphinxが優秀すぎた <a href="#fnref1">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>【WSLを復帰させる】02_cmd_startup_psh.batにexitを書いているためです。01_wsl_startup_cmd.batにexitとしても実行されません。 <a href="#fnref2">↩</a></p>
+</li>
+
+<li id="fn3">
+<p>【よく分からない事になりそう】windowsの権限をどうにか回避するためにやってる事なので、WSLからもbatをshとして呼び出します。 <a href="#fnref3">↩</a></p>
+</li>
+
+</ol>
+</div>

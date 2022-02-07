@@ -1,0 +1,109 @@
+<p><a href="https://qiita.com/nomurasan/items/5197100a1ae3e5a30f4c" id="reference-40c02a500a80ba75533b">レベル０のDockerプレイヤーが可能な限りシンプルな状態から勉強したい時の話</a>という記事を書いたんですが、その続きみたいなものです。</p>
+
+<h1>
+<span id="windowsでもgitlabを運用出来た話" class="fragment"></span><a href="#windows%E3%81%A7%E3%82%82gitlab%E3%82%92%E9%81%8B%E7%94%A8%E5%87%BA%E6%9D%A5%E3%81%9F%E8%A9%B1"><i class="fa fa-link"></i></a>WindowsでもGitlabを運用出来た話</h1>
+
+<h1>
+<span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h1>
+
+<p>今回から注釈記法に対応しました。<br>
+注釈数字のリンクをマウスオーバーで参照することを目的に書いているので、他の方とちょっと使い方が異なる事があります。<sup id="fnref1"><a href="#fn1" title="Qiitaの注釈記法について：凡例（何に対して？：対象の解説、注釈）という書き方をしています。この場合は（注釈記法について：私はこうやってつかってます）みたいな感じです。">1</a></sup><sup id="fnref2"><a href="#fn2" title="【リンク有】Qiitaの注釈記法について・補足：http://blog.qiita.com/post/105484781374/qiita-markdown-supporting-footnotes">2</a></sup></p>
+
+<h1>
+<span id="windows10-proでgitlabを運用したいのでdocker-for-windowsで環境を作ってみた" class="fragment"></span><a href="#windows10-pro%E3%81%A7gitlab%E3%82%92%E9%81%8B%E7%94%A8%E3%81%97%E3%81%9F%E3%81%84%E3%81%AE%E3%81%A7docker-for-windows%E3%81%A7%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F"><i class="fa fa-link"></i></a>Windows(10 pro)でGitlabを運用したいのでDocker for Windowsで環境を作ってみた。</h1>
+
+<p>ということで、google先生に色々聞いてみたんですが、よく分からんかったです。</p>
+
+<p><strong>ここではVMだとかVagrantだとかVirtual Boxなどは使っていません。</strong><br>
+私がよく分からん事になるので、使用は避けました。<br>
+ただ、管理まで考える場合はあった方がいいらしい、という事は何となく認識しているんですが…。<br>
+ちょっと理解が追い付いてない状態です。</p>
+
+<h1>
+<span id="本題" class="fragment"></span><a href="#%E6%9C%AC%E9%A1%8C"><i class="fa fa-link"></i></a>本題</h1>
+
+<ul>
+<li>Docker for Windows入れて、<sup id="fnref3"><a href="#fn3" title="【リンク有】Docker for Windows ダウンロードページが私にとっては分かりにくかったのですが、今後のためにちゃんと英語内容も読んでもらった方がいいと思ったのでここでは解説しません。">3</a></sup>
+</li>
+<li>Docker for WindowsをGUIチックに操作できるようにKitematic入れて<sup id="fnref4"><a href="#fn4" title="Kitematic：インストールして再起動が完了したらアイコンを右クリック→Kitematicでダウンロードできる">4</a></sup>
+</li>
+<li>Gitlab CEを探して入れる<sup id="fnref5"><a href="#fn5" title="Gitlab CEのインストール：Kitematicの画面上からどうぞ">5</a></sup>
+</li>
+</ul>
+
+<p>と、かなり簡単に入れられました。</p>
+
+<h2>
+<span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意</h2>
+
+<p>Docker for Windowsを動かすところが一番のヤマだと思うので、Hyper-V使えるかどうかは確認しておいたほうがいいです。<br>
+例によって例のごとく、Bash on Ubuntu on Windowsに入れようとしたんですが、こっちはgitlabを入れる前段の環境構築で結構面倒くさい事になってしまった<sup id="fnref6"><a href="#fn6" title="環境構築が面倒くさい：元々他でも使っている環境なので、変な競合を起こしてしまったらしく…原因はまだ分かっていません。">6</a></sup>ため、いったん取りやめました。<br>
+→<a href="">やってみました。</a><br>
+誤解を恐れずに言うと、私がやりたい用途という意味では、Docker for Windowsでも結局はBash on Ubuntu on Windowsと似たような事をやっているので、今回はあくまで「gitlabを運用したい！」という点だけに絞って話を進めさせていただきたい。</p>
+
+<h1>
+<span id="やること" class="fragment"></span><a href="#%E3%82%84%E3%82%8B%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やること</h1>
+
+<p>上にも書いてますが、本当に３ステップ。<br>
+途中でハマったのは、他の端末でもファイルを共有したかったので、ブラウザのダウンロード先をネットワークストラテジにしていたため、CドライブのProgram FilesにKitematicを置こうとしたら怒られたぐらい。<br>
+普通に使っていたらハマらないです、きっと。</p>
+
+<h1>
+<span id="構築完了" class="fragment"></span><a href="#%E6%A7%8B%E7%AF%89%E5%AE%8C%E4%BA%86"><i class="fa fa-link"></i></a>構築完了</h1>
+
+<p>gitlabのインストールは結構時間が掛かるっぽいです。寝て起きた頃に終わったのでそこまでではないでしょう。</p>
+
+<h1>
+<span id="問題" class="fragment"></span><a href="#%E5%95%8F%E9%A1%8C"><i class="fa fa-link"></i></a>問題</h1>
+
+<p>多分環境自体は出来てると思うんですが、実際にgitlabを使おうとするとこれがうまくいかない。<br>
+gitlabの構築は完了していると思うんだけど、Container logを見ても何をすればいいのか分からない。<br>
+試しにexecからpower shellを開いてみるんだけど、何のログを見ればいいとか、恐らくgitlabの根本的な知識がないので調べようがない。<br>
+出来る状態にはなってると思うけど、今出来るか？というとちょっと疑問。<br>
+要調査ですね…。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p><qiita-embed-ogp src="http://docs.docker.jp/windows/step_one.html"></qiita-embed-ogp></p>
+
+<h1>
+<span id="類似記事" class="fragment"></span><a href="#%E9%A1%9E%E4%BC%BC%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>類似記事</h1>
+
+<p><a href="https://qiita.com/nomurasan/items/a4291f5a18f3b6cc1525" id="reference-d9877842e03005fc2f16">Windows(10 pro)でGitlabを運用したいのでVagrant+VirtualBoxで環境を作って運用できた話</a><br>
+【ココ】Windows(10 pro)でGitlabを運用したいのでDocker for Windowsで環境を作ってみたけど運用できなかった話<br>
+<a href="https://qiita.com/nomurasan/items/b725c9ee9179bcac2b22" id="reference-8e3c0a42aade4cf9e1c7">Windows(10 pro)でGitlabを運用したいのでBash on Ubuntu on Windowsで環境を作ってみたけど運用できなかった話</a></p>
+
+<h1>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h1>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>Qiitaの注釈記法について：凡例（何に対して？：対象の解説、注釈）という書き方をしています。この場合は（注釈記法について：私はこうやってつかってます）みたいな感じです。 <a href="#fnref1">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>【リンク有】Qiitaの注釈記法について・補足：<a href="http://blog.qiita.com/post/105484781374/qiita-markdown-supporting-footnotes" class="autolink" rel="nofollow noopener" target="_blank">http://blog.qiita.com/post/105484781374/qiita-markdown-supporting-footnotes</a> <a href="#fnref2">↩</a></p>
+</li>
+
+<li id="fn3">
+<p>【リンク有】<a href="http://docs.docker.jp/windows/step_one.html" rel="nofollow noopener" target="_blank">Docker for Windows ダウンロードページ</a>が私にとっては分かりにくかったのですが、今後のためにちゃんと英語内容も読んでもらった方がいいと思ったのでここでは解説しません。 <a href="#fnref3">↩</a></p>
+</li>
+
+<li id="fn4">
+<p>Kitematic：インストールして再起動が完了したらアイコンを右クリック→Kitematicでダウンロードできる <a href="#fnref4">↩</a></p>
+</li>
+
+<li id="fn5">
+<p>Gitlab CEのインストール：Kitematicの画面上からどうぞ <a href="#fnref5">↩</a></p>
+</li>
+
+<li id="fn6">
+<p>環境構築が面倒くさい：元々他でも使っている環境なので、変な競合を起こしてしまったらしく…原因はまだ分かっていません。 <a href="#fnref6">↩</a></p>
+</li>
+
+</ol>
+</div>

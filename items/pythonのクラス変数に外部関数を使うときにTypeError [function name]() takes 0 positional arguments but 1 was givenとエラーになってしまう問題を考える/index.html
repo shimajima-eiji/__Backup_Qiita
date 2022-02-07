@@ -1,0 +1,81 @@
+
+<h1>
+<span id="pythonのクラス変数に外部関数を使うときにtypeerror-function-name-takes-0-positional-arguments-but-1-was-givenとエラーになってしまう問題を考える" class="fragment"></span><a href="#python%E3%81%AE%E3%82%AF%E3%83%A9%E3%82%B9%E5%A4%89%E6%95%B0%E3%81%AB%E5%A4%96%E9%83%A8%E9%96%A2%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86%E3%81%A8%E3%81%8D%E3%81%ABtypeerror-function-name-takes-0-positional-arguments-but-1-was-given%E3%81%A8%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E5%95%8F%E9%A1%8C%E3%82%92%E8%80%83%E3%81%88%E3%82%8B"><i class="fa fa-link"></i></a>pythonのクラス変数に外部関数を使うときにTypeError: <a href="">function name</a> takes 0 positional arguments but 1 was givenとエラーになってしまう問題を考える</h1>
+
+<p>タイトルが長いですが、言いたい事はそのままです。</p>
+
+<h2>
+<span id="問題" class="fragment"></span><a href="#%E5%95%8F%E9%A1%8C"><i class="fa fa-link"></i></a>問題</h2>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">question.py</span></div>
+<div class="highlight"><pre><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'outer'</span>
+
+<span class="k">class</span> <span class="nc">inner</span><span class="p">():</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="n">outer</span>
+    <span class="k">def</span> <span class="nf">call_outer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">function</span><span class="p">())</span>
+
+<span class="n">inner</span><span class="p">().</span><span class="n">function</span><span class="p">()</span>
+</code></pre></div>
+</div>
+
+<p>これを実施すると、タイトルの通りエラーになります。</p>
+
+<h2>
+<span id="解決" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA"><i class="fa fa-link"></i></a>解決</h2>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">answer.py</span></div>
+<div class="highlight"><pre><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'outer'</span>
+
+<span class="k">class</span> <span class="nc">inner</span><span class="p">():</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span><span class="n">outer</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">call_outer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">function</span><span class="p">())</span>
+
+<span class="n">inner</span><span class="p">().</span><span class="n">function</span><span class="p">()</span>
+</code></pre></div>
+</div>
+
+<p>クラス内でメソッドを使う場合、暗示的にselfが渡されます。<br>
+selfを捨てることで解決させようという発想です。</p>
+
+<h3>
+<span id="展開" class="fragment"></span><a href="#%E5%B1%95%E9%96%8B"><i class="fa fa-link"></i></a>展開</h3>
+
+<p>lambda式で書いているので分かりにくいんですが、要するにこういう事をやってます。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">answer.py</span></div>
+<div class="highlight"><pre><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">'outer'</span>
+
+<span class="k">class</span> <span class="nc">inner</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">outer</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">call_outer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">function</span><span class="p">())</span>
+
+<span class="n">inner</span><span class="p">().</span><span class="n">function</span><span class="p">()</span>
+</code></pre></div>
+</div>
+
+<p>こちらはよく見る形だと思います。</p>
+
+<h2>
+<span id="実例" class="fragment"></span><a href="#%E5%AE%9F%E4%BE%8B"><i class="fa fa-link"></i></a>実例</h2>
+
+<p><code>def outer(input)</code><br>
+を作っていて、クラス内から呼び出した時に<code>if isinstance(input,<br>
+ '期待するobject')</code>をやらなかったせいで、この関数ではエラーにならず通ってしまい、別の場所で問題になった時に追いかけるのにやたらと時間が掛かりました。<br>
+可能であれば引数をバリデーションする癖をつけておきましょう。<br>
+たったこれだけの事なんですが、えらい目に遭いました。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

@@ -1,0 +1,123 @@
+<p>今はpythonを使っているのでいいんだけど、いずれ古巣に戻るつもりなので、そこからまたpythonに戻ってきたら確実に忘れてるだろうな、と思うことを備忘録にしています。</p>
+
+<h1>
+<span id="printが式でなくて文になると何がうれしいか" class="fragment"></span><a href="#print%E3%81%8C%E5%BC%8F%E3%81%A7%E3%81%AA%E3%81%8F%E3%81%A6%E6%96%87%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%A8%E4%BD%95%E3%81%8C%E3%81%86%E3%82%8C%E3%81%97%E3%81%84%E3%81%8B"><i class="fa fa-link"></i></a>printが式でなくて文になると何がうれしいか？</h1>
+
+<p><a href="http://d.hatena.ne.jp/hekyou/20111224/p1" rel="nofollow noopener" target="_blank">探せばこのように、小難しい話とかはいっぱいある</a>んですが、<strong>実感として自分に降りてきてない</strong>ので自分どうなんよ？という話にフォーカスします。<br>
+<strong>正確性のある、かつ体系的な情報を求めている方にとっては有益な情報は提供できていない</strong><sup id="fnref1"><a href="#fn1" title="【有益な情報が提供できない理由】アーキテクチャーの話も理解しようとしたのですが、私の中でうまく理解しきれていません…">1</a></sup>かもしれません…</p>
+
+<h2>
+<span id="大前提" class="fragment"></span><a href="#%E5%A4%A7%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>大前提</h2>
+
+<p>以下のように書くとpython2系でも式っぽくなります。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">user_print.py</span></div>
+<div class="highlight"><pre><code><span class="k">lambda</span> <span class="n">message</span><span class="p">:</span><span class="k">print</span> <span class="n">message</span>
+
+<span class="c1"># 上記は以下と同義
+</span><span class="kn">import</span> <span class="nn">six</span>
+<span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">six</span><span class="p">.</span><span class="n">PY2</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">message</span>
+  <span class="k">elif</span> <span class="n">six</span><span class="p">.</span><span class="n">PY3</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">message</span>
+</code></pre></div>
+</div>
+
+<p>なので、python2でもprintを式っぽく書くこと自体は可能です。<br>
+厳密に言うと上記サイトの通り、上記のようなオレオレ関数は小回りは利かないのでpython3のprint式とは違うのですが…<br>
+私が使ってきた範囲ではあんまり関係ないので、本記事では同じものとして扱います。</p>
+
+<h2>
+<span id="実践" class="fragment"></span><a href="#%E5%AE%9F%E8%B7%B5"><i class="fa fa-link"></i></a>実践</h2>
+
+<p>高階関数を使うのが分かりやすいと思います。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">practice.py</span></div>
+<div class="highlight"><pre><code><span class="kn">from</span> <span class="nn">user_print</span> <span class="kn">import</span> <span class="n">user_print</span>
+
+<span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">'test1'</span><span class="p">,</span>
+  <span class="s">'test2'</span><span class="p">,</span>
+  <span class="p">]</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">str_list</span><span class="p">))</span>  <span class="c1"># python3
+</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span><span class="k">print</span><span class="p">(</span><span class="n">string</span><span class="p">),</span> <span class="n">str_list</span><span class="p">))</span>  <span class="c1"># python3
+</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">str_list</span><span class="p">))</span>  <span class="c1"># python2
+</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span><span class="n">message</span><span class="p">(</span><span class="n">string</span><span class="p">),</span> <span class="n">str_list</span><span class="p">))</span>  <span class="c1"># python2
+</span>
+<span class="c1"># forで書く
+</span><span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">:</span>
+  <span class="n">message</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="c1"># if six.PY3: print(string)
+</span>
+</code></pre></div>
+</div>
+
+<p>別にfor文に何か思うところがあるわけではないんですが、たとえば上記のようにする場合。<br>
+mapとかで引数が一つのケースでlambda式を書くメリットはほとんどないと思ってますが、帰ってきた時に忘れてそうなので書いておきます。</p>
+
+<h3>
+<span id="脱線メモ" class="fragment"></span><a href="#%E8%84%B1%E7%B7%9A%E3%83%A1%E3%83%A2"><i class="fa fa-link"></i></a>脱線メモ</h3>
+
+<p>以下のようなケースではlambda式を使う必要があります。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">class.py</span></div>
+<div class="highlight"><pre><code><span class="k">class</span> <span class="nc">user_print</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">string</span> <span class="o">=</span> <span class="n">string</span>
+  <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">string</span><span class="p">)</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span><span class="n">user_print</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">main</span><span class="p">(),</span> <span class="n">str_list</span><span class="p">))</span>
+</code></pre></div>
+</div>
+
+<p>list(map(user_print, str_list))<br>
+とか<br>
+list(map(user_print.main(), str_list))<br>
+は期待する結果を得られませんが、エラーにもなりません（？）</p>
+
+<h2>
+<span id="要望というか希望" class="fragment"></span><a href="#%E8%A6%81%E6%9C%9B%E3%81%A8%E3%81%84%E3%81%86%E3%81%8B%E5%B8%8C%E6%9C%9B"><i class="fa fa-link"></i></a>要望、というか希望</h2>
+
+<p>上記でも書いてますが、printとmessageは同じものなので深く考えなくていい<sup id="fnref2"><a href="#fn2" title="【printとユーザー関数messageが同じ】大事な事なので何度も言いますが、本記事のような使い方に限定しています。">2</a></sup>んですが、message関数のようにバージョンに対応出来た方が比較的親切かな、と思うシーンが多かったです。<br>
+本来はpy2とpy3のパーサがあればいいんでしょうが<sup id="fnref3"><a href="#fn3" title="【py2-py3のパーサ】例えば今回でいうところのprint文・式をいい感じにするものとかはありそうな気はしますよね。configparserとConfigparserみたいなのとか、socketのsettimeoutとか、探せば色々見つかります。">3</a></sup>、探すより作ったほうが楽だったのでそうしてます。<br>
+個人の環境でgitサーバーなりを立ててライブラリをまとめたプロジェクトを置いておくだけでも相当捗ります。</p>
+
+<h1>
+<span id="念のために" class="fragment"></span><a href="#%E5%BF%B5%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>念のために</h1>
+
+<ul>
+<li>python2.7.12</li>
+<li>python3.6.4</li>
+</ul>
+
+<p>で検証しています。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【有益な情報が提供できない理由】アーキテクチャーの話も理解しようとしたのですが、私の中でうまく理解しきれていません… <a href="#fnref1">↩</a></p>
+</li>
+
+<li id="fn2">
+<p>【printとユーザー関数messageが同じ】大事な事なので何度も言いますが、本記事のような使い方に限定しています。 <a href="#fnref2">↩</a></p>
+</li>
+
+<li id="fn3">
+<p>【py2-py3のパーサ】例えば今回でいうところのprint文・式をいい感じにするものとかはありそうな気はしますよね。configparserとConfigparserみたいなのとか、socketのsettimeoutとか、探せば色々見つかります。 <a href="#fnref3">↩</a></p>
+</li>
+
+</ol>
+</div>

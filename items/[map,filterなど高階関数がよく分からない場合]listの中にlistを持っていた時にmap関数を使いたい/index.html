@@ -1,0 +1,167 @@
+
+<h1>
+<span id="mapfilterなど高階関数がよく分からない場合listの中にlistを持っていた時にmap関数を使いたい" class="fragment"></span><a href="#mapfilter%E3%81%AA%E3%81%A9%E9%AB%98%E9%9A%8E%E9%96%A2%E6%95%B0%E3%81%8C%E3%82%88%E3%81%8F%E5%88%86%E3%81%8B%E3%82%89%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88list%E3%81%AE%E4%B8%AD%E3%81%ABlist%E3%82%92%E6%8C%81%E3%81%A3%E3%81%A6%E3%81%84%E3%81%9F%E6%99%82%E3%81%ABmap%E9%96%A2%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%84%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>[map,filterなど高階関数がよく分からない場合]listの中にlistを持っていた時にmap関数を使いたい</h1>
+
+<p>なんてことはないんだけど、解説してるサイトが見つからなかったので、後で困った時のためにメモ。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">list_in_list.py</span></div>
+<div class="highlight"><pre><code><span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s">'1A'</span><span class="p">,</span><span class="s">'1B'</span><span class="p">,</span><span class="s">'1C'</span><span class="p">],</span>
+  <span class="p">[</span><span class="s">'2A'</span><span class="p">,</span><span class="s">'2B'</span><span class="p">],</span>
+  <span class="p">[</span><span class="s">'3A'</span><span class="p">,</span><span class="s">'3B'</span><span class="p">,</span><span class="s">'3C'</span><span class="p">,</span><span class="s">'4D'</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="nb">list</span><span class="p">(</span>
+  <span class="nb">map</span><span class="p">(</span>
+    <span class="k">print</span><span class="p">,</span> <span class="n">list_in_list</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">#['1A','1B','1C']
+#['2A','2B']
+#['3A','3B','3C','4D']
+</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
+<span class="c1">#1A
+#1B
+#1C
+#2A
+#2B
+#3A
+#3B
+#3C
+#4D
+</span></code></pre></div>
+</div>
+
+<p>リストの外の括弧[]に対してlist(map())でループを回しているイメージ。</p>
+
+<h2>
+<span id="発展" class="fragment"></span><a href="#%E7%99%BA%E5%B1%95"><i class="fa fa-link"></i></a>発展</h2>
+
+<p>ただし、</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">list_in_list.py</span></div>
+<div class="highlight"><pre><code><span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'first'</span><span class="p">,[</span><span class="s">'1A'</span><span class="p">,</span><span class="s">'1B'</span><span class="p">,</span><span class="s">'1C'</span><span class="p">]],[</span><span class="s">'second'</span><span class="p">,[</span><span class="s">'2A'</span><span class="p">,</span><span class="s">'2B'</span><span class="p">]],[</span><span class="s">'third'</span><span class="p">,[</span><span class="s">'3A'</span><span class="p">,</span><span class="s">'3B'</span><span class="p">,</span><span class="s">'3C'</span><span class="p">,</span><span class="s">'4D'</span><span class="p">]]]</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
+
+<span class="c1">#first
+#['1A','1B','1C']
+</span>
+<span class="c1">#second
+#['2A','2B']
+</span>
+<span class="c1">#third
+#['3A','3B','3C','4D']
+</span></code></pre></div>
+</div>
+
+<p>のようなデータを扱うと、以下の場合おかしくなる。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">list_in_list.py</span></div>
+<div class="highlight"><pre><code><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">list2</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">list2</span><span class="p">)),</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
+<span class="c1">#f
+#i
+#r
+#s
+#t
+#1A
+#1B
+#1C
+#s
+#e
+#c
+#o
+#n
+#d
+#2A
+#2B
+#t
+#h
+#i
+#r
+#d
+#3A
+#3B
+#3C
+#4D
+</span></code></pre></div>
+</div>
+
+<p>これは、stringに'first'を入れてstring[0]、string[1]...のように取り出すような振る舞いがされている。<br>
+そのためエラーにならないが、期待値と異なる事がある。</p>
+
+<h2>
+<span id="解決" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA"><i class="fa fa-link"></i></a>解決</h2>
+
+<p>これを防ぎたい場合、たとえば今回の場合は以下のような書き方で逃げられる。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">list_in_list.py</span></div>
+<div class="highlight"><pre><code><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
+<span class="c1">#1A
+#1B
+#1C
+#2A
+#2B
+#3A
+#3B
+#3C
+#4D
+</span></code></pre></div>
+</div>
+
+<p>lists[0]のfirst, second, thirdを取りたい場合は、</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">list_in_list.py</span></div>
+<div class="highlight"><pre><code><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">list_in_list</span><span class="p">))</span>
+
+<span class="c1">#first
+#second
+#third
+</span></code></pre></div>
+</div>
+
+<p>で取れる。<br>
+落ち着いて一つずつ読み解けば難しい事ではないんだけど、勘違いしやすいので注意。<br>
+よく分からなくなった場合、list(map(..., list_in_list))をfor文に書き直してみると気付きやすいかも。</p>
+
+<h2>
+<span id="20180409-解決追記" class="fragment"></span><a href="#20180409-%E8%A7%A3%E6%B1%BA%E8%BF%BD%E8%A8%98"><i class="fa fa-link"></i></a>2018/04/09 解決追記</h2>
+
+<p>itertools.chainを使うともう少しスマートになる。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">answer_comment.py</span></div>
+<div class="highlight"><pre><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+
+<span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'first'</span><span class="p">,</span> <span class="p">[</span><span class="s">'1A'</span><span class="p">,</span> <span class="s">'1B'</span><span class="p">,</span> <span class="s">'1C'</span><span class="p">]],</span> <span class="s">'second'</span><span class="p">,</span> <span class="p">[</span><span class="s">'second'</span><span class="p">,[</span><span class="s">'2A'</span><span class="p">,</span> <span class="s">'2B'</span><span class="p">]],</span> <span class="p">[</span><span class="s">'third'</span><span class="p">,</span> <span class="p">[[</span><span class="s">'3A'</span><span class="p">,</span> <span class="s">'3B'</span><span class="p">,</span> <span class="s">'3C'</span><span class="p">,</span> <span class="s">'4D'</span><span class="p">]]]]</span>
+<span class="nb">list</span><span class="p">(</span>
+    <span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">list_in_list</span> <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+
+<h1>
+<span id="python2x系の場合" class="fragment"></span><a href="#python2x%E7%B3%BB%E3%81%AE%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>python2.x系の場合</h1>
+
+<p>printで説明しているのでprintについて言及するが、python2では上記をそのまま使えない。<br>
+そのため、以下のような関数を用意する。</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">python2.py</span></div>
+<div class="highlight"><pre><code><span class="k">def</span> <span class="nf">my_print</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">message</span>
+</code></pre></div>
+</div>
+
+<p>これでとりあえず使える。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

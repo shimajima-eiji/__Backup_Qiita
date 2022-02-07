@@ -1,0 +1,39 @@
+<p>ソースコードで解説します。<br>
+Momentに詳しくない私のために、考え方をコメントに添えています。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>var today = moment();
+
+// 隔週の場合、今日が一年で何週目か分かれば、2で割れば隔週が求められる
+var week = today.week() % 2;
+
+// 月の１週目などの指定がある場合、月初めが何曜日で今日が何日目か分かれば何周目か求められる
+var first_day = moment(today.format("YYYY/MM/DD")).date(1);  // 今月1日
+var today_week = Math.ceil((first_day.day() + today.date())/7);    // 日曜日の1日は1、土曜日の1日は7になる
+if(today_week == 1 &amp;&amp; today.day() == 0) // 一周目の日曜日の場合
+
+// 一回目の日曜日を検出したい場合、1日が何曜日か求めて、1週目と2週目の可能性を追求すれば分かる
+var target_week = (first_day.day() == 0) ? 1 : 2;
+if(today_week == target_week) // 一回目の日曜日の場合  
+</code></pre></div></div>
+
+<h1>
+<span id="解説" class="fragment"></span><a href="#%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>解説</h1>
+
+<p>この記事を読んでいる方は面倒くさがりな方<sup id="fnref1"><a href="#fn1" title="【面倒くさがり】プログラマーとしては良いことだと思います。">1</a></sup>だと思いますが、コメントを読んでフローチャートを書けば難しい話ではない事がわかります。<br>
+本稿では考え方について触れたいので<code>moment</code>を使用していますが、<code>moment</code>である必要はないです。</p>
+
+<h1>
+<span id="実践例" class="fragment"></span><a href="#%E5%AE%9F%E8%B7%B5%E4%BE%8B"><i class="fa fa-link"></i></a>実践例</h1>
+
+<p><a href="https://github.com/shimajima-eiji/Hosting/blob/GAS-timetrigger/%E3%82%B4%E3%83%9F%E3%81%AE%E6%97%A5.gs" rel="nofollow noopener" target="_blank">GASで毎日ゴミの日を通知する</a></p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【面倒くさがり】プログラマーとしては良いことだと思います。 <a href="#fnref1">↩</a></p>
+</li>
+
+</ol>
+</div>

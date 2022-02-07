@@ -1,0 +1,26 @@
+<p>こんなマニアックな使い方をする人がいるか分からないけど、備忘録</p>
+
+<div class="code-frame" data-lang="python">
+<div class="code-lang"><span class="bold">expansion.py</span></div>
+<div class="highlight"><pre><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'任意のパス'</span><span class="p">)</span>
+<span class="n">dirname</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">parent</span>  <span class="c1">#フルパスが欲しい場合はpath.resolve().parentでも取れる
+</span><span class="n">filename</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">stem</span>  <span class="c1">#拡張子を除いたファイル名を取得
+</span>
+<span class="n">Path</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span> <span class="o">/</span> <span class="s">'{}.ext'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>  <span class="c1">#.extはいい感じに
+</span></code></pre></div>
+</div>
+
+<p>説明用にdirnameやfilenameにPathを使っているけど、実際はstrを想定。<br>
+こんな面倒な事をしなくてもいいはずなんだけど、方法が見つからなかった。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p><a href="https://docs.python.jp/3/library/pathlib.html" rel="nofollow noopener" target="_blank">pathlib — オブジェクト指向のファイルシステムパス(Python.org)</a></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

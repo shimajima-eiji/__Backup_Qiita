@@ -1,0 +1,14 @@
+最初にsortしたらどうでしょう。
+
+```
+$ cat -b sample.txt | sort -k2 -k1 > sample2.txt
+
+$ cat sample2.txt
+5  1aa
+6  1aa
+3  a1a
+2  aa1
+7  aa1
+1  aaa
+4  aaa
+```

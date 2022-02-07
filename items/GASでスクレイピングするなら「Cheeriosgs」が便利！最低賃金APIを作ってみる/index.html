@@ -1,0 +1,231 @@
+<p><a href="https://takaya1992.hatenablog.jp/entry/2017/04/06/022344" rel="nofollow noopener" target="_blank">本家</a>の更新が2018年で止まっていたので、最新版に対応しつつGASでも作ってみる。</p>
+
+<h1>
+<span id="gasでスクレイピングするならcheeriosgsが便利最低賃金apiを作ってみる" class="fragment"></span><a href="#gas%E3%81%A7%E3%82%B9%E3%82%AF%E3%83%AC%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0%E3%81%99%E3%82%8B%E3%81%AA%E3%82%89cheeriosgs%E3%81%8C%E4%BE%BF%E5%88%A9%E6%9C%80%E4%BD%8E%E8%B3%83%E9%87%91api%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>GASでスクレイピングするなら「Cheeriosgs」が便利！最低賃金APIを作ってみる</h1>
+
+<p>いつもどおり、ソースは<a href="https://github.com/shimajima-eiji/Hosting/blob/GAS-minimum_wage/set.gs#L3-L74" rel="nofollow noopener" target="_blank">Github</a>。</p>
+
+<p><details><summary>ソースコード</summary><div>
+<br>
+```<br>
+  /**<br>
+   * ユーザー定義<br>
+   */<br>
+  const years = [<br>
+    {<br>
+      name: "令和",<br>
+      start: 2019,<br>
+    },<br>
+  ];
+
+<p>/**<br>
+   * データクレンジング<br>
+   */<br><br>
+  function replaces ( str )<br>
+  {<br>
+    return getDate( str ).trim()<br>
+      .replace( / /g, "" )<br>
+      .replace( /　/g, "" )<br>
+      .replace( /)/g, "" )<br>
+      .replace( /(/g, "" )<br>
+      .replace( /[０-９]/g, function ( word )<br>
+      {<br>
+        return String.fromCharCode( word.charCodeAt( 0 ) - 0xFEE0 )<br>
+      } );<br>
+  }<br>
+  function getDate ( str )<br>
+  {<br>
+    // 日付でなければやらない<br>
+    if ( str.indexOf( "年" ) == -1 ) return str;</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>// 年号を西暦に直す。
+var ad = -1;  // 元年分を減らしておくため-1
+years.forEach( function ( year )
+{
+  if ( str.indexOf( year.name ) &gt; -1 )
+  {
+    ad += year.start;
+    str = str.replace( year.name, "" );
+  }
+} );
+
+// 元年は1年
+str = str.replace( "元", 1 )
+
+// 西暦を算出して-でつなげる
+var split = str.split( "年" );  // 2桁以上の検出に対応
+return ( Number( split[ 0 ] ) + ad )
+  + "-"
+  + split[ 1 ].replace( "月", "-" ).replace( "日", "" );
+</code></pre></div></div>
+
+<p>}</p>
+
+<p>/**<br>
+   * メイン<br>
+   */<br>
+  const URL = PropertiesService.getScriptProperties().getProperties().url;<br>
+  const content = UrlFetchApp.fetch( URL ).getContentText();<br>
+  const $ = Cheerio.load( content );</p>
+
+<p>var result = [];<br>
+  var pointer = -1;<br>
+  const EXCLUDE_COLUMN = 3; // 最初の行だけおかしなものがあるので除外<br>
+  const COLUMNS = 4;<br>
+  $( "td" ).each( function ( i, td )<br>
+  {<br>
+    if ( i &lt; EXCLUDE_COLUMN ) return;<br>
+    if ( i % COLUMNS == EXCLUDE_COLUMN )<br>
+    {<br>
+      result.push( [] );<br>
+      pointer++;<br>
+    }<br>
+    result[ pointer ].push( replaces( $( td ).text() ) );<br>
+  } );<br>
+```<br>
+</p>
+</div></details></p>
+
+<p>スクレイピングでつらいのは、スクレイピングの処理ではなく、取得したデータのクレンジング。<br>
+具体的には、</p>
+
+<ul>
+<li>必要な部分の括り出し</li>
+<li>不正な値やデータを取り除く、置き換える</li>
+</ul>
+
+<p>これを如何に頑張らないかが重要だと考える。<br>
+pythonだととりあえずpandas辺りに入れてしまえ！となるがJavascriptにそこまで求めるのは酷だろうか。</p>
+
+<h2>
+<span id="cheeriogs" class="fragment"></span><a href="#cheeriogs"><i class="fa fa-link"></i></a>Cheeriogs</h2>
+
+<p><a href="https://github.com/tani/cheeriogs" rel="nofollow noopener" target="_blank">公式</a></p>
+
+<p>使い方はCheerioと同じなのでJQueryでスクレイピングをしている人にとっては馴染みやすい。</p>
+
+<h2>
+<span id="当初案" class="fragment"></span><a href="#%E5%BD%93%E5%88%9D%E6%A1%88"><i class="fa fa-link"></i></a>当初案</h2>
+
+<p><a href="https://github.com/shimajima-eiji/Hosting/commit/334503222be20d519d5cc5d9fbf88e163c732da9#diff-210a8378ce33326115f9b72aea5adcb2R3-R96" rel="nofollow noopener" target="_blank">Github(History)</a>。</p>
+
+<p><details><summary>ソースコード</summary><div>
+<br>
+```<br>
+  /**<br>
+   * ユーザー定義<br>
+   */<br>
+  var yearsname2ad = {<br>
+    "元年": 2019,<br>
+  };<br>
+  const PROPERTIES = PropertiesService.getScriptProperties().getProperties();
+
+<p>/**<br>
+   * システムロジック<br>
+   */</p>
+
+<p>function __scraping ()<br>
+  {<br>
+    var html = UrlFetchApp.fetch( PROPERTIES.url ).getContentText( 'UTF-8' ).replace( /\r?\n/g, "" ).replace( /[０-９]/g, function ( word )<br>
+    {<br>
+      return String.fromCharCode( word.charCodeAt( 0 ) - 0xFEE0 )<br>
+    } );<br>
+    var start = "</p>";<br>
+    var end = "";<br>
+    return __cut( html, start, end );<br>
+  }
+
+<p>var __match = {<br>
+    tr: /&lt;tr \w(.<em>?)&lt;\/tr&gt;/g,<br>
+    td: /&lt;td \w(.</em>?)&lt;\/td&gt;/g,<br>
+    year: /<a href=".*">\d元</a>年/g,<br>
+    month: /年\d(.<em>)月/g,<br>
+    day: /月\d(.</em>)日/g,<br>
+    run: function ( str, pattern ) { return str.match( __match[ pattern ] ) },<br>
+  }<br>
+  function __cut ( str, sep )<br>
+  {<br>
+    return str.substring( str.indexOf( sep ) + sep.length, str.length );<br>
+  }<br>
+  function __rsubstring ( str, sep )<br>
+  {<br>
+    return str.substring( 0, str.indexOf( sep ) );<br>
+  }</p>
+
+<p>function __getYMD ( str, pattern )<br>
+  {<br>
+    var tmp = __match.run( str, pattern )[ 0 ]</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>switch ( pattern )
+{
+  case "year":
+    tmp = yearsname2ad[ tmp ];
+    break;
+
+  case "month":
+  case "day":
+    tmp = tmp.substring( 1, tmp.length - 1 );
+    if ( tmp.length == 1 ) tmp = "0" + tmp;
+    break;
+}
+return tmp;
+</code></pre></div></div>
+
+<p>}<br>
+  function __getDate ( str )<br>
+  {<br>
+    var year = __getYMD( str, "year" );<br>
+    var month = __getYMD( str, "month" );<br>
+    var day = __getYMD( str, "day" );<br>
+    return year + "-" + month + "-" + day;<br>
+  }</p>
+
+<p>/**<br>
+   * メイン<br>
+   */</p>
+
+<p>var table = __scraping()<br>
+  //  var table = test()</p>
+
+<p>/**<br>
+   * データクレンジング<br>
+   */<br>
+  var tr_items = __match.run( table, "tr" );<br>
+  var td_items = tr_items.map( function ( tr )<br>
+  {<br>
+    var tds = __match.run( tr, "td" );<br>
+    return tds.map( function ( td )<br>
+    {<br>
+      var clean_td = __rsubstring( __cut( td, "&gt;" ), "&lt;" )<br>
+        .trim()<br>
+        .replace( / /g, "" )<br>
+        .replace( /　/g, "" )<br>
+        .replace( /(/g, "" )<br>
+        .replace( /)/g, "" )<br>
+        ;<br>
+      if ( clean_td.indexOf( "年" ) &gt; -1 ) clean_td = __getDate( clean_td );<br>
+      return clean_td;<br>
+    } );<br>
+  } );<br>
+  td_items.shift();<br>
+```<br>
+</p>
+</div></details></p>
+
+<p>このように、うまいパターンマッチングを考えるしか方法が思いつかなかった。</p>
+
+<p>なお、<code>getDate</code>関連と<code>str.replace</code>をリファクタリングしているので、そこは目を瞑ってほしい。</p>
+
+<h1>
+<span id="動くもの" class="fragment"></span><a href="#%E5%8B%95%E3%81%8F%E3%82%82%E3%81%AE"><i class="fa fa-link"></i></a>動くもの</h1>
+
+<p><a href="https://shimajima-eiji.github.io/Hosting/man-month/" rel="nofollow noopener" target="_blank">Web版</a></p>
+
+<p><a href="https://camo.qiitausercontent.com/1c99844e3622c9d25c2712bb2df4026c3b560ab7/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f38396431633039392d643565632d616530612d653032622d6239306637636233313961342e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F89d1c099-d5ec-ae0a-e02b-b90f7cb319a4.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b202c73c751b60de7d90cb8c2e09c4b8" alt="簡易人月シミュレーター.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/89d1c099-d5ec-ae0a-e02b-b90f7cb319a4.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F89d1c099-d5ec-ae0a-e02b-b90f7cb319a4.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=4af827c66d0e00ce84530011b11637fd 1x" loading="lazy"></a></p>
+
+<p>Chrome拡張機能にも対応している。</p>
+
+<h1>
+<span id="手引" class="fragment"></span><a href="#%E6%89%8B%E5%BC%95"><i class="fa fa-link"></i></a>手引</h1>
+
+<p><a href="https://note.com/nomuragoro/n/nf11cbbaf8f96" rel="nofollow noopener" target="_blank">最低賃金APIを使って簡易人月計算機をChrome拡張機能で作ってみた</a></p>

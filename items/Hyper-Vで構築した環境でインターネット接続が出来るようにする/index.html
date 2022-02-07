@@ -1,0 +1,87 @@
+<p>ここまでネットワーク設定で苦労するとは思いませんでした、本当に（ごあいさつ）</p>
+
+<h1>
+<span id="hyper-vで構築した環境にインターネット接続を試みる" class="fragment"></span><a href="#hyper-v%E3%81%A7%E6%A7%8B%E7%AF%89%E3%81%97%E3%81%9F%E7%92%B0%E5%A2%83%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E6%8E%A5%E7%B6%9A%E3%82%92%E8%A9%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>Hyper-Vで構築した環境にインターネット接続を試みる</h1>
+
+<p>試行錯誤の備忘録を残しておきます。</p>
+
+<h2>
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+
+<p>仮想スイッチを外部にする</p>
+
+<h1>
+<span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h1>
+
+<h2>
+<span id="osイメージをダウンロードする" class="fragment"></span><a href="#os%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%82%92%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>OSイメージをダウンロードする。</h2>
+
+<p>この後やりたい事があるので、Ubuntu16.04 LTSかCentOS7にしました。<br>
+Ubuntuはいいんですが、CentOS7はダウンロード先によってはものすごく時間が掛かるので、ダウンロードリンクを見極めることをおすすめします。</p>
+
+<p><a href="https://www.centos.org/download/" rel="nofollow noopener" target="_blank">CentOS</a><br>
+<a href="https://www.ubuntu.com" rel="nofollow noopener" target="_blank">Ubuntu</a></p>
+
+<p>慣れるまではかなり困惑するのでGUI使えるUbuntuがいいかもしれません。<br>
+ネットワークドライバがあればとりあえずは出来るので、どれでも大丈夫です。</p>
+
+<h2>
+<span id="hyper-vをインストールする" class="fragment"></span><a href="#hyper-v%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>Hyper-Vをインストールする。</h2>
+
+<p>コントロールパネルから「プログラムの追加と削除」でHyper-Vがあるので、これにチェックを入れます。<br>
+再起動を求められるかも知れませんが、先の作業でダウンロードが完了していなければ待ちましょう。</p>
+
+<h2>
+<span id="hyper-vの仮想スイッチマネージャーを設定する" class="fragment"></span><a href="#hyper-v%E3%81%AE%E4%BB%AE%E6%83%B3%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>Hyper-Vの仮想スイッチマネージャーを設定する</h2>
+
+<p>Hyper-V マネージャーを起動します。<br>
+画面を起動したら[操作]→[仮想スイッチマネージャー]を実行します。<br>
+ポップアップウィザードが起動したら、「外部」を選択して仮想スイッチを作成します。<br>
+外部ネットワークをホストで使っている物理ネットワークに設定して「管理オペレーティングシステムにこのネットワークアダプターの共有を許可する」に<strong>チェックを入れます</strong>。<br>
+これをやらないとホスト側が弾かれます。<br>
+他はさわらなくていいので、これでOKします。</p>
+
+<h3>
+<span id="ちょっと解説" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>ちょっと解説</h3>
+
+<p>ホスト側のネットワークアダプターを右クリック→プロパティでポップアップを出した後、共有タブを開くと似たような項目がありますが、ここで設定しているものが↑項目です。<br>
+競合しているので奪い合いになるのかな？　細かいのは分からないのですが、設定の意味というか意図はこれです。</p>
+
+<h2>
+<span id="仮想マシンを作る" class="fragment"></span><a href="#%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>仮想マシンを作る</h2>
+
+<p>普通に設定します。<br>
+ネットワークの構成は先ほど作成した外部ネットワーク用の仮想スイッチに接続するようにします。</p>
+
+<h1>
+<span id="失敗談" class="fragment"></span><a href="#%E5%A4%B1%E6%95%97%E8%AB%87"><i class="fa fa-link"></i></a>失敗談</h1>
+
+<p>色々なところを参考にさせてもらったんですが、私の環境ではうまくい<br>
+きませんでした…</p>
+
+<h2>
+<span id="事象" class="fragment"></span><a href="#%E4%BA%8B%E8%B1%A1"><i class="fa fa-link"></i></a>事象</h2>
+
+<p>仮想スイッチを内部にしてブリッジにすると、ホスト(Windows10)で接続できず、Hyper-V側(Ubuntu16)でつなげるようになる</p>
+
+<h2>
+<span id="手順-1" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86-1"><i class="fa fa-link"></i></a>手順</h2>
+
+<p>上記「Hyper-Vの仮想スイッチマネージャーを設定する」項目で外部ではなく内部にするのと、<br>
+ホスト側のネットワークアダプターの設定で、ホスト側で使っているネットワークアダプターと作成した内部仮想スイッチをブリッジ接続します。</p>
+
+<p>そうすると、ネットワークブリッジ接続という項目が作成されるのですが、これではなぜか事象のような状態になり、ホストから外につなげなくなりました。</p>
+
+<p>色々なページを見ていると、こちらの手順を書いているのでおや？となりました。<br>
+なので、私のケースのような事もあるかも知れないので、記事に書き残してます。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p>本当に多くのサイトが内部での手順が書いてありましたが、以下が非常に分かりやすかったです。<br>
+<a href="https://www.gmo.jp/report/single/?art_id=212" class="autolink" rel="nofollow noopener" target="_blank">https://www.gmo.jp/report/single/?art_id=212</a></p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

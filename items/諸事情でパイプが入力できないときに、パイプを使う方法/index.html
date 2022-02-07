@@ -1,0 +1,55 @@
+
+<h1>
+<span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h1>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>#!/bin/sh
+: &lt;&lt;__For_copy
+|
+\
+_
+@
+'
+"
+&amp;
+`
+__For_copy
+
+set -u
+${1} | ${2}
+</code></pre></div></div>
+
+<h1>
+<span id="使い方" class="fragment"></span><a href="#%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-link"></i></a>使い方</h1>
+
+<p>'''<br>
+sh pype.sh '実行したいコマンド' 'パイプ実行したいコマンド'<br>
+'''</p>
+
+<h1>
+<span id="アドバイス" class="fragment"></span><a href="#%E3%82%A2%E3%83%89%E3%83%90%E3%82%A4%E3%82%B9"><i class="fa fa-link"></i></a>アドバイス</h1>
+
+<p>本当はパイプを入力できるようにするのが好ましいのですが、面倒なことが往々にしてあると思います。<br>
+とりあえず入力に困りそうなキーをForCopyの中に入れておくと何気に助かります。</p>
+
+<p>使うときは、自前のサーバーなどでSAMBAを使うなり、Wgetなどで取得できるようにしておくと組織でも簡単に共有できます。</p>
+
+<p>複数のパイプに対応したい場合は、</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>${1} | ${2} | ${3} ...
+</code></pre></div></div>
+
+<p>のように引数を増やすと使えます。<br>
+&amp;&amp;や||もこれで作れるので、やりたいように作り変えてください。</p>
+
+<h1>
+<span id="キーボード変更について" class="fragment"></span><a href="#%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E5%A4%89%E6%9B%B4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>キーボード変更について</h1>
+
+<p>英語キーボードを使っているなら</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sudo loadkeys us
+</code></pre></div></div>
+
+<h1>
+<span id="感謝" class="fragment"></span><a href="#%E6%84%9F%E8%AC%9D"><i class="fa fa-link"></i></a>感謝</h1>
+
+<p><qiita-embed-ogp src="http://d.hatena.ne.jp/matoken/20090905/1252164012"></qiita-embed-ogp></p>

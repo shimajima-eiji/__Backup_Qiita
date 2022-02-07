@@ -1,0 +1,75 @@
+<p>知見がある方のご意見いただきたいなぁ、と思いつつ。</p>
+
+<h2>
+<span id="やりたいこと" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やりたいこと</h2>
+
+<ol>
+<li>リポジトリAの内容をリポジトリBにミラーリングする</li>
+<li>リポジトリAの履歴をリポジトリBに引き継ぐ</li>
+<li>リポジトリCにGithubActionsを作る</li>
+</ol>
+
+<p>できたのは2.まで。</p>
+
+<h2>
+<span id="やったこと" class="fragment"></span><a href="#%E3%82%84%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やったこと</h2>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>git clone リポジトリA
+git push --mirror リポジトリB
+</code></pre></div></div>
+
+<p>これで2.まではできます。</p>
+
+<h3>
+<span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h3>
+
+<p>httpsでやっているので気にしていませんでしたが、検証環境では.sshも対応しているので、もしかしたら関係があるかもしれません。</p>
+
+<h2>
+<span id="問題点" class="fragment"></span><a href="#%E5%95%8F%E9%A1%8C%E7%82%B9"><i class="fa fa-link"></i></a>問題点</h2>
+
+<p>GithubActionsで実行させようとすると、権限周りが問題になります。<br>
+何も考えずに</p>
+
+<div class="code-frame" data-lang="yaml">
+<div class="code-lang"><span class="bold">GithubAction.yml</span></div>
+<div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span>
+  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">git clone .git</span>
+    <span class="s">git config --global user.email "${{ secrets.EMAIL }}"</span>
+    <span class="s">git config --global user.name "shimajima-eiji"</span>
+    <span class="s">git push --mirror .git</span>
+</code></pre></div>
+</div>
+
+<p>とやると、様々な問題にぶち当たります。<br>
+GithubActionsに詳しくないのですが、設定周りが足りてないのだろうと思います。</p>
+
+<p>試しに.sshを作ってssh通信したり、GITHUB_TOKENが必要とのことでPATを試したりしたんですが、エラーが変わってもpushに失敗する問題が変わらなかったので諦めました。</p>
+
+<h3>
+<span id="別解" class="fragment"></span><a href="#%E5%88%A5%E8%A7%A3"><i class="fa fa-link"></i></a>別解</h3>
+
+<h4>
+<span id="リポジトリaの情報を引き継ぐ必要がない場合" class="fragment"></span><a href="#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AAa%E3%81%AE%E6%83%85%E5%A0%B1%E3%82%92%E5%BC%95%E3%81%8D%E7%B6%99%E3%81%90%E5%BF%85%E8%A6%81%E3%81%8C%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>リポジトリAの情報を引き継ぐ必要がない場合</h4>
+
+<p>リポジトリAの情報を破棄するのが一番手っ取り早いです。<br>
+リポジトリBはあくまでミラーリングするためだけであれば、<code>git clone --bare .git</code>とかでいいと思います。</p>
+
+<p>今回は、リポジトリAが.wiki.gitであり、これをGithubコントリビューションとして評価したかったので、これはNGです。</p>
+
+<h4>
+<span id="githubactions以外での自動化" class="fragment"></span><a href="#githubactions%E4%BB%A5%E5%A4%96%E3%81%A7%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96"><i class="fa fa-link"></i></a>GithubActions以外での自動化</h4>
+
+<p>運用を考えると毎日実施しなくても良く、思い出した時（話題になった時）に適用すれば良いと思ったので手動で実施することにしました。<br>
+毎日実施したいならcronなどを使う手もあります。</p>
+
+<h2>
+<span id="調べたこと" class="fragment"></span><a href="#%E8%AA%BF%E3%81%B9%E3%81%9F%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>調べたこと</h2>
+
+<ol>
+<li>他のリポジトリの情報をクローンする(<code>git clone --mirror</code>)</li>
+<li>リポジトリをミラーリングする(<code>git push --mirror</code>)</li>
+</ol>
+
+<p>大体 <code>error: failed to push some refs to</code>とか<code>fatal: --mirror can't be combined with refspecs</code>に引っ掛かってます。</p>

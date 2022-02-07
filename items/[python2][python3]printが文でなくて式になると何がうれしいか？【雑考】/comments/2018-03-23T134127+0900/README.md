@@ -1,0 +1,2 @@
+printのために特殊な構文を割かなくて良いのが最大の利点な気がします。
+[Python公式ドキュメント - What’s New In Python 3.0 - print関数](https://docs.python.jp/3/whatsnew/3.0.html#print-is-a-function)

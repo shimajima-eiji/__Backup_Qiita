@@ -1,0 +1,84 @@
+
+<h1>
+<span id="コマンドを探しにきた人に" class="fragment"></span><a href="#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E6%8E%A2%E3%81%97%E3%81%AB%E3%81%8D%E3%81%9F%E4%BA%BA%E3%81%AB"><i class="fa fa-link"></i></a>コマンドを探しにきた人に</h1>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code># macOS
+brew tap homebrew/core &amp;&amp; brew install apple-gcc42
+
+# Ubuntu/Debian/Mint
+sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+
+# CentOS/Fedora
+yum install -y gcc-6 bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel
+
+# openSUSE
+zypper install -y gcc6 automake gdbm-devel libffi-devel libyaml-devel libopenssl-devel ncurses-devel readline-devel zlib-devel
+
+# Arch Linux
+pacman -S --needed base-devel libffi libyaml openssl zlib
+</code></pre></div></div>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bashrc
+eval $(rbenv init)
+source ~/.bashrc
+
+rbenv install 2.x.x
+rbenv local 2.x.x
+</code></pre></div></div>
+
+<h1>
+<span id="動かない場合既存の環境など" class="fragment"></span><a href="#%E5%8B%95%E3%81%8B%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88%E6%97%A2%E5%AD%98%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%AA%E3%81%A9"><i class="fa fa-link"></i></a>動かない場合（既存の環境など）</h1>
+
+<p>パスとバージョンを確認</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>which rbenv
+rbenv -v
+
+which ruby
+ruby -v
+
+which gem
+gem -v
+
+which bundle
+bundle -v
+</code></pre></div></div>
+
+<p>※インストールしてもパスが適用されていない場合は手動で通す。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code># [command]はパスが間違っているコマンド名
+cd $(which ruby)
+unlink [command]
+ln -s $HOME/.rbenv/bin/[command] [command]
+</code></pre></div></div>
+
+<h1>
+<span id="解説" class="fragment"></span><a href="#%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>解説</h1>
+
+<p><a href="https://github.com/rbenv/ruby-build/wiki" rel="nofollow noopener" target="_blank">コマンドの最新はWiki参照</a><br>
+ここでは執筆時点の最新を公式Wikiより引用。</p>
+
+<p>また、<a href="https://qiita.com/dark-space/items/cf25001f89c41341a9fd" id="reference-35b5a905cdeb52b498f4">bash_profileではなくbashrcに書く理由</a>はリンク先の通り。</p>
+
+<h1>
+<span id="筆者環境" class="fragment"></span><a href="#%E7%AD%86%E8%80%85%E7%92%B0%E5%A2%83"><i class="fa fa-link"></i></a>筆者環境</h1>
+
+<p>WSLを使用している。<br>
+実行環境にbashを使用しているのでzshやfishでは実行できないかもしれない。</p>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>cat /etc/os-release 
+# NAME="Ubuntu"
+# VERSION="18.04.3 LTS (Bionic Beaver)"
+# ...
+</code></pre></div></div>
+
+<h1>
+<span id="動機" class="fragment"></span><a href="#%E5%8B%95%E6%A9%9F"><i class="fa fa-link"></i></a>動機</h1>
+
+<p>rbenvの情報が多いので解説はいいとして、そういうのは既に分かっている側の立場としては検索するのも面倒なんでお手軽にできるものが欲しかった。<br>
+執筆時点では、後述の筆者環境のみ検証しており、必要に応じて他環境も追記したい。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

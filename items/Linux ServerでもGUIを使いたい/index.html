@@ -1,0 +1,53 @@
+<p><strong>当たり前ですが、Serverで使っている以上GUIは使えません。</strong><br>
+が、GUIがなくてもGUIを使いたいのが本記事の趣旨です。</p>
+
+<h1>
+<span id="やり方" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>やり方</h1>
+
+<p>GUIがある端末でttyを立ち上げて以下のコマンドを実行するだけです。<br>
+動かすだけならオプションは-Yだけでいいです。</p>
+
+<div class="code-frame" data-lang="text">
+<div class="code-lang"><span class="bold">client.tty</span></div>
+<div class="highlight"><pre><code>ssh -XYC (user)@(ip/host)
+# GUIでやりたいこと firefoxとか
+</code></pre></div>
+</div>
+
+<h1>
+<span id="構成" class="fragment"></span><a href="#%E6%A7%8B%E6%88%90"><i class="fa fa-link"></i></a>構成</h1>
+
+<p>以下、注意事項です。<br>
+- クライアントがGUIに対応していないと表示されない<br>
+    - つまり、Desktop版からsshで接続する必要があります。<br>
+- Windows Subsystem for Linux(Bash on Windows on Ubuntu)だとダメでした。<br>
+- Windowsから実行する場合は更に設定が必要かも？</p>
+
+<p>実施時はUbuntu16ですが、CentOSほかでも同じだと思います。</p>
+
+<h1>
+<span id="細かい話" class="fragment"></span><a href="#%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1"><i class="fa fa-link"></i></a>細かい話</h1>
+
+<p>ここにたどり着くまでにxサーバーに対して色々やるのでxhostが必要だとか、.Xauthorityにaddするとか、<br>
+あるいは/etc/ssh/ssh_configのX11を有効にしてポートフォワーディングをするとか、TCPポートをLISTENにして$DISPLAYにlocalhost:0.0を入れる…などなど、<br>
+かなり遠回りをしましたが、実は上記でいけました。<br>
+場合によってはssh_configのX11を有効にする作業<sup id="fnref1"><a href="#fn1" title="【X11を有効にする】ForwardX11 = yesにしてsshを再起動する">1</a></sup>は必要かもしれません。</p>
+
+<h1>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h1>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【X11を有効にする】ForwardX11 = yesにしてsshを再起動する <a href="#fnref1">↩</a></p>
+</li>
+
+</ol>
+</div>

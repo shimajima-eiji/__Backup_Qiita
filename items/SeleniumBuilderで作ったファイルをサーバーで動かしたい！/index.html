@@ -1,0 +1,80 @@
+
+<h1>
+<span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>はじめに</h1>
+
+<p>SeleniumBuilderで作ったJsonファイルを使うのではなく、<strong>JavaなりRubyなりお好みの言語にエクスポートして使ったほうがなんぼかマシ</strong>です。<br>
+ということで、実際にSeleniumBuilderでファイルを作ってServerに渡します。</p>
+
+<h1>
+<span id="前提条件" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><i class="fa fa-link"></i></a>前提条件</h1>
+
+<p>SeleniumBuilderの操作が出来る、分かる人<br>
+<a href="http://qiita.com/nomurasan/items/39ebe76f0542bb2df00f" id="reference-7da13b08616441ff0755">参考先</a>が分かれば大丈夫です。</p>
+
+<h1>
+<span id="サーバーで動かす理由" class="fragment"></span><a href="#%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99%E7%90%86%E7%94%B1"><i class="fa fa-link"></i></a>サーバーで動かす理由</h1>
+
+<p>プログラマーならコード書いて動かしたいよね！<br>
+というところから始まります。<br>
+他にも、ヘッドレスで実行できるのでテスト作業がとてもスムーズになります。</p>
+
+<h1>
+<span id="環境ありますか" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%81%8B"><i class="fa fa-link"></i></a>環境ありますか？</h1>
+
+<p><a href="http://qiita.com/nomurasan/items/0e8c342576c90ce2a4cf" id="reference-e75a9a19ea633c58b6c7">さっき作ったのでどうぞ</a><br>
+ここで作る環境はあくまでブラウザから実行する場合の話なので、この後で動かすサーバーとはちょっと分けて考えてほしいです。<br>
+[追記]もしかしたらSeleniumBuilder3.x系じゃないとダメかも知れません。</p>
+
+<h1>
+<span id="更に環境を作ります" class="fragment"></span><a href="#%E6%9B%B4%E3%81%AB%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8A%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>更に環境を作ります。</h1>
+
+<p>SeleniumServerのStandaloneが必要です。<br>
+が、<a href="http://docs.seleniumhq.org/" rel="nofollow noopener" target="_blank">いつものところ</a>では最新版しか取得できないので、ちょっと回り道します。</p>
+
+<p><a href="http://seleniumsimplified.com/2016/06/use_selenium_webdriver_jar_locally/" rel="nofollow noopener" target="_blank">Use Selenium WebDriver 2.53.1 with Firefox 47.0.1</a><br>
+ここに環境の内訳が全部書いてます。<br>
+あとはJavaを入れてターミナル（プロンプト）からダウンロードしたSeleniumServerを実行するとできます。パスが通っているならjava -jar (selenium...jar)で起動したら、SeleniumBuilderの画面から実行-&gt;サーバーで動く（ターミナルがなんか反応する）と思います。<br>
+もしここで動きが見られないならブラウザを再起動してみてください。</p>
+
+<h2>
+<span id="javaの入れ方" class="fragment"></span><a href="#java%E3%81%AE%E5%85%A5%E3%82%8C%E6%96%B9"><i class="fa fa-link"></i></a>Javaの入れ方</h2>
+
+<p>探せばいっぱいあります。お使いの環境によっては共存させる必要があるかも知れません。</p>
+
+<h2>
+<span id="パスの通し方" class="fragment"></span><a href="#%E3%83%91%E3%82%B9%E3%81%AE%E9%80%9A%E3%81%97%E6%96%B9"><i class="fa fa-link"></i></a>パスの通し方</h2>
+
+<p><a href="http://realize.jounin.jp/path.html" rel="nofollow noopener" target="_blank">windowsならこの辺</a>とかを参考に。<br>
+他にもいいサイトはあります。</p>
+
+<h1>
+<span id="動かしてみよう" class="fragment"></span><a href="#%E5%8B%95%E3%81%8B%E3%81%97%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86"><i class="fa fa-link"></i></a>動かしてみよう</h1>
+
+<p>SeleniumBuilderで作った操作ファイルはjsonと各環境に合わせて２つ用意しましょう。<br>
+SeleniumBuilderはJavaとかRubyとかPython、JavaScriptとC#は読めませんがエクスポートは出来る。一方通行です。<br>
+操作部分で修正とかがあるとjsonを変更する方が将来的に楽です。</p>
+
+<p>エクスポートした後は、webdriverにmarionetteの設定を忘れずに。</p>
+
+<h1>
+<span id="エラーになる場合" class="fragment"></span><a href="#%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AB%E3%81%AA%E3%82%8B%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>エラーになる場合</h1>
+
+<p>webdriver側の問題であることが多いです。<br>
+Firefox46.0.1だとmarionetteなくても動くはずですが、それより新しいバージョンだとエラーログから推測していくのが良いと思います。<br>
+おすすめのサイトはteratailではなく<a href="http://ja.stackoverflow.com/" rel="nofollow noopener" target="_blank">stackoverflow(リンクは日本語にしておきました)</a>です。</p>
+
+<h1>
+<span id="コツ" class="fragment"></span><a href="#%E3%82%B3%E3%83%84"><i class="fa fa-link"></i></a>コツ</h1>
+
+<p>英語ばかりのサイトを開いて即行閉じないのがコツです。<br>
+難しいことは書いていません。</p>
+
+<h2>
+<span id="疑問" class="fragment"></span><a href="#%E7%96%91%E5%95%8F"><i class="fa fa-link"></i></a>疑問</h2>
+
+<p><a href="http://docs.seleniumhq.org/" rel="nofollow noopener" target="_blank">seleniumhq</a>でメジャーバージョンアップとはいえベータ版である3.0.0beta2を押しているのか、よく分かりません…</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

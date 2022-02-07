@@ -1,0 +1,38 @@
+<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>base_string = 'test'
+INSERT_POINT = 2  #分かりやすくするために大文字
+insert_string = '--hoge--'
+
+# 2文字目から挿入したい場合
+print '{0}{1}{2}'.format(base_string[:INSERT_POINT], insert_string, base_string[INSERT_POINT:])
+</code></pre></div></div>
+
+<p>これの結果は<br>
+<strong>te--hoge--st</strong><br>
+となります。</p>
+
+<h1>
+<span id="応用" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8"><i class="fa fa-link"></i></a>応用</h1>
+
+<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>def insert_string_to_base(target_string, insert_point, insert_string):
+    return target_string[:insert_point] + insert_string + target_string[insert_point:]
+</code></pre></div></div>
+
+<p>とすると関数で使えるし、</p>
+
+<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>insert_string_to_base = lambda base_string, insert_point, insert_string : base_string[:insert_point] + insert_string + base_string[insert_point:]
+</code></pre></div></div>
+
+<p>とするとラムダ式になります。<br>
+どちらも、</p>
+
+<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>base_string = 'test'
+INSERT_POINT = 2  #分かりやすくするために大文字
+insert_string = '--hoge--'
+
+# lambdaで見たい場合は予め上記コードをここに書いておく
+
+# 出力
+print insert_string_to_base(base_string, INSERT_POINT, insert_string)
+</code></pre></div></div>
+
+<p>で結果を参照できます。</p>

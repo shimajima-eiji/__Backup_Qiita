@@ -1,0 +1,135 @@
+<p>Dockerの性質上、いろんなものがくっついた状態で渡される事が多い。<br>
+（そういう使い方を期待してるし、想定しているから当然ではある）<br>
+これがDockerへの参入障壁を逆に高くしてしまっているところがあるかも知れない、という事で備忘録ついでに、なんでDockerに対して参入障壁が高いのか、自分なりに考えてみた。</p>
+
+<h1>
+<span id="シンプルな環境を作って勉強したいときに使えるもの" class="fragment"></span><a href="#%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E5%8B%89%E5%BC%B7%E3%81%97%E3%81%9F%E3%81%84%E3%81%A8%E3%81%8D%E3%81%AB%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%82%E3%81%AE"><i class="fa fa-link"></i></a>シンプルな環境を作って勉強したいときに使えるもの</h1>
+
+<div class="code-frame" data-lang="dockerfile">
+<div class="code-lang"><span class="bold">ubuntu.Dockerfile</span></div>
+<div class="highlight"><pre><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="dockerfile">
+<div class="code-lang"><span class="bold">centos.Dockerfile</span></div>
+<div class="highlight"><pre><code><span class="k">FROM</span><span class="s"> centos:latest</span>
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="dockerfile">
+<div class="code-lang"><span class="bold">other.Dockerfile</span></div>
+<div class="highlight"><pre><code><span class="k">FROM</span><span class="s"> &lt;image&gt;:latest</span>
+</code></pre></div>
+</div>
+
+<p>Ubuntuの上にCentOSを作りたい！という場合はcentos.Dockerfileの内容を持っていって使う。<br>
+Ubuntuの上にUbuntuのコンテナを作ることもできる。<br>
+説明のためにファイル名を意図的に設定しているが、使うときはDockerfileにリネームを推奨。</p>
+
+<h2>
+<span id="ざっくりと解説" class="fragment"></span><a href="#%E3%81%96%E3%81%A3%E3%81%8F%E3%82%8A%E3%81%A8%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>ざっくりと解説</h2>
+
+<div class="code-frame" data-lang="dockerfile">
+<div class="code-lang"><span class="bold">torisetsu.Dockerfile</span></div>
+<div class="highlight"><pre><code><span class="k">FROM</span><span class="s"> &lt;image&gt;</span>
+<span class="k">FROM</span><span class="s"> &lt;image&gt;:&lt;tag&gt;</span>
+<span class="k">FROM</span><span class="s"> &lt;image&gt;@&lt;digest&gt;</span>
+</code></pre></div>
+</div>
+
+<p>imageはOS名、<br>
+tagはバージョン<br>
+digestは使ったことないので、私が説明できません。<br>
+解説している場所を参考情報にまとめさせていただく。</p>
+
+<p>構築の練習をしたいだけなら、imageだけ必須。</p>
+
+<h1>
+<span id="使い方" class="fragment"></span><a href="#%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-link"></i></a>使い方</h1>
+
+<p><strong>以下、コマンド</strong></p>
+
+<p>上記をDockerfileとして配置し、<br>
+<code><br>
+docker build .(コロン。Dockerfileを置いてる場所)<br>
+</code><br>
+でdockerのイメージが作成できる。<br>
+<code><br>
+docker build . -t test_image<br>
+</code><br>
+test_imageっていう名前のイメージを作る。</p>
+
+<p><strong>ここで作ったイメージを元に、コンテナを作る。</strong><br>
+これは大事な事なんで、頭の片隅に置いてほしい。</p>
+
+<h1>
+<span id="コンテナを作る" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>コンテナを作る</h1>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>docker run test_image
+</code></pre></div></div>
+
+<p>先ほど作ったtest_imageを使ってコンテナを作る。<br>
+<code><br>
+docker run test_image --name test_container<br>
+</code><br>
+先ほど作ったtest_imageを使ってtest_containerという名前をつけてコンテナを作る。</p>
+
+<p>その後、<br>
+<code><br>
+docker start test_container<br>
+</code><br>
+で立ち上げて（立ち上がってるかも？）<br>
+<code><br>
+docker exec -it test_container /bin/bash<br>
+</code><br>
+でコンテナに入れる。</p>
+
+<p>execの -itと最後の/bin/bashはかなり大事な意味があるんだけど、とりあえずおまじないだと思ってもらって大丈夫。<br>
+ただ、後述のDockerfileを編集する段階になったらちゃんと勉強しておいたほうが<strong>絶対に</strong>いい。</p>
+
+<h2>
+<span id="dockerfileを編集する" class="fragment"></span><a href="#dockerfile%E3%82%92%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>Dockerfileを編集する</h2>
+
+<p>解説不要なぐらいわかりやすいので、参考の紹介に留める。<br>
+多分読み進めると引っかかるところが、RUNとCMDとEND POINTだと思う（私は引っかかった）ので、面白かったものを参考より先に紹介させていただく。</p>
+
+<p><a href="https://qiita.com/YusukeHigaki/items/044164837daa5e845d50" class="autolink" id="reference-a0e1d08005e2e2dae7d0">https://qiita.com/YusukeHigaki/items/044164837daa5e845d50</a><br>
+参考を読み進める際は、この絵を覚えておくと理解がしやすいかもしれない。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p>イメージとコンテナの作成・削除<br>
+<a href="https://qiita.com/kooohei/items/0e788a2ce8c30f9dba53" class="autolink" id="reference-e66999d6bb71e7122451">https://qiita.com/kooohei/items/0e788a2ce8c30f9dba53</a><br>
+<a href="https://qiita.com/tifa2chan/items/e9aa408244687a63a0ae" class="autolink" id="reference-859adcbc5a2d80714a68">https://qiita.com/tifa2chan/items/e9aa408244687a63a0ae</a></p>
+
+<p>↑が出来たら、コンテナに入る<br>
+<a href="https://qiita.com/noralife/items/18301143c20cc5172c56" class="autolink" id="reference-6eba95500564cc243b97">https://qiita.com/noralife/items/18301143c20cc5172c56</a></p>
+
+<p>コンテナとホストのファイルを共有したい<br>
+<a href="https://qiita.com/Yarimizu14/items/52f4859027165a805630" class="autolink" id="reference-45eaf78bb5d0d4f30684">https://qiita.com/Yarimizu14/items/52f4859027165a805630</a></p>
+
+<p><a href="https://qiita.com/jagaximo/items/c810ebce796d9e5e496e" class="autolink" id="reference-946d3b4c1151071f0ae0">https://qiita.com/jagaximo/items/c810ebce796d9e5e496e</a><br>
+↑の事もあって、sshでつなごうかと思ったけど、docker execやdocker cp、マウントが使えたので参考程度。リモート接続時は必要かも</p>
+
+<p>そろそろ分かってきたので、Dockerfileについてちゃんと勉強する。<br>
+<a href="https://qiita.com/soushiy/items/0945bcbc7ecce4822985" class="autolink" id="reference-91ca954c1978e6d3dfd1">https://qiita.com/soushiy/items/0945bcbc7ecce4822985</a><br>
+<a href="https://qiita.com/tanan/items/e79a5dc1b54ca830ac21" class="autolink" id="reference-fe7e8653980136da4672">https://qiita.com/tanan/items/e79a5dc1b54ca830ac21</a><br>
+<a href="http://docs.docker.jp/engine/userguide/eng-image/dockerfile_best-practice.html" class="autolink" rel="nofollow noopener" target="_blank">http://docs.docker.jp/engine/userguide/eng-image/dockerfile_best-practice.html</a></p>
+
+<p>トラブルシューティング的に、Docker内の環境変数について<br>
+<a href="https://qiita.com/lilacs/items/4d4e3f169a04560dee76" class="autolink" id="reference-32c582981cb84b2850b7">https://qiita.com/lilacs/items/4d4e3f169a04560dee76</a></p>
+
+<p>似たような問題。Dockerコンテナでcronを実行する時の話<br>
+<a href="http://higelog.brassworks.jp/1775" class="autolink" rel="nofollow noopener" target="_blank">http://higelog.brassworks.jp/1775</a><br>
+<a href="https://nsmr.tk/yumcron.html" class="autolink" rel="nofollow noopener" target="_blank">https://nsmr.tk/yumcron.html</a></p>
+
+<h1>
+<span id="初級者以上プロフェッショナルの方" class="fragment"></span><a href="#%E5%88%9D%E7%B4%9A%E8%80%85%E4%BB%A5%E4%B8%8A%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%83%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%81%AE%E6%96%B9"><i class="fa fa-link"></i></a>初級者以上、プロフェッショナルの方</h1>
+
+<p>「自分はこうやって勉強したよ！」</p>
+
+<p>っていう話がDockerの勉強会などでもあまり見られなかったです。<br>
+例えば、ハマったところとかトラブルシューティングはいっぱいあるんだけど、「こういう時にこうする」っていうシチュエーションだと勉強を進めにくいのです…。<br>
+本などがあれば参考にさせていただきたいです。</p>

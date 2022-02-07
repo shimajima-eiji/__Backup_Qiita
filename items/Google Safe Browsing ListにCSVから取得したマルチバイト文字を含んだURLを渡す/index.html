@@ -1,0 +1,59 @@
+<p>Python2.7でやってます。3系はもっと簡単に出来そう。</p>
+
+<h1>
+<span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h1>
+
+<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>from urlparse import urlparse
+import urllib
+
+def toGSBL(str_url, character_code)
+  scheme, netloc, path, params, query, fragments = urlparse(unicode(str_url, character_code, 'ignore'))
+
+  netloc = netloc.encode('idna')
+  path = urllib.quote_plus(path.encode('utf-8'), '')　if len(path) &gt; 0 else '/'
+  query = urllib.quote_plus(query.encode('utf-8'), '')　if len(query) &gt; 0 else ''
+
+  return scheme + '://' + netloc + path + query
+</code></pre></div></div>
+
+<ul>
+<li>urlparseして必要なところを細工したらくっつけてるだけです。</li>
+<li>charactor_codeにshift-jisとかutf-8とか入れれば思い思いに使えます。</li>
+<li>pathやqueryなど他にもマルチバイト文字が含まれていることを想定していますが、ここで欲しいのはあくまでnetlocをpunycodeにしたものです。</li>
+<li>文字コードにもよりますが、日本語・韓国語・中国語で期待した結果が得られたので大体できると思いますが確認していません。</li>
+</ul>
+
+<h2>
+<span id="ハマりポイント" class="fragment"></span><a href="#%E3%83%8F%E3%83%9E%E3%82%8A%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>ハマりポイント</h2>
+
+<p>UnicodeDecodeError、UnicodeEncodeErrorにはすっごく悩まされました…<br>
+というのも、urlparseをするのに環境の都合上どうしてもstr-unicode変換を強いられるため、その辺りの関係をきちんと理解しておかないとだめでした。<br>
+普段文字コードを気にしないで開発しているとこういう細かいところでハマります。</p>
+
+<p>楽にするなら文頭に「# -<em>- coding: utf-8 -</em>-」とか書ければいいんですが、今回はそれはナシということでこの形で実現しています。</p>
+
+<p>あと、URLLIBを知らない場合は便利だから見ておいたほうがいいと思います。</p>
+
+<h1>
+<span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
+
+<p>敬称略<br>
+大変助かりました！</p>
+
+<p>Pythonで日本語を含む国際化ドメイン（IDNA）をPunycode変換する（ServersMan@VPS（CentOS）でお気楽サーバー運営 (^^♪　　(忘れっぽいので個人メモ用)）<br>
+<a href="http://d.hatena.ne.jp/addition/20130327/1364353289" class="autolink" rel="nofollow noopener" target="_blank">http://d.hatena.ne.jp/addition/20130327/1364353289</a></p>
+
+<p>日本語文字列コード問題まとめ　ニホンジンは文字コードにうるさい（PythonMatrixJp for Pythonista!）<br>
+<a href="http://python.matrix.jp/pages/tips/string/encoding.html" class="autolink" rel="nofollow noopener" target="_blank">http://python.matrix.jp/pages/tips/string/encoding.html</a></p>
+
+<p>20.16. urlparse — Parse URLs into components（Python 2.7.14 Documentation）<br>
+<a href="https://docs.python.org/2.7/library/urlparse.html#module-urlparse" class="autolink" rel="nofollow noopener" target="_blank">https://docs.python.org/2.7/library/urlparse.html#module-urlparse</a></p>
+
+<p>urllib.parse.quote関数使用時の注意（<a href="/FGtatsuro" class="user-mention js-hovercard" title="FGtatsuro" data-hovercard-target-type="user" data-hovercard-target-name="FGtatsuro">@FGtatsuro</a>）<br>
+<a href="https://qiita.com/FGtatsuro/items/75a4593fec954a32c10c" class="autolink" id="reference-e63f4d20cc34c3fb4a16">https://qiita.com/FGtatsuro/items/75a4593fec954a32c10c</a></p>
+
+<p>urllib – ネットワークリソースへのシンプルなインタフェース（PyMOTW）<br>
+<a href="http://ja.pymotw.com/2/urllib/" class="autolink" rel="nofollow noopener" target="_blank">http://ja.pymotw.com/2/urllib/</a></p>
+
+<p>pythonで三項演算子のネスト（<a href="/u1and0" class="user-mention js-hovercard" title="u1and0" data-hovercard-target-type="user" data-hovercard-target-name="u1and0">@u1and0</a>）<br>
+<a href="https://qiita.com/u1and0/items/e47e3de059e27d4ebd74" class="autolink" id="reference-029f7d83a8082219eb14">https://qiita.com/u1and0/items/e47e3de059e27d4ebd74</a></p>

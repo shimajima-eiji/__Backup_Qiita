@@ -1,0 +1,122 @@
+<p>SeleniumBuilderでテストを実施したら分かるんですが、実施項目に緑・赤がついて、赤になるとその場でテストが止まります。<br>
+完全自動化を目指すと、この仕様のせいで夜回していたテストが終わってない、という事もあります。</p>
+
+<p>これを回避する運用案について、気付いたところをまとめました。</p>
+
+<h1>
+<span id="前提条件" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><i class="fa fa-link"></i></a>前提条件</h1>
+
+<ul>
+<li>SeleniumBuilder
+
+<ul>
+<li>使ったことがある</li>
+<li>テストツールとしての導入を考えている</li>
+</ul>
+</li>
+<li>SeleniumServer
+
+<ul>
+<li>運用している</li>
+<li>ターミナル系のコマンドが分かる</li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<span id="seleniumbuilderでのテストの挙動と課題" class="fragment"></span><a href="#seleniumbuilder%E3%81%A7%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E6%8C%99%E5%8B%95%E3%81%A8%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>SeleniumBuilderでのテストの挙動と課題</h1>
+
+<p>バージョンは2.3.5/3.0.9です。<a href="http://qiita.com/nomurasan">過去の投稿</a>を参考にしてください。</p>
+
+<ul>
+<li>Frame系
+
+<ul>
+<li>画面に出力されるエラーログからでは原因を特定することが難しい</li>
+</ul>
+</li>
+<li>Capture系
+
+<ul>
+<li>根本的にパスが間違っている場合のリカバリをSeleniumBuilder以外から確認する必要がある</li>
+<li>そのため、SeleniumBuilder側に固有の変数を持たせるべきではない。CSVなどで管理する</li>
+<li>ただし、複数のファイルから変数を与えることは仕様上出来ない。</li>
+</ul>
+</li>
+<li>テストシートの挙動
+
+<ul>
+<li>テストシートに連続したテストケースを入れる場合、前段のテストが正常終了だろうが異常終了だろうが気にしないで実施する</li>
+<li>これを回避する場合、テストシートのshareStateをfalseにして、都度開きなおすのが良い</li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h1>
+
+<p><strong>完全自動化を目的にするなら、現時点ではBuilderは使わないほうが良い</strong>でしょう。<br>
+ある程度運用を決めて、その上でボトルネックになっている部分を解決していくのが理想的です。</p>
+
+<h1>
+<span id="現行システムを改修する" class="fragment"></span><a href="#%E7%8F%BE%E8%A1%8C%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%94%B9%E4%BF%AE%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>現行システムを改修する</h1>
+
+<p>では、その上で動いているシステムをなるべく半自動化ぐらいには寄せよう、というのが今回の課題です。<br>
+やりたいことは「テストがすべて成功で完了できたのか判定する」という観点で解説します。</p>
+
+<h2>
+<span id="対応-seleniumbuilder側" class="fragment"></span><a href="#%E5%AF%BE%E5%BF%9C-seleniumbuilder%E5%81%B4"><i class="fa fa-link"></i></a>対応 SeleniumBuilder側</h2>
+
+<p>それぞれのテストケースの正しい完了条件を設定して、画像に意味のないスクリーンキャプチャを取ります。<br>
+ここでやりたいのはファイルを置く事なので、要件さえ満たせればスクリーンキャプチャの必要はありません。<br>
+SeleniumBuilderが用意しているファイル出力の仕組みがこれしかなかったので代用しています。</p>
+
+<div class="code-frame" data-lang="json">
+<div class="code-lang"><span class="bold">putComplate.json</span></div>
+<div class="highlight"><pre><code><span class="w">  </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="err">（中略）</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assertTitle"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ここに条件"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"saveScreenshot"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ここにファイルパス"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="err">（中略）</span><span class="w">
+  </span><span class="p">]</span><span class="err">,</span><span class="w">
+
+</span></code></pre></div>
+</div>
+
+<h2>
+<span id="対応-サーバー側" class="fragment"></span><a href="#%E5%AF%BE%E5%BF%9C-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%81%B4"><i class="fa fa-link"></i></a>対応 サーバー側</h2>
+
+<p>こちらは簡単ですね。<br>
+SeleniumBuilderが実施した内容が正常であることをsaveScreenshotのファイルから判定します。<br>
+ここは事前に打ち合わせるなりの運用対処が求められます。<br>
+わりかし安全なのはSeleniumBuilderが呼べる変数ファイルにパスを書いておいて、サーバーで対応する場所に読み替える事です。</p>
+
+<div class="code-frame" data-lang="shell-session">
+<div class="code-lang"><span class="bold">checkComplate.sh</span></div>
+<div class="highlight"><pre><code><span class="gp">#</span>（中略）
+<span class="gp">if [ ! -e "$</span><span class="o">{</span>saveScreenshot_path<span class="o">}</span><span class="s2">" ] then;
+</span><span class="go">  echo "no Complate"
+  exit 1
+else
+</span><span class="gp">  exec("$</span><span class="o">{</span>next_step<span class="o">}</span><span class="s2">")
+</span><span class="go">fi
+</span><span class="gp">#</span>（中略）
+</code></pre></div>
+</div>
+
+<h2>
+<span id="未解決課題" class="fragment"></span><a href="#%E6%9C%AA%E8%A7%A3%E6%B1%BA%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>未解決課題</h2>
+
+<p>Captureが失敗する可能性を考慮していない設計です。<br>
+実際問題として、Captureは失敗する可能性がありますので、その際もnoComplateとして扱います。</p>
+
+<h1>
+<span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
+
+<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

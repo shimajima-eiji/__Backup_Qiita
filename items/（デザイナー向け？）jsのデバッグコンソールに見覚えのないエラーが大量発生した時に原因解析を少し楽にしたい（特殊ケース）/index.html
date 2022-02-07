@@ -1,0 +1,123 @@
+
+<h1>
+<span id="タイトルについて" class="fragment"></span><a href="#%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>タイトルについて</h1>
+
+<p>私用のアプリをサクッと作っていた時にコンソールがエラーで埋め尽くされたので原因を調べていたら、参照できないオブジェクト（null）に対し操作をしているらしい事が分かった。<br>
+ページごとに必ず発生しているがエラー件数も違うので原因がつかめずハマったのでviewを見ながらビルドしたところjsファイルに問題がある事が発覚した。</p>
+
+<p>昨今のフレームワークはこういう作りになっている事は珍しいが、古いCMSだとありそうだな、と思ったので提案。</p>
+
+<p><strong>良かれと思って書いているがバッドノウハウである</strong>（後述）事は留意しておいてほしい。</p>
+
+<h1>
+<span id="前提" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>前提</h1>
+
+<ul>
+<li>生成側ではhtmlソースを管理していない
+
+<ul>
+<li>たとえばindex.phpとかcontents.phpのようなファイルは存在しないか、編集不可である</li>
+<li>生成されたhtmlファイルをview側で変更できない</li>
+</ul>
+</li>
+<li>複数のページで同じjsファイルを呼び出している</li>
+<li>呼び出されるjsファイルはscript.jsしかない</li>
+<li>jsとcssは編集できる</li>
+</ul>
+
+<p>という場合を想定。<br>
+なお、実際はユーザーが参照するファイルはhtmlではないのですが、説明をしやすいようにここでは生成物をhtmlとしている。</p>
+
+<h2>
+<span id="生成されるソースコード例" class="fragment"></span><a href="#%E7%94%9F%E6%88%90%E3%81%95%E3%82%8C%E3%82%8B%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E4%BE%8B"><i class="fa fa-link"></i></a>生成されるソースコード例</h2>
+
+<div class="code-frame" data-lang="html">
+<div class="code-lang"><span class="bold">index.html</span></div>
+<div class="highlight"><pre><code>（中略）
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;</span>
+<span class="err">（</span><span class="nx">中略</span><span class="err">）</span>
+<span class="o">&lt;</span><span class="nx">section</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">top_block</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="err">（</span><span class="nx">中略</span><span class="err">）</span>
+<span class="o">&lt;!--</span> <span class="nx">こちらにid</span><span class="p">:</span><span class="nx">contents_blockは存在しない</span> <span class="o">--&gt;</span>
+</code></pre></div>
+</div>
+
+<div class="code-frame" data-lang="html">
+<div class="code-lang"><span class="bold">contents.html</span></div>
+<div class="highlight"><pre><code>（中略）
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">'script.js'</span><span class="nt">&gt;</span>
+<span class="err">（</span><span class="nx">中略</span><span class="err">）</span>
+<span class="o">&lt;</span><span class="nx">section</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">contents_block</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="err">（</span><span class="nx">中略</span><span class="err">）</span>
+<span class="o">&lt;!--</span> <span class="nx">こちらにid</span><span class="p">:</span><span class="nx">top_blockは存在しない</span> <span class="o">--&gt;</span>
+</code></pre></div>
+</div>
+
+<p>この時、<code>id:top_block</code>と<code>id:contents_block</code>に対して何かしらのアプローチをしたい場合、他のページで存在しない要素に対して制御を行うとブラウザのコンソールに期待しないエラーが発生するためデバッグが面倒になる。<br>
+これが少ない数なら無視できるが、それぞれのページや要素に対して何か行っている場合、呼び出している回数だけエラーが発生することになってしまう。</p>
+
+<h1>
+<span id="解決提案" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA%E6%8F%90%E6%A1%88"><i class="fa fa-link"></i></a>解決（提案）</h1>
+
+<div class="code-frame" data-lang="javascript">
+<div class="code-lang"><span class="bold">script.js</span></div>
+<div class="highlight"><pre><code><span class="kd">function</span> <span class="nx">run_judge_function</span> <span class="p">(</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">func</span> <span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">func</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+
+<p>関数を実施させる際に直接呼び出すのではなく、<code>run_judge_function</code>に<strong>対象となるオブジェクト</strong>と<strong>実施したい関数</strong>を渡してnull(undefined)を検出してあげて、見つかれば実施したい関数を実行するというアプローチを検討する。</p>
+
+<h2>
+<span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意</h2>
+
+<p>この関数が想定される・本来は検出したいエラーを揉み消す可能性があり、本番環境に乗せてしまうと異常が発生した場合に適切なエラーログが取得できない事が考えられる。</p>
+
+<div class="code-frame" data-lang="javascript">
+<div class="code-lang"><span class="bold">script.js</span></div>
+<div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">stage_flg</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">// ※１</span>
+<span class="kd">function</span> <span class="nx">run_judge_function</span> <span class="p">(</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">func</span> <span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">stage_flg</span><span class="p">)</span> <span class="nx">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="p">?</span> <span class="kc">null</span> <span class="p">:</span> <span class="nx">func</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+
+<p>（※１<sup id="fnref1"><a href="#fn1" title="【※１】実際の使用例としてstage_flgは環境変数か何かで設定する事が望ましい。">1</a></sup>）<br>
+としておくと、消し忘れを防止できるが検証環境と本番環境で差異が発生する事に留意。<br>
+検証環境の時はtrue、そうでなければfalseにする環境変数を用意しておく事も検討すべきか。</p>
+
+<h2>
+<span id="備考" class="fragment"></span><a href="#%E5%82%99%E8%80%83"><i class="fa fa-link"></i></a>備考</h2>
+
+<p>本来は呼び出し側で適切なスクリプトを参照するようにしてあげるのがスマートだが、これらのhtmlソースを生成する側のファイルでヘッダ情報などを共通化しているために起こってしまう。<br>
+生成側のファイルを変更できるなら調整や対応をissueに上げるべきだが、今回はあくまでview側で解決する場合を考えた。</p>
+
+<h2>
+<span id="注意とお節介" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F%E3%81%A8%E3%81%8A%E7%AF%80%E4%BB%8B"><i class="fa fa-link"></i></a>注意とお節介</h2>
+
+<p>この問題は現場でも起こる可能性があるのではないかと考えており、たとえばプロジェクト初期に想定されなかった要素を継ぎ接ぎで追加した時に起こりがちな問題ではないだろうか？<br>
+後で継ぎ接ぎした時に<strong>良かれと思って</strong>こういう関数をかますと（既存部分への影響が大きすぎてテストが大変になり）メチャクチャ怒られるのが普通なので導入時は注意するか、なんならstage環境にも上げるべきではない。</p>
+
+<p>githubなどコードレビュー文化が根付いているならチェックが入るはずだが、<strong>コードを書けるプロの人はレビューもプロか？というとそうではない</strong>ので運用上の注意が必要。</p>
+
+<h1>
+<span id="お願い" class="fragment"></span><a href="#%E3%81%8A%E9%A1%98%E3%81%84"><i class="fa fa-link"></i></a>お願い</h1>
+
+<p>ページを参照した（view）がイコール最後まで読んでもらった（complete）と思っていないので、お手数を掛けて恐縮だがLGTMをいただけると、読みやすい書き方や記事がどういうものか分析しやすくなり大変助かります。</p>
+
+<h1>
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h1>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>【※１】実際の使用例としてstage_flgは環境変数か何かで設定する事が望ましい。 <a href="#fnref1">↩</a></p>
+</li>
+
+</ol>
+</div>

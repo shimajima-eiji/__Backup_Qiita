@@ -1,0 +1,51 @@
+<p>（タイトルの比較対象は私の知る範囲です）</p>
+
+<p>いろいろなページを斜め読みしてたんですが、結局よくわからなかったので、forkして設定すれば動くようなものを目指しました。<br>
+forkして後述のシークレット変数を設定すれば動くので、試してみてください。</p>
+
+<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Githut-Action_demo"></qiita-embed-ogp></p>
+
+<p>ほとんどREADMEに書いてます。</p>
+
+<h2>
+<span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h2>
+
+<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Githut-Action_demo/blob/main/.github/workflows/add_dummy.yml"></qiita-embed-ogp></p>
+
+<div class="code-frame" data-lang="yaml">
+<div class="code-lang"><span class="bold">/.github/workflows/add_dummy.yml</span></div>
+<div class="highlight"><pre><code><span class="c1"># 本稿で解説時点のコード</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">small git push</span>  <span class="c1"># (任意で変更できる。Github Actionsの一覧で表示される名称)</span>
+
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">run-shell-command</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>  <span class="c1"># name欄が実行結果を見れるものなので、何でもかんでもワンライナーにすれば良いというわけでもなさそう</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>  <span class="c1"># git clone (this)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git setting</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">git config --global user.email "${{ secrets.EMAIL }}"  # Settings-&gt;Secretsで追加</span>
+          <span class="s">git config --global user.name "${{ secrets.USER }}"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Commit files</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">TZ=JST-9 date '+%Y/%m/%d %H:%M:%S (%Z)' &gt;dummy  # Github ActionsのタイムゾーンがUTCなので、これをJSTに変更</span>
+          <span class="s">git add .</span>
+          <span class="s">git commit -m "Update dummy by Github Actions" -a</span>
+          <span class="s">git pull</span>
+          <span class="s">git push</span>
+</code></pre></div>
+</div>
+
+<h2>
+<span id="実行結果" class="fragment"></span><a href="#%E5%AE%9F%E8%A1%8C%E7%B5%90%E6%9E%9C"><i class="fa fa-link"></i></a>実行結果</h2>
+
+<p><code>/dummy</code>に実行した時点の日付を出力する。<br><br>
+試しに、README.mdを適当に変更してpushすればGithub Actionsが動いていることが確認できる。</p>
+
+<h2>
+<span id="開発アドバイス" class="fragment"></span><a href="#%E9%96%8B%E7%99%BA%E3%82%A2%E3%83%89%E3%83%90%E3%82%A4%E3%82%B9"><i class="fa fa-link"></i></a>開発アドバイス</h2>
+
+<p>とりあえず困ったら<code>pwd</code>したり<code>ls -l</code>で実行結果を見てみると何をすればいいかとっかかりが見えてくると思います。<br>
+コミットログが汚染されるので、開発用の捨てるリポジトリを一つ作ってガチャガチャやると精神的にも良いです。</p>
