@@ -1,0 +1,140 @@
+# Translation of Plugins - WP2HTML - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - WP2HTML - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-06-14 14:07:41+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - WP2HTML - Stable (latest release)\n"
+
+#: views/view_index.php:27
+msgid "Convert URL to absolute path"
+msgstr "URLを絶対パスに変換"
+
+#: views/view_index.php:106
+msgid "Generated paths"
+msgstr "ページの生成"
+
+#: views/view_index.php:97
+msgid "Generate"
+msgstr "作成"
+
+#: views/view_index.php:96
+msgid "If you have not saved this options yet, be sure to do so.\\n\\nCan I start generating?"
+msgstr "もし保存していない場合は、先に保存してください。\\n\\n生成を開始してもよろしいですか？"
+
+#: views/view_index.php:94
+msgid "Save"
+msgstr "保存"
+
+#: views/view_index.php:86
+msgid "Pages to add"
+msgstr "追加したいページ"
+
+#: views/view_index.php:81 views/view_index.php:89
+msgid "Enter one page per line."
+msgstr "1行に1ページを入力する。"
+
+#: views/view_index.php:78
+msgid "Pages not generated"
+msgstr "生成しないページ"
+
+#: views/view_index.php:73
+msgid "Replace __page__ with the page number."
+msgstr "__page__はページ番号に置き換えられる。"
+
+#: views/view_index.php:70
+msgid "Paging"
+msgstr "ページ分割"
+
+#: views/view_index.php:65
+msgid "If the page does not exist, generate the HTML for the 404 page."
+msgstr "もし存在しないページの場合、404ページ用のHTMLを生成します。"
+
+#: views/view_index.php:62 views/view_index.php:64
+msgid "404 Page"
+msgstr "404ページ"
+
+#: views/view_index.php:54
+msgid "Custom taxonomy archive"
+msgstr "カスタムタクソノミーアーカイブ"
+
+#: views/view_index.php:52 views/view_index.php:56
+msgid "archive"
+msgstr "アーカイブ"
+
+#: views/view_index.php:50
+msgid "Custom post type archive"
+msgstr "カスタム投稿タイプアーカイブ"
+
+#: views/view_index.php:49
+msgid "Tag archive"
+msgstr "タグアーカイブ"
+
+#: views/view_index.php:48
+msgid "Category archive"
+msgstr "カテゴリーアーカイブ"
+
+#: views/view_index.php:47
+msgid "Author archive"
+msgstr "投稿者アーカイブ"
+
+#: views/view_index.php:46
+msgid "Daily archive"
+msgstr "日別アーカイブ"
+
+#: views/view_index.php:45
+msgid "Monthly archive"
+msgstr "月別アーカイブ"
+
+#: views/view_index.php:44
+msgid "Yearly archive"
+msgstr "年別アーカイブ"
+
+#: views/view_index.php:43
+msgid "Pages"
+msgstr "固定ページ"
+
+#: views/view_index.php:42
+msgid "Posts"
+msgstr "投稿"
+
+#: views/view_index.php:40
+msgid "Blog page"
+msgstr "ブログページ"
+
+#: views/view_index.php:37
+msgid "Front page"
+msgstr "フロントページ"
+
+#: views/view_index.php:34
+msgid "Generate pages"
+msgstr "ページの生成"
+
+#: views/view_index.php:19
+msgid "The path to write the HTML"
+msgstr "HTMLを書き込むパス"
+
+#: views/view_index.php:12
+msgid "IP address to be accessed"
+msgstr "アクセスするIPアドレス"
+
+#: views/view_index.php:7
+msgid "Base URL"
+msgstr "ベースURL"
+
+#. Author of the plugin
+msgid "Digital Acorn"
+msgstr "Digital Acorn"
+
+#. Description of the plugin
+msgid "Make static HTMLs from WordPress"
+msgstr "WordPressのデータから静的なHTMLを生成します"
+
+#. Plugin Name of the plugin
+msgid "wp2html"
+msgstr "wp2html"
