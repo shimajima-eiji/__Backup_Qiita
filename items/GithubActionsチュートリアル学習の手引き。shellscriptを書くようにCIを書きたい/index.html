@@ -1,110 +1,110 @@
-<div class="note warn">
+<div data-sourcepos="1:1-4:3" class="note warn">
 <span class="fa fa-fw fa-exclamation-circle"></span><div>
-<p>本稿は、これからはじめてCIを勉強する方を対象にしています。<br>
+<p data-sourcepos="2:1-3:171">本稿は、これからはじめてCIを勉強する方を対象にしています。<br>
 厳密に言えば、それは間違ってるよ！という事もありますが、学習の理解を促進するために敢えてこのように表現しています。</p>
 </div>
 </div>
-<h2>
+<h2 data-sourcepos="6:1-6:18">
 <span id="本稿の目的" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E7%9B%AE%E7%9A%84"><i class="fa fa-link"></i></a>本稿の目的</h2>
-<p>GithubActionsのステップの判定などの情報を探していたんですが、探し方が良くないのか、ググラビリティが低いのか、なかなか分かりやすい日本語の情報が出てきません。<br>
+<p data-sourcepos="7:1-8:174">GithubActionsのステップの判定などの情報を探していたんですが、探し方が良くないのか、ググラビリティが低いのか、なかなか分かりやすい日本語の情報が出てきません。<br>
 公式ページの情報も、とりあえず手元で動かさないと分からないぐらいには理解が難しいので、チュートリアルを用意しました。</p>
-<div class="note info">
+<div data-sourcepos="10:1-13:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>ある程度実務経験を積んで、ソフトウェアアーキテクチャについて理解が進んだなら、<br>
+<p data-sourcepos="11:1-12:114">ある程度実務経験を積んで、ソフトウェアアーキテクチャについて理解が進んだなら、<br>
 一番最初に公式情報を閲覧して、手元で動かすぐらいはできるようになりましょう。</p>
 </div>
 </div>
-<p>とはいえ「プログラマーを目指す初心者がCIなんて勉強しないよねー」という現実は、理由とともに納得しているのですが、CIが分からなくても（あるいは、ツールなどを使えばノンコードで作れたりもするので）あまり需要はない気がしました。<br>
+<p data-sourcepos="15:1-16:98">とはいえ「プログラマーを目指す初心者がCIなんて勉強しないよねー」という現実は、理由とともに納得しているのですが、CIが分からなくても（あるいは、ツールなどを使えばノンコードで作れたりもするので）あまり需要はない気がしました。<br>
 自分でCIを作ろうと考えている人の助けになればいいなと思っています。</p>
-<h3>
+<h3 data-sourcepos="18:1-18:13">
 <span id="ヒント" class="fragment"></span><a href="#%E3%83%92%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>ヒント</h3>
-<p>本稿では手っ取り早く解説するためにGithubActionsを使っていますが、はじめてCIの学習をするだけならJenkinsから入った方が理解しやすいかもしれません。<br>
+<p data-sourcepos="19:1-20:113">本稿では手っ取り早く解説するためにGithubActionsを使っていますが、はじめてCIの学習をするだけならJenkinsから入った方が理解しやすいかもしれません。<br>
 CIの知識がないと「なんでこんなことやってるの？」という質問に回答できません。</p>
-<h2>
+<h2 data-sourcepos="22:1-22:15">
 <span id="参考情報" class="fragment"></span><a href="#%E5%8F%82%E8%80%83%E6%83%85%E5%A0%B1"><i class="fa fa-link"></i></a>参考情報</h2>
-<p>公式ドキュメントより「steps コンテキスト」の項目を参照すると、より詳しい情報が得られます。</p>
-<p><qiita-embed-ogp src="https://docs.github.com/ja/actions/learn-github-actions/contexts#example-usage-of-the-steps-context"></qiita-embed-ogp></p>
-<p>以下、手前味噌で恐縮です。</p>
-<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/90cc5288bb65988a578a"></qiita-embed-ogp></p>
-<p><qiita-embed-ogp src="https://nomuraya.tk/2022/03/consultant_learn.html"></qiita-embed-ogp></p>
-<h2>
+<p data-sourcepos="23:1-23:132">公式ドキュメントより「steps コンテキスト」の項目を参照すると、より詳しい情報が得られます。</p>
+<p data-sourcepos="25:1-25:99"><qiita-embed-ogp src="https://docs.github.com/ja/actions/learn-github-actions/contexts#example-usage-of-the-steps-context"></qiita-embed-ogp></p>
+<p data-sourcepos="27:1-27:39">以下、手前味噌で恐縮です。</p>
+<p data-sourcepos="29:1-29:54"><qiita-embed-ogp src="https://qiita.com/nomurasan/items/90cc5288bb65988a578a"></qiita-embed-ogp></p>
+<p data-sourcepos="31:1-31:49"><qiita-embed-ogp src="https://nomuraya.tk/2022/03/consultant_learn.html"></qiita-embed-ogp></p>
+<h2 data-sourcepos="33:1-33:31">
 <span id="githubactionsの基礎知識" class="fragment"></span><a href="#githubactions%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98"><i class="fa fa-link"></i></a>GithubActionsの基礎知識</h2>
-<p>ymlでできています。<br>
+<p data-sourcepos="34:1-35:109">ymlでできています。<br>
 GithubActionsはymlの内容を読んで、書かれている内容に従って処理をしていきます。</p>
-<div class="note info">
+<div data-sourcepos="37:1-40:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>ymlとはいわゆるiniやconfigと同じものです。<br>
+<p data-sourcepos="38:1-39:88">ymlとはいわゆるiniやconfigと同じものです。<br>
 あるいは、CSVとかXMLとかJSONと同じような、データの集合体です。</p>
 </div>
 </div>
-<div class="note warn">
+<div data-sourcepos="42:1-44:3" class="note warn">
 <span class="fa fa-fw fa-exclamation-circle"></span><div>
-<p>yml(yaml)については別途学習をしてください。</p>
+<p data-sourcepos="43:1-43:60">yml(yaml)については別途学習をしてください。</p>
 </div>
 </div>
-<h2>
+<h2 data-sourcepos="46:1-46:61">
 <span id="githubactionsで違うステップに変数を渡す方法" class="fragment"></span><a href="#githubactions%E3%81%A7%E9%81%95%E3%81%86%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%AB%E5%A4%89%E6%95%B0%E3%82%92%E6%B8%A1%E3%81%99%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>GithubActionsで違うステップに変数を渡す方法</h2>
-<p>とりあえず公式リファレンスを開いてみて欲しいんですが、見るだけだと分かりにくいので、エッセンスを抽出して解説します。<br>
+<p data-sourcepos="47:1-48:78">とりあえず公式リファレンスを開いてみて欲しいんですが、見るだけだと分かりにくいので、エッセンスを抽出して解説します。<br>
 以下、コード部分は私の感覚で翻訳・書き換えています。</p>
-<h3>
+<h3 data-sourcepos="50:1-50:22">
 <span id="変数の渡し方" class="fragment"></span><a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E6%B8%A1%E3%81%97%E6%96%B9"><i class="fa fa-link"></i></a>変数の渡し方</h3>
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="51:1-55:3">
 <div class="code-lang"><span class="bold">var.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">steps.generate_number.random_number = (0 or 1)を実行</span>
   <span class="na">id</span><span class="pi">:</span> <span class="s">generate_number</span>
   <span class="na">run</span><span class="pi">:</span>  <span class="s">echo "::set-output name=random_number::$(($RANDOM % 2))"</span>
 </code></pre></div>
 </div>
-<p>のステップで、<code>echo "::set-output name=random_number::$(($RANDOM % 2))"</code>を実施しています。</p>
-<div class="note info">
+<p data-sourcepos="57:1-57:106">のステップで、<code>echo "::set-output name=random_number::$(($RANDOM % 2))"</code>を実施しています。</p>
+<div data-sourcepos="59:1-61:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>違うステップに変数を渡したい場合は、<code>echo "::set-output ..."</code>する事を意識しておきましょう。</p>
+<p data-sourcepos="60:1-60:124">違うステップに変数を渡したい場合は、<code>echo "::set-output ..."</code>する事を意識しておきましょう。</p>
 </div>
 </div>
-<div class="note warn">
+<div data-sourcepos="63:1-65:3" class="note warn">
 <span class="fa fa-fw fa-exclamation-circle"></span><div>
-<p>後述していますが、変数を渡すステップでidを指定しておかないと取り出すことができません。</p>
+<p data-sourcepos="64:1-64:128">後述していますが、変数を渡すステップでidを指定しておかないと取り出すことができません。</p>
 </div>
 </div>
-<h3>
+<h3 data-sourcepos="67:1-67:28">
 <span id="変数の受け取り方" class="fragment"></span><a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>変数の受け取り方</h3>
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="68:1-72:3">
 <div class="code-lang"><span class="bold">if.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">前のステップ(id</span><span class="pi">:</span> <span class="s">generate_number)の結果を受け取って正常終了 or 異常終了する</span>
   <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
     <span class="s">if [[ ${{ steps.generate_number.outputs.random_number }} == 0 ]]; then exit 0; else exit 1; fi</span>
 </code></pre></div>
 </div>
-<div class="note info">
+<div data-sourcepos="74:1-77:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>取得する際は<code>${{ steps.generate_number.outputs.random_number }}</code>を使います。<br>
+<p data-sourcepos="75:1-76:92">取得する際は<code>${{ steps.generate_number.outputs.random_number }}</code>を使います。<br>
 内訳は「steps.(ステップのID).(set-outputで指定した変数名: name)」です。</p>
 </div>
 </div>
-<p>以下をイメージしてみると分かりやすいと思います。</p>
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>steps["ステップのID"] = {変数名: 値}
+<p data-sourcepos="79:1-79:72">以下をイメージしてみると分かりやすいと思います。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="81:1-83:3"><div class="highlight"><pre><code>steps["ステップのID"] = {変数名: 値}
 </code></pre></div></div>
-<p>つまり、先述した通り変数を渡したいステップにidがないと取り出すことができません。</p>
-<h2>
+<p data-sourcepos="85:1-85:119">つまり、先述した通り変数を渡したいステップにidがないと取り出すことができません。</p>
+<h2 data-sourcepos="87:1-87:13">
 <span id="runとuses" class="fragment"></span><a href="#run%E3%81%A8uses"><i class="fa fa-link"></i></a>runとuses</h2>
-<div class="note warn">
+<div data-sourcepos="88:1-91:3" class="note warn">
 <span class="fa fa-fw fa-exclamation-circle"></span><div>
-<p>まず始めに意識しておきたいのは、runは最終手段ぐらいに考えておいた方が良いでしょう。<br>
+<p data-sourcepos="89:1-90:64">まず始めに意識しておきたいのは、runは最終手段ぐらいに考えておいた方が良いでしょう。<br>
 基本的にはusesで管理できる方が望ましいです。</p>
 </div>
 </div>
-<p>と、いきなり言っても分かりにくいので、なぜか？をコードで見ていきましょう。</p>
-<div class="note alert">
+<p data-sourcepos="93:1-93:111">と、いきなり言っても分かりにくいので、なぜか？をコードで見ていきましょう。</p>
+<div data-sourcepos="95:1-97:3" class="note alert">
 <span class="fa fa-fw fa-times-circle"></span><div>
-<p>以下では、<code>steps</code>まで省略していますので、コピペする際は全文コピペにならないようにしましょう。</p>
+<p data-sourcepos="96:1-96:136">以下では、<code>steps</code>まで省略していますので、コピペする際は全文コピペにならないようにしましょう。</p>
 </div>
 </div>
-<h3>
+<h3 data-sourcepos="99:1-99:29">
 <span id="uses-actionscheckoutv2" class="fragment"></span><a href="#uses-actionscheckoutv2"><i class="fa fa-link"></i></a>uses: actions/checkout@v2</h3>
-<p>GithubActionsの勉強を始めた時に一番最初に障害になる存在だと思います。<br>
+<p data-sourcepos="100:1-101:66">GithubActionsの勉強を始めた時に一番最初に障害になる存在だと思います。<br>
 これが何やってるのか、分かりにくいですよね？</p>
-<p>上記のrunコマンドと組み合わせて、正体を暴いていきます。</p>
-<div class="code-frame" data-lang="yaml">
+<p data-sourcepos="103:1-103:81">上記のrunコマンドと組み合わせて、正体を暴いていきます。</p>
+<div class="code-frame" data-lang="yaml" data-sourcepos="105:1-111:3">
 <div class="code-lang"><span class="bold">uses.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">このリポジトリをcloneする</span>
   <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
@@ -113,19 +113,19 @@ GithubActionsはymlの内容を読んで、書かれている内容に従って�
   <span class="na">run</span><span class="pi">:</span> <span class="s">ls</span>
 </code></pre></div>
 </div>
-<p>これを実行すると、現在のリポジトリの内容がlsで表示されます。<br>
+<p data-sourcepos="113:1-114:150">これを実行すると、現在のリポジトリの内容がlsで表示されます。<br>
 ここから、<code>uses</code>をコメントアウトなり削除なりすると、<code>run: ls</code>の結果が何も表示されないことが確認できます。</p>
-<div class="note info">
+<div data-sourcepos="116:1-118:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>手元で確認してみてください。</p>
+<p data-sourcepos="117:1-117:42">手元で確認してみてください。</p>
 </div>
 </div>
-<h3>
+<h3 data-sourcepos="120:1-120:23">
 <span id="usesをrunで書く" class="fragment"></span><a href="#uses%E3%82%92run%E3%81%A7%E6%9B%B8%E3%81%8F"><i class="fa fa-link"></i></a>usesをrunで書く</h3>
-<p>先述した通り、runは最終手段です。<br>
+<p data-sourcepos="121:1-122:73">先述した通り、runは最終手段です。<br>
 usesでできるということは、runで同じ結果が作れます。</p>
-<p>やってみましょう。</p>
-<div class="code-frame" data-lang="yaml">
+<p data-sourcepos="124:1-124:27">やってみましょう。</p>
+<div class="code-frame" data-lang="yaml" data-sourcepos="126:1-133:3">
 <div class="code-lang"><span class="bold">run.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">このリポジトリをcloneする</span>
   <span class="c1"># uses: actions/checkout@v2</span>
@@ -135,21 +135,21 @@ usesでできるということは、runで同じ結果が作れます。</p>
   <span class="na">run</span><span class="pi">:</span> <span class="s">ls</span>
 </code></pre></div>
 </div>
-<p>同じ結果になるはずです。</p>
-<div class="note info">
+<p data-sourcepos="135:1-135:36">同じ結果になるはずです。</p>
+<div data-sourcepos="137:1-139:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>手元で確認してみてください。</p>
+<p data-sourcepos="138:1-138:42">手元で確認してみてください。</p>
 </div>
 </div>
-<p>とても簡単な例で解説したので、usesでもrunでもどっちでも良くない？という感覚になっていると思います。<br>
+<p data-sourcepos="141:1-142:61">とても簡単な例で解説したので、usesでもrunでもどっちでも良くない？という感覚になっていると思います。<br>
 では、usesを使うと便利になる例を示します。</p>
-<h2>
+<h2 data-sourcepos="144:1-144:45">
 <span id="pythonのバージョンを強制したい" class="fragment"></span><a href="#python%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%92%E5%BC%B7%E5%88%B6%E3%81%97%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>pythonのバージョンを強制したい</h2>
-<p>コード量を比較してください。<br>
+<p data-sourcepos="145:1-146:39">コード量を比較してください。<br>
 やっていることは同じです。</p>
-<h3>
+<h3 data-sourcepos="148:1-148:8">
 <span id="uses" class="fragment"></span><a href="#uses"><i class="fa fa-link"></i></a>uses</h3>
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="149:1-162:3">
 <div class="code-lang"><span class="bold">python_setuses.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pythonをインストール</span>
   <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-python@v3</span>
@@ -165,9 +165,9 @@ usesでできるということは、runで同じ結果が作れます。</p>
     <span class="s">curl -sf "${curl}" | python</span>
 </code></pre></div>
 </div>
-<h3>
+<h3 data-sourcepos="164:1-164:7">
 <span id="run" class="fragment"></span><a href="#run"><i class="fa fa-link"></i></a>run</h3>
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="165:1-194:3">
 <div class="code-lang"><span class="bold">python_setrun.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pythonをインストール</span>
   <span class="na">id</span><span class="pi">:</span> <span class="s">check_python</span>
@@ -199,33 +199,33 @@ usesでできるということは、runで同じ結果が作れます。</p>
     <span class="s">curl -sf "${curl}" | ${pyc}</span>
 </code></pre></div>
 </div>
-<p>既にrunのコードが複雑怪奇になっていますね。<br>
+<p data-sourcepos="196:1-197:54">既にrunのコードが複雑怪奇になっていますね。<br>
 新しい概念が出ているので解説します。</p>
-<h4>
+<h4 data-sourcepos="199:1-199:99">
 <span id="stepをまたいで変数をやり取りする場合は変数の受け渡し処理が必要" class="fragment"></span><a href="#step%E3%82%92%E3%81%BE%E3%81%9F%E3%81%84%E3%81%A7%E5%A4%89%E6%95%B0%E3%82%92%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AF%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%97%E3%81%91%E6%B8%A1%E3%81%97%E5%87%A6%E7%90%86%E3%81%8C%E5%BF%85%E8%A6%81"><i class="fa fa-link"></i></a>stepをまたいで変数をやり取りする場合は、変数の受け渡し処理が必要</h4>
-<ul>
-<li>渡す側のステップ <strong>（id: check_python）</strong> で<code>echo "::set-output name=pyc::${pyc}"</code>
+<ul data-sourcepos="200:1-202:0">
+<li data-sourcepos="200:1-200:95">渡す側のステップ <strong>（id: check_python）</strong> で<code>echo "::set-output name=pyc::${pyc}"</code>
 </li>
-<li>受け取る側のステップで<code>${{ steps.check_python.outputs.pyc }}</code>
+<li data-sourcepos="201:1-202:0">受け取る側のステップで<code>${{ steps.check_python.outputs.pyc }}</code>
 </li>
 </ul>
-<p>を実施しています。<br>
+<p data-sourcepos="203:1-204:151">を実施しています。<br>
 idはなんでもいいですが、渡す側のステップにidがないと、受け取る側のステップで指定することができません。</p>
-<h2>
+<h2 data-sourcepos="206:1-206:112">
 <span id="usesやrunを２つ以上使ったり組み合わせたりする複数のステップを実施する" class="fragment"></span><a href="#uses%E3%82%84run%E3%82%92%EF%BC%92%E3%81%A4%E4%BB%A5%E4%B8%8A%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%8A%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%81%9F%E3%82%8A%E3%81%99%E3%82%8B%E8%A4%87%E6%95%B0%E3%81%AE%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%82%92%E5%AE%9F%E6%96%BD%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>usesやrunを２つ以上使ったり、組み合わせたりする（複数のステップを実施する）</h2>
-<p>ようやく実践編です。<br>
+<p data-sourcepos="207:1-208:78">ようやく実践編です。<br>
 だいたい単一コマンドを実行しただけでは終わりません。</p>
-<p>ここではCIに求められがちな</p>
-<ul>
-<li>特定の処理があった時に</li>
+<p data-sourcepos="210:1-210:38">ここではCIに求められがちな</p>
+<ul data-sourcepos="211:1-212:0">
+<li data-sourcepos="211:1-212:0">特定の処理があった時に</li>
 </ul>
-<ol>
-<li>git cloneして</li>
-<li>結果を書き換えて</li>
-<li>git pushする</li>
+<ol data-sourcepos="213:1-216:0">
+<li data-sourcepos="213:1-213:18">git cloneして</li>
+<li data-sourcepos="214:1-214:27">結果を書き換えて</li>
+<li data-sourcepos="215:1-216:0">git pushする</li>
 </ol>
-<p>をやってみましょう。</p>
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>- name: git clone
+<p data-sourcepos="217:1-217:30">をやってみましょう。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="219:1-230:3"><div class="highlight"><pre><code>- name: git clone
   uses: actions/checkout@v2
   with:
     repository: shimajima-eiji/shimajima-eiji
@@ -236,37 +236,37 @@ idはなんでもいいですが、渡す側のステップにidがないと、�
 - name: git push
   uses: EndBug/add-and-commit@v9
 </code></pre></div></div>
-<div class="note alert">
+<div data-sourcepos="232:1-234:3" class="note alert">
 <span class="fa fa-fw fa-times-circle"></span><div>
-<p>これを実行すると、README.mdを書き換えます。</p>
+<p data-sourcepos="233:1-233:60">これを実行すると、README.mdを書き換えます。</p>
 </div>
 </div>
-<div class="note alert">
+<div data-sourcepos="236:1-239:3" class="note alert">
 <span class="fa fa-fw fa-times-circle"></span><div>
-<p>これを実行すると、コントリビューターに<a href="https://github.com/actions-user" rel="nofollow noopener" target="_blank">actions-user</a>が追加されます。<br>
+<p data-sourcepos="237:1-238:57">これを実行すると、コントリビューターに<a href="https://github.com/actions-user" rel="nofollow noopener" target="_blank">actions-user</a>が追加されます。<br>
 （ユーザーは書き換えることができます）</p>
 </div>
 </div>
-<p>runで書いたら、と思うと結構大変になりますよね。<br>
+<p data-sourcepos="241:1-242:28">runで書いたら、と思うと結構大変になりますよね。<br>
 特に<code>git push</code>の処理。</p>
-<h2>
+<h2 data-sourcepos="244:1-244:16">
 <span id="usesの意味" class="fragment"></span><a href="#uses%E3%81%AE%E6%84%8F%E5%91%B3"><i class="fa fa-link"></i></a>usesの意味</h2>
-<p>これは、Githubの <code>ユーザー名/リポジトリ名@バージョン</code>です。<br>
+<p data-sourcepos="245:1-246:72">これは、Githubの <code>ユーザー名/リポジトリ名@バージョン</code>です。<br>
 試しに、<code>uses: actions/checkout@v2</code>を探しにいきましょう。</p>
-<p><qiita-embed-ogp src="https://github.com/actions/checkout/releases"></qiita-embed-ogp></p>
-<p>最近v3が出たようですね。</p>
-<p>pushは以下。</p>
-<p><qiita-embed-ogp src="https://github.com/EndBug/add-and-commit/releases"></qiita-embed-ogp></p>
-<p>こちらは最新がv9でした。</p>
-<h3>
+<p data-sourcepos="248:1-248:44"><qiita-embed-ogp src="https://github.com/actions/checkout/releases"></qiita-embed-ogp></p>
+<p data-sourcepos="250:1-250:35">最近v3が出たようですね。</p>
+<p data-sourcepos="252:1-252:16">pushは以下。</p>
+<p data-sourcepos="254:1-254:49"><qiita-embed-ogp src="https://github.com/EndBug/add-and-commit/releases"></qiita-embed-ogp></p>
+<p data-sourcepos="256:1-256:35">こちらは最新がv9でした。</p>
+<h3 data-sourcepos="258:1-258:33">
 <span id="q自作できるのでは" class="fragment"></span><a href="#q%E8%87%AA%E4%BD%9C%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%AE%E3%81%A7%E3%81%AF"><i class="fa fa-link"></i></a>Q.自作できるのでは？</h3>
-<div class="note info">
+<div data-sourcepos="259:1-261:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p>A.できます。</p>
+<p data-sourcepos="260:1-260:17">A.できます。</p>
 </div>
 </div>
-<p><qiita-embed-ogp src="https://note.com/tably/n/n46041458d6b3"></qiita-embed-ogp></p>
-<h2>
+<p data-sourcepos="263:1-263:38"><qiita-embed-ogp src="https://note.com/tably/n/n46041458d6b3"></qiita-embed-ogp></p>
+<h2 data-sourcepos="265:1-265:12">
 <span id="応用例" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8%E4%BE%8B"><i class="fa fa-link"></i></a>応用例</h2>
-<p>長くなりすぎたので、別記事にします。</p>
-<p><qiita-embed-ogp src="https://nomuraya.tk/2022/03/githubactions.html"></qiita-embed-ogp></p>
+<p data-sourcepos="266:1-266:54">長くなりすぎたので、別記事にします。</p>
+<p data-sourcepos="268:1-268:46"><qiita-embed-ogp src="https://nomuraya.tk/2022/03/githubactions.html"></qiita-embed-ogp></p>
