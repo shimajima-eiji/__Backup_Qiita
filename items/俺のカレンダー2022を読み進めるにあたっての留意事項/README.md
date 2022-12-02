@@ -7,7 +7,7 @@ Qiitaに投稿する分はインデックスしてくれるのでいいんです
 本格的な記事は明日からの分です。お楽しみに！
 
 - [俺のカレンダー2022を読み進めるにあたっての留意事項 (1日目)](#)
-- [(2日目)]()
+- [(2日目)](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
 - [(3日目)]()
 - [(4日目)]()
 - [(5日目)]()
@@ -77,5 +77,5 @@ https://github.com/shimajima-eiji/__Github-Operation/issues/422
 では、また明日の記事でお会いしましょう！
 
 ## 次の記事
-- [(2日目)]()
+- [(2日目)](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
