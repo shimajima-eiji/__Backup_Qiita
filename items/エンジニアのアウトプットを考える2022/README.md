@@ -197,5 +197,5 @@ Qiitaに限った話ではないですが、はじめて何かを行う時は入
 （アウトプットする場所の話もしたかったんですが、思った以上に長くなったので別の記事にします）
 
 ## 次の記事
-- [(3日目)]()
+- [Github転職の最新事情2022(3日目)](https://qiita.com/nomurasan/items/885444cec8eefe37ac07)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)

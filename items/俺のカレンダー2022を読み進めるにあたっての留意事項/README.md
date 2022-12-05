@@ -6,13 +6,14 @@ Qiitaに投稿する分はインデックスしてくれるのでいいんです
 ナビゲーションがないサイト用に、本記事をインデックスとして使わせてもらってます。
 本格的な記事は明日からの分です。お楽しみに！
 
-- [俺のカレンダー2022を読み進めるにあたっての留意事項 (1日目)](#)
-- [(2日目)](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
-- [(3日目)]()
-- [(4日目)]()
-- [(5日目)]()
-- [(6日目)]()
-- [(7日目)]()
+- [(1日目) 俺のカレンダー2022を読み進めるにあたっての留意事項](#)
+- [(2日目) エンジニアのアウトプットを考える2022](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
+- [(3日目) Github転職の最新事情2022](https://qiita.com/nomurasan/items/885444cec8eefe37ac07)
+- [(4日目) 現役エンジニア講師が「今、改めて考える」初めて勉強するプログラミング言語は何がいい？2022年最新版](https://qiita.com/nomurasan/items/5f97870d5237f773c111)
+- [(5日目) 最もシンプルな記事の書き方・考え方紹介](https://qiita.com/nomurasan/items/6cdde5886073c571349c)
+  - [Qiitaデイリーに載ってしまった（感謝）ので、方針表明](https://qiita.com/nomurasan/items/8d263978b548d38fba67)
+- [(6日目) プログラミングを勉強したい人がやっておいた方がいいこと2022](https://qiita.com/nomurasan/items/281044ee0162b89b5b9e)
+- [(7日目) ]()
 - [(8日目)]()
 - [(9日目)]()
 - [(10日目)]()
@@ -77,5 +78,5 @@ https://github.com/shimajima-eiji/__Github-Operation/issues/422
 では、また明日の記事でお会いしましょう！
 
 ## 次の記事
-- [(2日目)](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
+- [エンジニアのアウトプットを考える2022(2日目)](https://qiita.com/nomurasan/items/4ec8deb10c609e93869d)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
