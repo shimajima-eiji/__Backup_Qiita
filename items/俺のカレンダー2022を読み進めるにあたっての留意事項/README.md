@@ -13,7 +13,7 @@ Qiitaに投稿する分はインデックスしてくれるのでいいんです
 - [(5日目) 最もシンプルな記事の書き方・考え方紹介](https://qiita.com/nomurasan/items/6cdde5886073c571349c)
   - [Qiitaデイリーに載ってしまった（感謝）ので、方針表明](https://qiita.com/nomurasan/items/8d263978b548d38fba67)
 - [(6日目) プログラミングを勉強したい人がやっておいた方がいいこと2022](https://qiita.com/nomurasan/items/281044ee0162b89b5b9e)
-- [(7日目) ]()
+- [子ども向けのプログラミングドリルは新人研修で使えるか？(7日目) ](https://qiita.com/nomurasan/items/85be0d822b50235205b0)
 - [(8日目)]()
 - [(9日目)]()
 - [(10日目)]()
