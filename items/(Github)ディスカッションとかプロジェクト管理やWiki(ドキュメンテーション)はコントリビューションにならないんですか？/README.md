@@ -49,5 +49,5 @@ Githubが評価しているのはエンジニアリングスキルであって�
 Wikiの更新をトリガーに出来たかどうかは分かりませんが、リアルタイムでなくてもいい場合はGithubActionsのworkflowトリガーをタイマーにすることで自動化できます。
 
 ## 次の記事
-- [(9日目) ](#)
+- [(9日目) 在宅フリーランスの勉強・仕事へのモチベーション管理例](https://qiita.com/nomurasan/items/1ab798e5794cc4b29b65)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
