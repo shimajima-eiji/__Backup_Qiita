@@ -16,7 +16,7 @@ Qiitaに投稿する分はインデックスしてくれるのでいいんです
 - [(7日目) 子ども向けのプログラミングドリルは新人研修で使えるか？](https://qiita.com/nomurasan/items/85be0d822b50235205b0)
 - [(8日目 (Github)ディスカッションとかプロジェクト管理やWiki(ドキュメンテーション)はコントリビューションにならないんですか？)](https://qiita.com/nomurasan/items/4521ad09e832a06c5438)
 - [(9日目) 在宅フリーランスの仕事・勉強へのモチベーション管理例](https://qiita.com/nomurasan/items/1ab798e5794cc4b29b65)
-- [(10日目)]()
+- [(10日目) AuthをPCだけで完結させる方法とメリデメ](https://qiita.com/nomurasan/items/e7bb03c717793a7c8b70)
 - [(11日目)]()
 - [(12日目)]()
 - [(13日目)]()

@@ -107,5 +107,5 @@ Nintendo SwitchやPSシリーズと同じものなのです。
 本稿があなたのリモートワーク生活の改善にお役立ちできることを祈ります。
 
 ## 次の記事
-- [(10日目) ](#)
+- [(10日目) AuthをPCだけで完結させる方法とメリデメ](https://qiita.com/nomurasan/items/e7bb03c717793a7c8b70)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
