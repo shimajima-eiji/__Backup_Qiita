@@ -1,0 +1,121 @@
+<h2 data-sourcepos="1:1-1:21">
+<span id="言いたいこと" class="fragment"></span><a href="#%E8%A8%80%E3%81%84%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>言いたいこと</h2>
+<p data-sourcepos="2:1-2:161">docsifyはindex.htmlなどをビルドする必要がなく、CDNで作れるので管理者じゃなくても(Github)Dependabotに怒られなくなります。</p>
+<h3 data-sourcepos="4:1-4:16">
+<span id="導入方法" class="fragment"></span><a href="#%E5%B0%8E%E5%85%A5%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>導入方法</h3>
+<p data-sourcepos="5:1-5:57">あまりにも簡単なので、先に紹介します。</p>
+<ol data-sourcepos="7:1-10:0">
+<li data-sourcepos="7:1-7:119">
+<a href="https://docsify.js.org/#/quickstart?id=manual-initialization" rel="nofollow noopener" target="_blank">クイックスタートのindex.html</a>を作成する</li>
+<li data-sourcepos="8:1-8:32">
+<code>README.md</code>を普通に書く</li>
+<li data-sourcepos="9:1-10:0">
+<code>index.html</code>を開く</li>
+</ol>
+<p data-sourcepos="11:1-11:103">CDNの場合、動いているのはクライアントJavaScriptなのでlocalhostでも動きます。</p>
+<ul data-sourcepos="13:1-15:0">
+<li data-sourcepos="13:1-15:0">
+<a href="https://docsify.js.org/#/" rel="nofollow noopener" target="_blank">公式ドキュメント</a>
+<ul data-sourcepos="14:3-15:0">
+<li data-sourcepos="14:3-15:0"><a href="https://yamachan.github.io/docsify-docs-ja/#/" rel="nofollow noopener" target="_blank">有志による日本語ドキュメント</a></li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="16:1-16:9">
+<span id="発端" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF"><i class="fa fa-link"></i></a>発端</h2>
+<p data-sourcepos="17:1-21:174">node系に限らずですが、<code>package.json</code>のようなものをpushすると、Dependabotがアップデートの状況などを管理してくれてとてもありがたいです。<br>
+が、反面Github Actionsで回している環境とローカルで開発したnodeなどのバージョンやライブラリの状態によってはDependabotのプルリクを通した後に開発ができなくなる、なんて事がありました。<br>
+当たり前ですが、Dependabotがアップデートした内容に準拠して開発環境も最新化・統一するのが当然なのですが、技術要件が高すぎてスキル差があるチームだとたかがドキュメンテーションなのに、うまく動かなくて詰むなんて事も。<br>
+開発でもnodeでREADME関連もnodeでビルドしていると、何が干渉しているか分からないので、どのパッケージを切り離して簡略化するか判断が難しく、結局READMEを捨てる、なんて事もありました。<br>
+新卒研修ではドキュメンテーションも評価の対象である事もあり、これでは何のために開発をしているのか分からなくなります。</p>
+<p data-sourcepos="23:1-24:144">docsifyはREADMEのビルド環境をすべてCDNに移管する事ができます。<br>
+私にとって（特に新卒研修などで受講生側が多少スキルがあるケース）にとっては神のようなツールです。</p>
+<h3 data-sourcepos="26:1-26:10">
+<span id="懸念" class="fragment"></span><a href="#%E6%87%B8%E5%BF%B5"><i class="fa fa-link"></i></a>懸念</h3>
+<p data-sourcepos="27:1-28:24">CDNもDependabotのように最新化されると動かなくなるケースというのは考えられます。<br>
+対応策としては、</p>
+<table data-sourcepos="30:1-35:381">
+<thead>
+<tr data-sourcepos="30:1-30:25">
+<th data-sourcepos="30:2-30:9">手段</th>
+<th data-sourcepos="30:11-30:24">検討事項</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="32:1-32:182">
+<td data-sourcepos="32:2-32:48">
+<code>docsify.js</code>をバックアップしておく</td>
+<td data-sourcepos="32:50-32:181">開発でnodeを使うケースを想定していますが、npmなどに組み込まなければ開発環境を汚染しません</td>
+</tr>
+<tr data-sourcepos="33:1-33:146">
+<td data-sourcepos="33:2-33:64">docsifyを捨てて、異なるビルド環境を構築する</td>
+<td data-sourcepos="33:66-33:145">今までのやり方に戻す案です。リスクは先述の通りです。</td>
+</tr>
+<tr data-sourcepos="34:1-34:304">
+<td data-sourcepos="34:2-34:73">
+<code>marked.js</code>を使う（index.htmlにmarkdownを書く・流し込む）</td>
+<td data-sourcepos="34:75-34:303">環境を守りつつ代替方法としては優秀ですが、手間がかかります。<br>また、docsify同様、バージョンアップによって環境が破壊されるに可能性を考慮しておくべきです。</td>
+</tr>
+<tr data-sourcepos="35:1-35:381">
+<td data-sourcepos="35:2-35:68">GithubやGitLabなどの標準機能を使う(Git系ユーザー)</td>
+<td data-sourcepos="35:70-35:380">多分これが一番ベストだと思います。資料を完全に内部向けと割り切るため、外部公開する場合は別のオープンリポジトリにdocsだけ移行すると良いでしょう。<br>Netlifyをはじめとしたホスティングサービスを使う方法もあります。</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="37:1-38:273">などが考えられます。<br>
+（細かい事をいえば、Git系ユーザー向けの方法もサービスを使う以上、サービス側の追加機能や仕様変更の煽りは絶対に受けるハズですが、影響が大きすぎるのでやらないんじゃないかという願望です）</p>
+<h3 data-sourcepos="40:1-40:43">
+<span id="ケースバイケースで見る対策" class="fragment"></span><a href="#%E3%82%B1%E3%83%BC%E3%82%B9%E3%83%90%E3%82%A4%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%A7%E8%A6%8B%E3%82%8B%E5%AF%BE%E7%AD%96"><i class="fa fa-link"></i></a>ケースバイケースで見る対策</h3>
+<p data-sourcepos="41:1-44:263">これだけいっぱい書いてますが、ぶっちゃけ開発で使う場合に気にすれば良いかなと思います。<br>
+特に作って後悔した後は投げっぱなしになる個人開発アプリを転職活動などで成果物として提出する場合です。<br>
+この場合は、どうせ個人と開き直って、githubのオープンリポジトリあるいは採用者向けのprivateリポジトリを作って、そちらのREADMEだけを使うパターン（docsifyを使わない）が最も良いかと思います。<br>
+非エンジニア（あるいは、Not Githubユーザー)にとっては画面として若干見にくくなりますが、リポジトリ自体またはGithubアカウント自体をポートフォリオサイトとして位置付ける方法があります。</p>
+<p data-sourcepos="46:1-46:24">有名どころだと、</p>
+<ul data-sourcepos="48:1-50:0">
+<li data-sourcepos="48:1-48:91">
+<code>(ユーザー名)/(ユーザー名)</code> のリポジトリは特殊リポジトリになる</li>
+<li data-sourcepos="49:1-50:0">
+<code>(ユーザー名)/(ユーザー名).github.io</code> のリポジトリは、GithubPagesのルートになる</li>
+</ul>
+<p data-sourcepos="51:1-52:159">ですね。<br>
+その他にも使い方はありそうな気がしますが、今も昔もググラビリティが壊滅的すぎて情報を集めるのが難しいです…</p>
+<h4 data-sourcepos="54:1-54:35">
+<span id="研修時の判断について" class="fragment"></span><a href="#%E7%A0%94%E4%BF%AE%E6%99%82%E3%81%AE%E5%88%A4%E6%96%AD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>研修時の判断について</h4>
+<p data-sourcepos="55:1-56:255">新卒研修ぐらいの短い期間なら気にしなくて良いと思いますが、たとえば１年間指導するようなケース（個人指導・ITスクール事業社の個人向けパッケージなど）は、今回のケースが発生する可能性が高いと思います。<br>
+「ドキュメンテーションにリソースを使うべきではない」という観点から、導入時の最新版をバックアップしておき、CDNがダメになった場合に備えておくのが現実的な運用かなと思います。</p>
+<p data-sourcepos="58:1-60:162">なお、ドキュメンテーションを採点しない場合はdocsify自体が不要です。<br>
+採点する場合は、githubのREADME.mdで評価するのは正しくなく、古い文化を継承しているクライアントの場合、ドキュメントページを印刷(.pdf)してレビューします。<br>
+（これはクライアントが古いのではなく、クライアントのエンドが古い体質である可能性も想定しておいてください。）</p>
+<h3 data-sourcepos="62:1-62:13">
+<span id="考え方" class="fragment"></span><a href="#%E8%80%83%E3%81%88%E6%96%B9"><i class="fa fa-link"></i></a>考え方</h3>
+<p data-sourcepos="63:1-67:357">ここで言いたいのは、docsifyに限らず現環境が壊れた際にリカバリーや代替手順が存在するか？という事です。<br>
+あるあるですが、Java研修などでEclipseを使って開発する場合は、Eclipse自体がしょっちゅう壊れます。<br>
+代替案としてJetBeansのIntellJ IDEA(Community Edition)などが挙げられますが、残念ながら運営側・講師ともにEclipseと比べると知見がないため採用される事はまずありませんでした。<br>
+Eclipseもバニラで使うだけなら乗り換えも容易ですが、たとえばプラグインを入れたり（OJDBCとか)端末依存の設定をする場合は、IntellJ IDEAのどこを設定すればできるのか、手順（マニュアル）化してから受講生に配布し、確実に問題を起こさないようにするという担保が必要です。<br>
+実際問題として、研修パッケージの提案段階ではこの観点がスッポリ抜け落ちているんじゃないかと思われるため（disりたい訳ではなく、実情のお話をお伝えしています）、この辺りも含めて「障害発生時の対応」という括りで合意締結されているように思います。</p>
+<p data-sourcepos="69:1-69:118">本稿では、上記観点も含めてdocsifyを採用するメリットを強調したくて執筆しています。</p>
+<h2 data-sourcepos="71:1-71:30">
+<span id="q-docsifyはjamstackか" class="fragment"></span><a href="#q-docsify%E3%81%AFjamstack%E3%81%8B"><i class="fa fa-link"></i></a>Q. docsifyはJAMStackか？</h2>
+<p data-sourcepos="72:1-72:35">A. JAMStackではありません。</p>
+<p data-sourcepos="74:1-79:100">こんな事を気にする人はいないと思いますが、SSGっぽい使い方ができるので、これには言及しておいた方がいいかなと思いました。<br>
+まず、<code>index.html</code>などを生成しないため、SSGではありません。<br>
+<code>marked.js</code>は既に生成されている<code>index.html</code>内の内容を読み取ってmarkdownをhtmlタグなどに置き換えていますので、これも違います。<br>
+ただし、これらは動的ページではありません（＝サーバーにリクエストがないため、高速ですがサイト内検索やコメント機能は別途作成する必要があります）<br>
+また、静的CMSでもありません（＝docsifyにコンテンツ管理機能はありません）<br>
+強いていえば、markdownからhtml要素を生成して出力する膨大なJavaScriptです。</p>
+<p data-sourcepos="81:1-81:152">ポートフォリオ等を作成する際に、JAMStackでなければならない要件であれば採用しないように注意してください。</p>
+<h2 data-sourcepos="83:1-83:52">
+<span id="docsifyで静的cmsのような事をやりたい" class="fragment"></span><a href="#docsify%E3%81%A7%E9%9D%99%E7%9A%84cms%E3%81%AE%E3%82%88%E3%81%86%E3%81%AA%E4%BA%8B%E3%82%92%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>Docsifyで静的CMSのような事をやりたい</h2>
+<p data-sourcepos="84:1-85:168">現状だとCIを使ってwebhookをトリガーする方法でしょうか。<br>
+外部にCMSを置く事になるので、Doscifｙ自体は静的CMSにならないのが、質問への回答としてズレてしまうポイントになります。</p>
+<p data-sourcepos="87:1-88:281">実はアドベントカレンダーの記事はすべて手前味噌のDocsifyに流し込んで仮運用しています。<br>
+Qiitaの投稿のバックアップは取っていますが、これがmarkdown形式なので、後はdocsifyのルールに従ってファイルを配置していけば、（バニラだと）レイアウトこそ異なりますが、やりたい事自体はできています。</p>
+<p data-sourcepos="90:1-92:135">ただし、qiitaの記法はdocsifyでは認識できないので、置換する仕組みは作る必要があります。<br>
+あるいは、運用対処としてqiita独自の記法を使わないのもありますね。<br>
+幸い、目次に関してはqiitaもdocsifyも独自機能でサポートされているので、ここの競合はありません。</p>
+<h2 data-sourcepos="94:1-94:15">
+<span id="次の記事" class="fragment"></span><a href="#%E6%AC%A1%E3%81%AE%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>次の記事</h2>
+<ul data-sourcepos="95:1-96:88">
+<li data-sourcepos="95:1-95:18"><a href="#">(12日目) </a></li>
+<li data-sourcepos="96:1-96:88"><a href="https://qiita.com/advent-calendar/2022/oreno_nomurasan2022">カレンダーページ</a></li>
+</ul>
