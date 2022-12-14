@@ -87,3 +87,9 @@ Servlet/JSP開発はVSCodeでもできます
 
 - [Mac](https://qiita.com/harhogefoo/items/2fa52ecee90b7a25e4c9)
 - [Windowsの場合は、各インストーラの情報をこちらに読み替えてください](https://www.suzu6.net/posts/131-vscode-for-maven/)
+
+---
+
+## 次の記事
+- [(13日目) ソフトウェア開発者目線で見る、among us界隈のMOD作者の氏名BAN問題にみるソフトウェアの取り扱い](https://qiita.com/nomurasan/items/1c690d8455a26aa22b8a)
+- [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)

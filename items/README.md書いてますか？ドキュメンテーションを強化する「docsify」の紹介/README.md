@@ -92,5 +92,5 @@ Qiitaの投稿のバックアップは取っていますが、これがmarkdown�
 幸い、目次に関してはqiitaもdocsifyも独自機能でサポートされているので、ここの競合はありません。
 
 ## 次の記事
-- [(12日目) ](#)
+- [(12日目) 【LT】エンジニア目線で考える「サービスの質」を考える](https://qiita.com/nomurasan/items/1c690d8455a26aa22b8a)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
