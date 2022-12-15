@@ -143,5 +143,5 @@ A. （※）何もないです。
 本稿ではGPLライセンスの扱いと著作権を主題に取り扱っていますが、他の意見が絶対あるはずなので、あなたが本稿に賛同でも反対でも違う人の考え方に触れてみてほしいと思います。
 
 ## 次の記事
-- [(14日目) ](https://qiita.com/nomurasan/items/)
+- [(14日目) エンジニアが講師業を営んで学び得た哲学の話](https://qiita.com/nomurasan/items/7cff5b7816eb4d660a05)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
