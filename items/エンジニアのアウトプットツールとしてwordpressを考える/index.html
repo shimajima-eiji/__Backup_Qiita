@@ -1,0 +1,56 @@
+<p data-sourcepos="1:1-1:15">本稿では、</p>
+<ul data-sourcepos="3:1-6:0">
+<li data-sourcepos="3:1-3:59">たかがwordpressのためにお金を払いたくない</li>
+<li data-sourcepos="4:1-4:47">Webサービスにお金を払いたくない</li>
+<li data-sourcepos="5:1-6:0">無料ホスティングはいっぱいあるのに、動的サービスが有料なのはおかしい</li>
+</ul>
+<p data-sourcepos="7:1-7:105">という、前時代的なおじさんがデモデモダッテする様子を見る事ができます。</p>
+<h2 data-sourcepos="9:1-9:33">
+<span id="wordpressって使えるの" class="fragment"></span><a href="#wordpress%E3%81%A3%E3%81%A6%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%AE"><i class="fa fa-link"></i></a>WordPressって使えるの？</h2>
+<p data-sourcepos="10:1-10:129">A. アウトプットが目的でなければアリ、アウトプットツールとして使いたいだけならナシです。</p>
+<p data-sourcepos="12:1-12:126">要するに、wordpressの案件をやりたいなら使うべきで、そうでなければ使うべきではないです。</p>
+<h2 data-sourcepos="14:1-14:38">
+<span id="個人レベルでdbは必要ない" class="fragment"></span><a href="#%E5%80%8B%E4%BA%BA%E3%83%AC%E3%83%99%E3%83%AB%E3%81%A7db%E3%81%AF%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>個人レベルでDBは必要ない</h2>
+<p data-sourcepos="15:1-15:140">WordPressというより動的CMSを全否定しますが、個人のアウトプットツールとして考えると、DBは不要です。</p>
+<p data-sourcepos="17:1-19:269">たとえば個人で使用している2台のPCがあり、どちらもほどほどに使っているとします。<br>
+筆者の環境でもWindowsPC(WSL)とMacPCの２台が存在しており、案件に合わせて使い分けています。<br>
+この２台にwordpressを入れた後に、片方の更新をもう一方のPCに適用するのに手動で操作したり、gitなどを使ってプラグインなどを最新化した後にデータベースを書き換える必要があるかもしれません。</p>
+<p data-sourcepos="21:1-21:289">DBの代わりになるファイル（いわゆるテキストDB）を作って、そちらを読み込む事で解決できればgit管理もできそうですが、wordpressの場合はなんだかんだでうまく行ったり行かなかったりするので非推奨です（２敗）</p>
+<h3 data-sourcepos="23:1-23:16">
+<span id="解決方法" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>解決方法</h3>
+<p data-sourcepos="24:1-25:95">ローカルPCでwordpressの運用をしないのがベターです。<br>
+つまり、クラウドPCを作ってその中にwordpressを入れれば解決できます。</p>
+<p data-sourcepos="27:1-30:144">もう一つの手段としては、wordpressを入れた端末にネットワーク経由でアクセスする方法です。<br>
+リモートツールを使っても構いません。<br>
+ただし、wordpressを入れた端末を落とす時に、リモート接続される可能性を考えるとなかなか電源を落としにくくなります。<br>
+また、いつでも気軽に電源を落とせないとなると、電気代が気になるのであまり良い選択とは言えません。</p>
+<p data-sourcepos="32:1-32:57">あなたの環境に合わせて選んでください。</p>
+<h2 data-sourcepos="34:1-34:24">
+<span id="おぢさんの要件" class="fragment"></span><a href="#%E3%81%8A%E3%81%A2%E3%81%95%E3%82%93%E3%81%AE%E8%A6%81%E4%BB%B6"><i class="fa fa-link"></i></a>おぢさんの要件</h2>
+<ul data-sourcepos="35:1-52:0">
+<li data-sourcepos="35:1-35:18"><strong>完全無料</strong></li>
+<li data-sourcepos="36:1-36:59">収益化できる（＝アフィリエイトが容易）</li>
+<li data-sourcepos="37:1-37:29">ページの表示が爆速</li>
+<li data-sourcepos="38:1-52:0">
+<strong>運用でイラつかない</strong>
+<ul data-sourcepos="39:3-52:0">
+<li data-sourcepos="39:3-39:28">記事の書きやすさ</li>
+<li data-sourcepos="40:3-40:34">プレビュー機能がある</li>
+<li data-sourcepos="41:3-41:28">ビルド時間が短い</li>
+<li data-sourcepos="42:3-42:34">簡単で直感的な操作性</li>
+<li data-sourcepos="43:3-43:37">開発時に環境を選ばない</li>
+<li data-sourcepos="44:3-44:34">技術的要件が高くない</li>
+<li data-sourcepos="45:3-48:48">メンテナンスコストが少ない
+<ul data-sourcepos="46:5-48:48">
+<li data-sourcepos="46:5-46:27">バニラで使える</li>
+<li data-sourcepos="47:5-47:45">障害発生時の原因特定が容易</li>
+<li data-sourcepos="48:5-48:48">バックアップ・リストアが容易</li>
+</ul>
+</li>
+<li data-sourcepos="49:3-49:55">マルチサイト・マルチブログができる</li>
+<li data-sourcepos="50:3-50:53">markdownに独自性がある（拡張markdown）</li>
+<li data-sourcepos="51:3-52:0">fontawesomeが使える</li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="53:1-53:63">書いていて、婚活かなんかを想起しました…。</p>

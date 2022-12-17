@@ -1,0 +1,126 @@
+<h2 data-sourcepos="1:1-1:60">
+<span id="後記新人研修で教えられないforのお話" class="fragment"></span><a href="#%E5%BE%8C%E8%A8%98%E6%96%B0%E4%BA%BA%E7%A0%94%E4%BF%AE%E3%81%A7%E6%95%99%E3%81%88%E3%82%89%E3%82%8C%E3%81%AA%E3%81%84for%E3%81%AE%E3%81%8A%E8%A9%B1"><i class="fa fa-link"></i></a>【後記】新人研修で教えられないforのお話</h2>
+<p data-sourcepos="2:1-3:45">これ結構良かったので、勝手にパクリます（なお、パクもラレも本人です）<br>
+なんで下書きに残っとるんや…！</p>
+<p data-sourcepos="5:1-6:124">元々は過去日に公開していたテーマだったんですが、結構ブラッシュアップしたので別記事になりました。<br>
+とはいえ、同じ事を言っているのでそのまま更新して2022アドカレに登録する運びにします。</p>
+<h2 data-sourcepos="8:1-8:27">
+<span id="今日いいたいこと" class="fragment"></span><a href="#%E4%BB%8A%E6%97%A5%E3%81%84%E3%81%84%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>今日いいたいこと</h2>
+<p data-sourcepos="9:1-9:33">タイトルの通り、for文の</p>
+<div class="code-frame" data-lang="php" data-sourcepos="11:1-19:3"><div class="highlight"><pre><code><span class="k">for</span><span class="p">(</span>
+  <span class="mf">1.</span> <span class="n">これ</span><span class="p">;</span>
+  <span class="mf">2.</span> <span class="n">これ</span><span class="p">;</span>
+  <span class="mf">3.</span> <span class="n">これ</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 処理</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p data-sourcepos="21:1-21:63">を正しく説明できるか？というのが本旨です。</p>
+<h2 data-sourcepos="23:1-23:24">
+<span id="研修中の説明例" class="fragment"></span><a href="#%E7%A0%94%E4%BF%AE%E4%B8%AD%E3%81%AE%E8%AA%AC%E6%98%8E%E4%BE%8B"><i class="fa fa-link"></i></a>研修中の説明例</h2>
+<div class="code-frame" data-lang="php" data-sourcepos="24:1-32:3"><div class="highlight"><pre><code><span class="k">for</span><span class="p">(</span>
+  <span class="n">変数の初期値</span><span class="p">;</span>
+  <span class="n">繰り返しの条件</span><span class="p">;</span>
+  <span class="n">カッコが終わった後にすること</span><span class="err">・</span><span class="n">繰り返しの条件が終わるようにする</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 処理</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p data-sourcepos="34:1-36:100">です。<br>
+研修など時間が限られている中で解説するため、forを使うだけならこの説明でも良いです。<br>
+が、今回取り上げたいのは、この説明は<strong>間違っている</strong>ということです。</p>
+<h3 data-sourcepos="38:1-38:45">
+<span id="for文をwhile文で書き直してみる" class="fragment"></span><a href="#for%E6%96%87%E3%82%92while%E6%96%87%E3%81%A7%E6%9B%B8%E3%81%8D%E7%9B%B4%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>for文をwhile文で書き直してみる</h3>
+<p data-sourcepos="39:1-40:63">下記にコード例を示します。<br>
+いずれも出力は以下のような結果になります。</p>
+<ol data-sourcepos="42:1-47:0">
+<li data-sourcepos="42:1-42:10"><code>1 / 0</code></li>
+<li data-sourcepos="43:1-43:10"><code>1 / 1</code></li>
+<li data-sourcepos="44:1-44:10"><code>1 / 2</code></li>
+<li data-sourcepos="45:1-45:10"><code>1 / 3</code></li>
+<li data-sourcepos="46:1-47:0"><code>1 / 4</code></li>
+</ol>
+<div class="code-frame" data-lang="php" data-sourcepos="48:1-63:3">
+<div class="code-lang"><span class="bold">for.php</span></div>
+<div class="highlight"><pre><code><span class="cp">&lt;?php</span>
+<span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$before</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nv">$after</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="p">(</span>
+  <span class="nv">$before</span><span class="o">++</span><span class="p">;</span>
+  <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="nv">$after</span><span class="o">++</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="nv">$before</span> <span class="mf">.</span> <span class="s2">" / "</span> <span class="mf">.</span> <span class="nv">$after</span> <span class="mf">.</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div>
+</div>
+<p data-sourcepos="65:1-65:58">これをfor-&gt;whileにリファクタリングします。</p>
+<div class="code-frame" data-lang="php" data-sourcepos="67:1-81:3">
+<div class="code-lang"><span class="bold">while.php</span></div>
+<div class="highlight"><pre><code><span class="cp">&lt;?php</span>
+<span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$before</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nv">$after</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="nv">$before</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for文の１行目</span>
+<span class="k">while</span><span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// for文の2行目</span>
+  <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="nv">$before</span> <span class="mf">.</span> <span class="s2">" / "</span> <span class="mf">.</span> <span class="nv">$after</span> <span class="mf">.</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+
+  <span class="nv">$after</span><span class="o">++</span><span class="p">;</span><span class="c1">// for文の3行目</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div>
+</div>
+<h3 data-sourcepos="83:1-83:14">
+<span id="javascript" class="fragment"></span><a href="#javascript"><i class="fa fa-link"></i></a>JavaScript</h3>
+<p data-sourcepos="84:1-84:51">（※）PHP側の書き方に寄せています。</p>
+<div class="code-frame" data-lang="javascript" data-sourcepos="86:1-100:3">
+<div class="code-lang"><span class="bold">for.js</span></div>
+<div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">before</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">after</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span>
+  <span class="nx">before</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="nx">after</span><span class="o">++</span>
+<span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">before</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> / </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">after</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p data-sourcepos="102:1-102:58">これをfor-&gt;whileにリファクタリングします。</p>
+<div class="code-frame" data-lang="javascript" data-sourcepos="104:1-117:3">
+<div class="code-lang"><span class="bold">while.js</span></div>
+<div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">before</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">after</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="nx">before</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for文の１行目</span>
+<span class="k">while</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="p">)</span>  <span class="c1">// for文の２行目</span>
+<span class="p">{</span>
+  <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">before</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> / </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">after</span> <span class="p">);</span>
+
+  <span class="nx">after</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for文の3行目</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 data-sourcepos="119:1-119:39">
+<span id="勘違いしていても使えます" class="fragment"></span><a href="#%E5%8B%98%E9%81%95%E3%81%84%E3%81%97%E3%81%A6%E3%81%84%E3%81%A6%E3%82%82%E4%BD%BF%E3%81%88%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>勘違いしていても使えます</h2>
+<p data-sourcepos="120:1-121:231">プログラミングの世界では、「厳密に意味を正しく理解していなくても使えてしまう」ものがいっぱいあります。<br>
+これは言語仕様であったりフレームワーク仕様などで「何となくいい感じにしてくれる」ものがある事を認識して使うのと、認識せず使うのでは意味が大きく異なります。</p>
+<p data-sourcepos="123:1-123:438">本来であれば、しっかりと指導するべきなのですが実際問題として指導できていないという問題があるので、せめてこういった時間を意識しなくても良い場では、ガチャガチャいじって予測と実験をする練習する機会を作っていくと、言語やフレームワークだけでなく、特にインフラ周りは理解が大幅に進みやすくなります。</p>
+<h2 data-sourcepos="125:1-125:15">
+<span id="次の記事" class="fragment"></span><a href="#%E6%AC%A1%E3%81%AE%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>次の記事</h2>
+<ul data-sourcepos="126:1-127:88">
+<li data-sourcepos="126:1-126:197"><a href="https://qiita.com/nomurasan/items/db69d80af8c90bbeaafe" id="reference-22918cd35b38216b53e2">(17日目) 【俺のエディタ年表】現役エンジニア講師のエディタ変遷〜なぜそのエディタを選んだのか〜</a></li>
+<li data-sourcepos="127:1-127:88"><a href="https://qiita.com/advent-calendar/2022/oreno_nomurasan2022">カレンダーページ</a></li>
+</ul>

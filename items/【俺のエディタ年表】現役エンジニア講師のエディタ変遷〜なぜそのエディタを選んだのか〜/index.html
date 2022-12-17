@@ -1,0 +1,80 @@
+<p data-sourcepos="1:1-1:162">どこに価値があるか分からないので、ちょいちょい質問がくる掲題について、理由や時代背景も含めて語っていきます。</p>
+<h2 data-sourcepos="3:1-3:33">
+<span id="一番良いエディタとは" class="fragment"></span><a href="#%E4%B8%80%E7%95%AA%E8%89%AF%E3%81%84%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>一番良いエディタとは</h2>
+<ol data-sourcepos="4:1-7:0">
+<li data-sourcepos="4:1-4:60">開発環境にあったものを使ってください。</li>
+<li data-sourcepos="5:1-5:60">指定がなければ好きなものを使えばよく、</li>
+<li data-sourcepos="6:1-7:0">好きなものがなければVSCodeをおすすめします。</li>
+</ol>
+<p data-sourcepos="8:1-8:33">上記の優先度でどうぞ。</p>
+<h2 data-sourcepos="10:1-10:12">
+<span id="言い訳" class="fragment"></span><a href="#%E8%A8%80%E3%81%84%E8%A8%B3"><i class="fa fa-link"></i></a>言い訳</h2>
+<p data-sourcepos="11:1-13:123">この記事を初めて書いたのがいつだったか分からないぐらい昔です、たぶん5年とかそれぐらいでしょうか。<br>
+ずっと下書きで寝かせっぱなしだったので、2022年仕様に変えてお届けします。<br>
+なお、未公開（ずっと下書き）なのでリファクタリング記事ではないです、たぶんきっと。</p>
+<h2 data-sourcepos="15:1-15:30">
+<span id="愛着があったnotepad" class="fragment"></span><a href="#%E6%84%9B%E7%9D%80%E3%81%8C%E3%81%82%E3%81%A3%E3%81%9Fnotepad"><i class="fa fa-link"></i></a>愛着があったNotepad++</h2>
+<p data-sourcepos="16:1-18:81">カスタマイズの手軽さ、というかプラグインマネージャーですよね。タブも使えるし、ウィンドウ分割もできるし軽い！<br>
+Atomだとちょっとした事をやるだけにしては大げさだったので、敢えて使うまでもないかな、と思っていたのですが…<br>
+あとは余計な勉強コストを積みたくなかったのはあります。</p>
+<h3 data-sourcepos="20:1-20:37">
+<span id="捨てる決心をした出来事" class="fragment"></span><a href="#%E6%8D%A8%E3%81%A6%E3%82%8B%E6%B1%BA%E5%BF%83%E3%82%92%E3%81%97%E3%81%9F%E5%87%BA%E6%9D%A5%E4%BA%8B"><i class="fa fa-link"></i></a>捨てる決心をした出来事</h3>
+<p data-sourcepos="21:1-21:151"><strong>プラグインマネージャーを使おうとするとプラグインリストのダウンロードに失敗してNotepad++ごと落ちます。</strong></p>
+<p data-sourcepos="23:1-23:57"><qiita-embed-ogp src="https://github.com/bruderstein/nppPluginManager/issues/57"></qiita-embed-ogp></p>
+<p data-sourcepos="25:1-26:153">私もこれにやられました。<br>
+さすがにもう解消していると思ったんですが、当時色々調べても私の環境では解決できなかったので諦めました。</p>
+<h3 data-sourcepos="28:1-28:34">
+<span id="元々やりたかったこと" class="fragment"></span><a href="#%E5%85%83%E3%80%85%E3%82%84%E3%82%8A%E3%81%9F%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>元々やりたかったこと</h3>
+<ul data-sourcepos="30:1-37:88">
+<li data-sourcepos="30:1-30:23">プラグイン拡張</li>
+<li data-sourcepos="31:1-31:8">タブ</li>
+<li data-sourcepos="32:1-32:23">ウィンドウ分割</li>
+<li data-sourcepos="33:1-33:8">比較</li>
+<li data-sourcepos="34:1-37:88">言語ごとのスタイル変更
+<ul data-sourcepos="35:3-37:88">
+<li data-sourcepos="35:3-35:59">似たような内容のスクリプトを組む時<sup><a href="#fn-1" id="fnref-1">1</a></sup>
+</li>
+<li data-sourcepos="36:3-36:49">python, perl, rubyなどが共存している</li>
+<li data-sourcepos="37:3-37:88">逆に統合しようとして、特定の言語へ移植する必要がある場合</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="40:1-40:46">
+<span id="あればいいなと思っていたこと" class="fragment"></span><a href="#%E3%81%82%E3%82%8C%E3%81%B0%E3%81%84%E3%81%84%E3%81%AA%E3%81%A8%E6%80%9D%E3%81%A3%E3%81%A6%E3%81%84%E3%81%9F%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>あればいいなと思っていたこと</h3>
+<ul data-sourcepos="42:1-44:0">
+<li data-sourcepos="42:1-42:8">公正</li>
+<li data-sourcepos="43:1-44:0">Lintっぽいもの。Rubocopとか</li>
+</ul>
+<p data-sourcepos="45:1-46:84">Atom(今はVSCodeですね。当時はAtomの方が強い時代でした)だと全部できそうですよね。<br>
+まだ調べきれてないので、分かり次第都度追加していきます。</p>
+<h3 data-sourcepos="48:1-48:16">
+<span id="導入手順" class="fragment"></span><a href="#%E5%B0%8E%E5%85%A5%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>導入手順</h3>
+<p data-sourcepos="49:1-50:279">だいたいは<a href="https://eng-entrance.com/atom-editor" rel="nofollow noopener" target="_blank">こちら</a>の手順通りです。<br>
+エンジニア向けのブログと違ってすごく読みやすく、分かりやすいのでこういうデザイン志向のブログは好きなんですが、いかんせん広告をチラつかされるのがたまらない人なので、そこさえなければ……。</p>
+<p data-sourcepos="52:1-52:100">（当時のメモはここまで下書き中でした。Atomいじってた頃だと思います）</p>
+<h2 data-sourcepos="54:1-54:42">
+<span id="2022年追記-時代はvscode一強に" class="fragment"></span><a href="#2022%E5%B9%B4%E8%BF%BD%E8%A8%98-%E6%99%82%E4%BB%A3%E3%81%AFvscode%E4%B8%80%E5%BC%B7%E3%81%AB"><i class="fa fa-link"></i></a>2022年追記: 時代はVSCode一強に</h2>
+<p data-sourcepos="55:1-57:152">もうNotepad++もAtomも使ってないですね…<br>
+当時はなんだかんだNotepad++は軽量でタブが使えるエディタ、AtomがLinterとか入れて使っていた全部盛り（ただし起動が遅い）IDEとして使っていたのですが、どちらもVSCodeで両立できます。はじめてVSCodeを使った当時の私がVSCodeマジかすげぇな！ってなりました。<br>
+分かる人向けですが、Java開発はEclipseだけではなく、VSCodeでも開発できますよ、と言われた時並のショックです。</p>
+<p data-sourcepos="59:1-62:127">今更VSCodeの解説はしません。<br>
+ただし、ここで上がらなかったエディタで操作を覚えておいたほうが良いものがあります。<br>
+EmacsとかVim、Nanoなどターミナルに標準装備しているエディタです。<br>
+つまり、GUIエディタとCUIエディタの2種類は使えるようにしておきましょう、というお話です。</p>
+<p data-sourcepos="64:1-65:150">ただし、チームで開発環境が決まっている場合はチームに合わせましょう。<br>
+開発環境レベルで管理されているので、過去にそれぞれのエディタを使おうとして失敗した可能性があります。</p>
+<p data-sourcepos="67:1-68:111">ちなみに、環境を統一したい場合にVSCodeを使う場合はsettings syncの設定を普段使いのものと異なるものを使うようにする必要があります。<br>
+実際に運用する前にバックアップをかならず手元に持っておくようにしましょう。</p>
+<h2 data-sourcepos="70:1-70:15">
+<span id="次の記事" class="fragment"></span><a href="#%E6%AC%A1%E3%81%AE%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>次の記事</h2>
+<ul data-sourcepos="71:1-72:88">
+<li data-sourcepos="71:1-71:18"><a href="#">(18日目) </a></li>
+<li data-sourcepos="72:1-72:88"><a href="https://qiita.com/advent-calendar/2022/oreno_nomurasan2022">カレンダーページ</a></li>
+</ul>
+<section class="footnotes">
+<ol>
+<li id="fn-1">
+<p data-sourcepos="38:7-38:128">スタイル変更・似たような内容のスクリプトを組む時：たとえばshellと他の何かをさわる時 <a href="#fnref-1" class="">↩</a></p>
+</li>
+</ol>
+</section>

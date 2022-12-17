@@ -115,5 +115,5 @@ WikiについてはVSCodeではなく、Githubでやりようはあるんです�
 もしwikiを充実させたい場合は、現行のGithubWebエディターを使った方がいいかもしれません。
 
 ## 次の記事
-- [(16日目) ](https://qiita.com/nomurasan/items/)
+- [(16日目) for文【for(これ;これ;これ)】の内容を正しく説明できますか？よくある勘違いを解説します。](https://qiita.com/nomurasan/items/162964f6fb2914cd348c)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
