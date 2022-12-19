@@ -68,5 +68,5 @@ EmacsとかVim、Nanoなどターミナルに標準装備しているエディ�
 実際に運用する前にバックアップをかならず手元に持っておくようにしましょう。
 
 ## 次の記事
-- [(18日目) ](#)
+- [(18日目) 勉強会で「LT会」というと参入敷居を感じさせるので「ポエム会」って呼ぼうぜ](https://qiita.com/nomurasan/items/9e4e67c588d3dfde4ead)
 - [カレンダーページ](https://qiita.com/advent-calendar/2022/oreno_nomurasan2022)
