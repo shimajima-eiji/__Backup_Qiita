@@ -1,0 +1,11 @@
+name: qiita記事を別の環境に移植する
+
+on: push
+
+jobs:
+  qiita2other:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 実行テスト
+      run: echo "テスト"
