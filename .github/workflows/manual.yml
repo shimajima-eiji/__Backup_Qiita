@@ -1,6 +1,9 @@
 name: qiita記事を別の環境に移植する
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   qiita2other:
