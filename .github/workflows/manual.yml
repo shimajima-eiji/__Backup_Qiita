@@ -8,4 +8,4 @@ jobs:
 
     steps:
     - name: 実行テスト
-      run: echo "テスト"
+      run: ls -R
