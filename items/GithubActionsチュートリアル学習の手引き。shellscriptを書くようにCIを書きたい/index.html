@@ -23,10 +23,16 @@ CIの知識がないと「なんでこんなことやってるの？」という
 <h2 data-sourcepos="22:1-22:15">
 <span id="参考情報" class="fragment"></span><a href="#%E5%8F%82%E8%80%83%E6%83%85%E5%A0%B1"><i class="fa fa-link"></i></a>参考情報</h2>
 <p data-sourcepos="23:1-23:132">公式ドキュメントより「steps コンテキスト」の項目を参照すると、より詳しい情報が得られます。</p>
-<p data-sourcepos="25:1-25:99"><qiita-embed-ogp src="https://docs.github.com/ja/actions/learn-github-actions/contexts#example-usage-of-the-steps-context"></qiita-embed-ogp></p>
+<p data-sourcepos="25:1-25:99"><iframe id="qiita-embed-content__0023524b2d7b2bd1fdad66f7a51423dc" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__0023524b2d7b2bd1fdad66f7a51423dc" data-content="https%3A%2F%2Fdocs.github.com%2Fja%2Factions%2Flearn-github-actions%2Fcontexts%23example-usage-of-the-steps-context" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
 <p data-sourcepos="27:1-27:39">以下、手前味噌で恐縮です。</p>
-<p data-sourcepos="29:1-29:54"><qiita-embed-ogp src="https://qiita.com/nomurasan/items/90cc5288bb65988a578a"></qiita-embed-ogp></p>
-<p data-sourcepos="31:1-31:49"><qiita-embed-ogp src="https://nomuraya.tk/2022/03/consultant_learn.html"></qiita-embed-ogp></p>
+<p data-sourcepos="29:1-29:54"><iframe id="qiita-embed-content__ca1a101b4d6151c93afac68df0a2195f" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__ca1a101b4d6151c93afac68df0a2195f" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F90cc5288bb65988a578a" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="31:1-31:49"><iframe id="qiita-embed-content__02f6f7e83e5cc6fef167e707adaa1f41" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__02f6f7e83e5cc6fef167e707adaa1f41" data-content="https%3A%2F%2Fnomuraya.tk%2F2022%2F03%2Fconsultant_learn.html" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
 <h2 data-sourcepos="33:1-33:31">
 <span id="githubactionsの基礎知識" class="fragment"></span><a href="#githubactions%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98"><i class="fa fa-link"></i></a>GithubActionsの基礎知識</h2>
 <p data-sourcepos="34:1-35:109">ymlでできています。<br>
@@ -70,7 +76,7 @@ GithubActionsはymlの内容を読んで、書かれている内容に従って�
 <span id="変数の受け取り方" class="fragment"></span><a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>変数の受け取り方</h3>
 <div class="code-frame" data-lang="yaml" data-sourcepos="68:1-72:3">
 <div class="code-lang"><span class="bold">if.yml</span></div>
-<div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">前のステップ(id</span><span class="pi">:</span> <span class="s">generate_number)の結果を受け取って正常終了 or 異常終了する</span>
+<div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name: 前のステップ(id</span><span class="pi">:</span> <span class="s">generate_number)の結果を受け取って正常終了 or 異常終了する</span>
   <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
     <span class="s">if [[ ${{ steps.generate_number.outputs.random_number }} == 0 ]]; then exit 0; else exit 1; fi</span>
 </code></pre></div>
@@ -253,10 +259,14 @@ idはなんでもいいですが、渡す側のステップにidがないと、�
 <span id="usesの意味" class="fragment"></span><a href="#uses%E3%81%AE%E6%84%8F%E5%91%B3"><i class="fa fa-link"></i></a>usesの意味</h2>
 <p data-sourcepos="245:1-246:72">これは、Githubの <code>ユーザー名/リポジトリ名@バージョン</code>です。<br>
 試しに、<code>uses: actions/checkout@v2</code>を探しにいきましょう。</p>
-<p data-sourcepos="248:1-248:44"><qiita-embed-ogp src="https://github.com/actions/checkout/releases"></qiita-embed-ogp></p>
+<p data-sourcepos="248:1-248:44"><iframe id="qiita-embed-content__ee8c70c49249daa6f77a5716abff50c0" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__ee8c70c49249daa6f77a5716abff50c0" data-content="https%3A%2F%2Fgithub.com%2Factions%2Fcheckout%2Freleases" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
 <p data-sourcepos="250:1-250:35">最近v3が出たようですね。</p>
 <p data-sourcepos="252:1-252:16">pushは以下。</p>
-<p data-sourcepos="254:1-254:49"><qiita-embed-ogp src="https://github.com/EndBug/add-and-commit/releases"></qiita-embed-ogp></p>
+<p data-sourcepos="254:1-254:49"><iframe id="qiita-embed-content__1a93def0a8545342b6c8e3f5b7289080" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__1a93def0a8545342b6c8e3f5b7289080" data-content="https%3A%2F%2Fgithub.com%2FEndBug%2Fadd-and-commit%2Freleases" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
 <p data-sourcepos="256:1-256:35">こちらは最新がv9でした。</p>
 <h3 data-sourcepos="258:1-258:33">
 <span id="q自作できるのでは" class="fragment"></span><a href="#q%E8%87%AA%E4%BD%9C%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%AE%E3%81%A7%E3%81%AF"><i class="fa fa-link"></i></a>Q.自作できるのでは？</h3>
@@ -265,8 +275,12 @@ idはなんでもいいですが、渡す側のステップにidがないと、�
 <p data-sourcepos="260:1-260:17">A.できます。</p>
 </div>
 </div>
-<p data-sourcepos="263:1-263:38"><qiita-embed-ogp src="https://note.com/tably/n/n46041458d6b3"></qiita-embed-ogp></p>
+<p data-sourcepos="263:1-263:38"><iframe id="qiita-embed-content__fcaa8857e63c5144f5bb9884fbd3a2e3" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__fcaa8857e63c5144f5bb9884fbd3a2e3" data-content="https%3A%2F%2Fnote.com%2Ftably%2Fn%2Fn46041458d6b3" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
 <h2 data-sourcepos="265:1-265:12">
 <span id="応用例" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8%E4%BE%8B"><i class="fa fa-link"></i></a>応用例</h2>
 <p data-sourcepos="266:1-266:54">長くなりすぎたので、別記事にします。</p>
-<p data-sourcepos="268:1-268:46"><qiita-embed-ogp src="https://nomuraya.tk/2022/03/githubactions.html"></qiita-embed-ogp></p>
+<p data-sourcepos="268:1-268:46"><iframe id="qiita-embed-content__4d8c5ace3ebfda024f4cbc10c8fd0f8f" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__4d8c5ace3ebfda024f4cbc10c8fd0f8f" data-content="https%3A%2F%2Fnomuraya.tk%2F2022%2F03%2Fgithubactions.html" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>

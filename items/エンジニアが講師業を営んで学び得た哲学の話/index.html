@@ -86,7 +86,7 @@
 <span class="c1">// これ以上は疲れたので勘弁</span>
 
 <span class="c1">// 朝礼</span>
-<span class="nx">meeting_copy</span><span class="p">()</span> <span class="p">{</span>
+<span class="nf">meeting_copy</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/**
      * 1. このメソッドは時間経過でのみ実行する事ができます。
      * 2. meeting_copy()を実行したオブジェクトのAモジュールのバグ = バージョンを上げたら動かなくなった件　を初期値とします
@@ -101,22 +101,22 @@
 
 <span class="c1">// 朝礼会議</span>
 
-<span class="nx">request_user</span> <span class="o">=</span> <span class="nx">PM_user</span><span class="p">.</span><span class="nx">meeting_copy</span><span class="p">();</span>
-<span class="nx">response_user</span> <span class="o">=</span> <span class="nx">PM_user</span><span class="p">.</span><span class="nx">meeting_copy</span><span class="p">();</span>
+<span class="nx">request_user</span> <span class="o">=</span> <span class="nx">PM_user</span><span class="p">.</span><span class="nf">meeting_copy</span><span class="p">();</span>
+<span class="nx">response_user</span> <span class="o">=</span> <span class="nx">PM_user</span><span class="p">.</span><span class="nf">meeting_copy</span><span class="p">();</span>
 
 <span class="c1">// 業務開始</span>
 <span class="nx">response_user</span><span class="p">.</span><span class="nx">Aモジュールのバグ</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">の修正後のPRで別人に指摘された件</span><span class="dl">"</span>
 
-<span class="nx">request_user</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">{(request_user.)Aモジュールのバグ}って取れたんだっけ？</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">request_user</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">{(request_user.)Aモジュールのバグ}って取れたんだっけ？</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// request_user.Aモジュールのバグ = バージョンを上げたら動かなくなった件</span>
 
-<span class="nx">response_user</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">{(response_user.)Aモジュールのバグ}ですか？ まだ終わってないです</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">response_user</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">{(response_user.)Aモジュールのバグ}ですか？ まだ終わってないです</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// Aモジュールのバグ = request_user.Aモジュールのバグの修正後のPRで別人に指摘された件</span>
 
-<span class="nx">request</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">(注：暗黙的な{Aモジュールのバグ})終わるのに時間掛かりそう？</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">request</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">(注：暗黙的な{Aモジュールのバグ})終わるのに時間掛かりそう？</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// 他に任せたいモジュールあるんだけど、作業振って大丈夫かな</span>
 
-<span class="nx">response</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">(後述コメント内)たぶん大丈夫だと思いますよ。</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">response</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">(後述コメント内)たぶん大丈夫だと思いますよ。</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// (注：暗黙的な{Aモジュールのバグ})のPRレビューで言われたところは直したし、レビュー漏れがなければ〜</span>
 
 </code></pre></div></div>
@@ -160,40 +160,40 @@ response側は多少くどいかな？と感じても、認識が合っている
  * 疲れたので前提条件とか準備とか略
 **/</span>
 
-<span class="nx">teacher</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">変数とは、物を入れられる箱です</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">teacher</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">変数とは、物を入れられる箱です</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// teacher.expected_var = "箱"; 　を実行</span>
 
-<span class="nx">studentA</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱…？よく分からんけど、とりあえず言われた通りにしよう</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentA</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱…？よく分からんけど、とりあえず言われた通りにしよう</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentA.box = "はこ"</span>
 
-<span class="nx">studentBB</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱…？どんな大きさでもええんか🤔</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentBB</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱…？どんな大きさでもええんか🤔</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentBB.box = "引っ越し段ボール大"</span>
 
-<span class="nx">studentCCC</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">🤔物ってなんや…？　とりあえず魚運べそうなやつにするか</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentCCC</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">🤔物ってなんや…？　とりあえず魚運べそうなやつにするか</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentCCC.box = "長方形の発泡スチロール"</span>
 
-<span class="nx">studentDDDD</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">よく分からんけど物を入れられる箱、りょーかい</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentDDDD</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">よく分からんけど物を入れられる箱、りょーかい</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentDDDD.teacher_message = "物を入れられる箱";　 なおboxはnull</span>
 
 <span class="c1">//　〜〜〜</span>
 
-<span class="nx">teacher</span><span class="p">.</span><span class="nx">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">作った箱の中に物を入れる事を代入といいます。</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">teacher</span><span class="p">.</span><span class="nf">talk</span><span class="p">(</span><span class="dl">"</span><span class="s2">作った箱の中に物を入れる事を代入といいます。</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// teacher.expected_var = ["物"];  ← 「代入のイメージ」の説明イメージ</span>
 
-<span class="nx">studentA</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱の中に物を入れるのが代入？…つまり？</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentA</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱の中に物を入れるのが代入？…つまり？</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentA.box = "は物こ";  これが代入</span>
 
-<span class="nx">studentBB</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱に入れるって事は、まだ入れられる可能性あるよね</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentBB</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">箱に入れるって事は、まだ入れられる可能性あるよね</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentBB.box = "引っ越し段ボール大     (以降、空白スペース)"</span>
 <span class="c1">// 代入自体に備えており、作業をしている感覚で話を理解している途中</span>
 
-<span class="nx">studentCCC</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">釣った魚を漁獲すればええんかな</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentCCC</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">釣った魚を漁獲すればええんかな</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// ノートへの書き取りミスなどで、このように理解した</span>
 <span class="c1">// studentCCC.things = "魚"</span>
 <span class="c1">// studentCCC.keyword = "代入"</span>
 <span class="c1">// studentCCC.image = "発泡　（魚）　スチロール"</span>
 
-<span class="nx">studentDDDD</span><span class="p">.</span><span class="nx">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">よく分からんけど、箱の中に物を入れたら代入やな！</span><span class="dl">"</span><span class="p">)</span>
+<span class="nx">studentDDDD</span><span class="p">.</span><span class="nf">think</span><span class="p">(</span><span class="dl">"</span><span class="s2">よく分からんけど、箱の中に物を入れたら代入やな！</span><span class="dl">"</span><span class="p">)</span>
 <span class="c1">// studentDDDD.teacher_message = "物"  「物を入れられる箱」が入っている時に"物"を入れる＝上書きすることを代入</span>
 
 </code></pre></div></div>
