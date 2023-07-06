@@ -1,1 +1,1 @@
-{"created_at":"2018-03-28T19:42:17+09:00","id":"f8b749930ed0af16d76c","updated_at":"2019-11-14T11:39:52+09:00","title":"pythonのクラス変数に外部関数を使うときにTypeError: [function name]() takes 0 positional arguments but 1 was givenとエラーになってしまう問題を考える","tags":["Python","エラー","トラブルシューティング"]}
+{"created_at":"2018-03-28T19:42:17+09:00","id":"f8b749930ed0af16d76c","updated_at":"2019-11-14T11:39:52+09:00","title":"pythonのクラス変数に外部関数を使うときにTypeError: [function name]() takes 0 positional arguments but 1 was givenとエラーになってしまう問題を考える","tags":["Python","error","トラブルシューティング"]}
