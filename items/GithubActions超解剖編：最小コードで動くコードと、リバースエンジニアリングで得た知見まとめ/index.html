@@ -40,14 +40,14 @@ jobs:
 <span id="画像で見る" class="fragment"></span><a href="#%E7%94%BB%E5%83%8F%E3%81%A7%E8%A6%8B%E3%82%8B"><i class="fa fa-link"></i></a>画像で見る</h3>
 <p data-sourcepos="32:1-34:140">今回ガチャガチャいじったのは<code>test.yml</code>です。<br>
 執筆時点だとリアルタイムでガチャガチャやりながら記事を書いているので、一番上がエラーになってしまうという締まらない状況です😓<br>
-<a href="../../img/19_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/19_7.png" alt="GithubActions直後の画面" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/0bc447d7-826b-bf00-04b7-72f3d1b45136.png" loading="lazy"></a></p>
+<a href="../../img/21_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/21_7.png" alt="GithubActions直後の画面" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/0bc447d7-826b-bf00-04b7-72f3d1b45136.png" loading="lazy"></a></p>
 <p data-sourcepos="36:1-37:70">ポイントは、Summaryの下のアコーディオン風のサイドバーが「job_name」となっていることです。<br>
 右カラム下の「test.yml」の下にもjob_nameがあります。</p>
-<p data-sourcepos="39:1-39:133"><a href="../../img/22_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/22_7.png" alt="タスクを開ける" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/f9074a75-a39b-bf0d-d2d3-80ce53c7e516.png" loading="lazy"></a></p>
+<p data-sourcepos="39:1-39:133"><a href="../../img/19_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/19_7.png" alt="タスクを開ける" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/f9074a75-a39b-bf0d-d2d3-80ce53c7e516.png" loading="lazy"></a></p>
 <p data-sourcepos="41:1-43:181">最後に、右カラムjob_nameを開けます。<br>
 それぞれのステップに色々書いてますね。<br>
 （Run sleep 1となっているステップは、当時sleepで出力のタイミングを制御したりしていたためです。echo "OK"に読み替える事もできます）</p>
-<p data-sourcepos="45:1-45:130"><a href="../../img/20_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/20_7.png" alt="詳細を開ける" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/36679e30-a977-dfd2-81b9-633b1a29f6f1.png" loading="lazy"></a></p>
+<p data-sourcepos="45:1-45:130"><a href="../../img/22_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/22_7.png" alt="詳細を開ける" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/36679e30-a977-dfd2-81b9-633b1a29f6f1.png" loading="lazy"></a></p>
 <h2 data-sourcepos="47:1-47:21">
 <span id="名前をつける" class="fragment"></span><a href="#%E5%90%8D%E5%89%8D%E3%82%92%E3%81%A4%E3%81%91%E3%82%8B"><i class="fa fa-link"></i></a>名前をつける</h2>
 <p data-sourcepos="48:1-49:66">まずはこれらを変えてみましょう。<br>
@@ -62,13 +62,13 @@ jobs:
         run: echo "OK"
 </code></pre></div></div>
 <p data-sourcepos="62:1-62:187">ちょっと分かりにくいんですが、コミットメッセージの下にあった「.github/workflows/test.yml」が「test.yml書き換える場所」に変わっています。</p>
-<p data-sourcepos="64:1-64:163"><a href="../../img/24_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/24_7.png" alt="コミットメッセージの下が変わってる" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/82087363-53f7-18e2-098e-09207c4ddc22.png" loading="lazy"></a></p>
+<p data-sourcepos="64:1-64:163"><a href="../../img/23_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/23_7.png" alt="コミットメッセージの下が変わってる" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/82087363-53f7-18e2-098e-09207c4ddc22.png" loading="lazy"></a></p>
 <p data-sourcepos="66:1-67:93">タイトルが「コミットメッセージ test.yml書き換える場所」になっていますね。<br>
 Summary欄も「change」になっています。job_nameから書き変わりましたね。</p>
-<p data-sourcepos="69:1-69:130"><a href="../../img/21_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/21_7.png" alt="変更が顕著に" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/72470145-14ec-4e2b-3c3b-2266e2d59a1f.png" loading="lazy"></a></p>
+<p data-sourcepos="69:1-69:130"><a href="../../img/25_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/25_7.png" alt="変更が顕著に" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/72470145-14ec-4e2b-3c3b-2266e2d59a1f.png" loading="lazy"></a></p>
 <p data-sourcepos="71:1-72:56"><code>Run sleep 1</code>（今回はecho "OK"に差し戻しましたが）が<code>Run なんとか〜を書き換える</code>と変化しました。<br>
 nameはそれぞれのstepにつけられそうです。</p>
-<p data-sourcepos="74:1-74:133"><a href="../../img/25_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/25_7.png" alt="項目名も変わる" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/f1512c43-a9f3-0fab-150a-f54beed1d3ae.png" loading="lazy"></a></p>
+<p data-sourcepos="74:1-74:133"><a href="../../img/20_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/20_7.png" alt="項目名も変わる" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/f1512c43-a9f3-0fab-150a-f54beed1d3ae.png" loading="lazy"></a></p>
 <p data-sourcepos="76:1-78:144">ところで、<code>Set up job</code>と<code>Complete job</code>の名前は書き換えられないんでしょうかね。<br>
 シンタックスエラーになったので、ここの調査は諦めました。<br>
 「これはそういうものだから」と考えることにして、名前を変えられなくても困りませんので残置します。</p>
