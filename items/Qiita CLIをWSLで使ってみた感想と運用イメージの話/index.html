@@ -1,0 +1,193 @@
+<h1 data-sourcepos="1:1-1:68">
+<span id="qiita-cliをwslで使ってみた感想と運用イメージの話" class="fragment"></span><a href="#qiita-cli%E3%82%92wsl%E3%81%A7%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E6%84%9F%E6%83%B3%E3%81%A8%E9%81%8B%E7%94%A8%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%AE%E8%A9%B1"><i class="fa fa-link"></i></a>Qiita CLIをWSLで使ってみた感想と運用イメージの話</h1>
+<div data-sourcepos="3:1-6:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="4:1-5:143">本稿の内容は執筆時点での環境によります。<br>
+特にQiitaCLIは執筆時点では出たばかりなので、将来的には本稿の状況と異なる可能性が高いと思われます。</p>
+</div>
+</div>
+<h2 data-sourcepos="8:1-8:63">
+<span id="想定読者結論と本稿でお話しすること" class="fragment"></span><a href="#%E6%83%B3%E5%AE%9A%E8%AA%AD%E8%80%85%E7%B5%90%E8%AB%96%E3%81%A8%E6%9C%AC%E7%A8%BF%E3%81%A7%E3%81%8A%E8%A9%B1%E3%81%97%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>想定読者（結論）と、本稿でお話しすること</h2>
+<ul data-sourcepos="9:1-12:0">
+<li data-sourcepos="9:1-9:135">Qiitaプラットフォームで慣れているなら、あえてQiitaCLIを使う選択肢を選ぶ必要はないと思います。</li>
+<li data-sourcepos="10:1-10:85">Qiitaに投稿した記事のバックアップがしたいならおすすめです</li>
+<li data-sourcepos="11:1-12:0">プラットフォーム・CLIを使うとしても、記事数が多くなった時に管理する方法は別途考えたほうがいいかもしれません。</li>
+</ul>
+<h2 data-sourcepos="13:1-13:36">
+<span id="本稿でお話ししないこと" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%A7%E3%81%8A%E8%A9%B1%E3%81%97%E3%81%97%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>本稿でお話ししないこと</h2>
+<ul data-sourcepos="14:1-20:0">
+<li data-sourcepos="14:1-15:28">大量の記事をCLIで運用する方法
+<ul data-sourcepos="15:3-15:28">
+<li data-sourcepos="15:3-15:28">私も知りたいです</li>
+</ul>
+</li>
+<li data-sourcepos="16:1-17:53">既存のQiitaAPIを利用する方法
+<ul data-sourcepos="17:3-17:53">
+<li data-sourcepos="17:3-17:53">他の記事とかChatGPT辺りが詳しいです</li>
+</ul>
+</li>
+<li data-sourcepos="18:1-20:0">マルチポストの具体的な方法
+<ul data-sourcepos="19:3-20:0">
+<li data-sourcepos="19:3-20:0">自前で実装するなら結構泥臭い、とだけ言います。</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="21:1-21:9">
+<span id="発端" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF"><i class="fa fa-link"></i></a>発端</h2>
+<p data-sourcepos="22:1-24:303">今までQiitaAPIを使った方法で投稿する機能をそれぞれで作っていたような状態でしたが、公式からCLIが出たので使ってみました。<br>
+似たような位置づけに<a href="https://github.com/ryokat3/qiita-sync" rel="nofollow noopener" target="_blank">Qiita Sync</a>がありましたが、使用感が気になります。<br>
+最近はQiitaに投稿するために書くというより、markdownで書いたものを投稿する先の一つにqiitaがあるという位置づけで運用しているため私のアカウントからの投稿数自体は少ないですが、手段は多いに越したことはないですね。</p>
+<h2 data-sourcepos="26:1-26:21">
+<span id="qiita-cliを使う" class="fragment"></span><a href="#qiita-cli%E3%82%92%E4%BD%BF%E3%81%86"><i class="fa fa-link"></i></a>Qiita-CLIを使う</h2>
+<p data-sourcepos="28:1-28:50"><iframe id="qiita-embed-content__b0fe02b10c3a312c83ce9ec71720dc16" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__b0fe02b10c3a312c83ce9ec71720dc16" data-content="https%3A%2F%2Fqiita.com%2FQiita%2Fitems%2F32c79014509987541130" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h3 data-sourcepos="30:1-30:21">
+<span id="実行環境wsl" class="fragment"></span><a href="#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83wsl"><i class="fa fa-link"></i></a>実行環境(WSL)</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="31:1-38:3"><div class="highlight"><pre><code>$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.3 LTS
+Release:        22.04
+Codename:       jammy
+</code></pre></div></div>
+<div class="code-frame" data-lang="text" data-sourcepos="39:1-42:3"><div class="highlight"><pre><code>$ npm --version
+9.2.0
+</code></pre></div></div>
+<h3 data-sourcepos="43:1-43:40">
+<span id="qiita-cliを使える環境を作る" class="fragment"></span><a href="#qiita-cli%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>Qiita-CLIを使える環境を作る</h3>
+<ol data-sourcepos="44:1-47:0">
+<li data-sourcepos="44:1-44:44"><code>npm install @qiita/qiita-cli --save-dev</code></li>
+<li data-sourcepos="45:1-45:19"><code>npx qiita init</code></li>
+<li data-sourcepos="46:1-47:0"><code>npx qiita login</code></li>
+</ol>
+<p data-sourcepos="48:1-50:83">これだけです。<br>
+Qiitaに投稿している記事もローカルに持ってくるので、バックアップ目的ならここまでで完了です。<br>
+念のため、作業時点のQiitaCLIのバージョンを置いておきます。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="52:1-55:3"><div class="highlight"><pre><code>$ npx qiita --version
+1.3.0
+</code></pre></div></div>
+<h3 data-sourcepos="57:1-57:21">
+<span id="frontmatterメモ" class="fragment"></span><a href="#frontmatter%E3%83%A1%E3%83%A2"><i class="fa fa-link"></i></a>FrontMatterメモ</h3>
+<p data-sourcepos="58:1-58:117"><code>npx qiita new (newArticle001)</code>で実行したらpublic/newArticle001.mdが作成され、内容が以下の通り。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="60:1-73:3"><div class="highlight"><pre><code>---
+title: newArticle001
+tags:
+  - ''
+private: false
+updated_at: ''
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
+# new article body
+</code></pre></div></div>
+<p data-sourcepos="75:1-75:75">ぱっと見、何がなんだか分かりにくいので公式と比較。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="77:1-89:3"><div class="highlight"><pre><code>---
+title: newArticle001 # 記事のタイトル
+tags:
+  - "" # タグ（ブロックスタイルで複数タグを追加できます）
+private: false # true: 限定共有記事 / false: 公開記事
+updated_at: "" # 記事を投稿した際に自動的に記事の更新日時に変わります
+id: null # 記事を投稿した際に自動的に記事のUUIDに変わります
+organization_url_name: null # 関連付けるOrganizationのURL名
+slide: false # true: スライドモードON / false: スライドモードOFF
+ignorePublish: false # true: `publish`コマンドにおいて無視されます（Qiitaに投稿されません） / false: `publish`コマンドで処理されます（Qiitaに投稿されます）
+---
+</code></pre></div></div>
+<p data-sourcepos="91:1-92:71">シンプルな使い方をしている場合、titleとtagsだけやれば良さそう。<br>
+下書きをしたいならignorePublishをtrueにするイメージ。</p>
+<h2 data-sourcepos="94:1-94:42">
+<span id="qiita-cliを使えると嬉しいこと" class="fragment"></span><a href="#qiita-cli%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E3%81%A8%E5%AC%89%E3%81%97%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>Qiita CLIを使えると嬉しいこと</h2>
+<ul data-sourcepos="95:1-101:0">
+<li data-sourcepos="95:1-97:70">Zennと同じリポジトリで住み分けができます
+<ul data-sourcepos="96:3-97:70">
+<li data-sourcepos="96:3-96:153">Qiitaはpublic、Zennはarticles,booksディレクトリを使うので、１つのリポジトリで記事が管理できるのは嬉しいですね</li>
+<li data-sourcepos="97:3-97:70">CLIのオプションでディレクトリ名は変えられます</li>
+</ul>
+</li>
+<li data-sourcepos="98:1-101:0">記事のバックアップができます
+<ul data-sourcepos="99:3-101:0">
+<li data-sourcepos="99:3-99:114">今まで頑張ってバックアップCIを作っていましたが、これが要らなくなりました。</li>
+<li data-sourcepos="100:3-101:0">定期的にバックアップをさせたいならCIはあってもいいかも知れません（Qiitaプラットフォームで投稿する場合など）</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="102:1-102:9">
+<span id="運用" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8"><i class="fa fa-link"></i></a>運用</h2>
+<h3 data-sourcepos="103:1-103:31">
+<span id="qiitaとzennに投稿する" class="fragment"></span><a href="#qiita%E3%81%A8zenn%E3%81%AB%E6%8A%95%E7%A8%BF%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>QiitaとZennに投稿する</h3>
+<p data-sourcepos="104:1-107:69">まず前提としてQiitaに投稿する場合はGitHubActionsではなく、<code>npx qiita publish --all</code>を使うことになります。<br>
+Zennはpushをトリガーにして後はよろしくやってくれます。<br>
+ちなみに、GitHub PagesならGitHub Actionsで制御できます。<br>
+このように、デプロイ時は微妙にズレが生じます。</p>
+<p data-sourcepos="109:1-109:170">なお、Qiitaに投稿する際は<code>npx qiita init</code>でpublish.ymlを作っているので、pushする前にリポジトリごとにQIITA_TOKENの設定を忘れずに。</p>
+<p data-sourcepos="111:1-112:173">もしQiitaに書いた記事をZennに投稿する、もしくはZennに書いた記事をQiitaにも投稿する（マルチポスト）場合は、それぞれにFrontMatterを設定する必要があります。<br>
+こればかりはCIでうまく加工したり、Qiitaに上がっていてZennに上がっていないファイルをチェックする仕組みが必要になります。</p>
+<h3 data-sourcepos="114:1-114:25">
+<span id="記事を管理する" class="fragment"></span><a href="#%E8%A8%98%E4%BA%8B%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>記事を管理する</h3>
+<p data-sourcepos="115:1-117:197">Zennの時にも課題に上げたんですが、GitHubでバックアップする運用だとQiitaの記事もpublicディレクトリに置くだけなので管理が大変です。<br>
+プラットフォームがあるのでQiitaに投稿するだけならQiitaのWebエディタを使えばよく、Zennについても同じことが言えます。<br>
+とはいえ、プラットフォームを使いつつ記事をバックアップしたい場合はQiitaCLIをバックアップ用に使うと割り切るのが現実的かな、と思います。</p>
+<p data-sourcepos="119:1-120:230">運用を考えると、ますますCMSの便利さを痛感することになった印象です。<br>
+ただし、QiitaCLI PreviewからQiitaの画像のアップロードリンクにアクセスができるので、CMSによっては画像管理をQiitaに任せるという運用の切り分けができるのは嬉しいです。</p>
+<h3 data-sourcepos="122:1-122:122">
+<span id="追記qiitacliで新規投稿してqiitaプラットフォームで記事を編集するとどうなるか" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98qiitacli%E3%81%A7%E6%96%B0%E8%A6%8F%E6%8A%95%E7%A8%BF%E3%81%97%E3%81%A6qiita%E3%83%97%E3%83%A9%E3%83%83%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%A7%E8%A8%98%E4%BA%8B%E3%82%92%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>【追記】QiitaCLIで新規投稿して、Qiitaプラットフォームで記事を編集するとどうなるか？</h3>
+<p data-sourcepos="123:1-125:93">運用として望ましい状態ではないですが、せっかくなのでマルチプラットフォーム感を出して運用してみます。<br>
+たとえば、２つ以上の端末を使って１つのアカウントを運用する時、どちらかはCLIを使ってどちらかはプラットフォームを使う、というシーンは考えられますね。<br>
+この場合にきちんと同期が取れるかどうかは気になるポイントです。</p>
+<p data-sourcepos="127:1-129:181">結論だけ言うと<code>npx qiita pull -f</code>と強制オプションがないと無視されてしまうようです。<br>
+ピンポイントにどのファイルを修正したかが分かるならファイルごと削除してpullする事で色々と節約できそうですが、実際そんな運用はやってられない。<br>
+とはいえ、git pullではないのでqiitaの内容を正に全てを上書きしてしまうという挙動があり、新しく書いた記事は当然初期化されます。</p>
+<p data-sourcepos="131:1-131:176">複数の端末で運用する場合はそれぞれにQiitaCLIを入れるか、あるいはCodeSpace的な場所で運用する方法も検討した方が良いでしょう。</p>
+<h3 data-sourcepos="133:1-133:63">
+<span id="追記２qiitacliから記事を編集できるか" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98%EF%BC%92qiitacli%E3%81%8B%E3%82%89%E8%A8%98%E4%BA%8B%E3%82%92%E7%B7%A8%E9%9B%86%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>【追記２】QiitaCLIから記事を編集できるか？</h3>
+<p data-sourcepos="134:1-135:179"><a href="https://qiita.com/Qiita/items/32c79014509987541130#%E8%A8%98%E4%BA%8B%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B" id="reference-a2da3bc15ecd1f335ef0">公式で大丈夫と言っている</a>ので大丈夫でしょう。<br>
+ついでに、Qiitaプラットフォームで更新した内容を取り込めるかどうかも検証したいので、追記１部分を手作業で移行しておきます。</p>
+<p data-sourcepos="137:1-138:24">この工程でやることは、ローカルで更新してcommit+push。記事の内容が更新されているかを確認します。<br>
+ローカル用リンク</p>
+<p data-sourcepos="140:1-140:54"><iframe id="qiita-embed-content__df059643456c6c354fba8fdd83ce3a2e" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__df059643456c6c354fba8fdd83ce3a2e" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F26a453b749e53c392639" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="142:1-142:21">→大丈夫でした</p>
+<h3 data-sourcepos="144:1-144:87">
+<span id="追記３記事の競合対策を考えるqiitaとローカルの競合" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98%EF%BC%93%E8%A8%98%E4%BA%8B%E3%81%AE%E7%AB%B6%E5%90%88%E5%AF%BE%E7%AD%96%E3%82%92%E8%80%83%E3%81%88%E3%82%8Bqiita%E3%81%A8%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AE%E7%AB%B6%E5%90%88"><i class="fa fa-link"></i></a>【追記３】記事の競合対策を考える（Qiitaとローカルの競合）</h3>
+<p data-sourcepos="145:1-149:177">ないと思いますが、１つのアカウントを複数人で運用する場合は注意が必要です。<br>
+しかし考えられる問題としては、１つのアカウントを１人が複数の端末で運用した場合、特定の記事を同時に変更する可能性は考えられます。<br>
+pushした方を正として扱うので、場合によってはgitでいう競合は発生するはずで、競合が発生するケースも考えると、QiitaCLIの環境も一箇所に制限した方がいいかもしれません。<br>
+まず真っ先にCodeSpace(GitHub.dev)を使う方法が思いつきますが、残念ながらターミナルが使えないのと、一部拡張機能も動かないのでプレビューも困難です。<br>
+こういう時はとりあえずAWSかなぁ、とも思いますがローカルでやれば簡単だしノーコスト、と考えるとなかなか選択肢にしにくい。</p>
+<p data-sourcepos="151:1-152:159">最悪の場合はリモートデスクトップとかですかね。<br>
+通信負荷やセキュリティはもちろん、昨今上がり続ける電気代などを考えるとあまり使いたくない手段ではあります。</p>
+<p data-sourcepos="154:1-154:98">開き直って「記事の編集にQiitaCLIを使わない」という選択肢はあります。</p>
+<h3 data-sourcepos="156:1-156:85">
+<span id="追記４ファイルの競合gitリモートとローカルの競合" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98%EF%BC%94%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E7%AB%B6%E5%90%88git%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%81%A8%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AE%E7%AB%B6%E5%90%88"><i class="fa fa-link"></i></a>【追記４】ファイルの競合（gitリモートとローカルの競合）</h3>
+<p data-sourcepos="157:1-159:158">追記１・２において、投稿・編集した時点でupdated_atが更新されます。<br>
+publish.ymlを見れば分かりますが、CIで更新した情報をgit pushしているので、ローカルでもgit pullしないとダメです。<br>
+つまり、git pullでpublish.ymlの情報を適用し、その上でqiita pull -fで最新の情報を反映させるようにする必要があります。</p>
+<h3 data-sourcepos="161:1-161:31">
+<span id="追記５不具合" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98%EF%BC%95%E4%B8%8D%E5%85%B7%E5%90%88"><i class="fa fa-link"></i></a>【追記５】不具合？</h3>
+<p data-sourcepos="162:1-164:117">大したことではないんですが、WSLでpreviewを実行中にtortoisegitなどでコミットしようとすると、改行コードが一時的に書き換わるようです。<br>
+この状態でコミットをしようとすると失敗してしまうので、作業が終わったらpreviewをCtrl+Cなどで終了するようにしましょう。<br>
+改行コードが元に戻るので、これで変更したファイルだけcommitできるようになります。</p>
+<h2 data-sourcepos="166:1-166:30">
+<span id="結論個人の感想" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96%E5%80%8B%E4%BA%BA%E3%81%AE%E6%84%9F%E6%83%B3"><i class="fa fa-link"></i></a>結論（個人の感想）</h2>
+<p data-sourcepos="167:1-169:84">新しく投稿するだけならQiitaプラットフォームを使うのでも、QiitaCLIでもお好みで使いましょう。<br>
+記事数が100を超えた辺りから過去の記事を編集したりする事を考えるなら、外部CMSも検討した方がいいかも知れません。<br>
+あるいは「過去の記事は対応しない」という運用もあります。</p>
+<h2 data-sourcepos="171:1-171:49">
+<span id="補足vscodeでqiita用mdのプレビュー" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3vscode%E3%81%A7qiita%E7%94%A8md%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC"><i class="fa fa-link"></i></a>補足：VSCodeでQiita用mdのプレビュー</h2>
+<p data-sourcepos="172:1-172:112">CLIでもpreview機能は使えるようですが、vscodeで書くならもっと良い方法があります。</p>
+<p data-sourcepos="174:1-174:52"><iframe id="qiita-embed-content__0c21e2ba121d60d9c7840308532b3622" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__0c21e2ba121d60d9c7840308532b3622" data-content="https%3A%2F%2Fqiita.com%2Fryokat3%2Fitems%2Ffe61d9234be2e147cb7f" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="176:1-176:207"><a href="https://marketplace.visualstudio.com/items?itemName=ryokat3.vscode-qiita-markdown-preview" rel="nofollow noopener" target="_blank">Qiita Markdown Preview</a>を入れた後にいつも通りmarkdownのプレビューをするだけで使えます。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="178:1-185:3"><div class="highlight"><pre><code>名前: Qiita Markdown Preview
+ID: ryokat3.vscode-qiita-markdown-preview
+説明: VSCode extension to preview Qiita markdown
+バージョン: 0.2.2
+パブリッシャー: Ryoji Kato
+VS Marketplace リンク: https://marketplace.visualstudio.com/items?itemName=ryokat3.vscode-qiita-markdown-preview
+</code></pre></div></div>
+<p data-sourcepos="187:1-187:122">従来のmarkdownプレビューが出来なくなるので、使わない時は拡張機能を無効にしましょう。</p>
