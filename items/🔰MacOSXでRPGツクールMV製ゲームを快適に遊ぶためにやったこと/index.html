@@ -1,0 +1,62 @@
+<p data-sourcepos="1:1-2:9">本稿は非エンジニアのRPGツクールでのゲーム作者（ツクラー）の方向けに書き直しました。<br>
+元記事</p>
+<p data-sourcepos="4:1-4:54"><iframe id="qiita-embed-content__21741f89dea3ac1ebd1c37c49840cad5" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__21741f89dea3ac1ebd1c37c49840cad5" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2Fd76270366c627645a332" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="6:1-6:111">開発者目線で書いていますが、プレイヤーとしても使える情報があるはず、です。</p>
+<h2 data-sourcepos="8:1-8:74">
+<span id="rpgツクールmv製のゲームを安全安定した環境で遊ぶ" class="fragment"></span><a href="#rpg%E3%83%84%E3%82%AF%E3%83%BC%E3%83%ABmv%E8%A3%BD%E3%81%AE%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E5%AE%89%E5%85%A8%E5%AE%89%E5%AE%9A%E3%81%97%E3%81%9F%E7%92%B0%E5%A2%83%E3%81%A7%E9%81%8A%E3%81%B6"><i class="fa fa-link"></i></a>RPGツクールMV製のゲームを安全・安定した環境で遊ぶ</h2>
+<p data-sourcepos="9:1-11:67">RPGアツマール（現在は閉鎖）で遊べていたようなオープンな場所があれば良いのですが、plicyかふりーむ以外の選択肢を取った場合（自サイトでの公開など）は実行環境を自前で用意しなければなりません。<br>
+PRGMVだとwwwディレクトリ（Windowsゲームを想定しているのでフォルダと呼ぶべき？）があり、index.htmlをブラウザで開けばゲームを実行することができます。<br>
+少なくともwineを使うよりは安定するし早いです。</p>
+<p data-sourcepos="13:1-13:187">しかし、普通に開くとCORSエラーが起こるので、サクッとローカルでWebサーバーを立てて回避しましょう、というアプローチを検討します。</p>
+<details>
+<summary>画像で見るCORSエラーとは？</summary>
+<h3 data-sourcepos="18:1-18:64">
+<span id="エラーメッセージは異なる可能性があります" class="fragment"></span><a href="#%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AF%E7%95%B0%E3%81%AA%E3%82%8B%E5%8F%AF%E8%83%BD%E6%80%A7%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>エラーメッセージは異なる可能性があります</h3>
+<p data-sourcepos="19:1-19:163"><a href="https://camo.qiitausercontent.com/e934512a249d4925dc06f016ccd25c0fd8b30246/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f61623330326234332d356631642d626538662d363838622d3939303536653535653565642e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fab302b43-5f1d-be8f-688b-99056e55e5ed.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c5fef588c2f0537e69718517e36e3659" alt="スクリーンショット 2023-09-29 17.20.42.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/ab302b43-5f1d-be8f-688b-99056e55e5ed.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fab302b43-5f1d-be8f-688b-99056e55e5ed.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=c42da79ac0335e9afa26fd9bdf34c2a3 1x" loading="lazy"></a></p>
+<p data-sourcepos="21:1-21:106">URL欄が「<code>file://〜/（プロジェクト名）/www/index.html</code>」だと上のようになります。</p>
+</details>
+<h3 data-sourcepos="25:1-25:64">
+<span id="最低限必要なコマンドターミナルを使用" class="fragment"></span><a href="#%E6%9C%80%E4%BD%8E%E9%99%90%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%82%92%E4%BD%BF%E7%94%A8"><i class="fa fa-link"></i></a>最低限必要なコマンド（ターミナルを使用）</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="26:1-29:3"><div class="highlight"><pre><code>npm install live-server  # 1回だけ実行すれば以降は不要
+npx live-server
+</code></pre></div></div>
+<p data-sourcepos="31:1-32:111">これで実行できます。<br>
+セーブ後にサーバーやマシンを再起動しても当然、ロードして続きから遊べます。</p>
+<p data-sourcepos="34:1-34:160">一応、Windowsでも理屈的には同じ方法が使えますが、元々exeが動く環境なのでこの方法を採用するメリットは薄いです。</p>
+<h2 data-sourcepos="36:1-36:57">
+<span id="finderからダブルクリックで起動したい" class="fragment"></span><a href="#finder%E3%81%8B%E3%82%89%E3%83%80%E3%83%96%E3%83%AB%E3%82%AF%E3%83%AA%E3%83%83%E3%82%AF%E3%81%A7%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>finderからダブルクリックで起動したい！</h2>
+<p data-sourcepos="37:1-38:66">さて、本題です。<br>
+元記事からスピンアウトした理由とも言います。</p>
+<p data-sourcepos="40:1-40:168">せっかくだからなんちゃってMac/Linux対応版としてプロジェクトに１つファイルを入れれば完成する仕組みを置いておきます。</p>
+<h3 data-sourcepos="42:1-42:69">
+<span id="1-gameexeと同じフォルダに以下を置いてください" class="fragment"></span><a href="#1-gameexe%E3%81%A8%E5%90%8C%E3%81%98%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AB%E4%BB%A5%E4%B8%8B%E3%82%92%E7%BD%AE%E3%81%84%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84"><i class="fa fa-link"></i></a>1. Game.exeと同じフォルダに以下を置いてください</h3>
+<div class="code-frame" data-lang="shell" data-sourcepos="43:1-48:3">
+<div class="code-lang"><span class="bold">Game.command</span></div>
+<div class="highlight"><pre><code><span class="c">#!/bin/sh</span>
+
+<span class="nb">cd</span> <span class="si">$(</span><span class="nb">dirname</span> <span class="nv">$0</span><span class="si">)</span>/www
+npx live-server
+</code></pre></div>
+</div>
+<p data-sourcepos="50:1-50:122">この内容をコピペしてメモ帳などに貼って「<code>Game.command</code>」という名前で保存してください。</p>
+<h3 data-sourcepos="52:1-52:61">
+<span id="2-gamecommandに実行権限を付与してください" class="fragment"></span><a href="#2-gamecommand%E3%81%AB%E5%AE%9F%E8%A1%8C%E6%A8%A9%E9%99%90%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84"><i class="fa fa-link"></i></a>2. Game.commandに実行権限を付与してください</h3>
+<p data-sourcepos="53:1-54:50">Game.commandに実行権限を付与するためにはターミナルを使用します。<br>
+念の為、Windowsの場合はPowerShellです。</p>
+<ol data-sourcepos="56:1-58:0">
+<li data-sourcepos="56:1-56:28"><code>npm install live-server</code></li>
+<li data-sourcepos="57:1-58:0"><code>chmod +x Game.command</code></li>
+</ol>
+<p data-sourcepos="59:1-61:46">順番はありません。ただし、どちらも実行してください。<br>
+2.は特に注意が必要で、<code>Game.command</code>がある場所で実行する必要があるので、「cdコマンド」と「ファイルパス」について少し調べる必要があります。<br>
+ChatGPTに聞くのが一番ベストです。</p>
+<h3 data-sourcepos="63:1-63:49">
+<span id="3遊ぶ人-ゲームを起動します" class="fragment"></span><a href="#3%E9%81%8A%E3%81%B6%E4%BA%BA-%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>3.（遊ぶ人） ゲームを起動します</h3>
+<p data-sourcepos="64:1-66:161"><code>Game.command</code>をダブルクリックで実行します。<br>
+ブラウザが開き「<code>http://127.0.0.1:8080/</code>」にアクセスするので、通常起動した後は思い思いにプレイ！<br>
+ウッカリindex.htmlを直接ひらいてURL欄が「<code>file://〜/（プロジェクト名）/www/index.html</code>」のようになってしまわないように！</p>
+<h3 data-sourcepos="68:1-68:54">
+<span id="4開発者-普通に圧縮して配布します" class="fragment"></span><a href="#4%E9%96%8B%E7%99%BA%E8%80%85-%E6%99%AE%E9%80%9A%E3%81%AB%E5%9C%A7%E7%B8%AE%E3%81%97%E3%81%A6%E9%85%8D%E5%B8%83%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>4.(開発者) 普通に圧縮して配布します</h3>
+<p data-sourcepos="69:1-69:15">おしまい。</p>

@@ -1,82 +1,92 @@
-<p>オブジェクト指向の良さが活かせない私がハマるポイントです…<br>
-今回はPython2系で。</p>
-
-<h1>
-<span id="やりたいこと" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やりたいこと</h1>
-
-<ul>
-<li>Baseクラスで宣言したものをそれぞれのクラス間で使えるようにしたい</li>
-<li>親クラスで子クラスを管理したい
-→そもそもこのアプローチが既に設計レベルで問題な気もしますが…</li>
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:248">この記事はQiitaの下書きに放置していた記事の一つですが、久しぶりにタイトルを読むと何がしたいのか分からなかったため、残っている内容から頑張って読み解いて意訳しています。</p>
+</div>
+</div>
+<p data-sourcepos="5:1-6:162">▶️オブジェクト指向を教える時にタイトルのような相談を受けるので、本気で考えてみようと思います。<br>
+▶️結論から言うと、is aとhas aをきちんと理解してないとこういう発想になってしまうんだろうな、と反省しきりです。</p>
+<h2 data-sourcepos="8:1-8:21">
+<span id="やりたいこと" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やりたいこと</h2>
+<ul data-sourcepos="9:1-13:0">
+<li data-sourcepos="9:1-9:96">Baseクラスで宣言したものをそれぞれのクラス間で使えるようにしたい</li>
+<li data-sourcepos="10:1-13:0">親クラスで子クラスを管理したい
+<ul data-sourcepos="11:3-13:0">
+<li data-sourcepos="11:3-11:127">▶️そもそもこのアプローチが既に設計レベルで問題です。呼び出し元で管理すべきです。</li>
+<li data-sourcepos="12:3-13:0">【未検証】Javaでいうstaticな配列フィールドをBaseクラスに作ってBaseクラス型で宣言しておき、子クラスのコンストラクタで参照先アドレスを渡すとか、運用対処でインスタンス化した後に必ず実行するメソッド（セッター）を決めてそちらから格納するとか？</li>
 </ul>
-
-<p>ちょっと考えてみました。</p>
-
-<h1>
-<span id="クラスの中にクラスを作ってみる方法" class="fragment"></span><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E4%B8%AD%E3%81%AB%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>クラスの中にクラスを作ってみる方法</h1>
-
-<div class="code-frame" data-lang="python">
+</li>
+</ul>
+<p data-sourcepos="14:1-14:36">ちょっと考えてみました。</p>
+<h2 data-sourcepos="16:1-16:54">
+<span id="クラスの中にクラスを作ってみる方法" class="fragment"></span><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E4%B8%AD%E3%81%AB%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>クラスの中にクラスを作ってみる方法</h2>
+<p data-sourcepos="17:1-17:93">コードが古い上に意味があると思えないので、興味があればどうぞ。</p>
+<details>
+<summary>展開</summary>
+<p data-sourcepos="22:1-22:25">今回はPython2系で。</p>
+<div class="code-frame" data-lang="python" data-sourcepos="24:1-74:3">
 <div class="code-lang"><span class="bold">inbound_class.py</span></div>
 <div class="highlight"><pre><code><span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">hoge</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Hoge</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">fuga</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Fuga</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">hoge</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">Hoge</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">fuga</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">Fuga</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
-  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-    <span class="k">print</span> <span class="bp">self</span><span class="p">.</span><span class="n">arg</span><span class="p">,</span> <span class="n">string</span>
+  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">self</span><span class="p">.</span><span class="n">arg</span><span class="p">,</span> <span class="n">string</span>
 
   <span class="k">class</span> <span class="nc">Hoge</span><span class="p">:</span>
-    <span class="n">__hoge_var</span> <span class="o">=</span> <span class="s">'hoge'</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
-    <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-      <span class="k">print</span> <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__hoge_var</span>
+    <span class="n">__hoge_var</span> <span class="o">=</span> <span class="sh">'</span><span class="s">hoge</span><span class="sh">'</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__hoge_var</span>
 
   <span class="k">class</span> <span class="nc">Fuga</span><span class="p">:</span>
-    <span class="n">__fuga_tuple</span> <span class="o">=</span> <span class="p">[</span><span class="s">'fuga'</span><span class="p">]</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
-    <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-      <span class="k">print</span> <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__fuga_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">__fuga_tuple</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">fuga</span><span class="sh">'</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+      <span class="k">print</span> <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__fuga_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="k">print</span> <span class="n">Base</span><span class="p">(</span><span class="s">'test'</span><span class="p">).</span><span class="n">hoge</span><span class="p">.</span><span class="n">print_classname</span><span class="p">()</span>
+<span class="k">print</span> <span class="nc">Base</span><span class="p">(</span><span class="sh">'</span><span class="s">test</span><span class="sh">'</span><span class="p">).</span><span class="n">hoge</span><span class="p">.</span><span class="nf">print_classname</span><span class="p">()</span>
 
-<span class="c1"># クラスを継承する方法
+<span class="c1">### クラスを継承する方法
 </span>
 <span class="sb">``</span><span class="err">`</span> <span class="n">inheritance</span><span class="p">.</span><span class="n">py</span>
 <span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">hoge</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Hoge</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">fuga</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">Fuga</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">hoge</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">Hoge</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">fuga</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nc">Fuga</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Hoge</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-  <span class="n">__hoge_var</span> <span class="o">=</span> <span class="s">'hoge'</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
-  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="nb">super</span><span class="p">().</span><span class="n">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__hoge_var</span><span class="p">)</span>
+  <span class="n">__hoge_var</span> <span class="o">=</span> <span class="sh">'</span><span class="s">hoge</span><span class="sh">'</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__hoge_var</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Fuga</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-  <span class="n">__fuga_tuple</span> <span class="o">=</span> <span class="p">[</span><span class="s">'fuga'</span><span class="p">]</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">().</span><span class="n">print_classname</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__fuga_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">__fuga_tuple</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">fuga</span><span class="sh">'</span><span class="p">]</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">print_classname</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">arg</span> <span class="o">+</span> <span class="n">__fuga_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="k">print</span> <span class="n">Base</span><span class="p">(</span><span class="s">'test'</span><span class="p">).</span><span class="n">hoge</span><span class="p">.</span><span class="n">print_classname</span><span class="p">()</span>
+<span class="k">print</span> <span class="nc">Base</span><span class="p">(</span><span class="sh">'</span><span class="s">test</span><span class="sh">'</span><span class="p">).</span><span class="n">hoge</span><span class="p">.</span><span class="nf">print_classname</span><span class="p">()</span>
 </code></pre></div>
 </div>
-
-<h1>
-<span id="課題" class="fragment"></span><a href="#%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>課題</h1>
-
-<p>なんとなくやりたい事は伝わればいいんですが、要は同じ要素をそれぞれの子クラスに入れるんじゃなくて、親クラスに入れて子クラスからもそれぞれに呼べるようにしたい、と。<br>
+<h2 data-sourcepos="76:1-76:9">
+<span id="課題" class="fragment"></span><a href="#%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>課題</h2>
+<p data-sourcepos="77:1-78:165">なんとなくやりたい事が伝わればいいんですが、要は同じ要素をそれぞれの子クラスに入れるんじゃなくて、親クラスに入れて子クラスからもそれぞれに呼べるようにしたい、と。<br>
 そういう話なんですが、こういう事をやる場合はdefだと上位の階層に変数を定義するとか、classだとselfとかが使えますね。</p>
-
-<p>とはいうものの、上記コードはエラーになります。<br>
+<p data-sourcepos="80:1-84:282">とはいうものの、上記コードはエラーになります。<br>
 正直、この辺り（やりたい事は上記、ただし実装をどうすれば良いか、よく分からなかっていない）でいつもdefをネストして作っています。<br>
 defのネストも好きじゃないのでやりたくないんですが、こちらの方が直感的というか、とりあえず動くものが出来るんで扱いやすいんですよね。<br>
 このコードもclassをdefに変えてメソッドのselfを消したら期待した通りに動くものになります。<br>
 defでネストしまくればやりたい事は実現できていますが、あまりにもスマートからかけ離れていることと、見やすくするためだけにdefを使っている面があるので、あんまり良い使い方・作り方ではありません。</p>
+</details>
+<h2 data-sourcepos="88:1-88:60">
+<span id="伝えたいこと当時を振り返っての反省" class="fragment"></span><a href="#%E4%BC%9D%E3%81%88%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%E5%BD%93%E6%99%82%E3%82%92%E6%8C%AF%E3%82%8A%E8%BF%94%E3%81%A3%E3%81%A6%E3%81%AE%E5%8F%8D%E7%9C%81"><i class="fa fa-link"></i></a>伝えたいこと（当時を振り返っての反省）</h2>
+<p data-sourcepos="89:1-90:420">そもそも親クラスを子クラスで管理する、というアプローチの目的が分からないのですが、当時superクラス・subクラスという表現の関係性をparentクラス、childクラスという名前で作成していたからこのような混乱が発生してしまったのかな、という印象です。<br>
+人間的な発想だと親が子供を知らないのはおかしいでしょ、というのでなんか質疑応答していた記憶がぼんやりとありますが、結局のところクラスを継承して使う目的が管理ではなくて拡張なので、クラスを人ではなく設計図として認識できるように指導していればこんな話にはならなかったのかもしれません。</p>

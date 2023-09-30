@@ -1,0 +1,73 @@
+<p data-sourcepos="1:1-3:45">Qiitaの下書きを何の気なしに開けたらすごい量あって、消していいのかダメなのかもぱっと見分からなくなったんで履歴機能を使って管理すれば良くね？まで気付いたついでに書き直すことにします。<br>
+書き直すとは言っても内容は完全に書き下ろしだし、下書き時点とは全く違う内容なので履歴がぐちゃぐちゃになってしまいますが、まぁ誰も見てないでしょう。<br>
+少なくとも、私は見てないです。</p>
+<hr data-sourcepos="5:1-6:0">
+<h2 data-sourcepos="7:1-7:103">
+<span id="2023年版-macos-sonoma140でexeを実行するならhomebrewでwine入れるのが良さそう" class="fragment"></span><a href="#2023%E5%B9%B4%E7%89%88-macos-sonoma140%E3%81%A7exe%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%AA%E3%82%89homebrew%E3%81%A7wine%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%AE%E3%81%8C%E8%89%AF%E3%81%95%E3%81%9D%E3%81%86"><i class="fa fa-link"></i></a>2023年版: macOS Sonoma(14.0)で.exeを実行するならhomebrewでwine入れるのが良さそう</h2>
+<p data-sourcepos="8:1-8:15">本題です。</p>
+<h3 data-sourcepos="10:1-10:16">
+<span id="対象読者" class="fragment"></span><a href="#%E5%AF%BE%E8%B1%A1%E8%AA%AD%E8%80%85"><i class="fa fa-link"></i></a>対象読者</h3>
+<ul data-sourcepos="11:1-14:0">
+<li data-sourcepos="11:1-11:66">MacユーザーだけどWindowsアプリ(.exe)を動かしたい</li>
+<li data-sourcepos="12:1-12:65">（業務使用ではないので）無料にこだわりたい</li>
+<li data-sourcepos="13:1-14:0">BootCampだと切り替えが面倒orそこまでやりたくない</li>
+</ul>
+<p data-sourcepos="15:1-16:126">今回は珍しくAND条件です。<br>
+予めお詫びしておきますと、上記全てを満たした方じゃないとあまり旨味はないと思います。</p>
+<p data-sourcepos="18:1-18:106"><strong>※動かすことが目的なので、使用に耐えるかどうかはここでは扱いません。</strong></p>
+<h3 data-sourcepos="20:1-20:28">
+<span id="結論解決方法" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>結論（解決方法）</h3>
+<p data-sourcepos="21:1-22:133">Windows端末を用意してリモートでつないで解決する事にしました。<br>
+Macで実行するわけじゃないけど、Macを使ってWindowsアプリを動かすという目的は達成したしセーフ？</p>
+<h3 data-sourcepos="24:1-24:19">
+<span id="前提の確認" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90%E3%81%AE%E7%A2%BA%E8%AA%8D"><i class="fa fa-link"></i></a>前提の確認</h3>
+<p data-sourcepos="25:1-26:228">結論はタイトルの通りです。<br>
+エラーメッセージもセットアップの仕方や環境がまちまちで、動かしたいexeも色々あり、使っているライブラリも違うはずなので動かない理由までは追求していません。</p>
+<p data-sourcepos="28:1-28:164">共通しているのは「アプリが指定する通常のセットアップ」「32bit/64bit双方のパターン、exeをそれぞれ実行」ぐらいです。</p>
+<h3 data-sourcepos="30:1-30:34">
+<span id="1-リモートで実現する" class="fragment"></span><a href="#1-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%81%A7%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>1. リモートで実現する</h3>
+<p data-sourcepos="31:1-32:93">要はMacとWindowsを繋げてGUIで操作できれば良いので、色々な方法やツールで解決できます。<br>
+私は個人利用かつ同一ネットワーク上なのでsplashtopを選択しました。</p>
+<p data-sourcepos="34:1-34:37"><iframe id="qiita-embed-content__8306330136fc1ea6960d78656bfcb106" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__8306330136fc1ea6960d78656bfcb106" data-content="https%3A%2F%2Fwww.splashtop.co.jp%2Fdownload%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="36:1-38:220">ピンポイントにexeだけを実行する場合は、Steamも使えます。<br>
+Steamライブラリ画面からゲームリストの下部に「ゲームを追加」があるので、ここから任意のexeファイルを入れてあげると良いです。<br>
+ここで追加するものはゲーム以外も入れられるので、普段windows端末で管理しているアプリを入れておくとSplashtopのショートカット的に扱うことができて便利です。</p>
+<h4 data-sourcepos="40:1-40:44">
+<span id="なぜこの方法を採用したのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E3%81%93%E3%81%AE%E6%96%B9%E6%B3%95%E3%82%92%E6%8E%A1%E7%94%A8%E3%81%97%E3%81%9F%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜこの方法を採用したのか</h4>
+<p data-sourcepos="41:1-43:171">今後またMacやwineのアップデートで互換性がなくなってしまったり、そもそも安定しない環境で無理やり実行させるよりは確実製が高く安定するから、ですね。<br>
+MacのスペックよりWindowsのスペックの方が高い事もあります。<br>
+そのためにネットワークを占有してしまうのは悩みと言えば悩みですが、日常生活で困らなかったので運用次第だと思います。</p>
+<h3 data-sourcepos="45:1-45:20">
+<span id="2-homevrew-wine" class="fragment"></span><a href="#2-homevrew-wine"><i class="fa fa-link"></i></a>2. homevrew-wine</h3>
+<p data-sourcepos="46:1-46:45"><iframe id="qiita-embed-content__1a4ba32908096c957d56b9da0a96ec31" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__1a4ba32908096c957d56b9da0a96ec31" data-content="https%3A%2F%2Fjonkara.com%2F2022%2F10%2F25%2Fhomebrew-wine%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="48:1-52:111">全部が全部動くとは思っていませんが、手元にあるインストーラ不要タイプのexeは動いたのでおそらく大丈夫でしょう。<br>
+Unityが動いたので多少大きいものでも大丈夫でしょう。<br>
+とはいえ、スペックの問題だと思いますが、快適かと言われると微妙なところ。<br>
+フォントも特殊なケースだと全く表示されないこともありますし、今後に期待しましょう。<br>
+もしかしたら最適な設定があるのかもしれませんが、そこまでは試していません。</p>
+<h3 data-sourcepos="54:1-54:30">
+<span id="3-失敗play-on-mac" class="fragment"></span><a href="#3-%E5%A4%B1%E6%95%97play-on-mac"><i class="fa fa-link"></i></a>3. （失敗）Play on Mac</h3>
+<p data-sourcepos="55:1-55:29"><iframe id="qiita-embed-content__fa2e9fb0f86ec458940aa3da8de32f6d" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__fa2e9fb0f86ec458940aa3da8de32f6d" data-content="https%3A%2F%2Fwww.playonmac.com%2Fen%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="57:1-61:105">当初案はこれを採用するつもりでした。<br>
+OSをアップデートする前からPlay on Macを使っていたので何事もなければそのまま動くだろうと思っていたんですが、そんなに簡単な話ではなかったです。<br>
+バックアップのために古いアプリを残した状態で新しいバージョンを入れようとしていたのが問題かな、と思って思い切って古いアプリと設定（バーチャルドライブ）も削除して入れ直したため、完全に復旧できなくなりました。<br>
+まぁPlay on Macも裏側はWineだと思うので互換性かなんかの問題だろうと勝手に思ってます。<br>
+GUIが使えるのは嬉しいので今後のアップデートに期待して待とうと思います。</p>
+<h3 data-sourcepos="63:1-63:64">
+<span id="別解-rpgツクールmv製のゲームを安全に遊ぶ" class="fragment"></span><a href="#%E5%88%A5%E8%A7%A3-rpg%E3%83%84%E3%82%AF%E3%83%BC%E3%83%ABmv%E8%A3%BD%E3%81%AE%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E9%81%8A%E3%81%B6"><i class="fa fa-link"></i></a>別解： RPGツクールMV製のゲームを安全に遊ぶ</h3>
+<p data-sourcepos="64:1-64:33">スピンアウトしました。</p>
+<p data-sourcepos="66:1-66:54"><iframe id="qiita-embed-content__ceaa63556b8d25759ddb8a85164f41b3" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__ceaa63556b8d25759ddb8a85164f41b3" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F6b9404aba4d7a12d0bc5" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="68:1-68:84">
+<span id="ネットワークが使えない環境でも使えるようにしておきたい" class="fragment"></span><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%8C%E4%BD%BF%E3%81%88%E3%81%AA%E3%81%84%E7%92%B0%E5%A2%83%E3%81%A7%E3%82%82%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%97%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>ネットワークが使えない環境でも使えるようにしておきたい</h2>
+<p data-sourcepos="69:1-71:274">私の結論としては、exeファイルをMacで動かすよりネットワークを使ってでもexeの実行が安定する環境を用意してリモートで繋ぐとしていますが、今回wineに乗り換えてMacでexeを実行できる環境を作ったことは無駄だと考えてないです。<br>
+移動先でexeを使いたくなるシーンもなくはないと思うので、その時にネットワークが使えない可能性もあるわけで。<br>
+私の場合はMacbookなので子供のおもちゃも兼ねており（当初そんなつもりもなかったのですが）、出先などで落ち着かせるためにいつものアプリを起動して静かにしてもらう、なんて使い方もしています。</p>
+<p data-sourcepos="73:1-73:111">選択肢を増やす、という観点でできることを増やしておくのは良いと思いました。</p>
