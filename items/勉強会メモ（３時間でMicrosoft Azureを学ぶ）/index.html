@@ -1,0 +1,100 @@
+<p data-sourcepos="1:1-2:154">今日は大手のイベントに参加。<br>
+connpassに登録されているが、登録手続きがconnpass以外にある勉強会でも大丈夫、というのを書くだけの記事である。</p>
+<h2 data-sourcepos="4:1-4:21">
+<span id="本日の勉強会" class="fragment"></span><a href="#%E6%9C%AC%E6%97%A5%E3%81%AE%E5%8B%89%E5%BC%B7%E4%BC%9A"><i class="fa fa-link"></i></a>本日の勉強会</h2>
+<p data-sourcepos="5:1-5:39">今回の勉強会ページは以下。</p>
+<p data-sourcepos="7:1-7:51"><iframe id="qiita-embed-content__d759a5f4677dec403bdc44eac5579589" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__d759a5f4677dec403bdc44eac5579589" data-content="https%3A%2F%2Fmicrosoft-events.connpass.com%2Fevent%2F302222%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="9:1-10:105">生成系AIの勉強会は頻繁にGenAIとかGenerateAIとかGAIみたいに略したりするため、GAIといえば生成系AIを略した表記としてほしい。<br>
+各社でGAIという表記を固有名詞的に使っているので本稿も各社の表記に従う。</p>
+<h2 data-sourcepos="12:1-12:54">
+<span id="クラウドの時代に乗り遅れないために" class="fragment"></span><a href="#%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%81%AE%E6%99%82%E4%BB%A3%E3%81%AB%E4%B9%97%E3%82%8A%E9%81%85%E3%82%8C%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>クラウドの時代に乗り遅れないために</h2>
+<ul data-sourcepos="13:1-15:0">
+<li data-sourcepos="13:1-15:0">Azure Arc（専用管理が必要なもの、環境を維持し、リソースを提供する）
+<ul data-sourcepos="14:3-15:0">
+<li data-sourcepos="14:3-15:0">どうしてもオンプレ、他社クラウド（AWSなど）と協業していく</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="16:1-16:23">
+<span id="xaasの位置付け" class="fragment"></span><a href="#xaas%E3%81%AE%E4%BD%8D%E7%BD%AE%E4%BB%98%E3%81%91"><i class="fa fa-link"></i></a>Xaasの位置付け</h3>
+<ul data-sourcepos="17:1-19:0">
+<li data-sourcepos="17:1-17:29">Saas: 既存製品の利用</li>
+<li data-sourcepos="18:1-19:0">Paas: 自社製品に組み込み</li>
+</ul>
+<p data-sourcepos="20:1-20:183">特にChatGPTの拡張サービスを色々な会社が出していたり、研修プランもパッケージングしているが、MSが出したら他社要らなくなりそう。</p>
+<h3 data-sourcepos="22:1-22:60">
+<span id="openai-chatgptを使うならazureのai-chatgpt使おう" class="fragment"></span><a href="#openai-chatgpt%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AA%E3%82%89azure%E3%81%AEai-chatgpt%E4%BD%BF%E3%81%8A%E3%81%86"><i class="fa fa-link"></i></a>OpenAI ChatGPTを使うならAzureのAI ChatGPT使おう</h3>
+<p data-sourcepos="23:1-25:51">プランが気になるところだ。<br>
+本家OpenAIのようにプラグイン突っ込めるかどうか。<br>
+→別スピーカーより、できるとのこと</p>
+<h3 data-sourcepos="27:1-27:10">
+<span id="所感" class="fragment"></span><a href="#%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>所感</h3>
+<p data-sourcepos="28:1-28:66">メインはAzure系。Windowsは売り切った（普及した）</p>
+<p data-sourcepos="30:1-31:131">思うに、Windowsでシェア取ってAzureを推したいなら、Windowsの標準アプリとしてAzureの一部を使いやすいようにアプリにしてプリインすればいいのでは？という気がする。<br>
+出来が良ければ古い時代のIEのようにシェア取りに行ける気がする。もう胡座をかかないだろう。</p>
+<h2 data-sourcepos="33:1-33:61">
+<span id="azpower社-chatgptから始まったpowergenaiの作り方" class="fragment"></span><a href="#azpower%E7%A4%BE-chatgpt%E3%81%8B%E3%82%89%E5%A7%8B%E3%81%BE%E3%81%A3%E3%81%9Fpowergenai%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>AZPower社 ChatGPTから始まったPowerGenAIの作り方</h2>
+<p data-sourcepos="34:1-35:96">生成系AI（分かりやすくChatGPTとする）をユーザーに提供する前にある程度事前学習（教師ありデータによるラベリング）がされている。<br>
+これに対して追加で学習させる事ができる。（ファインチューニング）</p>
+<p data-sourcepos="37:1-38:57">対話型で学習させると、特定のユーザーまたはクラスタによるコミュニケーションを過学習してしまう（AIなのにバイアスを持ってしまう）危険性が考えられる。<br>
+→人間の親子学習のようなものを感じるね</p>
+<h3 data-sourcepos="40:1-40:36">
+<span id="生成aiは人間化ではない" class="fragment"></span><a href="#%E7%94%9F%E6%88%90ai%E3%81%AF%E4%BA%BA%E9%96%93%E5%8C%96%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>生成AIは人間化ではない</h3>
+<p data-sourcepos="41:1-41:23">Generative AI is not…</p>
+<ol data-sourcepos="43:1-46:0">
+<li data-sourcepos="43:1-43:31">思考しない: Intelligent</li>
+<li data-sourcepos="44:1-44:42">決定論的ではない: Deterministic</li>
+<li data-sourcepos="45:1-46:0">信頼してはいけない: Trustworthy</li>
+</ol>
+<p data-sourcepos="47:1-48:87">回答がいかにもそれっぽいだけに、専門家でもなければ見分けるのが難しい（信用してしまう）<br>
+しっかりと内容を精査し、正しさを人間が保証する必要がある。</p>
+<h3 data-sourcepos="50:1-50:36">
+<span id="aiオーケストレーション" class="fragment"></span><a href="#ai%E3%82%AA%E3%83%BC%E3%82%B1%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"><i class="fa fa-link"></i></a>AIオーケストレーション</h3>
+<p data-sourcepos="51:1-51:60">LLMの利用方法をいくつかの層に分解して構築</p>
+<ul data-sourcepos="53:1-59:0">
+<li data-sourcepos="53:1-55:90">プロンプトエンジニアリング
+<ul data-sourcepos="54:3-55:90">
+<li data-sourcepos="54:3-54:45">プロンプト: タスク指示の内容</li>
+<li data-sourcepos="55:3-55:90">メタプロンプト: ルールや制限、振る舞いを記述するプロンプト</li>
+</ul>
+</li>
+<li data-sourcepos="56:1-59:0">
+<ul data-sourcepos="57:3-59:0">
+<li data-sourcepos="57:3-57:108">データグラウンディング: モデルが学習していない新たなデータを付与する。</li>
+<li data-sourcepos="58:3-59:0">プラグインエグゼキューション</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="60:1-60:90">
+<span id="ムダがクラウドを高くする---コスト30削減-azure移行成功の秘訣" class="fragment"></span><a href="#%E3%83%A0%E3%83%80%E3%81%8C%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%82%92%E9%AB%98%E3%81%8F%E3%81%99%E3%82%8B---%E3%82%B3%E3%82%B9%E3%83%8830%E5%89%8A%E6%B8%9B-azure%E7%A7%BB%E8%A1%8C%E6%88%90%E5%8A%9F%E3%81%AE%E7%A7%98%E8%A8%A3"><i class="fa fa-link"></i></a>ムダがクラウドを高くする - コスト30%削減 Azure移行成功の秘訣〜</h2>
+<p data-sourcepos="61:1-62:123">円安の影響をモロに受ける。クラウドサービスは外資だからね…。<br>
+必ずしもAWSが安くなるわけじゃないよ、という話を自社（他社導入）事例を交えてのお話。</p>
+<p data-sourcepos="64:1-67:114">主にクライアントの課題と自社サービスの話なので書く事がない。<br>
+ストレージが高い理由は、過去一度もアクセスしなさそうなファイル（バックアップを含む）を安いストレージに置けば良い。<br>
+クラウド移行でコストカットできるかは、知見があるベンダーを入れよう、という提案。<br>
+→高いコンサル費を払うとイニシャルコストが安くならないので及び腰になるなぁ。</p>
+<p data-sourcepos="69:1-69:31"><iframe id="qiita-embed-content__302a82564b0896ee07c2229bedb3a664" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__302a82564b0896ee07c2229bedb3a664" data-content="http%3A%2F%2Fwww.jbcc.co.jp%2Fr%2Fms-jbcc" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="71:1-71:81">
+<span id="ソフトクリエイト社-ファイルサーバーをazureへテイクオフ" class="fragment"></span><a href="#%E3%82%BD%E3%83%95%E3%83%88%E3%82%AF%E3%83%AA%E3%82%A8%E3%82%A4%E3%83%88%E7%A4%BE-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92azure%E3%81%B8%E3%83%86%E3%82%A4%E3%82%AF%E3%82%AA%E3%83%95"><i class="fa fa-link"></i></a>ソフトクリエイト社 ファイルサーバーをAzureへテイクオフ</h2>
+<p data-sourcepos="72:1-76:154">ファイルサーバーをクラウド化すると必要な分だけ容量を買えるのが強い！<br>
+→個人レベルで考えた場合、起きっぱなしにするだけのデータを月々課金したくない。トータルで見るとオンプレの方が安上がり。<br>
+　→問題は、ファイルサーバーをどこにするか、という観点で評価できているか。<br>
+　　→ファイルサーバーの種類が増えると、ファイルサーバー自体の管理・メンテナンスコストが生じないか？<br>
+Azureサービス関連（MSのサービス？）だと１アカウントで様々なファイルサーバーが使えるというのもメリットか。</p>
+<p data-sourcepos="78:1-80:246">いわゆるオンプレのメリデメとクラウドのメリデメで、移行元の運用をクラウドで100%できるようにしないと移行しない、という選択は勿体無い。<br>
+今回はオンプレ→クラウドの話だが、単純にDX化についても同じ事が言える。<br>
+運用制御の話（主にActiveDirectory）を聞くと、複雑な運用制御をするための運用コストが発生しているのでファイルサーバー以外の部分でコストを上げてしまっているような気がする。</p>
+<p data-sourcepos="82:1-85:148">なお、運用まで想定してファイルサーバーで冗長管理をしたい場合、オンプレのファイルパスとクラウドのファイルパスは一致させる必要がある。<br>
+（ファイルの同期が取れず、別物として処理されてしまう）<br>
+また、ファイルロック状態（主にMS製品を開きっぱなしにする）ではバックアップがうまく動かない事がある。<br>
+AIで活用したいなら、活用するAIの構造に従って格納する必要もあるので、多角的な運用に配慮が必要になる。</p>
+<h2 data-sourcepos="87:1-87:15">
+<span id="全体所感" class="fragment"></span><a href="#%E5%85%A8%E4%BD%93%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>全体所感</h2>
+<p data-sourcepos="88:1-88:59">17時に帰れメロディー流れてるのいいなぁ。</p>
+<p data-sourcepos="90:1-91:83">今回は「Azureの活用方法」という点だったが、筆者が関心を持っていたのは「AzureAI」だったので学びは少なかったように思う。<br>
+Virtual Training Dayシリーズで詳細を勉強していくようにしよう。</p>
+<p data-sourcepos="93:1-93:113">今回はTKPカンファレンスルームだったが、MS社内のイベントにも参加していきたい。</p>
