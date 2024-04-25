@@ -1,0 +1,200 @@
+<h2 data-sourcepos="1:1-1:24">
+<span id="イベントページ" class="fragment"></span><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%9A%E3%83%BC%E3%82%B8"><i class="fa fa-link"></i></a>イベントページ</h2>
+<p data-sourcepos="2:1-2:24"><iframe id="qiita-embed-content__bf127ea03a69357050e441f0c8982cdb" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__bf127ea03a69357050e441f0c8982cdb" data-content="https%3A%2F%2Flinuc.community%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="4:1-4:86">コミュニティに参加してSlackでイベントページの案内をゲット！</p>
+<h2 data-sourcepos="6:1-6:12">
+<span id="やり方" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>やり方</h2>
+<ol data-sourcepos="7:1-21:0">
+<li data-sourcepos="7:1-7:15">VSCode開く</li>
+<li data-sourcepos="8:1-8:134">
+<a href="https://marketplace.visualstudio.com/items?itemName=yasuraok.simple-text-refine" rel="nofollow noopener" target="_blank">simple-text-refine（拡張機能）</a>をいれる</li>
+<li data-sourcepos="9:1-10:107">OpenAIキーを入れる（Lionコミュニティの好意でテストアカウントをお借りしてます）
+<ol data-sourcepos="10:5-10:107">
+<li data-sourcepos="10:5-10:107">以下（画像１）を参照（やばい情報なのでAPI Key部分は手動で消してます）</li>
+</ol>
+</li>
+<li data-sourcepos="11:1-11:184">VSCodeのエクスプローラーでどこかのフォルダを開いておく（そうしないと次の作業で「workspace is not selected」とエラーになってしまう）</li>
+<li data-sourcepos="12:1-13:37">
+<code>simple text refine open prompt file</code>を選択。実行するとその場で.promptファイルが作られる
+<ol data-sourcepos="13:5-13:37">
+<li data-sourcepos="13:5-13:37">以下（画像２）を参照</li>
+</ol>
+</li>
+<li data-sourcepos="14:1-16:83">プロンプトに従い、元となる情報を書く
+<ol data-sourcepos="15:5-16:83">
+<li data-sourcepos="15:5-15:94">本稿では後述の「指示.md」をベースに記事を書かせることにする</li>
+<li data-sourcepos="16:5-16:83">なお、先ほどの.promptに後述のプロンプトを追記している</li>
+</ol>
+</li>
+<li data-sourcepos="17:1-18:37">
+<strong>翻訳したい範囲を選択して</strong> からsimple text refine: call LLM with selected Text
+<ol data-sourcepos="18:5-18:37">
+<li data-sourcepos="18:5-18:37">以下（画像３）を参照</li>
+</ol>
+</li>
+<li data-sourcepos="19:1-21:0">生成元と生成後の内容でdiff取れる。Gitのコンフリクトを直しているような感覚で作業ができる
+<ol data-sourcepos="20:5-21:0">
+<li data-sourcepos="20:5-21:0">以下（画像４）を参照</li>
+</ol>
+</li>
+</ol>
+<p data-sourcepos="22:1-23:121">画像１<br>
+<a href="https://camo.qiitausercontent.com/33854b6b2a5f9de95bfc098d00b9d410b0030d79/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f64396561366430622d306232632d313461652d383961352d3961666637306262393832652e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fd9ea6d0b-0b2c-14ae-89a5-9aff70bb982e.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=79e86ac3624b78f720a1f87af1ef0710" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/d9ea6d0b-0b2c-14ae-89a5-9aff70bb982e.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fd9ea6d0b-0b2c-14ae-89a5-9aff70bb982e.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=72706f335ded7bca3e2bb8eeddd96131 1x" loading="lazy"></a></p>
+<p data-sourcepos="25:1-26:121">画像２<br>
+<a href="https://camo.qiitausercontent.com/258dc4a8173c9b2905355924999886166e6a493e/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f31393130353135302d323865322d663538302d646431642d3761353339376336353434312e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F19105150-28e2-f580-dd1d-7a5397c65441.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=cfb5c70cb295bfaf23b1e507c6563905" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/19105150-28e2-f580-dd1d-7a5397c65441.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F19105150-28e2-f580-dd1d-7a5397c65441.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=d61b52c9d3e1a0a5d230e6ed77dd1530 1x" loading="lazy"></a></p>
+<p data-sourcepos="28:1-29:121">画像３<br>
+<a href="https://camo.qiitausercontent.com/6c03cf28b6e6e4e9c4aedbe8aa922a8a5c154ee7/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f32353264613361632d373362342d353863612d333933652d3163656536666435336439362e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F252da3ac-73b4-58ca-393e-1cee6fd53d96.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1eef6215202bb4743ceed0a126974119" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/252da3ac-73b4-58ca-393e-1cee6fd53d96.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F252da3ac-73b4-58ca-393e-1cee6fd53d96.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=7a8702a1f46fd133e67cd80db3c43e4e 1x" loading="lazy"></a></p>
+<p data-sourcepos="31:1-32:121">画像４<br>
+<a href="https://camo.qiitausercontent.com/9dafa9fd30294952b1d12ce59ac8b7d3477b5e19/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f64336531653234632d323366372d343966352d346465352d6330636637356535323839612e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fd3e1e24c-23f7-49f5-4de5-c0cf75e5289a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=7ae2284a4309f84ea5521b494fb431db" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/d3e1e24c-23f7-49f5-4de5-c0cf75e5289a.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fd3e1e24c-23f7-49f5-4de5-c0cf75e5289a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=30985dbf7e2b56f698918d845b7ecc14 1x" loading="lazy"></a></p>
+<h2 data-sourcepos="35:1-35:89">
+<span id="simple-text-refine-open-prompt-fileを実行すると生成されるファイル" class="fragment"></span><a href="#simple-text-refine-open-prompt-file%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%A8%E7%94%9F%E6%88%90%E3%81%95%E3%82%8C%E3%82%8B%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><i class="fa fa-link"></i></a>「simple text refine open prompt file」を実行すると生成されるファイル</h2>
+<div class="code-frame" data-lang="text" data-sourcepos="36:1-47:3">
+<div class="code-lang"><span class="bold">.prompt</span></div>
+<div class="highlight"><pre><code>- label: 添削
+  description: |
+    作成中の技術文書を添削し修正案を返してください。
+    文中で&lt;&lt;と&gt;&gt;で囲まれた部分はあなたへの指示であり、またXXXと書かれた部分はあなたに埋めて欲しい箇所です。
+    メモ書きのようになっている箇所に対しては、自然な文章になるように補正してください。
+    その際、箇条書きを地の文に変更したり、適当な見出しを追加するなどの形式変更もしてかまいません。
+- label: メール
+  description: |
+    メールやチャットの投稿下書きを書いているユーザーから作成中の文章が与えられるので、添削し修正案を返してください。
+    書き始めで文章が不足していたり不連続と思われる場合はそれを補完し、ほぼ完成している場合は文体の改善などをメインに修正してください。
+</code></pre></div>
+</div>
+<p data-sourcepos="49:1-50:55">ここにプロンプトを書いていくイメージ。<br>
+中身は見ての通り、ただのyamlファイル。</p>
+<h2 data-sourcepos="52:1-52:24">
+<span id="vscodeマーケット" class="fragment"></span><a href="#vscode%E3%83%9E%E3%83%BC%E3%82%B1%E3%83%83%E3%83%88"><i class="fa fa-link"></i></a>VSCodeマーケット</h2>
+<div class="code-frame" data-lang="text" data-sourcepos="53:1-60:3"><div class="highlight"><pre><code>Name: simple-text-refine
+Id: yasuraok.simple-text-refine
+Description: 
+Version: 0.0.6
+Publisher: yasuraok
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=yasuraok.simple-text-refine
+</code></pre></div></div>
+<h2 data-sourcepos="62:1-62:18">
+<span id="やってみた" class="fragment"></span><a href="#%E3%82%84%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F"><i class="fa fa-link"></i></a>やってみた</h2>
+<h3 data-sourcepos="64:1-64:10">
+<span id="内容" class="fragment"></span><a href="#%E5%86%85%E5%AE%B9"><i class="fa fa-link"></i></a>内容</h3>
+<p data-sourcepos="65:1-65:78">我ながらマジかよ、と思う内容で記事を書かせてみます。</p>
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="67:1-74:3">
+<div class="code-lang"><span class="bold">指示.md</span></div>
+<div class="highlight"><pre><code>以下のソースコードを説明してください
+
+function add(a,b) {
+  return a + b;
+}
+
+</code></pre></div>
+</div>
+<h3 data-sourcepos="76:1-76:19">
+<span id="プロンプト" class="fragment"></span><a href="#%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88"><i class="fa fa-link"></i></a>プロンプト</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="77:1-85:3"><div class="highlight"><pre><code>- label: ブログ執筆
+  description: |
+    ユーザーが頑張って作ったプログラムの背景や工夫点などをテックブログで紹介しようと思っています。
+    以下の方針に基づいてブログ記事の原稿のMarkdownを返してください。
+    - ユーザーの入力がREADMEやソースそのものと思われる場合は、その内容を加味してテックブログ記事を生成する
+    - 既にある程度テックブログの体裁になっているものは、改善や誤字脱字の修正を行う
+      &lt;&lt;と&gt;&gt;で囲まれた部分はユーザーからの指示です。指示を踏まえて改善してください。
+</code></pre></div></div>
+<p data-sourcepos="87:1-87:57">を追加し、このプロンプトを適用します。</p>
+<h3 data-sourcepos="89:1-89:11">
+<span id="gpt4md" class="fragment"></span><a href="#gpt4md"><i class="fa fa-link"></i></a>GPT4.md</h3>
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="90:1-131:3">
+<div class="code-lang"><span class="bold">GPT4.md</span></div>
+<div class="highlight"><pre><code># シンプルなJavaScript関数の魅力: `add`関数の紹介
+
+プログラミングの世界において、基本的な知識はしっかりと確実なソフトウェア開発に不可欠です。今回は、JavaScriptでのプログラミングを始めたばかりの方や、基本に立ち返りたい経験者に向けて、最も基本的な関数の一つである加算関数 `add` を紹介します。
+
+## `add` 関数とは?
+
+`add` 関数は、その名の通り、2つの数値を引数に取り、それらを足し合わせた結果を返します。ここでは、この関数の構造を簡単に解説し、どのようにして数値の加算が行われるのかを説明します。
+
+### 関数の定義
+
+以下が `add` 関数のソースコードです。
+
+¥```javascript
+function add(a, b) {
+  return a + b;
+}
+¥```
+
+### パラメータと戻り値
+
+この関数定義にはいくつかの重要な部分があります。まず、関数名 `add` は、この関数の目的—数値の加算—を端的に表しています。続いて、この関数は2つのパラメータ `a` と `b` を取ります。これらは加算される2つの数値です。
+
+重要なのは、`return` ステートメントです。この行では、パラメータ `a` と `b` を `+` 演算子で加算し、その結果を関数の呼び出し元に返しています。
+
+### 使い方
+
+`add` 関数の使用は非常にシンプルです。2つの数値を引数として渡し、関数を呼び出すだけです。以下はその例です。
+
+¥```javascript
+let result = add(5, 7);
+console.log(result);  // 出力: 12
+¥```
+
+この例では、5と7という2つの数値を`add`関数に渡しています。関数はこれらの値を加算し、その結果12を返します。
+
+## まとめ
+
+`add`関数はJavaScriptプログラミングにおける基本ですが、そのシンプルさと効率性から、どんな規模のプロジェクトにおいても便利なツールとなることでしょう。この関数の背後にあるプリンシプルを理解することは、より複雑な関数を作成するための基礎となります。
+
+最後に、プログラミングは練習あるのみです。実際に手を動かして、さまざまな関数を自身で作成し、その動作をテストしてみることをお勧めします。
+</code></pre></div>
+</div>
+<h3 data-sourcepos="133:1-133:17">
+<span id="claude3opus" class="fragment"></span><a href="#claude3opus"><i class="fa fa-link"></i></a>Claude3(opus)</h3>
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="134:1-168:3">
+<div class="code-lang"><span class="bold">Claude3(opus).md</span></div>
+<div class="highlight"><pre><code>こちらのソースコードをテックブログ記事風に紹介してみました。
+
+# シンプルに数値を足し算する関数を作ってみた
+
+こんにちは。今回は、JavaScriptで2つの数値を受け取って、その合計値を返す関数 `add` を作ってみました。
+ソースコードはこちら。
+
+¥```javascript
+function add(a, b) {
+  return a + b;
+}
+¥```
+
+とてもシンプルな関数ですが、2つの引数 `a` と `b` を取り、それらを加算した結果を `return` で返しています。
+例えば以下のように使うことができます。
+
+¥```javascript
+const result1 = add(1, 2);
+console.log(result1); // 3
+
+const result2 = add(10, 5); 
+console.log(result2); // 15
+¥```
+
+引数に渡した2つの数値を足し合わせた結果が返ってくるというわけです。
+
+数値の加算というごく基本的な処理ですが、関数化しておくことで再利用しやすくなり、コードの見通しも良くなります。
+このように、よく使う処理は積極的に関数にまとめていくのが良いでしょう。
+
+JavaScript初心者の方にとっては、とてもわかりやすいコードだと思います。
+本記事が、関数の書き方の理解に少しでも役立てば幸いです。
+
+&lt;&lt;もう少し具体的な使用例を1つ入れて、関数化することのメリットをより伝えるようにしてください。&gt;&gt;
+</code></pre></div>
+</div>
+<h3 data-sourcepos="170:1-170:13">
+<span id="おまけ" class="fragment"></span><a href="#%E3%81%8A%E3%81%BE%E3%81%91"><i class="fa fa-link"></i></a>おまけ</h3>
+<p data-sourcepos="171:1-171:33">自分でも書いてみました</p>
+<p data-sourcepos="173:1-173:121"><a href="https://camo.qiitausercontent.com/1836059d8cf95909d026873e3c66c150d3ae693e/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f31313135636535332d623565392d326437662d633061652d3461353661663332373830662e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F1115ce53-b5e9-2d7f-c0ae-4a56af32780f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=de03368933ba294dc88109ac581e499c" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/1115ce53-b5e9-2d7f-c0ae-4a56af32780f.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F1115ce53-b5e9-2d7f-c0ae-4a56af32780f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=bc251c7821be3ee902b2af351800e85a 1x" loading="lazy"></a></p>
+<p data-sourcepos="175:1-175:75">と、↑の記事を読ませてタイトルを考えてもらいました</p>
+<p data-sourcepos="177:1-177:121"><a href="https://camo.qiitausercontent.com/2a14f1633c45744e221ac016ad791afbbea04267/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3132323830302f30616535646536332d366532662d313832382d623966622d3730343630303038626337342e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F0ae5de63-6e2f-1828-b9fb-70460008bc74.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=8e68f5aa2732b71fe76d3430c5d6138d" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/0ae5de63-6e2f-1828-b9fb-70460008bc74.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F0ae5de63-6e2f-1828-b9fb-70460008bc74.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=14c76cd3ec18d5230364b18fabe71235 1x" loading="lazy"></a></p>
+<div class="code-frame" data-lang="text" data-sourcepos="179:1-183:3"><div class="highlight"><pre><code>1. **VSCodeでプログラム添削を効率化！生成されるMarkdownファイルで編集作業がラクラク**
+2. **JavaScriptの基本を理解する：`add`関数の使い方とメリットをテックブログで解説**
+3. **プログラミング初心者必見！シンプルなJavaScript関数の世界を楽しもう**
+</code></pre></div></div>
+<p data-sourcepos="185:1-186:120">らしいです。<br>
+参考にはしましたが、採用はしませんでした（目的が違うのと、プロンプトが雑すぎた）</p>
