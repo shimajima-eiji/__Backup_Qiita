@@ -1,0 +1,39 @@
+<p data-sourcepos="2:1-2:40"><strong>本稿はできなかった話です</strong></p>
+<h2 data-sourcepos="4:1-4:9">
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+<ul data-sourcepos="5:1-7:0">
+<li data-sourcepos="5:1-5:32">Webエディタで書かない</li>
+<li data-sourcepos="6:1-7:0">Webエディタで書いたら手動でqiita pullしてpushする</li>
+</ul>
+<p data-sourcepos="8:1-9:162">特にQiitaCLIで書いた場合、特にバックアップを取る必要ないやん？という考えから対応しなくて良いとする<br>
+問題はWebエディタで書いた場合。よくあるのはキャンペーンに登録するついでにタグ変えたりしたい場合が考えられる。</p>
+<h2 data-sourcepos="11:1-11:18">
+<span id="問題と解消" class="fragment"></span><a href="#%E5%95%8F%E9%A1%8C%E3%81%A8%E8%A7%A3%E6%B6%88"><i class="fa fa-link"></i></a>問題と解消</h2>
+<p data-sourcepos="12:1-12:41">CIでnpx qiita loginを解消できない</p>
+<p data-sourcepos="14:1-15:162">GitHub Actionsで対話モードでトークンを渡してあげる必要があるが、これがどうしても解決できない<br>
+いくつか解消方法は思いつくが、いやいやそれはあかんやろ、という主観のみで不採用としたが、誰かの役に立つはず。</p>
+<ol data-sourcepos="17:1-33:164">
+<li data-sourcepos="17:1-19:0">
+<p data-sourcepos="17:4-18:133">認証済みの環境で実施する<br>
+git cloneしてnpx qiita pullしてgit pushするshellなりを作ってcronを実行するようにさせれば解決できそう。</p>
+</li>
+<li data-sourcepos="20:1-24:0">
+<p data-sourcepos="20:4-23:57">動く環境のimageを作る<br>
+そもそもの話として、公式が用意しているusesでpushできているので、これに相当する環境を作れば解決するが、そのために努力したくないなー、というのが本音<br>
+QiitaAPIを使ってデータを取ってくる方法が考えられるが、そういう面倒臭いのをやらなくてもよいようにQiitaCLIがあるはずなので、公式が対応してくれることを願いたい。<br>
+（でもディスカッションには書いてない）</p>
+</li>
+<li data-sourcepos="25:1-28:0">
+<p data-sourcepos="25:4-27:173">QiitaAPIで全記事取得する<br>
+正直、これが一番現実的な方法なんじゃないかと。<br>
+ただし、npx qiita pullの形式に合わせて記事データを取ってくる処理が必要で、特にQiitaCLIでpublishした記事の取り扱いが面倒くさい</p>
+</li>
+<li data-sourcepos="29:1-31:0">
+<p data-sourcepos="29:4-30:66">Webエディタを使わない or Webエディタで書いたら手動で1. を実施<br>
+正直、現実的じゃないなぁと。いつか絶対忘れる</p>
+</li>
+<li data-sourcepos="32:1-33:164">
+<p data-sourcepos="32:4-33:164">祈る<br>
+＝何もしない。GitHub Actions対話モードでトークンを渡す方法ができるか、npx qiita loginでトークンが渡せるようになれば解決</p>
+</li>
+</ol>
