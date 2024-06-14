@@ -1,0 +1,8 @@
+<p data-sourcepos="2:1-2:54">publishで更新する処理はCIでいうところの</p>
+<div class="code-frame" data-lang="text" data-sourcepos="4:1-9:3"><div class="highlight"><pre><code>- uses: increments/qiita-cli/actions/publish@v1
+  with:
+    qiita-token: ${{ secrets.QIITA_TOKEN }}
+    root: "."
+</code></pre></div></div>
+<p data-sourcepos="11:1-12:59">が実行しているからでは？という疑問<br>
+単純にローカルからnpx qiita pushだとどうか？</p>
