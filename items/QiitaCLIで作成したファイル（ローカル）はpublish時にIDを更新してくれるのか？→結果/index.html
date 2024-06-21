@@ -1,0 +1,78 @@
+<h2 data-sourcepos="2:1-2:9">
+<span id="発端" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF"><i class="fa fa-link"></i></a>発端</h2>
+<p data-sourcepos="3:1-3:122">QiitaCLIをガチャガチャいじっていて気がついたが、publishで更新する処理はCIでいうところの</p>
+<div class="code-frame" data-lang="text" data-sourcepos="5:1-10:3"><div class="highlight"><pre><code>- uses: increments/qiita-cli/actions/publish@v1
+  with:
+    qiita-token: ${{ secrets.QIITA_TOKEN }}
+    root: "."
+</code></pre></div></div>
+<p data-sourcepos="12:1-14:103">が実行しているからでは？という疑問。<br>
+単純にローカルから<code>npx qiita push</code>だとどうか？<br>
+→<code>npx qiita push --all</code>としないと新しいファイルが追加されなかったので修正。</p>
+<h2 data-sourcepos="16:1-16:15">
+<span id="検証結果" class="fragment"></span><a href="#%E6%A4%9C%E8%A8%BC%E7%B5%90%E6%9E%9C"><i class="fa fa-link"></i></a>検証結果</h2>
+<p data-sourcepos="17:1-17:45">更新された！本ファイルで確認。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="19:1-31:3"><div class="highlight"><pre><code>---
+title: QiitaCLIで作成したファイル（ローカル）はpublish時にIDを更新してくれるのか？
+tags:
+  - QiitaCLI
+private: false
+updated_at: ''
+id: 
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
+</code></pre></div></div>
+<p data-sourcepos="33:1-33:3">が</p>
+<div class="code-frame" data-lang="text" data-sourcepos="35:1-47:3"><div class="highlight"><pre><code>---
+title: QiitaCLIで作成したファイル（ローカル）はpublish時にIDを更新してくれるのか？
+tags:
+  - QiitaCLI
+private: false
+updated_at: '2024-06-13T14:15:04+09:00'
+id: 384f130aba7ea537937b
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
+</code></pre></div></div>
+<p data-sourcepos="49:1-49:51">になった。変更差分だけ取り出すと、</p>
+<table data-sourcepos="51:1-54:39">
+<thead>
+<tr data-sourcepos="51:1-51:34">
+<th data-sourcepos="51:2-51:9">行数</th>
+<th data-sourcepos="51:11-51:21">変更前</th>
+<th data-sourcepos="51:23-51:33">変更後</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="53:1-53:65">
+<td data-sourcepos="53:2-53:4">6</td>
+<td data-sourcepos="53:6-53:21">updated_at: ''</td>
+<td data-sourcepos="53:23-53:63">updated_at: '2024-06-13T14:15:04+09:00'</td>
+</tr>
+<tr data-sourcepos="54:1-54:39">
+<td data-sourcepos="54:2-54:4">7</td>
+<td data-sourcepos="54:6-54:11">id:</td>
+<td data-sourcepos="54:13-54:38">id: 384f130aba7ea537937b</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="56:1-57:155">であるので、qiita pushによって元ファイルへの更新も同時に行なっていることがわかった。<br>
+慣れてくると勘違いしがちだが、qiita pushはあくまでqiitaへのアップロードなのでgit pushはまた別に行う必要がある。</p>
+<p data-sourcepos="59:1-59:32">ただし、CIを実行すると</p>
+<div class="code-frame" data-lang="text" data-sourcepos="61:1-66:3"><div class="highlight"><pre><code>- uses: increments/qiita-cli/actions/publish@v1
+  with:
+    qiita-token: ${{ secrets.QIITA_TOKEN }}
+    root: "."
+</code></pre></div></div>
+<p data-sourcepos="68:1-68:88">のタイミングでgit pushも実施される（コミッターはgithub actions[bot])</p>
+<h2 data-sourcepos="70:1-70:36">
+<span id="実はこっそり別の検証も" class="fragment"></span><a href="#%E5%AE%9F%E3%81%AF%E3%81%93%E3%81%A3%E3%81%9D%E3%82%8A%E5%88%A5%E3%81%AE%E6%A4%9C%E8%A8%BC%E3%82%82"><i class="fa fa-link"></i></a>実はこっそり別の検証も</h2>
+<p data-sourcepos="71:1-73:199">いったんpublishした状態でpublicフォルダ・ディレクトリから記事ファイルを削除して、もう一度publicに追加し直す、という操作をやってみた。<br>
+どうやら記事ID(FrontFormatter)で管理しているらしいので、新しくファイルが追加される、ということはないらしい。<br>
+よく考えたらそれはそうで、別の端末またはディレクトリにgit cloneして複数の環境を作ってもqiita pullされない限りは環境差異が生じないことになる</p>
+<p data-sourcepos="75:1-76:69">逆に言えば、いったん記事をpublishした環境とは別の場所でqiita pullしてそこからまたpublishをすると、別の場所ではqiita pullしないと最新版にならないよね、という話にもなる。<br>
+これはgitと同じ考え方ができるので納得感もある。</p>
+<p data-sourcepos="78:1-78:107">QiitaCLIは（Webエディタでの編集による競合を考えなければ）運用可用性はある！</p>
