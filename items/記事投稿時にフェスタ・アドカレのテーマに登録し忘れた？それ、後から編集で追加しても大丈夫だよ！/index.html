@@ -1,0 +1,26 @@
+<p data-sourcepos="1:1-1:111">前記事で、１日何度投稿しても投稿数だけバッジがもらえることを検証しました。</p>
+<p data-sourcepos="3:1-3:54"><iframe id="qiita-embed-content__4ce246e6c81c5da23c32ab92f9336edb" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__4ce246e6c81c5da23c32ab92f9336edb" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F331ad07e5ccabd326864" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="5:1-6:279">本投稿は「キャンペーン期間中に投稿したが、公開設定時にうっかりキャンペーンに登録し忘れた記事は対象になるのか？」というものです。<br>
+正直、操作ミスでバッジ落としちゃうケースは結構あるあるだと思ってます。どうしてもバッジにこだわりたい場合は投稿ミスした記事は削除して、もう一回書き直したらええやん、とは思うんですけどね。</p>
+<p data-sourcepos="8:1-9:168">また、本記事は需要はありそうだけど、38記事書くぜ！というモチベーションを持っている人がどれだけいるか分からなかったので、後で編集時に誰得キャンペーンにつけておくことにします。<br>
+（新規画面では登録操作後、公開する前に「登録を取り消す」ボタンが押せるので、同じことができるのでは？という予想）</p>
+<h2 data-sourcepos="11:1-11:93">
+<span id="編集追記キャンペーン登録せず公開しても記事カウントされない" class="fragment"></span><a href="#%E7%B7%A8%E9%9B%86%E8%BF%BD%E8%A8%98%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%B3%E7%99%BB%E9%8C%B2%E3%81%9B%E3%81%9A%E5%85%AC%E9%96%8B%E3%81%97%E3%81%A6%E3%82%82%E8%A8%98%E4%BA%8B%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>編集追記・キャンペーン登録せず公開しても記事カウントされない</h2>
+<p data-sourcepos="12:1-13:66">予想通りです。というか、そりゃそうでしょと思ってます。<br>
+そもそも本題はこっちではない。これからです。</p>
+<h2 data-sourcepos="15:1-15:57">
+<span id="編集追記ウッカリミスしても大丈夫" class="fragment"></span><a href="#%E7%B7%A8%E9%9B%86%E8%BF%BD%E8%A8%98%E3%82%A6%E3%83%83%E3%82%AB%E3%83%AA%E3%83%9F%E3%82%B9%E3%81%97%E3%81%A6%E3%82%82%E5%A4%A7%E4%B8%88%E5%A4%AB"><i class="fa fa-link"></i></a>編集追記・ウッカリミスしても大丈夫！</h2>
+<p data-sourcepos="16:1-16:121"><a href="../../img/52_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/52_7.png" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/1b5ca9f4-e669-63f7-0638-9dad64c45ef5.png" loading="lazy"></a></p>
+<p data-sourcepos="18:1-18:121"><a href="../../img/51_7.png" target="_blank" rel="nofollow noopener"><img src="../../img/51_7.png" alt="image.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/ccc8bc6d-6048-5f78-53d4-19e4c185156f.png" loading="lazy"></a></p>
+<p data-sourcepos="20:1-22:78">もらえました！<br>
+すげーなここまで対応してくれるんだ、びっくりしました。<br>
+これで安心して記事を投稿していくことができそうです。</p>
+<p data-sourcepos="24:1-24:72">もう新規記事を作って追加する検証作業はないはず。</p>
+<h2 data-sourcepos="26:1-26:20">
+<span id="qiitacliを使う" class="fragment"></span><a href="#qiitacli%E3%82%92%E4%BD%BF%E3%81%86"><i class="fa fa-link"></i></a>QiitaCLIを使う</h2>
+<p data-sourcepos="27:1-30:233">QiitaCLIを使うと、タグを登録できてもキャンペーンは登録できません。<br>
+おそらく、アドベントカレンダーでも同様の問題は発生しそうだとは思っています。過去のアドベントカレンダー執筆中にQiitaCLIを使ったことはなかったので未検証ですが、今回の方法で解決できないか検証してみるのはアリだなと思いました。<br>
+そうでなくても、QiitaCLIから記事を削除する事はできないので、同じように意図しない挙動になりそうなものは機能として組み込まれていないだろうと推測します。<br>
+機能追加するとしても、イベントごとに固有のIDを割り振ったりするのも、それをユーザー側に管理させるのも微妙な気がするので、ある意味これでいいのかも知れません。</p>
