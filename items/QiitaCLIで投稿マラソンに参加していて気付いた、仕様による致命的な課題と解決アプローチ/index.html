@@ -1,0 +1,69 @@
+<h2 data-sourcepos="2:1-2:30">
+<span id="本稿でいいたいこと" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%A7%E3%81%84%E3%81%84%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>本稿でいいたいこと</h2>
+<p data-sourcepos="3:1-3:176">QiitaCLIを使ってQiita投稿イベントに記事を投稿する時は、Webエディタが必須になるためupdated_atが必ず更新される事を認識しておこう</p>
+<h3 data-sourcepos="5:1-5:16">
+<span id="なぜか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E3%81%8B"><i class="fa fa-link"></i></a>なぜか？</h3>
+<ul data-sourcepos="6:1-9:0">
+<li data-sourcepos="6:1-6:67">QiitaCLIで完結できず、Webエディタでの操作が必須</li>
+<li data-sourcepos="7:1-7:61">QiitaCLIで投稿イベントへの紐付けができない</li>
+<li data-sourcepos="8:1-9:0">Webエディタで本文もタグもタイトルも変えずに、イベントを追加する更新をしただけでも、 <code>npx qiita pull</code> でコンフリクトを起こしてしまう</li>
+</ul>
+<h2 data-sourcepos="10:1-10:21">
+<span id="当初想定と罠" class="fragment"></span><a href="#%E5%BD%93%E5%88%9D%E6%83%B3%E5%AE%9A%E3%81%A8%E7%BD%A0"><i class="fa fa-link"></i></a>当初想定と罠</h2>
+<p data-sourcepos="11:1-12:88">QiitaCLIで記事を書けばGitHubのコントリビューションにも反映されるし、Qiitaにも投稿できるしでメリットしかない！という発想だった。<br>
+ZennもCLIを使っているので、その感覚で考えていたところもある。</p>
+<p data-sourcepos="14:1-15:90">ここに、Webエディタでも編集できることの問題に気付くのは今日まで時間がかかってしまっていた。<br>
+いや、違和感はあったがなんとか付き合っていこうと考えていた。</p>
+<p data-sourcepos="17:1-19:57">が、どうしても受け入れられなくなった。<br>
+「QiitaCLIで出来ないことをWebエディタでフォローすれば大丈夫でしょ」という感覚だったが、Webエディタを使うとどう足掻いてもコンフリクトを起こしてしまう<br>
+回避する手段もあるが、現実的ではない。</p>
+<h2 data-sourcepos="21:1-21:24">
+<span id="仕様を確認する" class="fragment"></span><a href="#%E4%BB%95%E6%A7%98%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>仕様を確認する</h2>
+<h3 data-sourcepos="22:1-22:12">
+<span id="qiitacli" class="fragment"></span><a href="#qiitacli"><i class="fa fa-link"></i></a>QiitaCLI</h3>
+<p data-sourcepos="23:1-24:21">QiitaCLI-CIで新規に記事を投稿する場合、updated_atとidを空欄にしておくと、新しく記事の投稿情報が得られる<br>
+具体的には以下</p>
+<ul data-sourcepos="26:1-28:0">
+<li data-sourcepos="26:1-26:91">
+<code>npx qiita push</code> 時に記事が投稿され、同時にupdated_atとidが更新される</li>
+<li data-sourcepos="27:1-28:0">QiitaCLI-CIは、更新された後の情報を適用するようにgitにコミットする</li>
+</ul>
+<p data-sourcepos="29:1-30:171">ここだけ切り取ると、何もおかしなところはない。それどころか、元記事を修正しやすいように自動的に当該記事のフロントフォーマッター部分を追記してくれる。<br>
+神がかってるな！と、当時の私は考えていた。なんなら「イベントに登録できないのはしょうがないか」ぐらいに考えていた。</p>
+<h3 data-sourcepos="32:1-32:131">
+<span id="qiitaのwebエディタで編集をするとqiitacliでコンフリクトを起こす原因と躓きやすいポイント" class="fragment"></span><a href="#qiita%E3%81%AEweb%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%A7%E7%B7%A8%E9%9B%86%E3%82%92%E3%81%99%E3%82%8B%E3%81%A8qiitacli%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%82%92%E8%B5%B7%E3%81%93%E3%81%99%E5%8E%9F%E5%9B%A0%E3%81%A8%E8%BA%93%E3%81%8D%E3%82%84%E3%81%99%E3%81%84%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>QiitaのWebエディタで編集をすると、QiitaCLIでコンフリクトを起こす原因と、躓きやすいポイント</h3>
+<p data-sourcepos="33:1-36:159">ここでは、QiitaCLI上で管理している項目に対して、一切の変更を加えることなく操作ができる、という思い込みが問題であることを言及しておく。<br>
+まず、Webエディタで編集をする。記事の内容もタイトルもタグも変えない。やったのは、エンジニアフェスタのキャンペーンに登録する。それだけだ。<br>
+先述した通り、これだけの作業でも必ずフロントフォーマッター部分は更新されるようになっている。具体的には <code>updated_at</code> である。<br>
+見た目上何もしなくても更新ボタンが押せてしまう事が、まさかこんな問題になるとは、この時は思いもしなかった。</p>
+<p data-sourcepos="38:1-39:48">私の頭の中は「何も変更していないので差分はなし。ただし、キャンペーンには後から登録できる」という考えだった。<br>
+上記の通り、差分は必ず発生する。</p>
+<h3 data-sourcepos="41:1-41:27">
+<span id="qiitacliで編集する" class="fragment"></span><a href="#qiitacli%E3%81%A7%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>QiitaCLIで編集する</h3>
+<p data-sourcepos="42:1-43:133">さて、Webエディタで編集したので、本来であればQiitaCLIで <code>npx qiita pull</code> しなければならないが、毎度のこと「あの記事を更新したから、編集する前にpullしよう」なんて思わない。<br>
+なんなら「とりあえずqiita pushしておいて、後から編集で追記すればいいよね」とまで考えている。</p>
+<p data-sourcepos="45:1-45:12">ここで、</p>
+<ul data-sourcepos="47:1-49:0">
+<li data-sourcepos="47:1-47:124">QiitaCLI: updated_atが差し替えられていない状態で、本文などが変更された内容を保持する履歴</li>
+<li data-sourcepos="48:1-49:0">Webエディタ: updated_atだけが更新されている状態の、その他は前回のコミットから全く変更されていない履歴</li>
+</ul>
+<p data-sourcepos="50:1-50:33">がそれぞれに存在する。</p>
+<p data-sourcepos="52:1-52:156">当然、それぞれの履歴が異なるが同一ファイルを編集しているという扱いのためにコンフリクトを起こしてしまう。</p>
+<p data-sourcepos="54:1-55:298">で、 <code>npx qiita pull</code> はコンフリクトの解消はしてくれない。git pull(git merge）とは違うようだ。<br>
+人間の感覚としては「そんなもん、それぞれの前回の履歴と比較して変わっているところだけをそれぞれから抽出してくれよ」と思ってしまうわけだが、これが出来ないのでgitのような感覚でqiita pullを使うと危険である。</p>
+<p data-sourcepos="57:1-58:234">さらに、QiitaCLI-CIを使って初めて <code>npx qiita push</code> に失敗する事に気付けるので、直前までWebエディタ側の更新を誰も把握できないことになってしまう。<br>
+CIで運用する以上、トリガーとなる要素はpushやスケジュールを想定していると思われるため、このタイミングでは既にgitの履歴としてみた場合でも違う歴史になってしまう。</p>
+<h3 data-sourcepos="60:1-60:37">
+<span id="コンフリクトを解消する" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%95%E3%83%AA%E3%82%AF%E3%83%88%E3%82%92%E8%A7%A3%E6%B6%88%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>コンフリクトを解消する</h3>
+<p data-sourcepos="61:1-62:108">やり方は単純で、今あるGitHubでの最後のBotのコミット履歴に戻ってqiita pullした後に今回の変更を適用するしかない。<br>
+コンフリクトが発生した履歴は消すか戻すかのどちらかで対応する必要がある。</p>
+<p data-sourcepos="64:1-65:163">その上で、updated_atを修正してコミットする。<br>
+決め打ちでupdated_atを差し替える事で半自動化は可能だが、問題の解消にはやはり運用対処が必要になってしまうだろう。</p>
+<h2 data-sourcepos="67:1-67:24">
+<span id="ポイントまとめ" class="fragment"></span><a href="#%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>ポイントまとめ</h2>
+<ul data-sourcepos="68:1-71:0">
+<li data-sourcepos="68:1-68:100">QiitaCLIを使うことでGitHubのコントリビューションに反映することができる</li>
+<li data-sourcepos="69:1-69:134">QiitaCLIを使って記事のバージョン管理をしたいなら、Webエディタは使えない　→ 使ってはならない</li>
+<li data-sourcepos="70:1-71:0">Webエディタを使った場合、コミットする前にqiita pullする</li>
+</ul>
+<p data-sourcepos="72:1-72:86">これでGitHubとWebエディタを併用しながらQiitaCLIを使う事ができる</p>
