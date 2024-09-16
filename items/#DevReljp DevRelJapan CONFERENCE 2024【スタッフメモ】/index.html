@@ -1,240 +1,297 @@
-<h2 data-sourcepos="1:1-1:36">
+<h2 data-sourcepos="1:1-1:24">
+<span id="本稿の留意事項" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E7%95%99%E6%84%8F%E4%BA%8B%E9%A0%85"><i class="fa fa-link"></i></a>本稿の留意事項</h2>
+<ul data-sourcepos="2:1-5:0">
+<li data-sourcepos="2:1-2:329">本稿はこれからカンファレンススタッフをやってみようと考えているエンジニアのための記事であり、本稿を通じて別イベントスタッフとして活躍していただいた方を通して技術を身に付けたい方の発展を期するものである事をご留意願います</li>
+<li data-sourcepos="3:1-5:0">本稿自体はDevRel Japan Conference 2024のセミナーセッションについては触れません
+<ul data-sourcepos="4:3-5:0">
+<li data-sourcepos="4:3-5:0">ありがたいことにスタッフをしながらセミナーの内容は聞けたものの、内容を腹落ち・考察など自身に落とし込める心理的余裕がなかったため、学びとして定着しておらず途中で諦めました</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="6:1-6:36">
 <span id="本日のセミナーイベント" class="fragment"></span><a href="#%E6%9C%AC%E6%97%A5%E3%81%AE%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>本日のセミナーイベント</h2>
-<p data-sourcepos="2:1-2:31"><iframe id="qiita-embed-content__63e65f08d7892717a62c0064edb41992" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__63e65f08d7892717a62c0064edb41992" data-content="https%3A%2F%2Fdevrel.tokyo%2Fjapan-2024" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+<p data-sourcepos="7:1-7:31"><iframe id="qiita-embed-content__63e65f08d7892717a62c0064edb41992" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__63e65f08d7892717a62c0064edb41992" data-content="https%3A%2F%2Fdevrel.tokyo%2Fjapan-2024" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
 </iframe>
 </p>
-<p data-sourcepos="4:1-5:213">今回は一般参加ではなくスタッフ参加のため、セミナーの内容というよりは運営側目線でのアレコレです<br>
-今プチバズっているスタッフエンジニアではないですが、エンジニアがイベントスタッフしてみた話なので、そういう意味ではスタッフ（エンジニア）です。</p>
-<h2 data-sourcepos="7:1-7:18">
-<span id="ターゲット" class="fragment"></span><a href="#%E3%82%BF%E3%83%BC%E3%82%B2%E3%83%83%E3%83%88"><i class="fa fa-link"></i></a>ターゲット</h2>
-<ul data-sourcepos="8:1-11:0">
-<li data-sourcepos="8:1-8:113">エンジニアイベントには参加しているが、スタッフは未経験の方（今日までの私）</li>
-<li data-sourcepos="9:1-9:83">エンジニア界隈以外のイベントスタッフ主催・経験者（私）</li>
-<li data-sourcepos="10:1-11:0">コミュニティに何かしら貢献したい人（私）</li>
+<p data-sourcepos="9:1-11:176">繰り返しになりますが、今回は一般参加ではなくスタッフ参加のため、セミナーの内容というよりは運営側目線<sup><a href="#fn-%E9%81%8B%E5%96%B6%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95" id="fnref-%E9%81%8B%E5%96%B6%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95">1</a></sup>でのアレコレです<br>
+今プチバズっているスタッフエンジニアではないですが、エンジニアがイベントスタッフしてみた話なので、そういう意味ではスタッフ（エンジニア）と言い張っておきます。<br>
+きちんとしたスタッフエンジニアについては、Qiita内だけでも多くの投稿が見つかりますのでそちらを参照されると良いでしょう。</p>
+<p data-sourcepos="13:1-13:108"><iframe id="qiita-embed-content__6f681caed6eb4901fd22de5ed1ffd952" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__6f681caed6eb4901fd22de5ed1ffd952" data-content="https%3A%2F%2Fqiita.com%2Fsearch%3Fq%3D%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%2583%25E3%2583%2595%25E3%2582%25A8%25E3%2583%25B3%25E3%2582%25B8%25E3%2583%258B%25E3%2582%25A2" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="17:1-17:27">
+<span id="本稿のターゲット" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E3%82%BF%E3%83%BC%E3%82%B2%E3%83%83%E3%83%88"><i class="fa fa-link"></i></a>本稿のターゲット</h2>
+<ul data-sourcepos="18:1-22:0">
+<li data-sourcepos="18:1-18:86">いつも一般参加で知らずのうちにお世話になっている人（私）</li>
+<li data-sourcepos="19:1-19:113">エンジニアイベントには参加しているが、スタッフは未経験の方（今日までの私）</li>
+<li data-sourcepos="20:1-20:83">エンジニア界隈以外のイベントスタッフ主催・経験者（私）</li>
+<li data-sourcepos="21:1-22:0">コミュニティに何かしら貢献したい人（私）</li>
 </ul>
-<p data-sourcepos="12:1-12:42">という、私のための備忘録です</p>
-<h2 data-sourcepos="14:1-14:18">
-<span id="目的目標" class="fragment"></span><a href="#%E7%9B%AE%E7%9A%84%E7%9B%AE%E6%A8%99"><i class="fa fa-link"></i></a>目的・目標</h2>
-<div data-sourcepos="15:1-17:3" class="note info">
+<p data-sourcepos="23:1-23:42">という、私のための備忘録です</p>
+<h2 data-sourcepos="25:1-25:27">
+<span id="本稿の目的目標" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E7%9B%AE%E7%9A%84%E7%9B%AE%E6%A8%99"><i class="fa fa-link"></i></a>本稿の目的・目標</h2>
+<div data-sourcepos="26:1-28:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="16:1-16:66">次は（できたらいっしょに）スタッフやろうぜ！</p>
+<p data-sourcepos="27:1-27:66">次は（できたらいっしょに）スタッフやろうぜ！</p>
 </div>
 </div>
-<h2 data-sourcepos="19:1-19:42">
+<p data-sourcepos="30:1-31:93">スタッフになって気付く、知れる話は多いです<br>
+（逆に言うと、スタッフをやると一般参加以上に情報が集まります）</p>
+<h3 data-sourcepos="33:1-33:85">
+<span id="イベントに参加する目的から考えるスタッフをやるべき人" class="fragment"></span><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%99%E3%82%8B%E7%9B%AE%E7%9A%84%E3%81%8B%E3%82%89%E8%80%83%E3%81%88%E3%82%8B%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%82%92%E3%82%84%E3%82%8B%E3%81%B9%E3%81%8D%E4%BA%BA"><i class="fa fa-link"></i></a>イベントに参加する目的から考える、スタッフをやるべき人</h3>
+<ul data-sourcepos="34:1-42:0">
+<li data-sourcepos="34:1-38:147">イベントの界隈や業界については知らない・分からない
+<ul data-sourcepos="35:3-38:147">
+<li data-sourcepos="35:3-36:170">セッションを聴いたりブースで話してみるのも方法としては良いですが、コアメンバーとの交流の時間が最も手っ取り早く情報・知識が得られます
+<ul data-sourcepos="36:5-36:170">
+<li data-sourcepos="36:5-36:170">コアメンバーはコミュニティにも詳しく、かつ業界にも詳しい人が多い上に別イベント（でorも）主催やってる人がいます</li>
+</ul>
+</li>
+<li data-sourcepos="37:3-38:147">当たり前ですが、知らない事は全部教えてくれ、というスタンスでは「こいつナメてんのか？」と思われても仕方ないのは当然です。節度はお忘れ無く！
+<ul data-sourcepos="38:5-38:147">
+<li data-sourcepos="38:5-38:147">とはいえ、知らない・詳しくないからこそ新しい風を吹かせるという役割を期待されている事は多いです</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="39:1-39:41">自分もセミナーに興味がある</li>
+<li data-sourcepos="40:1-42:0">裏技として
+<ul data-sourcepos="41:3-42:0">
+<li data-sourcepos="41:3-42:0">声を大にして言うことではないのですが、来場者として参加要件を満たしていなくてもスタッフとしての参加要件を満たしていればイベントに参加する事ができます</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="43:1-43:64">
+<span id="いきなりスタッフ参加はハードル高くない" class="fragment"></span><a href="#%E3%81%84%E3%81%8D%E3%81%AA%E3%82%8A%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E5%8F%82%E5%8A%A0%E3%81%AF%E3%83%8F%E3%83%BC%E3%83%89%E3%83%AB%E9%AB%98%E3%81%8F%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>いきなりスタッフ参加はハードル高くない？</h3>
+<p data-sourcepos="44:1-46:369">実は私もこの辺りは気持ちとしてありました。<br>
+というのも、IT界隈ではいないと認識されがちですが、IT界隈以外の催し事を含めると大体スタッフルームまたはイベント中の盗難騒ぎが起こるため（起こった現場に居合わせた経験があるため）身元不明のスタッフを採用しませんし、身分証ではないですが緊急連絡先などをはじめスタッフの個人情報は持つようにしています。<br>
+私の場合は当該イベント終了後は使う事がない上に、活用できない個人情報は持っているだけでリスクでしかないため即時破棄しますが、個人情報を取られても良いという信頼関係が成立していない関係値の人間をスタッフとして扱うことをリスクだと考えているからです。</p>
+<p data-sourcepos="48:1-48:162">これを説明すると納得はされますが、今のところそういった問題になっていないのは本当に良い界隈だなと思いました。</p>
+<h3 data-sourcepos="50:1-50:40">
+<span id="スタッフって報酬あるの" class="fragment"></span><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%81%A3%E3%81%A6%E5%A0%B1%E9%85%AC%E3%81%82%E3%82%8B%E3%81%AE"><i class="fa fa-link"></i></a>スタッフって報酬あるの？</h3>
+<p data-sourcepos="51:1-53:192">ある場合もあるでしょうし、ない場合もあるんじゃないでしょうか？<br>
+基本的にスタッフとは「コミュニティやイベントに貢献したい」という気持ちでやるものだと思っているので、報酬の多寡は気にしていませんし、求めたこともありません。また、求められた事もありません。<br>
+とはいえ、主催目線では「どうしてもこの人にお願いしたい」というケースはあるので、その場合は交渉になるでしょう（ケースバイケース）</p>
+<p data-sourcepos="55:1-56:111">あえて言えば「一般参加では得られない機会（時間・体験）と情報量・人脈が報酬です。<br>
+なお「ください」と言ってもらえるものではないため、自ら報酬を作りましょう。</p>
+<h2 data-sourcepos="58:1-58:42">
 <span id="やったことスタッフ業務" class="fragment"></span><a href="#%E3%82%84%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E6%A5%AD%E5%8B%99"><i class="fa fa-link"></i></a>やったこと（スタッフ業務）</h2>
-<p data-sourcepos="20:1-20:72">項目は時系列順にしてますが、流動的に変わってます</p>
-<h3 data-sourcepos="22:1-22:22">
+<p data-sourcepos="59:1-59:72">項目は時系列順にしてますが、流動的に変わってます</p>
+<h3 data-sourcepos="61:1-61:22">
 <span id="会場前設営" class="fragment"></span><a href="#%E4%BC%9A%E5%A0%B4%E5%89%8D%E8%A8%AD%E5%96%B6"><i class="fa fa-link"></i></a>会場前・設営</h3>
-<ul data-sourcepos="23:1-37:0">
-<li data-sourcepos="23:1-27:264">ワンパターンで手を動かせば良いもの
-<ul data-sourcepos="24:3-27:264">
-<li data-sourcepos="24:3-24:40">ネックストラップ組み立て</li>
-<li data-sourcepos="25:3-25:61">トートバックへのチラシ・フライヤー詰め</li>
-<li data-sourcepos="26:3-27:264">内職を効率的にやるスキルも重要。マクドナルドとかはこの辺り鍛えられるのでおすすめ
-<ul data-sourcepos="27:5-27:264">
-<li data-sourcepos="27:5-27:264">ただし、マクドナルドの場合は標準規格として効率的な方法は研究され尽くしているので、自分流にアレンジしたい場合は自分最適であると認識した上でやり方を他者に強要しないようにする</li>
+<ul data-sourcepos="62:1-76:0">
+<li data-sourcepos="62:1-66:264">ワンパターンで手を動かせば良いもの
+<ul data-sourcepos="63:3-66:264">
+<li data-sourcepos="63:3-63:40">ネックストラップ組み立て</li>
+<li data-sourcepos="64:3-64:61">トートバックへのチラシ・フライヤー詰め</li>
+<li data-sourcepos="65:3-66:264">内職を効率的にやるスキルも重要。マクドナルドとかはこの辺り鍛えられるのでおすすめ
+<ul data-sourcepos="66:5-66:264">
+<li data-sourcepos="66:5-66:264">ただし、マクドナルドの場合は標準規格として効率的な方法は研究され尽くしているので、自分流にアレンジしたい場合は自分最適であると認識した上でやり方を他者に強要しないようにする</li>
 </ul>
 </li>
 </ul>
 </li>
-<li data-sourcepos="28:1-28:68">ゴミの管理・ゴミ箱設置（場合により組み立て）</li>
-<li data-sourcepos="29:1-37:0">ゴミの分別
-<ul data-sourcepos="30:3-37:0">
-<li data-sourcepos="30:3-32:96">大ゴミ
-<ul data-sourcepos="31:5-32:96">
-<li data-sourcepos="31:5-31:36">配送に使った段ボール</li>
-<li data-sourcepos="32:5-32:96">資料など配布後に手元からなくなったため必要性が消えた梱包材類</li>
+<li data-sourcepos="67:1-67:68">ゴミの管理・ゴミ箱設置（場合により組み立て）</li>
+<li data-sourcepos="68:1-76:0">ゴミの分別
+<ul data-sourcepos="69:3-76:0">
+<li data-sourcepos="69:3-71:96">大ゴミ
+<ul data-sourcepos="70:5-71:96">
+<li data-sourcepos="70:5-70:36">配送に使った段ボール</li>
+<li data-sourcepos="71:5-71:96">資料など配布後に手元からなくなったため必要性が消えた梱包材類</li>
 </ul>
 </li>
-<li data-sourcepos="33:3-35:87">小ゴミ（可燃・不燃・ペットボトル・）
-<ul data-sourcepos="34:5-35:87">
-<li data-sourcepos="34:5-34:66">来場者が持ち込んだもの（スタッフを含む）</li>
-<li data-sourcepos="35:5-35:87">会場提供者が常設しているゴミ箱の使用を制限する取り組み</li>
+<li data-sourcepos="72:3-74:87">小ゴミ（可燃・不燃・ペットボトル・）
+<ul data-sourcepos="73:5-74:87">
+<li data-sourcepos="73:5-73:66">来場者が持ち込んだもの（スタッフを含む）</li>
+<li data-sourcepos="74:5-74:87">会場提供者が常設しているゴミ箱の使用を制限する取り組み</li>
 </ul>
 </li>
-<li data-sourcepos="36:3-37:0">ガムテープや養生テープを使って机にゴミ袋をぶら下げて貼り付けたりもしてますが、</li>
+<li data-sourcepos="75:3-76:0">ガムテープや養生テープを使って机にゴミ袋をぶら下げて貼り付けたりもしてますが、</li>
 </ul>
 </li>
 </ul>
-<p data-sourcepos="38:1-38:210">会場提供側宛の配送物や、参加スポンサーの配送物が混じる事があるので、梱包物の取り出し時には宛名が確実に正しいことを確認してから取り出します。</p>
-<h3 data-sourcepos="40:1-40:25">
+<p data-sourcepos="77:1-77:210">会場提供側宛の配送物や、参加スポンサーの配送物が混じる事があるので、梱包物の取り出し時には宛名が確実に正しいことを確認してから取り出します。</p>
+<h3 data-sourcepos="79:1-79:25">
 <span id="受付会場案内" class="fragment"></span><a href="#%E5%8F%97%E4%BB%98%E4%BC%9A%E5%A0%B4%E6%A1%88%E5%86%85"><i class="fa fa-link"></i></a>受付・会場案内</h3>
-<ul data-sourcepos="41:1-56:0">
-<li data-sourcepos="41:1-42:88">案内漏れについては、最初の会場セッション・あいさつで全体向けに案内するので多少漏れたり間違っていてもそちらで吸収できます
-<ul data-sourcepos="42:3-42:88">
-<li data-sourcepos="42:3-42:88">特に会場のことはこの時に初めて知る（気付く）事があるかも</li>
+<ul data-sourcepos="80:1-95:0">
+<li data-sourcepos="80:1-81:88">案内漏れについては、最初の会場セッション・あいさつで全体向けに案内するので多少漏れたり間違っていてもそちらで吸収できます
+<ul data-sourcepos="81:3-81:88">
+<li data-sourcepos="81:3-81:88">特に会場のことはこの時に初めて知る（気付く）事があるかも</li>
 </ul>
 </li>
-<li data-sourcepos="43:1-50:54">受付業務の作業
-<ul data-sourcepos="44:3-50:54">
-<li data-sourcepos="44:3-44:91">名前を聞いて名簿（紙なりスプレッドシートなり）から検索する</li>
-<li data-sourcepos="45:3-46:24">専用アプリからQRコードを読み込む
-<ul data-sourcepos="46:5-46:24">
-<li data-sourcepos="46:5-46:24">今回はこちら</li>
+<li data-sourcepos="82:1-89:54">受付業務の作業
+<ul data-sourcepos="83:3-89:54">
+<li data-sourcepos="83:3-83:91">名前を聞いて名簿（紙なりスプレッドシートなり）から検索する</li>
+<li data-sourcepos="84:3-85:24">専用アプリからQRコードを読み込む
+<ul data-sourcepos="85:5-85:24">
+<li data-sourcepos="85:5-85:24">今回はこちら</li>
 </ul>
 </li>
-<li data-sourcepos="47:3-50:54">おそらく名簿管理している事がほとんどのはずなので、名前検索時は以下に注意
-<ul data-sourcepos="48:5-50:54">
-<li data-sourcepos="48:5-48:39">漢字の読みが一致しない</li>
-<li data-sourcepos="49:5-49:42">登録名と名前が一致しない</li>
-<li data-sourcepos="50:5-50:54">システム上、読みを登録していない</li>
-</ul>
-</li>
-</ul>
-</li>
-<li data-sourcepos="51:1-52:58">スピーカー・スポンサー対応
-<ul data-sourcepos="52:3-52:58">
-<li data-sourcepos="52:3-52:58">予約をしていないケースがある（多い）</li>
-</ul>
-</li>
-<li data-sourcepos="53:1-56:0">景品交換所とルールの案内
-<ul data-sourcepos="54:3-56:0">
-<li data-sourcepos="54:3-54:73">スタッフ・あるかどうかも事前に確認しておくべき</li>
-<li data-sourcepos="55:3-56:0">主催・対応フローを認識・周知する</li>
+<li data-sourcepos="86:3-89:54">おそらく名簿管理している事がほとんどのはずなので、名前検索時は以下に注意
+<ul data-sourcepos="87:5-89:54">
+<li data-sourcepos="87:5-87:39">漢字の読みが一致しない</li>
+<li data-sourcepos="88:5-88:42">登録名と名前が一致しない</li>
+<li data-sourcepos="89:5-89:54">システム上、読みを登録していない</li>
 </ul>
 </li>
 </ul>
-<h3 data-sourcepos="57:1-57:16">
+</li>
+<li data-sourcepos="90:1-91:58">スピーカー・スポンサー対応
+<ul data-sourcepos="91:3-91:58">
+<li data-sourcepos="91:3-91:58">予約をしていないケースがある（多い）</li>
+</ul>
+</li>
+<li data-sourcepos="92:1-95:0">景品交換所とルールの案内
+<ul data-sourcepos="93:3-95:0">
+<li data-sourcepos="93:3-93:73">スタッフ・あるかどうかも事前に確認しておくべき</li>
+<li data-sourcepos="94:3-95:0">主催・対応フローを認識・周知する</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="96:1-96:16">
 <span id="現地運営" class="fragment"></span><a href="#%E7%8F%BE%E5%9C%B0%E9%81%8B%E5%96%B6"><i class="fa fa-link"></i></a>現地運営</h3>
-<ul data-sourcepos="58:1-64:0">
-<li data-sourcepos="58:1-60:64">補充
-<ul data-sourcepos="59:3-60:64">
-<li data-sourcepos="59:3-59:70">ケータリング（ご飯とか食べ物系）の準備、展開</li>
-<li data-sourcepos="60:3-60:64">リフレッシュメント（ドリンク、お菓子系）</li>
+<ul data-sourcepos="97:1-103:0">
+<li data-sourcepos="97:1-99:64">補充
+<ul data-sourcepos="98:3-99:64">
+<li data-sourcepos="98:3-98:70">ケータリング（ご飯とか食べ物系）の準備、展開</li>
+<li data-sourcepos="99:3-99:64">リフレッシュメント（ドリンク、お菓子系）</li>
 </ul>
 </li>
-<li data-sourcepos="61:1-64:0">タイムキーパー
-<ul data-sourcepos="62:3-64:0">
-<li data-sourcepos="62:3-62:70">シフト決め（聞きたいセッションがあれば調整）</li>
-<li data-sourcepos="63:3-64:0">タイムキーバーのフォロー<sup><a href="#fn-timer" id="fnref-timer">1</a></sup>
+<li data-sourcepos="100:1-103:0">タイムキーパー
+<ul data-sourcepos="101:3-103:0">
+<li data-sourcepos="101:3-101:70">シフト決め（聞きたいセッションがあれば調整）</li>
+<li data-sourcepos="102:3-103:0">タイムキーバーのフォロー<sup><a href="#fn-timer" id="fnref-timer">2</a></sup>
 </li>
 </ul>
 </li>
 </ul>
-<p data-sourcepos="65:1-67:72">特に補充関係はなくなった時にどうするかも決めておいても良かったかも<br>
+<p data-sourcepos="104:1-106:72">特に補充関係はなくなった時にどうするかも決めておいても良かったかも<br>
 どうしてもなくなりやすいもの（人気）とそうでないものの差があり、数が読みにくいのも実情ですが、売れない商品を押し出す工夫を意識できると売れ残り（を集めて宅配コストかけたり）を防げるかなと<br>
 ↑この辺りはコンビニ経営者レベルの意見が聞きたい</p>
-<h2 data-sourcepos="71:1-71:21">
+<h2 data-sourcepos="110:1-110:21">
 <span id="懇親会の準備" class="fragment"></span><a href="#%E6%87%87%E8%A6%AA%E4%BC%9A%E3%81%AE%E6%BA%96%E5%82%99"><i class="fa fa-link"></i></a>懇親会の準備</h2>
-<div data-sourcepos="72:1-74:3" class="note warn">
+<div data-sourcepos="111:1-113:3" class="note warn">
 <span class="fa fa-fw fa-exclamation-circle"></span><div>
-<p data-sourcepos="73:1-73:195">イベントレポートは即時投稿しないと二度と見ないし忘れる、という自己の戒めがありますので、懇親会については覚えていたら追記しています</p>
+<p data-sourcepos="112:1-112:195">イベントレポートは即時投稿しないと二度と見ないし忘れる、という自己の戒めがありますので、懇親会については覚えていたら追記しています</p>
 </div>
 </div>
-<p data-sourcepos="76:1-77:84">最終セッションが終わった後に書いていくコーナー、のつもりですが、このタイミングから忙しくなるので、本稿はそこまでに書いた内容ということですね。<br>
+<p data-sourcepos="115:1-116:84">最終セッションが終わった後に書いていくコーナー、のつもりですが、このタイミングから忙しくなるので、本稿はそこまでに書いた内容ということですね。<br>
 この先は執筆時点ではまだ未来の話なので書けないのです…。</p>
-<h2 data-sourcepos="79:1-79:66">
+<h2 data-sourcepos="118:1-118:66">
 <span id="参考イベント前のスタッフミーティングなど" class="fragment"></span><a href="#%E5%8F%82%E8%80%83%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%89%8D%E3%81%AE%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AA%E3%81%A9"><i class="fa fa-link"></i></a>参考：イベント前のスタッフミーティングなど</h2>
-<p data-sourcepos="80:1-81:177">当日スタッフのためか、１回のみ<br>
+<p data-sourcepos="119:1-120:177">当日スタッフのためか、１回のみ<br>
 当日の流れの確認と、集合場所・時間だけ決めた印象。資料は後から追記されるので前日または当日にもう一度確認しておくぐらい</p>
-<h2 data-sourcepos="83:1-83:18">
+<h2 data-sourcepos="122:1-122:18">
 <span id="当日の所感" class="fragment"></span><a href="#%E5%BD%93%E6%97%A5%E3%81%AE%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>当日の所感</h2>
-<p data-sourcepos="84:1-84:144">おそらく多くの方が初見になると思うので、ちょっとだけ「所感」という項目について言及しておきます。</p>
-<div data-sourcepos="86:1-88:3" class="note info">
+<p data-sourcepos="123:1-123:144">おそらく多くの方が初見になると思うので、ちょっとだけ「所感」という項目について言及しておきます。</p>
+<div data-sourcepos="125:1-127:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="87:1-87:51">「お気持ち」は大事だと思ってます。</p>
+<p data-sourcepos="126:1-126:51">「お気持ち」は大事だと思ってます。</p>
 </div>
 </div>
-<div data-sourcepos="90:1-92:3" class="note alert">
+<div data-sourcepos="129:1-131:3" class="note alert">
 <span class="fa fa-fw fa-times-circle"></span><div>
-<p data-sourcepos="91:1-91:72">「お気持ち」を押し付けるのはダメだと思ってます。</p>
+<p data-sourcepos="130:1-130:72">「お気持ち」を押し付けるのはダメだと思ってます。</p>
 </div>
 </div>
-<p data-sourcepos="94:1-94:315">所感のコーナーはイベントの内容とは関係ない話とか「お気持ち」を書いてますが、押し付けるものではないし、なんなら部分最適の可能性が高いため、他のイベントまたは同じ系列のイベントでも最適解が異なる可能性があります。</p>
-<p data-sourcepos="96:1-96:48">多分本稿のメインコンテンツです。</p>
-<h3 data-sourcepos="98:1-98:49">
+<p data-sourcepos="133:1-133:315">所感のコーナーはイベントの内容とは関係ない話とか「お気持ち」を書いてますが、押し付けるものではないし、なんなら部分最適の可能性が高いため、他のイベントまたは同じ系列のイベントでも最適解が異なる可能性があります。</p>
+<p data-sourcepos="135:1-135:48">多分本稿のメインコンテンツです。</p>
+<h3 data-sourcepos="137:1-137:49">
 <span id="スタッフもセッション聞きたい" class="fragment"></span><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%82%82%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E8%81%9E%E3%81%8D%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>スタッフもセッション聞きたい！</h3>
-<p data-sourcepos="99:1-100:228">→聞けました。他のセミナーでもスタッフ間でうまいこと連携をとってもらえば聞きたいセッションに集中できるんじゃないかと思います<br>
+<p data-sourcepos="138:1-139:228">→聞けました。他のセミナーでもスタッフ間でうまいこと連携をとってもらえば聞きたいセッションに集中できるんじゃないかと思います<br>
 アーカイブ視聴ができるとのことで、当日のスタッフ業務・イベント運営に集中していました。知識は会場でなくても得られるので、体験を得ることをメインにしました</p>
-<h3 data-sourcepos="102:1-102:25">
+<h3 data-sourcepos="141:1-141:25">
 <span id="会場環境良すぎ" class="fragment"></span><a href="#%E4%BC%9A%E5%A0%B4%E7%92%B0%E5%A2%83%E8%89%AF%E3%81%99%E3%81%8E"><i class="fa fa-link"></i></a>会場環境良すぎ</h3>
-<ul data-sourcepos="103:1-111:0">
-<li data-sourcepos="103:1-103:62">実は先週段階に別イベントで来場してました</li>
-<li data-sourcepos="104:1-104:33">Wifiがある、しかも強い</li>
-<li data-sourcepos="105:1-108:108">電源もある（が、使ってない…）
-<ul data-sourcepos="106:3-108:108">
-<li data-sourcepos="106:3-108:108">一般参加者目線だと「使わせてくれよ！」と思うのですが（今回、一般参加だったら間違いなく思ってる）、スタッフ目線だと転倒リスクが上がって危ないので使って欲しくない
-<ul data-sourcepos="107:5-108:108">
-<li data-sourcepos="107:5-107:96">最大の参加人数に合わせて席数を用意するので、机を確保できない</li>
-<li data-sourcepos="108:5-108:108">電源を安全に利用するために机が必須。その場合、席数を減らす必要がある</li>
+<ul data-sourcepos="142:1-150:0">
+<li data-sourcepos="142:1-142:62">実は先週段階に別イベントで来場してました</li>
+<li data-sourcepos="143:1-143:33">Wifiがある、しかも強い</li>
+<li data-sourcepos="144:1-147:108">電源もある（が、使ってない…）
+<ul data-sourcepos="145:3-147:108">
+<li data-sourcepos="145:3-147:108">一般参加者目線だと「使わせてくれよ！」と思うのですが（今回、一般参加だったら間違いなく思ってる）、スタッフ目線だと転倒リスクが上がって危ないので使って欲しくない
+<ul data-sourcepos="146:5-147:108">
+<li data-sourcepos="146:5-146:96">最大の参加人数に合わせて席数を用意するので、机を確保できない</li>
+<li data-sourcepos="147:5-147:108">電源を安全に利用するために机が必須。その場合、席数を減らす必要がある</li>
 </ul>
 </li>
 </ul>
 </li>
-<li data-sourcepos="109:1-111:0">スタッフの登壇者率高すぎ
-<ul data-sourcepos="110:3-111:0">
-<li data-sourcepos="110:3-111:0">そういうもんなのかな…？他のイベントでも私が知らない（気にしていない）だけで、イベントスタッフだけど登壇者！というケースは多いのかもしれない</li>
+<li data-sourcepos="148:1-150:0">スタッフの登壇者率高すぎ
+<ul data-sourcepos="149:3-150:0">
+<li data-sourcepos="149:3-150:0">そういうもんなのかな…？他のイベントでも私が知らない（気にしていない）だけで、イベントスタッフだけど登壇者！というケースは多いのかもしれない</li>
 </ul>
 </li>
 </ul>
-<h3 data-sourcepos="112:1-112:40">
+<h3 data-sourcepos="151:1-151:40">
 <span id="コアスタッフの練度の高さ" class="fragment"></span><a href="#%E3%82%B3%E3%82%A2%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%81%AE%E7%B7%B4%E5%BA%A6%E3%81%AE%E9%AB%98%E3%81%95"><i class="fa fa-link"></i></a>コアスタッフの練度の高さ</h3>
-<p data-sourcepos="113:1-116:96">ちょっと用語説明が必要なので、先に解説を入れます。<br>
+<p data-sourcepos="152:1-155:96">ちょっと用語説明が必要なので、先に解説を入れます。<br>
 まずスタッフの種類がコアスタッフ（コミュニティ運営メンバー）と当日スタッフ（都度募集・有志）に分かれます。<br>
 幸いにも、別コミュニティでコアスタッフ（という名称こそ使わなかったのですが、似たようなロール）をやっていたので、このあたりについては違和感なく入っていけました。<br>
 が、それにしてはコアスタッフの熟練度がすごい。１〜２年かそこらの</p>
-<ul data-sourcepos="118:1-124:0">
-<li data-sourcepos="118:1-120:181">当日、ベテランスタッフの方にめっちゃご指導いただきました！感謝
-<ul data-sourcepos="119:3-120:181">
-<li data-sourcepos="119:3-119:181">奇しくも、個人的にも勉強会などで一方的に知ってるだけの方でしたので「お前誰やねん」的な受け入れ障壁もなかった気がします</li>
-<li data-sourcepos="120:3-120:181">いうて私もイベント運営の主催経験があるので、なんか役割を見つけてバリューを出そう、というので色々と試行錯誤やってました</li>
+<ul data-sourcepos="157:1-163:0">
+<li data-sourcepos="157:1-159:181">当日、ベテランスタッフの方にめっちゃご指導いただきました！感謝
+<ul data-sourcepos="158:3-159:181">
+<li data-sourcepos="158:3-158:181">奇しくも、個人的にも勉強会などで一方的に知ってるだけの方でしたので「お前誰やねん」的な受け入れ障壁もなかった気がします</li>
+<li data-sourcepos="159:3-159:181">いうて私もイベント運営の主催経験があるので、なんか役割を見つけてバリューを出そう、というので色々と試行錯誤やってました</li>
 </ul>
 </li>
-<li data-sourcepos="121:1-124:0">スタッフミーティング等で、特に運営側から指示やアナウンスもなかったのですがほぼ全員がSlackに常駐してました
-<ul data-sourcepos="122:3-124:0">
-<li data-sourcepos="122:3-122:183">午前中は会場に意識を全力で向けていたので気づかなかったんですが、午後からはSlackにも張り付いて全体運営フォローに回りました</li>
-<li data-sourcepos="123:3-124:0">特に次のプログラムがなんだ、いつから始まるんだ、登壇者との打ち合わせがしたいので誰か知りたいなどの要望が多く発生していた印象です</li>
+<li data-sourcepos="160:1-163:0">スタッフミーティング等で、特に運営側から指示やアナウンスもなかったのですがほぼ全員がSlackに常駐してました
+<ul data-sourcepos="161:3-163:0">
+<li data-sourcepos="161:3-161:183">午前中は会場に意識を全力で向けていたので気づかなかったんですが、午後からはSlackにも張り付いて全体運営フォローに回りました</li>
+<li data-sourcepos="162:3-163:0">特に次のプログラムがなんだ、いつから始まるんだ、登壇者との打ち合わせがしたいので誰か知りたいなどの要望が多く発生していた印象です</li>
 </ul>
 </li>
 </ul>
-<h3 data-sourcepos="125:1-125:40">
+<h3 data-sourcepos="164:1-164:40">
 <span id="各スタッフの経歴もやばい" class="fragment"></span><a href="#%E5%90%84%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95%E3%81%AE%E7%B5%8C%E6%AD%B4%E3%82%82%E3%82%84%E3%81%B0%E3%81%84"><i class="fa fa-link"></i></a>各スタッフの経歴もやばい</h3>
-<ul data-sourcepos="126:1-130:0">
-<li data-sourcepos="126:1-127:139">一般参加目線だとスタッフの存在を軽視してしまいがちなのは、同人誌即売会（コミケ）でもあるある
-<ul data-sourcepos="127:3-127:139">
-<li data-sourcepos="127:3-127:139">即売会のスタッフも別イベントの主催なり代表が別イベントのスタッフやってます、とかザラにある</li>
+<ul data-sourcepos="165:1-169:0">
+<li data-sourcepos="165:1-166:139">一般参加目線だとスタッフの存在を軽視してしまいがちなのは、同人誌即売会（コミケ）でもあるある
+<ul data-sourcepos="166:3-166:139">
+<li data-sourcepos="166:3-166:139">即売会のスタッフも別イベントの主催なり代表が別イベントのスタッフやってます、とかザラにある</li>
 </ul>
 </li>
-<li data-sourcepos="128:1-130:0">そもそもイベントスタッフをやりたがる人なんてヤバい人（私目線。なんちゃってエンジニア）しかいない（戒め）
-<ul data-sourcepos="129:3-130:0">
-<li data-sourcepos="129:3-130:0">こう書くとブーメランが刺さるのですが、自分の事は棚に上げます</li>
+<li data-sourcepos="167:1-169:0">そもそもイベントスタッフをやりたがる人なんてヤバい人（私目線。なんちゃってエンジニア）しかいない（戒め）
+<ul data-sourcepos="168:3-169:0">
+<li data-sourcepos="168:3-169:0">こう書くとブーメランが刺さるのですが、自分の事は棚に上げます</li>
 </ul>
 </li>
 </ul>
-<p data-sourcepos="131:1-131:186">小話にもならないネタなんですが、コミケをタイポして「小池」になってしまったのに後で気づいたので都知事の力は強いと思いました。</p>
-<h3 data-sourcepos="133:1-133:91">
+<p data-sourcepos="170:1-170:186">小話にもならないネタなんですが、コミケをタイポして「小池」になってしまったのに後で気づいたので都知事の力は強いと思いました。</p>
+<h3 data-sourcepos="172:1-172:91">
 <span id="わかってないなりにやろうとして混乱させてしまったかも" class="fragment"></span><a href="#%E3%82%8F%E3%81%8B%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%84%E3%81%AA%E3%82%8A%E3%81%AB%E3%82%84%E3%82%8D%E3%81%86%E3%81%A8%E3%81%97%E3%81%A6%E6%B7%B7%E4%B9%B1%E3%81%95%E3%81%9B%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%8B%E3%82%82"><i class="fa fa-link"></i></a>わかってないなりにやろうとして混乱させてしまった（かも？）</h3>
-<p data-sourcepos="134:1-136:102">ちょっと反省だなーと思っているところでもあるんですが、大体の場合現地対応するスタッフ、特に主催寄りは忙しいです。<br>
+<p data-sourcepos="173:1-175:102">ちょっと反省だなーと思っているところでもあるんですが、大体の場合現地対応するスタッフ、特に主催寄りは忙しいです。<br>
 タイムマネジメントは結構きつい上に面倒臭いので、主催側が手の回りにくい細々とした軽作業を持つようにしました。<br>
 その一つが、この後のタイムテーブルを全体に流す、という作業なのですが</p>
-<ul data-sourcepos="138:1-140:0">
-<li data-sourcepos="138:1-138:44">手元に来場者用のスケジュール</li>
-<li data-sourcepos="139:1-140:0">別ファイルで運営用スケジュール</li>
+<ul data-sourcepos="177:1-179:0">
+<li data-sourcepos="177:1-177:44">手元に来場者用のスケジュール</li>
+<li data-sourcepos="178:1-179:0">別ファイルで運営用スケジュール</li>
 </ul>
-<p data-sourcepos="141:1-143:168">を持っていたために、うっかりやらかしてしまいました。<br>
+<p data-sourcepos="180:1-182:168">を持っていたために、うっかりやらかしてしまいました。<br>
 ２つのスケジュールを同じ日に受け取ったのがウッカリの原因かもしれません。<br>
 同じタイミングで２種類のタイムスケジュールを運用する場合は、日付をずらして展開・周知すると良かったかもしれません</p>
-<h3 data-sourcepos="145:1-145:51">
+<h3 data-sourcepos="184:1-184:51">
 <span id="slackちゃんとリアクションしよう" class="fragment"></span><a href="#slack%E3%81%A1%E3%82%83%E3%82%93%E3%81%A8%E3%83%AA%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%97%E3%82%88%E3%81%86"><i class="fa fa-link"></i></a>Slack：ちゃんとリアクションしよう</h3>
-<p data-sourcepos="146:1-149:51">現地対応をしているため、見たのか見ていないのかが確認できません。<br>
+<p data-sourcepos="185:1-188:51">現地対応をしているため、見たのか見ていないのかが確認できません。<br>
 少なくとも見たよ！という場合は見たよスタンプを決めておきましょう<br>
 また、質問や相談をした場合は解決したのかどうかスレッドを辿らないとわからない事があるので、解決済みならきちんとクローズしましょう。<br>
 私の場合、以下を使う事が多いです。</p>
-<ul data-sourcepos="151:1-154:0">
-<li data-sourcepos="151:1-151:26">見たよ：👍 or 👀</li>
-<li data-sourcepos="152:1-152:20">解決済み：✅</li>
-<li data-sourcepos="153:1-154:0">
+<ul data-sourcepos="190:1-193:0">
+<li data-sourcepos="190:1-190:26">見たよ：👍 or 👀</li>
+<li data-sourcepos="191:1-191:20">解決済み：✅</li>
+<li data-sourcepos="192:1-193:0">
 <strong>相談後時間が経っており、未解決</strong>：もう一回全体に向けてメンション飛ばす。緊急性により時間を調整</li>
 </ul>
-<h2 data-sourcepos="155:1-155:9">
+<h2 data-sourcepos="194:1-194:9">
 <span id="謝辞" class="fragment"></span><a href="#%E8%AC%9D%E8%BE%9E"><i class="fa fa-link"></i></a>謝辞</h2>
-<p data-sourcepos="156:1-156:181">本イベントではZennさんも登壇されていたので、他の記事はやらないようにしていますが、本稿だけマルチポストさせてもらってます。</p>
-<h3 data-sourcepos="158:1-158:10">
+<p data-sourcepos="195:1-195:181">本イベントではZennさんも登壇されていたので、他の記事はやらないようにしていますが、本稿だけマルチポストさせてもらってます。</p>
+<h3 data-sourcepos="197:1-197:10">
 <span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
 <section class="footnotes">
 <ol>
+<li id="fn-%E9%81%8B%E5%96%B6%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95">
+<p data-sourcepos="15:24-15:599">【運営側目線】一般参加者目線でメモ。実はスタッフも大別して２パターンで、一般に問題解決能力がある存在を指しますが、全てのユーザーのペルソナを立てる事が外部スタッフ（≒当日スタッフ）の教育コスト面や現実的な課題設定として難しいため、スタッフは「わかる人を呼んでくる役」と割り切ると良いです。そして、スタッフへの要望は自分のわがままになっていないか見直し・振り返りましょう。なお自己反省中 <a href="#fnref-%E9%81%8B%E5%96%B6%E3%82%B9%E3%82%BF%E3%83%83%E3%83%95" class="">↩</a></p>
+</li>
 <li id="fn-timer">
-<p data-sourcepos="69:11-69:371">【タイムキーバーのフォロー】本カンファレンスに限らず、タイムキーパーがその時間中の全責任を負うというプレッシャーがきついので、タイムキーパーは一人代表で立てますが、時間管理自体はタイムキーパー・登壇者・ヘルパーで3重管理すべきだと思ってます。 <a href="#fnref-timer" class="">↩</a></p>
+<p data-sourcepos="108:11-108:371">【タイムキーバーのフォロー】本カンファレンスに限らず、タイムキーパーがその時間中の全責任を負うというプレッシャーがきついので、タイムキーパーは一人代表で立てますが、時間管理自体はタイムキーパー・登壇者・ヘルパーで3重管理すべきだと思ってます。 <a href="#fnref-timer" class="">↩</a></p>
 </li>
 </ol>
 </section>
