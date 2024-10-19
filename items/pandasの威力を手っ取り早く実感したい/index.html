@@ -1,119 +1,97 @@
-<p>私自身、pythonもあまり理解していると言えないレベルだが、そんなレベルでも手っ取り早くパンダさんすげー！っていいたい記事が見つからなかったので書いた。<br>
+<p data-sourcepos="1:1-3:198">私自身、pythonもあまり理解していると言えないレベルだが、そんなレベルでも手っ取り早くパンダさんすげー！っていいたい記事が見つからなかったので書いた。<br>
 正直、他の記事とかを読むと、周りのレベルが高すぎて参入障壁を非常に高く感じていたpython,pandasだが、私みたいなおっさん勢でもpythonのなんかすごいライブラリ使い始められるよ！っていうのを伝えたかった。<br>
 少しでも難しい話はここではしたくないと思って書いているので、有識者各位から見れば疑問に感じる部分は多くあることをご留意いただきたい。</p>
-
-<p>今回つかったもの<br>
+<p data-sourcepos="5:1-8:32">今回つかったもの<br>
 import pandas as pd  #pip, xlrd, openpyxl<br>
 import sqlite3  #apt install / _sqlite3が無いと言われた場合はpython自体の再インストールを<br>
 from pandasql import sqldf  #pip</p>
-
-<p>STEP2では以下が必要になる。<br>
+<p data-sourcepos="10:1-11:13">STEP2では以下が必要になる。<br>
 import socket</p>
-
-<h1>
+<h1 data-sourcepos="13:1-13:41">
 <span id="step0-代入をatで軽快にやろう" class="fragment"></span><a href="#step0-%E4%BB%A3%E5%85%A5%E3%82%92at%E3%81%A7%E8%BB%BD%E5%BF%AB%E3%81%AB%E3%82%84%E3%82%8D%E3%81%86"><i class="fa fa-link"></i></a>STEP0. 代入をatで軽快にやろう</h1>
-
-<h2>
+<h2 data-sourcepos="14:1-14:15">
 <span id="まえがき" class="fragment"></span><a href="#%E3%81%BE%E3%81%88%E3%81%8C%E3%81%8D"><i class="fa fa-link"></i></a>まえがき</h2>
-
-<p>dataframeを使い始めて思ったのが</p>
-
-<ul>
-<li>よく分からん</li>
-<li>使いやす……い……？</li>
-<li>dictで良いんじゃないの？</li>
+<p data-sourcepos="15:1-15:42">dataframeを使い始めて思ったのが</p>
+<ul data-sourcepos="17:1-20:0">
+<li data-sourcepos="17:1-17:20">よく分からん</li>
+<li data-sourcepos="18:1-18:32">使いやす……い……？</li>
+<li data-sourcepos="19:1-20:0">dictで良いんじゃないの？</li>
 </ul>
-
-<p>という、<strong>pandasとはなんぞや？をまるで理解していない</strong>意見だった。<br>
+<p data-sourcepos="21:1-22:357">という、<strong>pandasとはなんぞや？をまるで理解していない</strong>意見だった。<br>
 もちろん、pandasの使い方を知らないけどとりあえず使ってみよう、から始まった話なのでこういうトンチンカンな事をやりだすのもよくある話（スマートフォンを知らないけどガラケーから機種変した時のような、あの気分）だが、分からないなりにやってみたが、</p>
-
-<p>遅い</p>
-
-<p>もちろん、使い方を間違えているからに他ならない事は明記しておくが、とりあえずは非効率的なforやなんちゃってリスト内包表記を使うのをやめる事から考えてみた。<br>
+<p data-sourcepos="24:1-24:6">遅い</p>
+<p data-sourcepos="26:1-27:39">もちろん、使い方を間違えているからに他ならない事は明記しておくが、とりあえずは非効率的なforやなんちゃってリスト内包表記を使うのをやめる事から考えてみた。<br>
 その軌跡をたどろうと思う。</p>
-
-<h2>
+<h2 data-sourcepos="29:1-29:9">
 <span id="本題" class="fragment"></span><a href="#%E6%9C%AC%E9%A1%8C"><i class="fa fa-link"></i></a>本題</h2>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="31:1-50:3">
 <div class="code-lang"><span class="bold">準備.py</span></div>
-<div class="highlight"><pre><code><span class="kn">import</span> <span class="nn">pandas</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'site.csv'</span><span class="p">)</span>  <span class="c1">#たったこれだけでCSVが使えるようになるパンダさんすごい
+<div class="highlight"><pre><code><span class="kn">import</span> <span class="n">pandas</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">site.csv</span><span class="sh">'</span><span class="p">)</span>  <span class="c1">#たったこれだけでCSVが使えるようになるパンダさんすごい
 #site.csvにはsite,url,ip,host（サイト名、URL、IP、portなど）が入っているものを想定
 </span>
 
 <span class="c1">#良い例
 </span><span class="k">def</span> <span class="nf">good</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">.</span><span class="n">itterrows</span><span class="p">():</span>
-    <span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'test'</span>
+  <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">.</span><span class="nf">itterrows</span><span class="p">():</span>
+    <span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">test</span><span class="sh">'</span>
 
 <span class="c1"># rowの中にcsvヘッダを持っており、df.(head)[index]で簡単かつ高速に参照できる
 </span>
 <span class="c1">#よく分からない時にやっていた事
 </span><span class="k">def</span> <span class="nf">poor</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
-  <span class="n">df</span><span class="p">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="s">'test'</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+  <span class="n">df</span><span class="p">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">test</span><span class="sh">'</span>
 
 <span class="c1"># range(len(df))を変数にしたり、リスト内包表記やmapにしても上記例より遅かった
 </span></code></pre></div>
 </div>
-
-<p>これは手元のコードで比べてもらうと一目瞭然かと思う。<br>
+<p data-sourcepos="52:1-54:81">これは手元のコードで比べてもらうと一目瞭然かと思う。<br>
 dataframeに代入する処理をgoodのように書き換えるだけでだいぶ変わる。大事なのは(dataframe).<strong>at</strong><br>
 そこだけ変えるだけでも体感で分かるレベルで早くなった。</p>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="56:1-62:3">
 <div class="code-lang"><span class="bold">実践.py</span></div>
 <div class="highlight"><pre><code><span class="err">～～</span><span class="n">準備略</span><span class="err">～～</span>
 
-<span class="k">for</span> <span class="n">df1_index</span><span class="p">,</span><span class="n">df1_row</span> <span class="ow">in</span> <span class="n">df1</span><span class="p">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df1</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">'.*test.*'</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="bp">False</span><span class="p">)].</span><span class="n">iterrows</span><span class="p">():</span>
+<span class="k">for</span> <span class="n">df1_index</span><span class="p">,</span><span class="n">df1_row</span> <span class="ow">in</span> <span class="n">df1</span><span class="p">.</span><span class="n">ix</span><span class="p">[</span><span class="n">df1</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="nb">str</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="sh">'</span><span class="s">.*test.*</span><span class="sh">'</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="bp">False</span><span class="p">)].</span><span class="nf">iterrows</span><span class="p">():</span>
   <span class="c1">#nameにtestを含む項目を抜き出す。単純にtestが欲しい場合、df1.ix[df1.name == 'test'].iterrows()
-</span>  <span class="n">df1</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">df1_index</span><span class="p">,</span> <span class="s">'find_test'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'OK'</span>
+</span>  <span class="n">df1</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">df1_index</span><span class="p">,</span> <span class="sh">'</span><span class="s">find_test</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">OK</span><span class="sh">'</span>
 </code></pre></div>
 </div>
-
-<p>変わったのはループの範囲。<br>
+<p data-sourcepos="63:1-64:156">変わったのはループの範囲。<br>
 もっと良い方法があるが、まえがきにも書いた通り私がそこから沼にハマり始めたので、ここでは敢えて割愛する。</p>
-
-<h1>
+<h1 data-sourcepos="66:1-66:33">
 <span id="step1-ムリせずsqlを使う" class="fragment"></span><a href="#step1-%E3%83%A0%E3%83%AA%E3%81%9B%E3%81%9Asql%E3%82%92%E4%BD%BF%E3%81%86"><i class="fa fa-link"></i></a>STEP1. ムリせずSQLを使う</h1>
-
-<p>先述で割愛した通り、pandasには使いやすいメソッドがいっぱいある。<br>
+<p data-sourcepos="68:1-69:216">先述で割愛した通り、pandasには使いやすいメソッドがいっぱいある。<br>
 が、逆に多すぎて全部を覚えるのが大変で、とりあえずコピペで作ったコードでは何がなんだか分からなくなる。そのうちメンテやリファクタリングを諦める。</p>
-
-<p>勉強したての頃やメンテ初期は、あまり頑張りすぎずSQLを使った方が良いかも知れない。<br>
+<p data-sourcepos="71:1-73:203">勉強したての頃やメンテ初期は、あまり頑張りすぎずSQLを使った方が良いかも知れない。<br>
 とはいえ、本当はこんな事をしなくても良い事も多い。<br>
 最終的にはSQLを書かなくていい事はメソッドを使うべきだと思うが、慣れないうちはpandas自体に苦手意識を持たないよう、SQLdfを使うのも良いと思う。</p>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="75:1-90:3">
 <div class="code-lang"><span class="bold">SQL.py</span></div>
-<div class="highlight"><pre><code><span class="err">～～</span><span class="n">上記df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'test'</span><span class="n">を以下の呼び出しなどに読み替える</span><span class="err">～～</span>
+<div class="highlight"><pre><code><span class="err">～～</span><span class="n">上記df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">test</span><span class="sh">'</span><span class="n">を以下の呼び出しなどに読み替える</span><span class="err">～～</span>
 
 <span class="k">def</span> <span class="nf">sql</span><span class="p">(</span><span class="n">df1</span><span class="p">):</span>
   <span class="c1">#sql_resultに欲しい結果のSQLを書く。SQLのfrom句にdf1（python側に書いたpandasデータフレーム）
-</span>  <span class="n">sql_result</span> <span class="o">=</span> <span class="s">"""
+</span>  <span class="n">sql_result</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">
     select *
     from df1
-    ;:"""</span>
-  <span class="n">df2</span> <span class="o">=</span> <span class="n">sqldf</span><span class="p">(</span><span class="n">sql_result</span><span class="p">,</span><span class="nb">locals</span><span class="p">())</span>
+    ;:</span><span class="sh">"""</span>
+  <span class="n">df2</span> <span class="o">=</span> <span class="nf">sqldf</span><span class="p">(</span><span class="n">sql_result</span><span class="p">,</span><span class="nf">locals</span><span class="p">())</span>
   <span class="c1">#del df2[(たとえば、サブクエリ等WHERE句の比較で取得した列など、表示に要らない列)]
 </span>  <span class="k">return</span> <span class="n">df2</span>
 
-<span class="n">df2</span> <span class="o">=</span> <span class="n">sql</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="nf">sql</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
 <span class="c1">#df2 = pd.concat([df1, df2,...], ignore_index=True)  #必要であれば列を追加するなり。ignore_index=Trueでdfx..の結果が0件の場合でもエラーとしない
 </span></code></pre></div>
 </div>
-
-<p>ここでSQLについては触れないが、これで期待した結果と速度を得られるようになる。</p>
-
-<h1>
+<p data-sourcepos="92:1-92:114">ここでSQLについては触れないが、これで期待した結果と速度を得られるようになる。</p>
+<h1 data-sourcepos="94:1-94:63">
 <span id="step2-csvに項目が存在しないケースに対応する" class="fragment"></span><a href="#step2-csv%E3%81%AB%E9%A0%85%E7%9B%AE%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%97%E3%81%AA%E3%81%84%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AB%E5%AF%BE%E5%BF%9C%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>STEP2. CSVに項目が存在しないケースに対応する</h1>
-
-<p>上記例でURL,ipがあるので、ip &lt;- -&gt; host変換をしてみたいケースを考える。<br>
+<p data-sourcepos="95:1-97:201">上記例でURL,ipがあるので、ip &lt;- -&gt; host変換をしてみたいケースを考える。<br>
 pandasの便利さが何となく分かってきたところで、ハマりやすいエラーを考える。<br>
 そもそも、そういうCSVを送ってくるな！と運用で対処できるのが理想だが、現実的にはそうなってない事が多いので、こういうケースを考えておく。</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>def ip_host(df, index):
+<div class="code-frame" data-lang="text" data-sourcepos="99:1-110:3"><div class="highlight"><pre><code>def ip_host(df, index):
   # 各項目に値がない場合の対処。import numpy　として、numpy.NaNで比較しても良いが、以下でも同様の結果が得られる
   if not df.URL == df.URL:
     socket.gethostbyaddr(df2.ip[index])[0]
@@ -124,38 +102,26 @@ pandasの便利さが何となく分かってきたところで、ハマりや�
     pass
 
 </code></pre></div></div>
-
-<p>もう一つ嫌らしいケースとしては、そもそもCSV自体に項目ipやURLなどが存在しないケースがあった場合は上記では対処しきれない。<br>
+<p data-sourcepos="112:1-113:135">もう一つ嫌らしいケースとしては、そもそもCSV自体に項目ipやURLなどが存在しないケースがあった場合は上記では対処しきれない。<br>
 たとえばdf.URLやdf.ipが参照できずエラーになるので、try-exceptでエラーハンドリングする必要がある。</p>
-
-<h1>
+<h1 data-sourcepos="115:1-115:18">
 <span id="step3-脱sql" class="fragment"></span><a href="#step3-%E8%84%B1sql"><i class="fa fa-link"></i></a>STEP3. 脱：SQL</h1>
-
-<p>ここから先は本記事の対象を離れて、pandasのメソッドを頑張って探していく事になる。<br>
+<p data-sourcepos="116:1-117:144">ここから先は本記事の対象を離れて、pandasのメソッドを頑張って探していく事になる。<br>
 SQLに頼らなくても書けると非常にスマートなコードになるので、もっとパンダさんと仲良くなれると思う。</p>
-
-<p>私のようにpythonに苦手意識を持っていたり、pandasにとっつきにくさを感じていた人が「何となくやってみようかな」と思ってくれれば幸いだ。</p>
-
-<h1>
+<p data-sourcepos="119:1-119:192">私のようにpythonに苦手意識を持っていたり、pandasにとっつきにくさを感じていた人が「何となくやってみようかな」と思ってくれれば幸いだ。</p>
+<h1 data-sourcepos="121:1-121:8">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
-
-<p>step0の書き方をやめようと思って、大いに参考にさせていただいた方々。<br>
+<p data-sourcepos="122:1-123:165">step0の書き方をやめようと思って、大いに参考にさせていただいた方々。<br>
 今回登場していない内容もあるが、知っているのと知らないのとでは理解度が違うと思うので挙げさせていただいている。</p>
-
-<p>pandas データフレームをstr.contains()で処理し、nan値を無視したい<br>
+<p data-sourcepos="125:1-126:37">pandas データフレームをstr.contains()で処理し、nan値を無視したい<br>
 <a href="https://teratail.com/questions/108500" class="autolink" rel="nofollow noopener" target="_blank">https://teratail.com/questions/108500</a></p>
-
-<p> concatで連結した時にindexを再度振り直す。<br>
+<p data-sourcepos="128:1-129:57"> concatで連結した時にindexを再度振り直す。<br>
 <a href="http://nekoyukimmm.hatenablog.com/entry/2015/10/20/161110" class="autolink" rel="nofollow noopener" target="_blank">http://nekoyukimmm.hatenablog.com/entry/2015/10/20/161110</a></p>
-
-<p>pandasで任意の位置の値を取得・変更するat, iat, loc, iloc<br>
+<p data-sourcepos="131:1-132:51">pandasで任意の位置の値を取得・変更するat, iat, loc, iloc<br>
 <a href="https://note.nkmk.me/python-pandas-at-iat-loc-iloc/" class="autolink" rel="nofollow noopener" target="_blank">https://note.nkmk.me/python-pandas-at-iat-loc-iloc/</a></p>
-
-<p>高度な副問合せの構文（SQL）<br>
+<p data-sourcepos="134:1-135:59">高度な副問合せの構文（SQL）<br>
 <a href="http://www.atmarkit.co.jp/ait/articles/1209/14/news146.html" class="autolink" rel="nofollow noopener" target="_blank">http://www.atmarkit.co.jp/ait/articles/1209/14/news146.html</a></p>
-
-<p>Pandas のデータフレームの特定の行・列を削除する<br>
+<p data-sourcepos="137:1-138:63">Pandas のデータフレームの特定の行・列を削除する<br>
 <a href="https://pythondatascience.plavox.info/pandas/%E8%A1%8C%E3%83%BB%E5%88%97%E3%82%92%E5%89%8A%E9%99%A4" class="autolink" rel="nofollow noopener" target="_blank">https://pythondatascience.plavox.info/pandas/行・列を削除</a></p>
-
-<p>PythonではNoneの比較は==ではなくisを使う<br>
+<p data-sourcepos="140:1-141:50">PythonではNoneの比較は==ではなくisを使う<br>
 <a href="http://monmon.hateblo.jp/entry/20110214/1297710749" class="autolink" rel="nofollow noopener" target="_blank">http://monmon.hateblo.jp/entry/20110214/1297710749</a></p>

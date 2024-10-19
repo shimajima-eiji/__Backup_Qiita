@@ -1,48 +1,32 @@
-<p>今回使ったのはUbuntuですが、同じやり方でCentOSも出来るんじゃないかなぁ、と思ってます。</p>
-
-<h1>
+<p data-sourcepos="1:1-1:123">今回使ったのはUbuntuですが、同じやり方でCentOSも出来るんじゃないかなぁ、と思ってます。</p>
+<h1 data-sourcepos="3:1-3:8">
 <span id="構成" class="fragment"></span><a href="#%E6%A7%8B%E6%88%90"><i class="fa fa-link"></i></a>構成</h1>
-
-<p>OS: Ubuntu16.04(Server: CUI)<br>
+<p data-sourcepos="4:1-7:5">OS: Ubuntu16.04(Server: CUI)<br>
 CD: Ubuntu16.04(LiveCD: GUI)<br>
 HDD: 4TB<br>
 GRUB2</p>
-
-<h1>
+<h1 data-sourcepos="9:1-9:8">
 <span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意</h1>
-
-<p>ここでは起動をするだけですが、何か変更を加える場合(下記でGRUBの初期化を実施しようとしていますが、こういったケースも含め)バックアップを取っておいてください。<br>
+<p data-sourcepos="10:1-11:102">ここでは起動をするだけですが、何か変更を加える場合(下記でGRUBの初期化を実施しようとしていますが、こういったケースも含め)バックアップを取っておいてください。<br>
 また、正常なシステムで行うと予期せぬ問題が発生する事も考えられます。</p>
-
-<h1>
+<h1 data-sourcepos="13:1-13:8">
 <span id="解決" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA"><i class="fa fa-link"></i></a>解決</h1>
-
-<p><strong>LiveCDのブートメニューを起動して、HDDをrootにする</strong><br>
+<p data-sourcepos="14:1-16:109"><strong>LiveCDのブートメニューを起動して、HDDをrootにする</strong><br>
 boot=casperをroot=/dev/sda2(sda1はbios bootパーティション）として、10分もかからないと思いますが待っていると起動されました。<br>
 イメージ的には、LiveCDで実行する時にchroot /media/ubuntu/(UUID)/とする、でしょうか。</p>
-
-<h1>
+<h1 data-sourcepos="18:1-18:8">
 <span id="展開" class="fragment"></span><a href="#%E5%B1%95%E9%96%8B"><i class="fa fa-link"></i></a>展開</h1>
-
-<p>ネットワーク接続設定を変えてopenssh-serverを入れて接続するところまで確かめたので、この状態でアプリケーションを起動したりするのも問題はなさそうです。<br>
+<p data-sourcepos="19:1-20:141">ネットワーク接続設定を変えてopenssh-serverを入れて接続するところまで確かめたので、この状態でアプリケーションを起動したりするのも問題はなさそうです。<br>
 とはいえ、入念なテストを行ったわけではないので、なるべくなら正常な状態に戻すようにすべきです。</p>
-
-<h2>
+<h2 data-sourcepos="22:1-22:9">
 <span id="備考" class="fragment"></span><a href="#%E5%82%99%E8%80%83"><i class="fa fa-link"></i></a>備考</h2>
-
-<p>GRUB の初期化を実施するとログイン画面ではなくGRUB Rescueが立ち上がるので、私の環境では改善は出来なかったようです。</p>
-
-<h1>
+<p data-sourcepos="23:1-23:163">GRUB の初期化を実施するとログイン画面ではなくGRUB Rescueが立ち上がるので、私の環境では改善は出来なかったようです。</p>
+<h1 data-sourcepos="25:1-25:8">
 <span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h1>
-
-<p>正常なファイルシステムであることをfdisk -lとmount /dev/sda2 (mnt)としてファイルにアクセスできることを確認したぐらいですが、より確実に調べるならgpartedを使うべきでしょう。</p>
-
-<h1>
+<p data-sourcepos="26:1-26:237">正常なファイルシステムであることをfdisk -lとmount /dev/sda2 (mnt)としてファイルにアクセスできることを確認したぐらいですが、より確実に調べるならgpartedを使うべきでしょう。</p>
+<h1 data-sourcepos="28:1-28:8">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
-
-<p><a href="https://www.kunihikokaneko.com/free/linuxtoolchain/grubinstall.html" rel="nofollow noopener" target="_blank">起動できなくなった Ubuntu の起動を試みる(金子邦彦研究室)</a></p>
-
-<h1>
+<p data-sourcepos="29:1-29:161"><a href="https://www.kunihikokaneko.com/free/linuxtoolchain/grubinstall.html" rel="nofollow noopener" target="_blank">起動できなくなった Ubuntu の起動を試みる(金子邦彦研究室)</a></p>
+<h1 data-sourcepos="31:1-31:47">
 <span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
-
-<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+<p data-sourcepos="32:1-32:150">どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

@@ -1,18 +1,12 @@
-
-<h1>
+<h1 data-sourcepos="1:1-1:133">
 <span id="備忘録ターミナルのtransコマンドを使う時にapi制限を回避してファイル翻訳を実行させたい" class="fragment"></span><a href="#%E5%82%99%E5%BF%98%E9%8C%B2%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%81%AEtrans%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E4%BD%BF%E3%81%86%E6%99%82%E3%81%ABapi%E5%88%B6%E9%99%90%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%97%E3%81%A6%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%BF%BB%E8%A8%B3%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%95%E3%81%9B%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>【備忘録】ターミナルのtransコマンドを使う時に、API制限を回避してファイル翻訳を実行させたい</h1>
-
-<p><a href="https://qiita.com/eggplants/items/f3de713add0bb4f0548f#api%E5%88%B6%E9%99%90%E3%81%AE%E5%9B%9E%E9%81%BF" id="reference-c4824dbce598d64d8f10">Translate-shellを無限に動かして遊ぶ#API制限の回避</a>のコマンドを都度都度打ち込んだり、transコマンドをいじるのに抵抗があったので、ファイル化しようとして躓いたところなど。<br>
+<p data-sourcepos="2:1-3:84"><a href="https://qiita.com/eggplants/items/f3de713add0bb4f0548f#api%E5%88%B6%E9%99%90%E3%81%AE%E5%9B%9E%E9%81%BF" id="reference-c4824dbce598d64d8f10">Translate-shellを無限に動かして遊ぶ#API制限の回避</a>のコマンドを都度都度打ち込んだり、transコマンドをいじるのに抵抗があったので、ファイル化しようとして躓いたところなど。<br>
 知ってるかどうかの違いだけど、まとまった情報はなかった。</p>
-
-<p><details><summary>前提：transコマンドのインストール</summary><div>
-
-<p>transコマンドのインストール自体は<a href="https://www.soimort.org/translate-shell/#installation" rel="nofollow noopener" target="_blank">本家</a>の通り。<br>
+<details><summary>前提：transコマンドのインストール</summary><div>
+<p data-sourcepos="7:1-8:75">transコマンドのインストール自体は<a href="https://www.soimort.org/translate-shell/#installation" rel="nofollow noopener" target="_blank">本家</a>の通り。<br>
 環境により方法が異なるため、ここでは解説できない。</p>
-
-<p>私の環境（WSL:Ubuntu）だと<code>#3. From Git</code>の手順でインストールしている。</p>
-
-<div class="code-frame" data-lang="text">
+<p data-sourcepos="10:1-10:93">私の環境（WSL:Ubuntu）だと<code>#3. From Git</code>の手順でインストールしている。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="12:1-17:3">
 <div class="code-lang"><span class="bold">Terminal.</span></div>
 <div class="highlight"><pre><code>git clone https://github.com/soimort/translate-shell
 cd translate-shell/
@@ -20,16 +14,11 @@ make
 [sudo] make install
 </code></pre></div>
 </div>
-
-<p>参考程度に。</p>
-
-<p></p>
-</div></details></p>
-
-<h1>
+<p data-sourcepos="19:1-19:18">参考程度に。</p>
+</div></details>
+<h1 data-sourcepos="23:1-23:30">
 <span id="実行ファイルbash" class="fragment"></span><a href="#%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABbash"><i class="fa fa-link"></i></a>実行ファイル（Bash）</h1>
-
-<div class="code-frame" data-lang="text">
+<div class="code-frame" data-lang="text" data-sourcepos="24:1-39:3">
 <div class="code-lang"><span class="bold">trans_file.bsh</span></div>
 <div class="highlight"><pre><code>#!/bin/bash
 if [ -z "$BASH_VERSION" ] || [ "${BASH##*/}" != "bash" ]; then
@@ -47,31 +36,24 @@ while read line; do
 done &lt;${input}
 </code></pre></div>
 </div>
-
-<h2>
+<h2 data-sourcepos="41:1-41:12">
 <span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>※補足</h2>
-
-<p>Bashである必要があるのは<code>$[RANDOM%5+5]</code>の部分。<br>
+<p data-sourcepos="42:1-43:63">Bashである必要があるのは<code>$[RANDOM%5+5]</code>の部分。<br>
 shで書き換えられるならbashである必要はない。</p>
-
-<h1>
+<h1 data-sourcepos="45:1-45:8">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
-
-<ul>
-<li><a href="https://qiita.com/eggplants/items/f3de713add0bb4f0548f#api%E5%88%B6%E9%99%90%E3%81%AE%E5%9B%9E%E9%81%BF">Translate-shellを無限に動かして遊ぶ</a></li>
-<li><a href="https://qiita.com/ma2saka/items/f975fff5af6d48255e0a" id="reference-f9514d462fde6cd86b96">detect bash（bashから実行されているかどうかの判定）</a></li>
-<li>
+<ul data-sourcepos="46:1-50:0">
+<li data-sourcepos="46:1-46:124"><a href="https://qiita.com/eggplants/items/f3de713add0bb4f0548f#api%E5%88%B6%E9%99%90%E3%81%AE%E5%9B%9E%E9%81%BF">Translate-shellを無限に動かして遊ぶ</a></li>
+<li data-sourcepos="47:1-47:127"><a href="https://qiita.com/ma2saka/items/f975fff5af6d48255e0a" id="reference-f9514d462fde6cd86b96">detect bash（bashから実行されているかどうかの判定）</a></li>
+<li data-sourcepos="48:1-50:0">
 <a href="https://qiita.com/tea4/items/5b430c0ed3da3372166c" id="reference-1201135aadd808f326eb">Qiitaでいつも調べちゃうマークダウン（表、折りたたみ）</a>
-
-<ul>
-<li>本記事内の折りたたみの書き方</li>
+<ul data-sourcepos="49:3-50:0">
+<li data-sourcepos="49:3-50:0">本記事内の折りたたみの書き方</li>
 </ul>
 </li>
 </ul>
-
-<p><details><summary>ご協力のお願い</summary><div>
-<br>
-読みやすく、疲れない記事にする努力をしているのですが、Qiitaで表示数(View)は分かっても読了を知る方法がないので、<br>
-読了された方はLGTMを押してもらえると「この記事は最後まで読んでもらえたんだな」と判別できて助かります。<br>
-お手数をおかけします。<br>
-</div></details></p>
+<details><summary>ご協力のお願い</summary><div>
+読みやすく、疲れない記事にする努力をしているのですが、Qiitaで表示数(View)は分かっても読了を知る方法がないので、
+読了された方はLGTMを押してもらえると「この記事は最後まで読んでもらえたんだな」と判別できて助かります。
+お手数をおかけします。
+</div></details>

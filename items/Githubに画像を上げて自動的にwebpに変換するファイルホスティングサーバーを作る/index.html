@@ -1,49 +1,41 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:45">
 <span id="画像ファイルのアップロード先" class="fragment"></span><a href="#%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89%E5%85%88"><i class="fa fa-link"></i></a>画像ファイルのアップロード先</h2>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Backup_Images"></qiita-embed-ogp></p>
-
-<h2>
+<p data-sourcepos="2:1-2:49"><iframe id="qiita-embed-content__8fd02d69b2c25554701a7b92cf17c83d" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__8fd02d69b2c25554701a7b92cf17c83d" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Backup_Images" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="4:1-4:21">
 <span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h2>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Backup_Images/blob/main/.github/workflows/convert_webp.yml"></qiita-embed-ogp></p>
-
-<h2>
+<p data-sourcepos="5:1-5:94"><iframe id="qiita-embed-content__a77eb9d446ec326585290e08a2df5acf" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__a77eb9d446ec326585290e08a2df5acf" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Backup_Images%2Fblob%2Fmain%2F.github%2Fworkflows%2Fconvert_webp.yml" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="7:1-7:12">
 <span id="使い方" class="fragment"></span><a href="#%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-link"></i></a>使い方</h2>
-
-<p>リポジトリに画像ファイルを上げる<br>
+<p data-sourcepos="8:1-9:9">リポジトリに画像ファイルを上げる<br>
 以上！</p>
-
-<h2>
+<h2 data-sourcepos="11:1-11:30">
 <span id="ymlでやっていること" class="fragment"></span><a href="#yml%E3%81%A7%E3%82%84%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>ymlでやっていること</h2>
-
-<ol>
-<li>webpパッケージをインストール
-
-<ol>
-<li>(今回はUbuntu:latestを使っているので<code>sudo apt install webp</code>。Macなら<code>brew install webp</code>)</li>
+<ol data-sourcepos="12:1-17:0">
+<li data-sourcepos="12:1-13:109">webpパッケージをインストール
+<ol data-sourcepos="13:5-13:109">
+<li data-sourcepos="13:5-13:109">(今回はUbuntu:latestを使っているので<code>sudo apt install webp</code>。Macなら<code>brew install webp</code>)</li>
 </ol>
 </li>
-<li>リポジトリ内のファイルを全てチェックして、見つけたファイルをwebpに変換する
-
-<ol>
-<li>この時、webpに変換できなかったファイルは無視する(cwebpコマンドの挙動)</li>
+<li data-sourcepos="14:1-15:105">リポジトリ内のファイルを全てチェックして、見つけたファイルをwebpに変換する
+<ol data-sourcepos="15:5-15:105">
+<li data-sourcepos="15:5-15:105">この時、webpに変換できなかったファイルは無視する(cwebpコマンドの挙動)</li>
 </ol>
 </li>
-<li>（詳細は後述）webp変換したらpush、変換していないなら何もしない</li>
+<li data-sourcepos="16:1-17:0">（詳細は後述）webp変換したらpush、変換していないなら何もしない</li>
 </ol>
-
-<p>ソースコードは実際に運用しているスクリプトなので、チェックロジックをバシバシ入れていますが、やっている事は上記の通りです。<br>
+<p data-sourcepos="18:1-19:71">ソースコードは実際に運用しているスクリプトなので、チェックロジックをバシバシ入れていますが、やっている事は上記の通りです。<br>
 エッセンスを抽出すると<code>cwebp "(from)" -o "(to)"</code>の部分。</p>
-
-<h2>
+<h2 data-sourcepos="21:1-21:59">
 <span id="20220111-追記もっと簡単で直感的な方法" class="fragment"></span><a href="#20220111-%E8%BF%BD%E8%A8%98%E3%82%82%E3%81%A3%E3%81%A8%E7%B0%A1%E5%8D%98%E3%81%A7%E7%9B%B4%E6%84%9F%E7%9A%84%E3%81%AA%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>2022/01/11 追記。もっと簡単で直感的な方法</h2>
-
-<p>ymlはコマンドの集まりではなく、一つのshellファイルとみなして考えたほうがよさそうです。<br>
+<p data-sourcepos="22:1-23:137">ymlはコマンドの集まりではなく、一つのshellファイルとみなして考えたほうがよさそうです。<br>
 Github Actionsの仕様を考えていましたが、保守性や教育コストを考えるとこちらの方がシンプルでした。</p>
-
-<div class="code-frame" data-lang="yml"><div class="highlight"><pre><code><span class="s">（中略）</span>
+<div class="code-frame" data-lang="yaml" data-sourcepos="25:1-47:3">
+<div class="code-lang"><span class="bold">.yml</span></div>
+<div class="highlight"><pre><code><span class="s">（中略）</span>
 <span class="c1"># 説明のため、echoにしたが実際は処理がいっぱい</span>
 <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">sample</span>
   <span class="na">run</span><span class="pi">:</span> <span class="s">echo 0  &gt;file2webp.log</span>
@@ -64,43 +56,34 @@ Github Actionsの仕様を考えていましたが、保守性や教育コスト
     <span class="s">​else</span>
       <span class="s">​echo "[SKIP] No convert."</span>
     <span class="s">​fi</span>
-</code></pre></div></div>
-
-<p>これなら、GithubActionsを知らなくてもif文で処理できます。<br>
+</code></pre></div>
+</div>
+<p data-sourcepos="49:1-50:160">これなら、GithubActionsを知らなくてもif文で処理できます。<br>
 GithubActionsで変数を持たせると制御が分かりにくいので、今回のようにファイルに書き出して捨てた方が直感的でした。</p>
-
-<h2>
+<h2 data-sourcepos="52:1-52:58">
 <span id="非推奨webp変換判定をgithubactionに渡す" class="fragment"></span><a href="#%E9%9D%9E%E6%8E%A8%E5%A5%A8webp%E5%A4%89%E6%8F%9B%E5%88%A4%E5%AE%9A%E3%82%92githubaction%E3%81%AB%E6%B8%A1%E3%81%99"><i class="fa fa-link"></i></a>（非推奨）webp変換判定をGithubActionに渡す</h2>
-
-<p>まず、これがとんでもなく難しかったです。<br>
+<p data-sourcepos="53:1-54:68">まず、これがとんでもなく難しかったです。<br>
 まずshellの実行結果を受け取る必要がありますが、</p>
-
-<ul>
-<li>shellファイルは戻り値を持たない（実行結果は受け取れる）　　→ 0で正常終了、0以外で異常終了。ただし255件を超えると予期せぬ挙動が起こる可能性がある</li>
-<li>出力を実行結果にする方法がある　→　他の出力が欲しいので使えない</li>
+<ul data-sourcepos="56:1-58:0">
+<li data-sourcepos="56:1-56:214">shellファイルは戻り値を持たない（実行結果は受け取れる）　　→ 0で正常終了、0以外で異常終了。ただし255件を超えると予期せぬ挙動が起こる可能性がある</li>
+<li data-sourcepos="57:1-58:0">出力を実行結果にする方法がある　→　他の出力が欲しいので使えない</li>
 </ul>
-
-<p>という、強烈な問題があります。</p>
-
-<p>次に、shellの結果を受け取れたとしても、Github Actionsで条件判定する方法とはまた別の話なので、これらを解決する方法が必要になりました。</p>
-
-<h3>
+<p data-sourcepos="59:1-59:45">という、強烈な問題があります。</p>
+<p data-sourcepos="61:1-61:190">次に、shellの結果を受け取れたとしても、Github Actionsで条件判定する方法とはまた別の話なので、これらを解決する方法が必要になりました。</p>
+<h3 data-sourcepos="63:1-63:33">
 <span id="shellの結果を受け取る" class="fragment"></span><a href="#shell%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E5%8F%97%E3%81%91%E5%8F%96%E3%82%8B"><i class="fa fa-link"></i></a>shellの結果を受け取る</h3>
-
-<p>急遽、shellスクリプト側に件数を出力する処理を追加しました。<br>
+<p data-sourcepos="64:1-67:47">急遽、shellスクリプト側に件数を出力する処理を追加しました。<br>
 GithubActionsのログに表示をさせたいのと、255件を超える数値を条件処理に使いたいのでどちらも満たせるのが<code>tee</code>コマンドです。<br>
 シンプルに0であればfalse、0以外であればtrueにして渡す方法もありましたが、shell側に責任を持たせるのは違うので、せめて意味のあるものとしてwebp変換した数を出力させるぐらいはやらせる事にしました。<br>
 shell側ができる精一杯の譲歩です。</p>
-
-<h3>
+<h3 data-sourcepos="69:1-69:33">
 <span id="github-actionsで条件処理" class="fragment"></span><a href="#github-actions%E3%81%A7%E6%9D%A1%E4%BB%B6%E5%87%A6%E7%90%86"><i class="fa fa-link"></i></a>Github Actionsで条件処理</h3>
-
-<p><qiita-embed-ogp src="https://qiita.com/ljourm/items/556f5ccc8425891865de"></qiita-embed-ogp></p>
-
-<p>ほぼこちらを参考にしました。<br>
+<p data-sourcepos="70:1-70:51"><iframe id="qiita-embed-content__d0211798d27198bfe94e654dbf8ff559" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__d0211798d27198bfe94e654dbf8ff559" data-content="https%3A%2F%2Fqiita.com%2Fljourm%2Fitems%2F556f5ccc8425891865de" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="72:1-73:87">ほぼこちらを参考にしました。<br>
 デバッグの方法を書いてもらっていたのがとても助かりました。</p>
-
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="75:1-80:3">
 <div class="code-lang"><span class="bold">debug.yml</span></div>
 <div class="highlight"><pre><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">output step context</span>
   <span class="na">run</span><span class="pi">:</span> <span class="s">echo $CONTEXT</span>
@@ -108,11 +91,9 @@ shell側ができる精一杯の譲歩です。</p>
     <span class="na">CONTEXT</span><span class="pi">:</span> <span class="s">${{ toJSON(steps.check_something) }}</span>
 </code></pre></div>
 </div>
-
-<p>この時の条件処理で欲しいのは「webp変換をしたファイルがあるのかどうか」だけなので、<code>tee</code>で作ったファイルを<code>tail -n 1</code>で取得すれば件数だけ取れるので、あとはtrue(success)=0 / false(failure)=0以外で取得すれば良いです。<br>
+<p data-sourcepos="82:1-83:12">この時の条件処理で欲しいのは「webp変換をしたファイルがあるのかどうか」だけなので、<code>tee</code>で作ったファイルを<code>tail -n 1</code>で取得すれば件数だけ取れるので、あとはtrue(success)=0 / false(failure)=0以外で取得すれば良いです。<br>
 従って、</p>
-
-<div class="code-frame" data-lang="yaml">
+<div class="code-frame" data-lang="yaml" data-sourcepos="85:1-99:3">
 <div class="code-lang"><span class="bold">convert_webp.yml</span></div>
 <div class="highlight"><pre><code><span class="na">steps</span><span class="pi">:</span>
 <span class="c1"># （中略）</span>
@@ -121,7 +102,7 @@ shell側ができる精一杯の譲歩です。</p>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">result check</span>
     <span class="na">id</span><span class="pi">:</span> <span class="s">result</span>
     <span class="na">run</span><span class="pi">:</span> <span class="s">tail -n 1 file2webp.log</span>
-    <span class="na">continue-on-error</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">continue-on-error</span><span class="pi">:</span> <span class="kc">true</span>
 <span class="c1"># （中略）</span>
 <span class="c1"># webp変換した場合のみ処理する</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Commit files</span>
@@ -129,35 +110,25 @@ shell側ができる精一杯の譲歩です。</p>
     <span class="na">run</span><span class="pi">:</span> <span class="s">...</span>
 </code></pre></div>
 </div>
-
-<p>上記の方法で取得できます。<br>
-後は生成したファイルのrawを取ったり、ダウンロードをすれば良いです。<sup id="fnref1"><a href="#fn1" title="【作成したwebpファイルをダウンロードする】WEBP変換ツールとかがあるので、こちらを使った方が楽です。">1</a></sup></p>
-
-<h2>
+<p data-sourcepos="101:1-102:103">上記の方法で取得できます。<br>
+後は生成したファイルのrawを取ったり、ダウンロードをすれば良いです。<sup><a href="#fn-1" id="fnref-1">1</a></sup></p>
+<h2 data-sourcepos="105:1-105:42">
 <span id="リポジトリの軽量化について" class="fragment"></span><a href="#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E8%BB%BD%E9%87%8F%E5%8C%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>リポジトリの軽量化について</h2>
-
-<p>ここまでにリポジトリに画像を上げたらwebpに変換してくれる上、ファイルホスティングもしてくれるWebサーバーが手軽に作れます。<br>
+<p data-sourcepos="106:1-107:39">ここまでにリポジトリに画像を上げたらwebpに変換してくれる上、ファイルホスティングもしてくれるWebサーバーが手軽に作れます。<br>
 もし元ファイルが不要なら、</p>
-
-<div class="code-frame" data-lang="sh"><div class="highlight"><pre><code>git pull
+<div class="code-frame" data-lang="sh" data-sourcepos="109:1-115:3"><div class="highlight"><pre><code>git pull
 git filter-branch <span class="nt">--tree-filter</span> <span class="s2">"rm -fr </span><span class="k">${</span><span class="p">元ファイルのpath</span><span class="k">}</span><span class="s2">"</span> HEAD
 git reflog expire <span class="nt">--expire</span><span class="o">=</span>now <span class="nt">--all</span>
 git gc <span class="nt">--aggressive</span> <span class="nt">--prune</span><span class="o">=</span>now
 git push <span class="nt">-f</span>
 </code></pre></div></div>
-
-<p>を実施すると、元ファイルも履歴から削除できて多少軽量化できます。</p>
-
-<h3>
+<p data-sourcepos="117:1-117:96">を実施すると、元ファイルも履歴から削除できて多少軽量化できます。</p>
+<h3 data-sourcepos="119:1-119:10">
 <span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
-
-<div class="footnotes">
-<hr>
+<section class="footnotes">
 <ol>
-
-<li id="fn1">
-<p>【作成したwebpファイルをダウンロードする】<a href="https://lab.syncer.jp/Tool/Webp-Converter" rel="nofollow noopener" target="_blank">WEBP変換ツール</a>とかがあるので、こちらを使った方が楽です。 <a href="#fnref1">↩</a></p>
+<li id="fn-1">
+<p data-sourcepos="103:7-103:194">【作成したwebpファイルをダウンロードする】<a href="https://lab.syncer.jp/Tool/Webp-Converter" rel="nofollow noopener" target="_blank">WEBP変換ツール</a>とかがあるので、こちらを使った方が楽です。 <a href="#fnref-1" class="">↩</a></p>
 </li>
-
 </ol>
-</div>
+</section>

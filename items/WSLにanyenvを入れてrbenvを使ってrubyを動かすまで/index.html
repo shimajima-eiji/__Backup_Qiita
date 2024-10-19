@@ -1,82 +1,58 @@
-<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/84674c0581380aa9acc8"></qiita-embed-ogp></p>
-
-<p>のスピンアウト記事です。<br>
+<p data-sourcepos="1:1-1:54"><iframe id="qiita-embed-content__d33699c943e6f086c82b7f11c1a0630e" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__d33699c943e6f086c82b7f11c1a0630e" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F84674c0581380aa9acc8" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="3:1-4:87">のスピンアウト記事です。<br>
 軽い気持ちでやってみたら案外ハマったので別記事にしました。</p>
-
-<h2>
+<h2 data-sourcepos="6:1-6:9">
 <span id="前提" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>前提</h2>
-
-<ol>
-<li>WSLが動いている</li>
-<li>linuxbrewが使える</li>
-<li>anyenvが使える</li>
+<ol data-sourcepos="7:1-10:0">
+<li data-sourcepos="7:1-7:24">WSLが動いている</li>
+<li data-sourcepos="8:1-8:24">linuxbrewが使える</li>
+<li data-sourcepos="9:1-10:0">anyenvが使える</li>
 </ol>
-
-<p>前提の手順については、上記記事をご参照ください。</p>
-
-<h2>
+<p data-sourcepos="11:1-11:72">前提の手順については、上記記事をご参照ください。</p>
+<h2 data-sourcepos="13:1-13:38">
 <span id="1-rbenvをインストールする" class="fragment"></span><a href="#1-rbenv%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>1. rbenvをインストールする</h2>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>anyenv install rbenv
+<div class="code-frame" data-lang="text" data-sourcepos="14:1-16:3"><div class="highlight"><pre><code>anyenv install rbenv
 </code></pre></div></div>
-
-<p>超簡単！<br>
+<p data-sourcepos="18:1-19:102">超簡単！<br>
 うまく行かない場合はanyenvへのパスが通ってない可能性が高いと思います。</p>
-
-<h2>
+<h2 data-sourcepos="21:1-21:37">
 <span id="2-rubyをインストールする" class="fragment"></span><a href="#2-ruby%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>2. rubyをインストールする</h2>
-
-<p>私の環境ではここで問題が発生しました。</p>
-
-<h4>
+<p data-sourcepos="22:1-22:57">私の環境ではここで問題が発生しました。</p>
+<h4 data-sourcepos="24:1-24:95">
 <span id="rbenvまでのパスも通したのにrbenv-no-such-command-installと怒られる" class="fragment"></span><a href="#rbenv%E3%81%BE%E3%81%A7%E3%81%AE%E3%83%91%E3%82%B9%E3%82%82%E9%80%9A%E3%81%97%E3%81%9F%E3%81%AE%E3%81%ABrbenv-no-such-command-install%E3%81%A8%E6%80%92%E3%82%89%E3%82%8C%E3%82%8B"><i class="fa fa-link"></i></a>rbenvまでのパスも通したのに、<code>rbenv: no such command 'install'</code>と怒られる</h4>
-
-<p>これは<code>brew install ruby-build</code>で解決できます。gccでもbuild-essentialsでもないんですね。ハマりやすいので気をつけて！</p>
-
-<h4>
+<p data-sourcepos="25:1-25:152">これは<code>brew install ruby-build</code>で解決できます。gccでもbuild-essentialsでもないんですね。ハマりやすいので気をつけて！</p>
+<h4 data-sourcepos="27:1-27:26">
 <span id="build-failedになる" class="fragment"></span><a href="#build-failed%E3%81%AB%E3%81%AA%E3%82%8B"><i class="fa fa-link"></i></a>BUILD FAILEDになる</h4>
-
-<p>これはバージョンにもよると思いますが、現行で最新の3.0.3を入れようとすると「パッケージが足りてないので入れてね」と怒られていました。<br>
+<p data-sourcepos="28:1-29:57">これはバージョンにもよると思いますが、現行で最新の3.0.3を入れようとすると「パッケージが足りてないので入れてね」と怒られていました。<br>
 私の環境で足りなかったのは以下の通り。</p>
-
-<ul>
-<li><code>sudo apt install -y zlib1g-dev</code></li>
+<ul data-sourcepos="31:1-32:0">
+<li data-sourcepos="31:1-32:0"><code>sudo apt install -y zlib1g-dev</code></li>
 </ul>
-
-<p>これはエラーメッセージ内の<code>Try running 'apt-get install -y zlib1g-dev' to fetch missing dependencies.</code>を落ち着いて読めば大したことないです。<br>
+<p data-sourcepos="33:1-34:219">これはエラーメッセージ内の<code>Try running 'apt-get install -y zlib1g-dev' to fetch missing dependencies.</code>を落ち着いて読めば大したことないです。<br>
 だいたい公式サイトか、anyenv等を使用した場合に必要なパッケージが別途githubなどに書いてあると思いますので、そちらを参照するのが一番良い方法と思います。</p>
-
-<h2>
+<h2 data-sourcepos="36:1-36:24">
 <span id="3rubyを実行する" class="fragment"></span><a href="#3ruby%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.rubyを実行する</h2>
-
-<p>ここでもハマりました。</p>
-
-<h3>
+<p data-sourcepos="37:1-37:33">ここでもハマりました。</p>
+<h3 data-sourcepos="39:1-39:82">
 <span id="インストールできたのにruby--vでcommand-ruby-not-foundになる" class="fragment"></span><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%8D%E3%81%9F%E3%81%AE%E3%81%ABruby--v%E3%81%A7command-ruby-not-found%E3%81%AB%E3%81%AA%E3%82%8B"><i class="fa fa-link"></i></a>インストールできたのにruby -vで<code>Command 'ruby' not found</code>になる</h3>
-
-<p>インストールが上手く行ってもパスを設定する必要があったりします。</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>echo PATH="$HOME/.rbenv/shims:$PATH" &gt;&gt;$HOME/.profile
+<p data-sourcepos="40:1-40:96">インストールが上手く行ってもパスを設定する必要があったりします。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="42:1-46:3"><div class="highlight"><pre><code>echo PATH="$HOME/.rbenv/shims:$PATH" &gt;&gt;$HOME/.profile
 exec $SHELL -l
 ruby -v
 </code></pre></div></div>
-
-<p>anyenvを介さない場合、rbenvでinstallした状態でrubyにパスが通っているのですが、anyenvだとrbenvでrubyがインストールされるパスが異なるため？か、うまくいきません。<br>
+<p data-sourcepos="48:1-49:108">anyenvを介さない場合、rbenvでinstallした状態でrubyにパスが通っているのですが、anyenvだとrbenvでrubyがインストールされるパスが異なるため？か、うまくいきません。<br>
 解決方法としては、anyenvのrbenvで入れたrubyのパスを指定してあげればいいです。</p>
-
-<h3>
+<h3 data-sourcepos="51:1-51:41">
 <span id="それでもrubyが実行できない" class="fragment"></span><a href="#%E3%81%9D%E3%82%8C%E3%81%A7%E3%82%82ruby%E3%81%8C%E5%AE%9F%E8%A1%8C%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>それでもrubyが実行できない</h3>
-
-<p>rubyのインストールができたら、<code>rbenv global （バージョン）</code>もお忘れなく。</p>
-
-<h3>
+<p data-sourcepos="52:1-52:100">rubyのインストールができたら、<code>rbenv global （バージョン）</code>もお忘れなく。</p>
+<h3 data-sourcepos="54:1-54:43">
 <span id="それでもうまく行かない場合" class="fragment"></span><a href="#%E3%81%9D%E3%82%8C%E3%81%A7%E3%82%82%E3%81%86%E3%81%BE%E3%81%8F%E8%A1%8C%E3%81%8B%E3%81%AA%E3%81%84%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>それでもうまく行かない場合</h3>
-
-<p>どうしてもうまくいかないなら、インストールするバージョンは最新版に拘らず、古いものを使う方法も検討してみるのも良いかもしれません。</p>
-
-<p>あるいは、個人開発と割り切ってapt install rubyとし、ディストリビューションで管理してしまう手もあります。</p>
-
-<h2>
+<p data-sourcepos="55:1-55:195">どうしてもうまくいかないなら、インストールするバージョンは最新版に拘らず、古いものを使う方法も検討してみるのも良いかもしれません。</p>
+<p data-sourcepos="57:1-57:148">あるいは、個人開発と割り切ってapt install rubyとし、ディストリビューションで管理してしまう手もあります。</p>
+<h2 data-sourcepos="59:1-59:9">
 <span id="戻る" class="fragment"></span><a href="#%E6%88%BB%E3%82%8B"><i class="fa fa-link"></i></a>戻る</h2>
-
-<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/84674c0581380aa9acc8"></qiita-embed-ogp></p>
+<p data-sourcepos="61:1-61:54"><iframe id="qiita-embed-content__3866c2faefd064f420b20a11fde4acae" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__3866c2faefd064f420b20a11fde4acae" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F84674c0581380aa9acc8" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>

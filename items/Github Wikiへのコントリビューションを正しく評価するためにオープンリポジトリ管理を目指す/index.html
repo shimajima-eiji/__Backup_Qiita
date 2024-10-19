@@ -1,62 +1,43 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:9">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
-
-<p>できました。</p>
-
-<ol>
-<li>Wikiをクローン</li>
-<li>新しいリポジトリを生成
-
-<ol>
-<li>ない場合は作る</li>
+<p data-sourcepos="2:1-2:18">できました。</p>
+<ol data-sourcepos="4:1-8:0">
+<li data-sourcepos="4:1-4:22">Wikiをクローン</li>
+<li data-sourcepos="5:1-5:36">新しいリポジトリを生成</li>
+<li data-sourcepos="6:3-6:26">ない場合は作る</li>
+<li data-sourcepos="7:1-8:0">新しいリポジトリにwikiリポジトリをpush</li>
 </ol>
-</li>
-<li>新しいリポジトリにwikiリポジトリをpush</li>
-</ol>
-
-<h2>
+<h2 data-sourcepos="9:1-9:9">
 <span id="実験" class="fragment"></span><a href="#%E5%AE%9F%E9%A8%93"><i class="fa fa-link"></i></a>実験</h2>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Github-Operation"></qiita-embed-ogp></p>
-
-<p>のWikiリポジトリを</p>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Github-Operation_wiki"></qiita-embed-ogp></p>
-
-<p>として移行したところ、過去の更新などを生きた状態でコントリビューションとして扱うことに成功しました。<br>
+<p data-sourcepos="11:1-11:52"><iframe id="qiita-embed-content__65b18891db7c39cb1a4fc908dd7860c1" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__65b18891db7c39cb1a4fc908dd7860c1" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Github-Operation" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="13:1-13:25">のWikiリポジトリを</p>
+<p data-sourcepos="15:1-15:57"><iframe id="qiita-embed-content__ab4632371c9a8e2b3928235139096ac1" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__ab4632371c9a8e2b3928235139096ac1" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Github-Operation_wiki" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="17:1-18:112">として移行したところ、過去の更新などを生きた状態でコントリビューションとして扱うことに成功しました。<br>
 これで、<strong>ドキュメンテーションもきちんとした開発貢献だと証明できそうです。</strong></p>
-
-<p>ただし、バージョン管理という観点ではいらない作業ですし、二重管理になるのでもれ抜けが発生します（後述で対策）</p>
-
-<h2>
+<p data-sourcepos="20:1-20:162">ただし、バージョン管理という観点ではいらない作業ですし、二重管理になるのでもれ抜けが発生します（後述で対策）</p>
+<h2 data-sourcepos="22:1-22:12">
 <span id="手引き" class="fragment"></span><a href="#%E6%89%8B%E5%BC%95%E3%81%8D"><i class="fa fa-link"></i></a>手引き</h2>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>git clone (wiki.git)
+<div class="code-frame" data-lang="text" data-sourcepos="23:1-26:3"><div class="highlight"><pre><code>git clone (wiki.git)
 git push --mirror 新規リポジトリ
 </code></pre></div></div>
-
-<p>これだけです。</p>
-
-<h2>
+<p data-sourcepos="28:1-28:21">これだけです。</p>
+<h2 data-sourcepos="30:1-30:51">
 <span id="発展リアルタイム性が必要な場合" class="fragment"></span><a href="#%E7%99%BA%E5%B1%95%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E6%80%A7%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>発展：リアルタイム性が必要な場合</h2>
-
-<p>cronなりでwikiをcloneしてwikiを格納するリポジトリにpushすればいいです。<br>
+<p data-sourcepos="31:1-32:154">cronなりでwikiをcloneしてwikiを格納するリポジトリにpushすればいいです。<br>
 運用上正規のWikiを編集する事はあってもリポジトリを編集する事はないはずなので理論上漏れ抜けはなくせます。</p>
-
-<h2>
+<h2 data-sourcepos="34:1-34:68">
 <span id="応用プライベートリポジトリでwikiを使いたい" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%A7wiki%E3%82%92%E4%BD%BF%E3%81%84%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>応用？:プライベートリポジトリでWikiを使いたい</h2>
-
-<p>とりあえず方法だけ書いておきますが、運用できるとは思えません。<br>
+<p data-sourcepos="35:1-36:105">とりあえず方法だけ書いておきますが、運用できるとは思えません。<br>
 短期的には良いかもしれませんが、保守まで考えると現実的ではありません。</p>
-
-<p>ｆWiki用のリポジトリを公開で作って記載内容をまとめ、リポジトリ自体はWikiのバックアップとしてしまう手が有効です。<br>
+<p data-sourcepos="38:1-39:205">ｆWiki用のリポジトリを公開で作って記載内容をまとめ、リポジトリ自体はWikiのバックアップとしてしまう手が有効です。<br>
 もちろん、公開ができない情報を扱うのがほとんどだと思うので、非公開リポジトリにDocsなどのディレクトリを置き、キーワードを置く手もあります。</p>
-
-<h3>
+<h3 data-sourcepos="41:1-41:7">
 <span id="例" class="fragment"></span><a href="#%E4%BE%8B"><i class="fa fa-link"></i></a>例</h3>
-
-<div class="code-frame" data-lang="gcc-machine-description">
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="42:1-55:3">
 <div class="code-lang"><span class="bold">OpenWiki/Home.md</span></div>
 <div class="highlight"><pre><code>〜〜　情報 〜〜
 # ページ情報
@@ -72,8 +53,7 @@ git push --mirror 新規リポジトリ
 〜〜　情報 〜〜
 </code></pre></div>
 </div>
-
-<div class="code-frame" data-lang="gcc-machine-description">
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="57:1-66:3">
 <div class="code-lang"><span class="bold">ClosedRepository/Docs/Home.md</span></div>
 <div class="highlight"><pre><code>秘匿したい具体的な情報。
 
@@ -85,38 +65,26 @@ git push --mirror 新規リポジトリ
   - URL2: (正しい情報)
 </code></pre></div>
 </div>
-
-<h3>
+<h3 data-sourcepos="68:1-68:25">
 <span id="個人開発の場合" class="fragment"></span><a href="#%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA%E3%81%AE%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>個人開発の場合</h3>
-
-<p>そもそもWiki機能がいらないと思います。<br>
+<p data-sourcepos="69:1-70:66">そもそもWiki機能がいらないと思います。<br>
 が、それも本末転倒なので運用を考えてみます。</p>
-
-<p>先ほどのClosedRepository/Docs以下にREADME.mdだけを置けば、ページを降りるだけで内容が表示されます。<br>
+<p data-sourcepos="72:1-74:180">先ほどのClosedRepository/Docs以下にREADME.mdだけを置けば、ページを降りるだけで内容が表示されます。<br>
 ただし、Wiki機能で重宝するサイドバーやフッターが使えないためページ遷移がやりにくいです。<br>
 そのため、どうしてもWiki機能を使いたい場合は、OpenWikiをただのリンク集とし、内容はClosedRepository/Docs以下に格納する手もあります。</p>
-
-<p>どちらにしても、使いにくいので運用が続くとは思えません。</p>
-
-<h2>
+<p data-sourcepos="76:1-76:84">どちらにしても、使いにくいので運用が続くとは思えません。</p>
+<h2 data-sourcepos="78:1-78:48">
 <span id="疑問github-wikiは運用足り得るか" class="fragment"></span><a href="#%E7%96%91%E5%95%8Fgithub-wiki%E3%81%AF%E9%81%8B%E7%94%A8%E8%B6%B3%E3%82%8A%E5%BE%97%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>疑問:Github Wikiは運用足り得るか？</h2>
-
-<p>正直、QiitaTeamやesaなどナレッジ管理ツールを使った方がいいと思います。<br>
-ナレッジ管理ツールにも長短ありますので、どれが一概に良いか言えませんが、Github WikiやRedMine等のプロジェクト管理ツールでの運用の問題点を洗い出すと、解決ツールの策定がしやすくなると思います。<sup id="fnref1"><a href="#fn1" title="【ナレッジベースの検討】予算の都合などから、一つのツールで全部やろうとしてしまいたくなりますが、運用コストを考えるとそれぞれの専門ツールを使って責任を分けた方が良い事があります。ツール間連携が必要な場合は別途検討が必要です。">1</a></sup><br>
-そういった意味で、スモールスタートでGithub Wikiを使っておくのはアリだと思います。</p>
-
-<hr>
-
-<h3>
+<p data-sourcepos="79:1-80:280">正直、QiitaTeamやesaなどナレッジ管理ツールを使った方がいいと思います。<br>
+ナレッジ管理ツールにも長短ありますので、どれが一概に良いか言えませんが、Github WikiやRedMine等のプロジェクト管理ツールでの運用の問題点を洗い出すと、解決ツールの策定がしやすくなると思います。<sup><a href="#fn-1" id="fnref-1">1</a></sup></p>
+<p data-sourcepos="83:1-83:116">そういった意味で、スモールスタートでGithub Wikiを使っておくのはアリだと思います。</p>
+<hr data-sourcepos="85:1-86:0">
+<h3 data-sourcepos="87:1-87:10">
 <span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
-
-<div class="footnotes">
-<hr>
+<section class="footnotes">
 <ol>
-
-<li id="fn1">
-<p>【ナレッジベースの検討】予算の都合などから、一つのツールで全部やろうとしてしまいたくなりますが、運用コストを考えるとそれぞれの専門ツールを使って責任を分けた方が良い事があります。ツール間連携が必要な場合は別途検討が必要です。 <a href="#fnref1">↩</a></p>
+<li id="fn-1">
+<p data-sourcepos="81:7-81:342">【ナレッジベースの検討】予算の都合などから、一つのツールで全部やろうとしてしまいたくなりますが、運用コストを考えるとそれぞれの専門ツールを使って責任を分けた方が良い事があります。ツール間連携が必要な場合は別途検討が必要です。 <a href="#fnref-1" class="">↩</a></p>
 </li>
-
 </ol>
-</div>
+</section>

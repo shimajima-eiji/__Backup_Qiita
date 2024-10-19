@@ -1,18 +1,16 @@
-<p>（タイトルの比較対象は私の知る範囲です）</p>
-
-<p>いろいろなページを斜め読みしてたんですが、結局よくわからなかったので、forkして設定すれば動くようなものを目指しました。<br>
+<p data-sourcepos="1:1-1:60">（タイトルの比較対象は私の知る範囲です）</p>
+<p data-sourcepos="3:1-4:106">いろいろなページを斜め読みしてたんですが、結局よくわからなかったので、forkして設定すれば動くようなものを目指しました。<br>
 forkして後述のシークレット変数を設定すれば動くので、試してみてください。</p>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Githut-Action_demo"></qiita-embed-ogp></p>
-
-<p>ほとんどREADMEに書いてます。</p>
-
-<h2>
+<p data-sourcepos="6:1-6:54"><iframe id="qiita-embed-content__3afe2b28bd4e648850ee3ca7c3221a02" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__3afe2b28bd4e648850ee3ca7c3221a02" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Githut-Action_demo" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="8:1-8:39">ほとんどREADMEに書いてます。</p>
+<h2 data-sourcepos="10:1-10:21">
 <span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h2>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/__Githut-Action_demo/blob/main/.github/workflows/add_dummy.yml"></qiita-embed-ogp></p>
-
-<div class="code-frame" data-lang="yaml">
+<p data-sourcepos="11:1-11:96"><iframe id="qiita-embed-content__c66e441121ab4d716d2146725a96edf6" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__c66e441121ab4d716d2146725a96edf6" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2F__Githut-Action_demo%2Fblob%2Fmain%2F.github%2Fworkflows%2Fadd_dummy.yml" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<div class="code-frame" data-lang="yaml" data-sourcepos="13:1-35:3">
 <div class="code-lang"><span class="bold">/.github/workflows/add_dummy.yml</span></div>
 <div class="highlight"><pre><code><span class="c1"># 本稿で解説時点のコード</span>
 <span class="na">name</span><span class="pi">:</span> <span class="s">small git push</span>  <span class="c1"># (任意で変更できる。Github Actionsの一覧で表示される名称)</span>
@@ -37,15 +35,11 @@ forkして後述のシークレット変数を設定すれば動くので、試�
           <span class="s">git push</span>
 </code></pre></div>
 </div>
-
-<h2>
+<h2 data-sourcepos="37:1-37:15">
 <span id="実行結果" class="fragment"></span><a href="#%E5%AE%9F%E8%A1%8C%E7%B5%90%E6%9E%9C"><i class="fa fa-link"></i></a>実行結果</h2>
-
-<p><code>/dummy</code>に実行した時点の日付を出力する。<br><br>
+<p data-sourcepos="38:1-39:117"><code>/dummy</code>に実行した時点の日付を出力する。<br>
 試しに、README.mdを適当に変更してpushすればGithub Actionsが動いていることが確認できる。</p>
-
-<h2>
+<h2 data-sourcepos="41:1-41:24">
 <span id="開発アドバイス" class="fragment"></span><a href="#%E9%96%8B%E7%99%BA%E3%82%A2%E3%83%89%E3%83%90%E3%82%A4%E3%82%B9"><i class="fa fa-link"></i></a>開発アドバイス</h2>
-
-<p>とりあえず困ったら<code>pwd</code>したり<code>ls -l</code>で実行結果を見てみると何をすればいいかとっかかりが見えてくると思います。<br>
+<p data-sourcepos="42:1-43:156">とりあえず困ったら<code>pwd</code>したり<code>ls -l</code>で実行結果を見てみると何をすればいいかとっかかりが見えてくると思います。<br>
 コミットログが汚染されるので、開発用の捨てるリポジトリを一つ作ってガチャガチャやると精神的にも良いです。</p>

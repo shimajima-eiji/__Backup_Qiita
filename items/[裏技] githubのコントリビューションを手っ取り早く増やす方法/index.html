@@ -1,73 +1,51 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:9">
 <span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意</h2>
-
-<ul>
-<li>※良いか悪いかでいうと、良くはないです。</li>
-<li>※何のためにやるのかは正直不明です。</li>
-<li>※実際にやるのはおすすめしませんが、できますよという話をします。</li>
+<ul data-sourcepos="2:1-5:0">
+<li data-sourcepos="2:1-2:62">※良いか悪いかでいうと、良くはないです。</li>
+<li data-sourcepos="3:1-3:56">※何のためにやるのかは正直不明です。</li>
+<li data-sourcepos="4:1-5:0">※実際にやるのはおすすめしませんが、できますよという話をします。</li>
 </ul>
-
-<h2>
+<h2 data-sourcepos="6:1-6:9">
 <span id="発端" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF"><i class="fa fa-link"></i></a>発端</h2>
-
-<p>githubを湿潤にしたい（草を生やしたい）と思ったけど、過去の日付を遡らないと面倒くさい……。<br>
+<p data-sourcepos="7:1-8:39">githubを湿潤にしたい（草を生やしたい）と思ったけど、過去の日付を遡らないと面倒くさい……。<br>
 どうにかならないだろうか？</p>
-
-<h2>
+<h2 data-sourcepos="10:1-10:24">
 <span id="それ出来ます" class="fragment"></span><a href="#%E3%81%9D%E3%82%8C%E5%87%BA%E6%9D%A5%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>それ、出来ます</h2>
-
-<p>ポイントは</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>git commit --date="日付型"
+<p data-sourcepos="11:1-11:15">ポイントは</p>
+<div class="code-frame" data-lang="text" data-sourcepos="13:1-15:3"><div class="highlight"><pre><code>git commit --date="日付型"
 </code></pre></div></div>
-
-<p>あとは必要な部分を適宜対応すれば期待した結果が得られるでしょう。</p>
-
-<h2>
+<p data-sourcepos="17:1-17:96">あとは必要な部分を適宜対応すれば期待した結果が得られるでしょう。</p>
+<h2 data-sourcepos="19:1-19:51">
 <span id="コントリビューション数を稼ぐには" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%95%B0%E3%82%92%E7%A8%BC%E3%81%90%E3%81%AB%E3%81%AF"><i class="fa fa-link"></i></a>コントリビューション数を稼ぐには</h2>
-
-<p>元々の発端は上記の通り、古い日付も草で茂らせる事でした。<br>
+<p data-sourcepos="20:1-22:57">元々の発端は上記の通り、古い日付も草で茂らせる事でした。<br>
 が、別に日付を気にしないでもコントリビューション数は稼げます。<br>
 <code>git commit</code>さえ通ってしまえばよいのです。</p>
-
-<p>ちょっと端折りすぎたのできちんと説明します。<br>
+<p data-sourcepos="25:1-29:150">ちょっと端折りすぎたのできちんと説明します。<br>
 githubに草を生やすので当然といえば当然ながらコントリビューションにカウントされます。<br>
 つまり、この仕組みを悪用すればコントリビューション数は事実上改竄が可能です。<br>
 その気になれば、1分で60コントリビューションはできるので、一気に数を稼ぐならマルチプロセスで動かせば良いです。<br>
 コンフリクトを確実に避けたいならファイルを分けたり、プロセスごとにリポジトリを分ける方法もあります。</p>
-
-<h2>
+<h2 data-sourcepos="31:1-31:63">
 <span id="コントリビューション数を稼ぐとどうなるか" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E6%95%B0%E3%82%92%E7%A8%BC%E3%81%90%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>コントリビューション数を稼ぐとどうなるか</h2>
-
-<p>さて、私は元々Githubを使った就活・転職を主に行っています。<br>
+<p data-sourcepos="32:1-35:57">さて、私は元々Githubを使った就活・転職を主に行っています。<br>
 その中ではGithubへのコントリビューション数を聞かれる事は当然ありませんでした。<br>
 具体的にはGithubにどういうものを上げているか、セールスPRとか価格をつけたらいくらにするか、と言ったお話が主なので何の役にも立ちません。<br>
 精々マウンティングが関の山と思います。</p>
-
-<h2>
+<h2 data-sourcepos="37:1-37:9">
 <span id="注意-1" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F-1"><i class="fa fa-link"></i></a>注意</h2>
-
-<p><code>git commit</code>まではローカル作業なので特に怒られはしないですが、<br>
+<p data-sourcepos="38:1-41:148"><code>git commit</code>まではローカル作業なので特に怒られはしないですが、<br>
 <code>git push</code>はサーバーに負荷を掛けるので、連発してはいけません。<br>
 何度もpushしたい瞬間はあると思いますが、せめて5秒ぐらい開けましょう。<br>
-また、5分間で10回以上アクセスがあったら攻撃行為っぽく見える<sup id="fnref1"><a href="#fn1" title="【連続アクセスは何回までなら許されるか？】このあたりは人によります。">1</a></sup>ので、やりすぎはほどほどにしましょう。</p>
-
-<h2>
+また、5分間で10回以上アクセスがあったら攻撃行為っぽく見える<sup><a href="#fn-1" id="fnref-1">1</a></sup>ので、やりすぎはほどほどにしましょう。</p>
+<h2 data-sourcepos="44:1-44:39">
 <span id="有効活用する方法があれば" class="fragment"></span><a href="#%E6%9C%89%E5%8A%B9%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%8C%E3%81%82%E3%82%8C%E3%81%B0"><i class="fa fa-link"></i></a>有効活用する方法があれば</h2>
-
-<p>コメント欄などで教えて下さい。。。</p>
-
-<h3>
+<p data-sourcepos="45:1-45:51">コメント欄などで教えて下さい。。。</p>
+<h3 data-sourcepos="47:1-47:10">
 <span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
-
-<div class="footnotes">
-<hr>
+<section class="footnotes">
 <ol>
-
-<li id="fn1">
-<p>【連続アクセスは何回までなら許されるか？】このあたりは人によります。 <a href="#fnref1">↩</a></p>
+<li id="fn-1">
+<p data-sourcepos="42:7-42:108">【連続アクセスは何回までなら許されるか？】このあたりは人によります。 <a href="#fnref-1" class="">↩</a></p>
 </li>
-
 </ol>
-</div>
+</section>

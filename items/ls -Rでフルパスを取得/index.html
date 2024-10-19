@@ -1,24 +1,18 @@
-<p>あってもおかしくないのに、見当たらなかったので。<br>
+<p data-sourcepos="1:1-3:45">あってもおかしくないのに、見当たらなかったので。<br>
 私の探し方がまずかったのかな…？<br>
 念のため、備忘録おいときます。</p>
-
-<h1>
+<h1 data-sourcepos="5:1-5:24">
 <span id="find--ls--maxdepth-n" class="fragment"></span><a href="#find--ls--maxdepth-n"><i class="fa fa-link"></i></a>find -ls -maxdepth (n)</h1>
-
-<p>一番手っ取り早いのはこれ。<br>
+<p data-sourcepos="6:1-8:107">一番手っ取り早いのはこれ。<br>
 とはいえ、ls -Rの出力形式のようにしたい場合はfindは邪魔になります。<br>
 力技でいい感じにするというのも手ではありますが、今回はlsにこだわります。</p>
-
-<h1>
+<h1 data-sourcepos="10:1-10:20">
 <span id="キーポイント" class="fragment"></span><a href="#%E3%82%AD%E3%83%BC%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>キーポイント</h1>
-
-<p>ターミナルでpwdを打つ機会は多いと思いますが、<code>$PWD</code>で自分の場所がフルパスで取れます。<br>
+<p data-sourcepos="11:1-12:40">ターミナルでpwdを打つ機会は多いと思いますが、<code>$PWD</code>で自分の場所がフルパスで取れます。<br>
 <code>$(PWD)</code>でも<code>PWD</code>でも同じです。</p>
-
-<p>これを使って、今いる場所(./)をフルパスに置き換える、というのが目的です。<br>
+<p data-sourcepos="14:1-15:51">これを使って、今いる場所(./)をフルパスに置き換える、というのが目的です。<br>
 仕組み自体はそんな難しくないです。</p>
-
-<div class="code-frame" data-lang="sh">
+<div class="code-frame" data-lang="sh" data-sourcepos="17:1-25:3">
 <div class="code-lang"><span class="bold">fullls.sh</span></div>
 <div class="highlight"><pre><code><span class="c">#!/bin/sh</span>
 <span class="nv">nowDir</span><span class="o">=</span><span class="nv">$PWD</span>
@@ -29,13 +23,10 @@
 <span class="nb">cd</span> <span class="k">${</span><span class="nv">nowDir</span><span class="k">}</span>
 </code></pre></div>
 </div>
-
-<p>これだけです。とても簡単！<br>
+<p data-sourcepos="27:1-28:146">これだけです。とても簡単！<br>
 nowDirしているのは、lsした後で今いる場所に戻ってくることがあるかも知れないので、念のため入れてます。</p>
-
-<p>気をつけてほしいのが、nowDirでsh実行をする想定でteeとかしたい場合は以下のようにします。</p>
-
-<div class="code-frame" data-lang="sh">
+<p data-sourcepos="30:1-30:125">気をつけてほしいのが、nowDirでsh実行をする想定でteeとかしたい場合は以下のようにします。</p>
+<div class="code-frame" data-lang="sh" data-sourcepos="32:1-41:3">
 <div class="code-lang"><span class="bold">tee.sh</span></div>
 <div class="highlight"><pre><code><span class="c">#!/bin/sh</span>
 
@@ -47,7 +38,6 @@ nowDirしているのは、lsした後で今いる場所に戻ってくること
 <span class="nb">ls</span> <span class="nt">-R</span> <span class="nv">$PWD</span> | <span class="nb">tee</span> <span class="k">${</span><span class="nv">this</span><span class="k">}</span>/tee.txt
 </code></pre></div>
 </div>
-
-<p>これでどこに移動しても一意の場所を設定できます。<br>
+<p data-sourcepos="43:1-45:126">これでどこに移動しても一意の場所を設定できます。<br>
 結構落とし穴なので、出力先の設定も絶対パスにするようにしましょう。<br>
 逆に、相対パスで都合がいい場合はこの限りではありませんが、運用に気をつけてください。</p>

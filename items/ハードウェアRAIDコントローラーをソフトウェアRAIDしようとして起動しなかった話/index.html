@@ -1,111 +1,80 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:18">
 <span id="ごあいさつ" class="fragment"></span><a href="#%E3%81%94%E3%81%82%E3%81%84%E3%81%95%E3%81%A4"><i class="fa fa-link"></i></a>ごあいさつ</h2>
-
-<p>鯖缶のくせに何を当たり前のことを書いているんだ、と思われる方は非常に多いと思いますが、アプリ屋あがりにはコレが結構難しい話だったので、備忘録がてらまとめておきます。<br>
+<p data-sourcepos="2:1-3:99">鯖缶のくせに何を当たり前のことを書いているんだ、と思われる方は非常に多いと思いますが、アプリ屋あがりにはコレが結構難しい話だったので、備忘録がてらまとめておきます。<br>
 まさかこれだけのことのために２日もハマるとは思わなかったので……。</p>
-
-<h2>
+<h2 data-sourcepos="5:1-5:75">
 <span id="環境ほかの環境でも起こりえる可能性があります" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E3%81%BB%E3%81%8B%E3%81%AE%E7%92%B0%E5%A2%83%E3%81%A7%E3%82%82%E8%B5%B7%E3%81%93%E3%82%8A%E3%81%88%E3%82%8B%E5%8F%AF%E8%83%BD%E6%80%A7%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>環境（ほかの環境でも起こりえる可能性があります）</h2>
-
-<ul>
-<li>サーバーラックに格納するタイプの大きなアレ</li>
-<li>専用RAID-SASコントローラー(MegaRAID)
-
-<ul>
-<li>後で知ったんですが、RAID機能がないSASコントローラーがあるそうです。お使いの機種にあるかどうかは要確認：サポート契約が必要？） </li>
+<ul data-sourcepos="6:1-11:0">
+<li data-sourcepos="6:1-6:65">サーバーラックに格納するタイプの大きなアレ</li>
+<li data-sourcepos="7:1-8:189">専用RAID-SASコントローラー(MegaRAID)
+<ul data-sourcepos="8:3-8:189">
+<li data-sourcepos="8:3-8:189">後で知ったんですが、RAID機能がないSASコントローラーがあるそうです。お使いの機種にあるかどうかは要確認：サポート契約が必要？）</li>
 </ul>
 </li>
-<li>ハードディスク(SAS)</li>
-<li>Ubuntu 14.04 Server（2017/11/07 時点で最新を使用）</li>
+<li data-sourcepos="9:1-9:28">ハードディスク(SAS)</li>
+<li data-sourcepos="10:1-11:0">Ubuntu 14.04 Server（2017/11/07 時点で最新を使用）</li>
 </ul>
-
-<h2>
+<h2 data-sourcepos="12:1-12:33">
 <span id="こうすると動きました" class="fragment"></span><a href="#%E3%81%93%E3%81%86%E3%81%99%E3%82%8B%E3%81%A8%E5%8B%95%E3%81%8D%E3%81%BE%E3%81%97%E3%81%9F"><i class="fa fa-link"></i></a>こうすると動きました</h2>
-
-<p>名称はなんとなくでつけてます。手順はあってますが表記はうろ覚え。</p>
-
-<h3>
+<p data-sourcepos="13:1-13:96">名称はなんとなくでつけてます。手順はあってますが表記はうろ覚え。</p>
+<h3 data-sourcepos="15:1-15:28">
 <span id="電源を入れる前に" class="fragment"></span><a href="#%E9%9B%BB%E6%BA%90%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E5%89%8D%E3%81%AB"><i class="fa fa-link"></i></a>電源を入れる前に</h3>
-
-<ol>
-<li>【要検証】HDDはVirtual Driver Group0で構築するものだけにする</li>
+<ol data-sourcepos="16:1-17:0">
+<li data-sourcepos="16:1-17:0">【要検証】HDDはVirtual Driver Group0で構築するものだけにする</li>
 </ol>
-
-<h3>
+<h3 data-sourcepos="18:1-18:11">
 <span id="bios側" class="fragment"></span><a href="#bios%E5%81%B4"><i class="fa fa-link"></i></a>BIOS側</h3>
-
-<ol>
-<li><strong>SATA,eSATAのコントローラー設定をRAIDにしない</strong></li>
-<li>ブートオプションにHard Disk(Raid Adapter)を選択。UEFIではない</li>
-<li>ブートオプションメニューの下の方にあるHDD BBS Propertiesの起動メニューを2.と同じにする。この場合Hard Disk(Raid Adapter)</li>
+<ol data-sourcepos="19:1-22:0">
+<li data-sourcepos="19:1-19:66"><strong>SATA,eSATAのコントローラー設定をRAIDにしない</strong></li>
+<li data-sourcepos="20:1-20:81">ブートオプションにHard Disk(Raid Adapter)を選択。UEFIではない</li>
+<li data-sourcepos="21:1-22:0">ブートオプションメニューの下の方にあるHDD BBS Propertiesの起動メニューを2.と同じにする。この場合Hard Disk(Raid Adapter)</li>
 </ol>
-
-<h3>
+<h3 data-sourcepos="23:1-23:42">
 <span id="raidコントローラー側megaraid" class="fragment"></span><a href="#raid%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E5%81%B4megaraid"><i class="fa fa-link"></i></a>Raidコントローラー側(MegaRAID)</h3>
-
-<ol>
-<li>通常通り、Virtual Driver Groupなどを設定</li>
-<li><strong>Ctrl MngのブートさせたいVirtual Driver Groupを指定</strong></li>
+<ol data-sourcepos="24:1-26:0">
+<li data-sourcepos="24:1-24:53">通常通り、Virtual Driver Groupなどを設定</li>
+<li data-sourcepos="25:1-26:0"><strong>Ctrl MngのブートさせたいVirtual Driver Groupを指定</strong></li>
 </ol>
-
-<h3>
+<h3 data-sourcepos="27:1-27:33">
 <span id="osパーティション設定" class="fragment"></span><a href="#os%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3%E8%A8%AD%E5%AE%9A"><i class="fa fa-link"></i></a>OSパーティション設定</h3>
-
-<ol>
-<li>この前段までは普通に環境に合わせて設定</li>
-<li>ブート領域を設定。色々なサイトを参考にすると1Mぐらい？確保するとありますが、私はインストールガイドが指定する容量を設定しました。</li>
+<ol data-sourcepos="28:1-30:0">
+<li data-sourcepos="28:1-28:60">この前段までは普通に環境に合わせて設定</li>
+<li data-sourcepos="29:1-30:0">ブート領域を設定。色々なサイトを参考にすると1Mぐらい？確保するとありますが、私はインストールガイドが指定する容量を設定しました。</li>
 </ol>
-
-<p>ここで一つでも間違っているとGRUBレスキューモードが起動したり、Kernel Panicが起こったり(エラーメッセージはVFS...)最悪の場合、BIOS起動後に反応が返ってこなくなりました。</p>
-
-<h3>
+<p data-sourcepos="31:1-31:235">ここで一つでも間違っているとGRUBレスキューモードが起動したり、Kernel Panicが起こったり(エラーメッセージはVFS...)最悪の場合、BIOS起動後に反応が返ってこなくなりました。</p>
+<h3 data-sourcepos="33:1-33:7">
 <span id="注" class="fragment"></span><a href="#%E6%B3%A8"><i class="fa fa-link"></i></a>注</h3>
-
-<p>なお、Virtual Driveを設定する際に、同時にイニシャライズしておかないとOSレベルのパーティション設定でブートローダーがコケる？ようです。<br>
+<p data-sourcepos="34:1-35:222">なお、Virtual Driveを設定する際に、同時にイニシャライズしておかないとOSレベルのパーティション設定でブートローダーがコケる？ようです。<br>
 私の環境だけかもしれませんが、後のOSインストール時にシステム領域のHDD以外を挿した状態だとOSがどこにインストールされたか分からず、GRUB rescueが起動します。</p>
-
-<h2>
+<h2 data-sourcepos="37:1-37:15">
 <span id="原因考察" class="fragment"></span><a href="#%E5%8E%9F%E5%9B%A0%E8%80%83%E5%AF%9F"><i class="fa fa-link"></i></a>原因考察</h2>
-
-<p>考察と書いているのはメーカー側のサポートの範疇を超えてしまっているのと、私も正直説明が難しいからです……。</p>
-
-<ul>
-<li>ハードウェアRAIDコントローラーをソフトウェアRAIDすると起動しなかったのは、BIOSレベルでRAID制御をしようとしているものの、参照先がHDDなどではなくハードウェアRAIDコントローラーであるため『そんなもんねーです！』と突き返されてしまっている。
-
-<ul>
-<li>ただし、OSインストール自体はできる。どこにインストールされているのかはこれまた分からないですが……</li>
+<p data-sourcepos="38:1-38:159">考察と書いているのはメーカー側のサポートの範疇を超えてしまっているのと、私も正直説明が難しいからです……。</p>
+<ul data-sourcepos="40:1-46:0">
+<li data-sourcepos="40:1-41:150">ハードウェアRAIDコントローラーをソフトウェアRAIDすると起動しなかったのは、BIOSレベルでRAID制御をしようとしているものの、参照先がHDDなどではなくハードウェアRAIDコントローラーであるため『そんなもんねーです！』と突き返されてしまっている。
+<ul data-sourcepos="41:3-41:150">
+<li data-sourcepos="41:3-41:150">ただし、OSインストール自体はできる。どこにインストールされているのかはこれまた分からないですが……</li>
 </ul>
 </li>
-<li>BIOSが見ている記憶領域とハードウェアRAIDが管理している記憶領域(Virtual Driver - 実記憶領域)は別物？
-
-<ul>
-<li>ハードウェアRAIDコントローラーのブート設定でVirtual Driveの指定をしてますが、OSのインストールはこの辺りをよろしくやってくれていない？</li>
+<li data-sourcepos="42:1-43:194">BIOSが見ている記憶領域とハードウェアRAIDが管理している記憶領域(Virtual Driver - 実記憶領域)は別物？
+<ul data-sourcepos="43:3-43:194">
+<li data-sourcepos="43:3-43:194">ハードウェアRAIDコントローラーのブート設定でVirtual Driveの指定をしてますが、OSのインストールはこの辺りをよろしくやってくれていない？</li>
 </ul>
 </li>
-<li>インストールするOS種類、あるいはバージョンが古いために起こっている？
-
-<ul>
-<li>Ubuntu 16.04 GUIだと何とかなってるっぽい。その時の設定を覚えていないので要検証</li>
+<li data-sourcepos="44:1-46:0">インストールするOS種類、あるいはバージョンが古いために起こっている？
+<ul data-sourcepos="45:3-46:0">
+<li data-sourcepos="45:3-46:0">Ubuntu 16.04 GUIだと何とかなってるっぽい。その時の設定を覚えていないので要検証</li>
 </ul>
 </li>
 </ul>
-
-<p>他にもいろいろガチャガチャやってたので、考察内容に記憶違いの情報が混ざってるかもしれません。</p>
-
-<h2>
+<p data-sourcepos="47:1-47:138">他にもいろいろガチャガチャやってたので、考察内容に記憶違いの情報が混ざってるかもしれません。</p>
+<h2 data-sourcepos="49:1-49:15">
 <span id="ちなみに" class="fragment"></span><a href="#%E3%81%A1%E3%81%AA%E3%81%BF%E3%81%AB"><i class="fa fa-link"></i></a>ちなみに</h2>
-
-<p>別メーカーのサーバーラック用のPCで似たような構成のもので試しましたが、こちらでも再現しています。</p>
-
-<h1>
+<p data-sourcepos="50:1-50:143">別メーカーのサーバーラック用のPCで似たような構成のもので試しましたが、こちらでも再現しています。</p>
+<h1 data-sourcepos="52:1-52:8">
 <span id="追記" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98"><i class="fa fa-link"></i></a>追記</h1>
-
-<p>HDDが2TB以上のパーティションにOS入れようとしていたので、いわゆる2TBの壁問題にぶちあたってこうなってしまったんじゃないか？<br>
+<p data-sourcepos="53:1-55:138">HDDが2TB以上のパーティションにOS入れようとしていたので、いわゆる2TBの壁問題にぶちあたってこうなってしまったんじゃないか？<br>
 という可能性は高いです。<br>
 運用上検証の意味がなかったので精査していませんが、考えられる要因の一つとして挙げておきます。</p>
-
-<h1>
+<h1 data-sourcepos="57:1-57:17">
 <span id="さらに追記" class="fragment"></span><a href="#%E3%81%95%E3%82%89%E3%81%AB%E8%BF%BD%E8%A8%98"><i class="fa fa-link"></i></a>さらに追記</h1>
-
-<p>Ubuntu16.04やCentOS7.3で上記問題が再現しなかったので、OSがハードウェアRAIDに対応しているかどうかが関係しているかもしれません。</p>
+<p data-sourcepos="58:1-58:176">Ubuntu16.04やCentOS7.3で上記問題が再現しなかったので、OSがハードウェアRAIDに対応しているかどうかが関係しているかもしれません。</p>

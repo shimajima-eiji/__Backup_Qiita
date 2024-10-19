@@ -1,21 +1,19 @@
-<blockquote>
-<p>この例から、message = message or 'no message'　のような形で変数に格納していますが、変数に値がない場合のみ変数に値を格納する処理を実行したい、という場合だとまた違うケースになりますでしょうか。</p>
+<blockquote data-sourcepos="1:1-1:272">
+<p data-sourcepos="1:3-1:272">この例から、message = message or 'no message'　のような形で変数に格納していますが、変数に値がない場合のみ変数に値を格納する処理を実行したい、という場合だとまた違うケースになりますでしょうか。</p>
 </blockquote>
-
-<p>注意が必要です。<br>
+<p data-sourcepos="3:1-5:269">注意が必要です。<br>
 message に 'no message' が代入されるのは、message が None, False, 数値の0(0, 0.0, 0+0j), 空文字列・空配列・空集合('', [], (), {}) のときです。boolに変換するとFalseになる値たちです。<br>
 値が空文字列や数値0のときも「値がない」としていいのであれば正しく動作しますが、None のときだけ「値がない」としたいときなどはif文や条件式（俗にいう三項演算子）で書かないといけません。</p>
-
-<div class="code-frame" data-lang="py"><div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<div class="code-frame" data-lang="py" data-sourcepos="7:1-20:3"><div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">(</span><span class="sh">''</span><span class="p">)</span>
 <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="s">'0'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">(</span><span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">)</span>
 <span class="bp">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">([])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">([])</span>
 <span class="bp">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">([</span><span class="s">''</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">bool</span><span class="p">([</span><span class="sh">''</span><span class="p">])</span>
 <span class="bp">True</span>
 </code></pre></div></div>

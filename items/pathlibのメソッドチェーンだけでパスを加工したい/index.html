@@ -1,13 +1,10 @@
-<p><a href="https://teratail.com/questions/141682" rel="nofollow noopener" target="_blank">フルパスを持つPath or strから、任意に指定した階層以上だけを切り捨てたい</a><br>
+<p data-sourcepos="1:1-3:102"><a href="https://teratail.com/questions/141682" rel="nofollow noopener" target="_blank">フルパスを持つPath or strから、任意に指定した階層以上だけを切り捨てたい</a><br>
 という質問をさせてもらって、「partsってなんだ？」ってなったんで徹底的に調べてみました。<br>
 この場を借りまして、改めてご回答いただいた皆さんに御礼申し上げます。</p>
-
-<h1>
+<h1 data-sourcepos="5:1-5:19">
 <span id="partsについて" class="fragment"></span><a href="#parts%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>partsについて</h1>
-
-<p><a href="https://docs.python.jp/3/library/pathlib.html#accessing-individual-parts" rel="nofollow noopener" target="_blank">公式ドキュメント：parts</a>に書いていますが、ちゃんと調査をしてみます。</p>
-
-<p>.parts[-1:]<br>
+<p data-sourcepos="6:1-6:185"><a href="https://docs.python.jp/3/library/pathlib.html#accessing-individual-parts" rel="nofollow noopener" target="_blank">公式ドキュメント：parts</a>に書いていますが、ちゃんと調査をしてみます。</p>
+<p data-sourcepos="8:1-17:45">.parts[-1:]<br>
 　　.name(basename)を取得したい<br>
 .parts[[:-1]<br>
 　　parent,parents[]を取得したい<br>
@@ -17,18 +14,13 @@
 　　上から順番にパスを取得したい<br>
 .parts[[1:]<br>
 　　上から順番にパスを消したい</p>
-
-<p>というようになるみたいです。<br>
+<p data-sourcepos="19:1-20:54">というようになるみたいです。<br>
 ややこしくて理解するのが大変でした。</p>
-
-<h1>
+<h1 data-sourcepos="22:1-22:23">
 <span id="視覚化したい" class="fragment"></span><a href="#%E8%A6%96%E8%A6%9A%E5%8C%96%E3%81%97%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>視覚化したい！</h1>
-
-<p>色々やったんですが視覚的な情報（表とか）を作るのはブログの方が楽だったんで、そちらに移してます。<br>
+<p data-sourcepos="23:1-25:153">色々やったんですが視覚的な情報（表とか）を作るのはブログの方が楽だったんで、そちらに移してます。<br>
 ご参考程度に。<br>
 <a href="https://nomuraya.work/develop/037" rel="nofollow noopener" target="_blank">parts: parentやparents、nameのラップ元であり現在のパスの操作をもっと拡張したい</a></p>
-
-<h1>
+<h1 data-sourcepos="27:1-27:47">
 <span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
-
-<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+<p data-sourcepos="28:1-28:150">どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

@@ -1,17 +1,12 @@
-<p>基礎的な話ばかりだけど、「こういう場合ってどうなんだっけ？」って頻繁に悩んでgoogle先生に教えを乞うので、この機会にきちんと整理！<br>
+<p data-sourcepos="1:1-2:72">基礎的な話ばかりだけど、「こういう場合ってどうなんだっけ？」って頻繁に悩んでgoogle先生に教えを乞うので、この機会にきちんと整理！<br>
 コーディング規約から保守から、雑ながら包括的に。</p>
-
-<p>ちょっとだけsphinxの導入とか、パッケージを意識したモジュールづくりの話とかもします。</p>
-
-<h1>
+<p data-sourcepos="4:1-4:123">ちょっとだけsphinxの導入とか、パッケージを意識したモジュールづくりの話とかもします。</p>
+<h1 data-sourcepos="6:1-6:152">
 <span id="sphinxを入れるために__init__pyを後から入れたら大変な事になったので今からでも気を付けることをまとめる" class="fragment"></span><a href="#sphinx%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB__init__py%E3%82%92%E5%BE%8C%E3%81%8B%E3%82%89%E5%85%A5%E3%82%8C%E3%81%9F%E3%82%89%E5%A4%A7%E5%A4%89%E3%81%AA%E4%BA%8B%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%81%AE%E3%81%A7%E4%BB%8A%E3%81%8B%E3%82%89%E3%81%A7%E3%82%82%E6%B0%97%E3%82%92%E4%BB%98%E3%81%91%E3%82%8B%E3%81%93%E3%81%A8%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B"><i class="fa fa-link"></i></a>sphinxを入れるために__init__.pyを後から入れたら大変な事になったので、今からでも気を付けることをまとめる</h1>
-
-<h1>
+<h1 data-sourcepos="7:1-7:20">
 <span id="ファイル構成" class="fragment"></span><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%A7%8B%E6%88%90"><i class="fa fa-link"></i></a>ファイル構成</h1>
-
-<p>今回の環境はこういう形で作ってます。</p>
-
-<div class="code-frame" data-lang="text">
+<p data-sourcepos="8:1-8:54">今回の環境はこういう形で作ってます。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="10:1-30:3">
 <div class="code-lang"><span class="bold">tree.</span></div>
 <div class="highlight"><pre><code>(root)
 ├── README.md
@@ -34,107 +29,84 @@
     ... rst
 </code></pre></div>
 </div>
-
-<p>元々は__init__.pyなんてなかったし、appとかsphinxとかのディレクトリも後付けです。<br>
+<p data-sourcepos="32:1-34:133">元々は__init__.pyなんてなかったし、appとかsphinxとかのディレクトリも後付けです。<br>
 出力先の階層が一段深まってしまったので、パスもそれぞれ書き直すことになってしまいました。<br>
 <strong>実装に着手する前に変更に強い仕組みを考えておくのは非常に重要な事だと改めて思いました。</strong></p>
-
-<h2>
+<h2 data-sourcepos="36:1-36:36">
 <span id="__init__pyについて補足" class="fragment"></span><a href="#__init__py%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>__init__.pyについて補足</h2>
-
-<p>なにかモジュールが呼ばれた場合（たとえばapp/main.py）、同階層の__init__.py（app/__init__.py）が実行するより先に呼ばれるため、<br>
+<p data-sourcepos="37:1-38:178">なにかモジュールが呼ばれた場合（たとえばapp/main.py）、同階層の__init__.py（app/__init__.py）が実行するより先に呼ばれるため、<br>
 後述のapp/src/modules.pyの from ..libs import modulesも１：app/__init__.pyを通って２：app/libs/__init__.pyを通ってlibs/modules.pyが実行されます。</p>
-
-<p>これを検証する場合、各ファイルの先頭にprint __file__とすると流れをつかみやすいが、上の通り何度も呼ばれるので、呼ばれた回数を正しく追う方が大事。<br>
+<p data-sourcepos="40:1-41:192">これを検証する場合、各ファイルの先頭にprint __file__とすると流れをつかみやすいが、上の通り何度も呼ばれるので、呼ばれた回数を正しく追う方が大事。<br>
 つまり、sphinxのビルド時にエラーになると呼ばれた回数だけエラー件数が増えるので、__init__.pyには基本的には何も書かないようにします。</p>
-
-<h2>
+<h2 data-sourcepos="43:1-43:12">
 <span id="current" class="fragment"></span><a href="#current"><i class="fa fa-link"></i></a>(current)</h2>
-
-<p>ここには__init__.pyを置く必要はありません。<br>
+<p data-sourcepos="44:1-45:66">ここには__init__.pyを置く必要はありません。<br>
 パッケージの外から実行した時のイメージです。</p>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="47:1-53:3">
 <div class="code-lang"><span class="bold">run.py</span></div>
-<div class="highlight"><pre><code><span class="s">"""
+<div class="highlight"><pre><code><span class="sh">"""</span><span class="s">
 パッケージの外なのでfrom .app import mainとしない
-"""</span>
+</span><span class="sh">"""</span>
 
-<span class="kn">import</span> <span class="nn">app.main</span>
+<span class="kn">import</span> <span class="n">app.main</span>
 </code></pre></div>
 </div>
-
-<h3>
+<h3 data-sourcepos="55:1-55:17">
 <span id="currentapp" class="fragment"></span><a href="#currentapp"><i class="fa fa-link"></i></a>(current)/app</h3>
-
-<p>sphinx-apidocのソーススクリプトで指定するパッケージ（ディレクトリ）<br>
+<p data-sourcepos="56:1-57:81">sphinx-apidocのソーススクリプトで指定するパッケージ（ディレクトリ）<br>
 サブディレクトリ含む以下がドキュメントとして生成される</p>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="59:1-65:3">
 <div class="code-lang"><span class="bold">app/main.py</span></div>
-<div class="highlight"><pre><code><span class="s">"""
+<div class="highlight"><pre><code><span class="sh">"""</span><span class="s">
 srcのモジュールを参照して何らかの処理をする
-"""</span>
+</span><span class="sh">"""</span>
 
-<span class="kn">from</span> <span class="nn">.src</span> <span class="kn">import</span> <span class="n">modules</span>
+<span class="kn">from</span> <span class="n">.src</span> <span class="kn">import</span> <span class="n">modules</span>
 </code></pre></div>
 </div>
-
-<h4>
+<h4 data-sourcepos="67:1-67:22">
 <span id="currentappsrc" class="fragment"></span><a href="#currentappsrc"><i class="fa fa-link"></i></a>(current)/app/src</h4>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="68:1-76:3">
 <div class="code-lang"><span class="bold">app/src/modules.py</span></div>
-<div class="highlight"><pre><code><span class="s">"""
+<div class="highlight"><pre><code><span class="sh">"""</span><span class="s">
 ここは普通に書く
 main.pyから呼び出されて、libs/modules.pyを呼ぶ
-"""</span>
+</span><span class="sh">"""</span>
 
-<span class="kn">from</span> <span class="nn">..libs</span> <span class="kn">import</span> <span class="n">modules</span>
+<span class="kn">from</span> <span class="n">..libs</span> <span class="kn">import</span> <span class="n">modules</span>
 <span class="c1"># ～なにかの処理
 </span></code></pre></div>
 </div>
-
-<h4>
+<h4 data-sourcepos="78:1-78:23">
 <span id="currentapplibs" class="fragment"></span><a href="#currentapplibs"><i class="fa fa-link"></i></a>(current)/app/libs</h4>
-
-<div class="code-frame" data-lang="python">
+<div class="code-frame" data-lang="python" data-sourcepos="79:1-86:3">
 <div class="code-lang"><span class="bold">app/libs/modules.py</span></div>
-<div class="highlight"><pre><code><span class="s">"""
+<div class="highlight"><pre><code><span class="sh">"""</span><span class="s">
 ここは普通に書く
 src/modules.pyから呼び出される
-"""</span>
+</span><span class="sh">"""</span>
 
 <span class="c1"># ～なにかの処理
 </span></code></pre></div>
 </div>
-
-<h1>
+<h1 data-sourcepos="88:1-88:20">
 <span id="ハマりどころ" class="fragment"></span><a href="#%E3%83%8F%E3%83%9E%E3%82%8A%E3%81%A9%E3%81%93%E3%82%8D"><i class="fa fa-link"></i></a>ハマりどころ</h1>
-
-<p>当たり前だがモジュールはimportされたその瞬間、その場所から当該ファイルが１行ずつ処理されます。<br>
+<p data-sourcepos="89:1-91:195">当たり前だがモジュールはimportされたその瞬間、その場所から当該ファイルが１行ずつ処理されます。<br>
 この時、相対的なパスで通ってきた__init__.pyは通るたびに呼ばれるので、夥しい量のエラーメッセージを吐き出す可能性が高く、デバッグ時に血反吐を吐くことになります。<br>
 当然、__init__.pyに同階層のモジュールをimportして、同階層のモジュールが巡り巡って…なんて無限ループが発生しうる可能性も考えられます。</p>
-
-<p>うっかり忘れがちですが、python3では暗黙的な相対パスでのimportは禁止。<br>
+<p data-sourcepos="93:1-95:84">うっかり忘れがちですが、python3では暗黙的な相対パスでのimportは禁止。<br>
 __init__.pyがなくてもimportができるので、本当に忘れがち。<br>
 sphinxを入れると必須になるので、この問題も未然に防げます。</p>
-
-<p>sys.path.appendを使う方法も考えられるものの、相対パスが使えるならそちらを選択したいですね。</p>
-
-<p>このあと、WLSで生成したsphinxドキュメントがwindows10の権限回りでハマったのですが、別記事にて。</p>
-
-<h1>
+<p data-sourcepos="97:1-97:129">sys.path.appendを使う方法も考えられるものの、相対パスが使えるならそちらを選択したいですね。</p>
+<p data-sourcepos="99:1-99:132">このあと、WLSで生成したsphinxドキュメントがwindows10の権限回りでハマったのですが、別記事にて。</p>
+<h1 data-sourcepos="102:1-102:8">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
-
-<ul>
-<li><a href="https://qiita.com/sukobuto/items/15c1173b3f37f0306dd5" id="reference-32862359e577a159d0a0">Python におけるモジュールとパッケージは「名前空間」</a></li>
-<li><a href="https://www.yoheim.net/blog.php?q=20160612" rel="nofollow noopener" target="_blank">[Python] コーディング規約(PEP8)を学んで、Pythonらしいコードを書く</a></li>
-<li><a href="http://d.hatena.ne.jp/chlere/20110618/1308369842" rel="nofollow noopener" target="_blank">Pythonでディレクトリの上層にあるモジュールをimportするときの注意点</a></li>
-<li><a href="https://qiita.com/ysk24ok/items/2711295d83218c699276" id="reference-47511dc53925ffd0b839">[Python] importの躓きどころ（筆者註：importの話）</a></li>
+<ul data-sourcepos="103:1-107:0">
+<li data-sourcepos="103:1-103:143"><a href="https://qiita.com/sukobuto/items/15c1173b3f37f0306dd5" id="reference-32862359e577a159d0a0">Python におけるモジュールとパッケージは「名前空間」</a></li>
+<li data-sourcepos="104:1-104:146"><a href="https://www.yoheim.net/blog.php?q=20160612" rel="nofollow noopener" target="_blank">[Python] コーディング規約(PEP8)を学んで、Pythonらしいコードを書く</a></li>
+<li data-sourcepos="105:1-105:158"><a href="http://d.hatena.ne.jp/chlere/20110618/1308369842" rel="nofollow noopener" target="_blank">Pythonでディレクトリの上層にあるモジュールをimportするときの注意点</a></li>
+<li data-sourcepos="106:1-107:0"><a href="https://qiita.com/ysk24ok/items/2711295d83218c699276" id="reference-47511dc53925ffd0b839">[Python] importの躓きどころ（筆者註：importの話）</a></li>
 </ul>
-
-<h1>
+<h1 data-sourcepos="108:1-108:47">
 <span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
-
-<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+<p data-sourcepos="109:1-109:150">どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

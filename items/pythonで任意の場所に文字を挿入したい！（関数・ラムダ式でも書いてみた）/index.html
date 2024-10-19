@@ -1,31 +1,24 @@
-<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>base_string = 'test'
+<div class="code-frame" data-lang="code" data-sourcepos="1:1-8:3"><div class="highlight"><pre><code>base_string = 'test'
 INSERT_POINT = 2  #分かりやすくするために大文字
 insert_string = '--hoge--'
 
 # 2文字目から挿入したい場合
 print '{0}{1}{2}'.format(base_string[:INSERT_POINT], insert_string, base_string[INSERT_POINT:])
 </code></pre></div></div>
-
-<p>これの結果は<br>
+<p data-sourcepos="10:1-12:18">これの結果は<br>
 <strong>te--hoge--st</strong><br>
 となります。</p>
-
-<h1>
+<h1 data-sourcepos="14:1-14:8">
 <span id="応用" class="fragment"></span><a href="#%E5%BF%9C%E7%94%A8"><i class="fa fa-link"></i></a>応用</h1>
-
-<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>def insert_string_to_base(target_string, insert_point, insert_string):
+<div class="code-frame" data-lang="code" data-sourcepos="15:1-18:3"><div class="highlight"><pre><code>def insert_string_to_base(target_string, insert_point, insert_string):
     return target_string[:insert_point] + insert_string + target_string[insert_point:]
 </code></pre></div></div>
-
-<p>とすると関数で使えるし、</p>
-
-<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>insert_string_to_base = lambda base_string, insert_point, insert_string : base_string[:insert_point] + insert_string + base_string[insert_point:]
+<p data-sourcepos="20:1-20:36">とすると関数で使えるし、</p>
+<div class="code-frame" data-lang="code" data-sourcepos="22:1-24:3"><div class="highlight"><pre><code>insert_string_to_base = lambda base_string, insert_point, insert_string : base_string[:insert_point] + insert_string + base_string[insert_point:]
 </code></pre></div></div>
-
-<p>とするとラムダ式になります。<br>
+<p data-sourcepos="26:1-27:15">とするとラムダ式になります。<br>
 どちらも、</p>
-
-<div class="code-frame" data-lang="code"><div class="highlight"><pre><code>base_string = 'test'
+<div class="code-frame" data-lang="code" data-sourcepos="29:1-38:3"><div class="highlight"><pre><code>base_string = 'test'
 INSERT_POINT = 2  #分かりやすくするために大文字
 insert_string = '--hoge--'
 
@@ -34,5 +27,4 @@ insert_string = '--hoge--'
 # 出力
 print insert_string_to_base(base_string, INSERT_POINT, insert_string)
 </code></pre></div></div>
-
-<p>で結果を参照できます。</p>
+<p data-sourcepos="40:1-40:33">で結果を参照できます。</p>

@@ -1,67 +1,47 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:9">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
-
-<p>パイプで実行したshが返されます。<br>
+<p data-sourcepos="2:1-4:79">パイプで実行したshが返されます。<br>
 たとえば、タイトルのように<code>(略) | sh -s</code>だと、<code>sh</code><br>
 これをbashとかzshに変えたらそれぞれの結果になりました。</p>
-
-<p>検証用URL(curlで呼び出せます）</p>
-
-<div class="code-frame" data-lang="text">
+<p data-sourcepos="6:1-6:41">検証用URL(curlで呼び出せます）</p>
+<div class="code-frame" data-lang="text" data-sourcepos="8:1-11:3">
 <div class="code-lang"><span class="bold">検証用URL.sh(r_and_d.sh)</span></div>
 <div class="highlight"><pre><code># curlで実行された場合に何を出力するか検証
 echo $0
 </code></pre></div>
 </div>
-
-<p><a href="https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/%2314_20211225_ver1_brew_upgrade_sh/for_Mac/r_and_d.sh" rel="nofollow noopener" target="_blank">検証用URL(r_and_d.sh)</a></p>
-
-<p>※普段からブランチや場合によりリポジトリをいじっているので、動かなくなったら↑の内容をご自身の環境において試してみてください。</p>
-
-<div class="code-frame" data-lang="shell">
+<p data-sourcepos="13:1-13:152"><a href="https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/%2314_20211225_ver1_brew_upgrade_sh/for_Mac/r_and_d.sh" rel="nofollow noopener" target="_blank">検証用URL(r_and_d.sh)</a></p>
+<p data-sourcepos="15:1-15:189">※普段からブランチや場合によりリポジトリをいじっているので、動かなくなったら↑の内容をご自身の環境において試してみてください。</p>
+<div class="code-frame" data-lang="shell" data-sourcepos="17:1-19:3">
 <div class="code-lang"><span class="bold">ログインシェルで実行.sh</span></div>
 <div class="highlight"><pre><code>curl <span class="nt">-sf</span> https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/%2314_20211225_ver1_brew_upgrade_sh/for_Mac/r_and_d.sh | sh <span class="nt">-s</span>
 </code></pre></div>
 </div>
-
-<h3>
+<h3 data-sourcepos="21:1-21:10">
 <span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h3>
-
-<p>当然ですが、ファイルをローカルに保存して、ローカルから呼び出すと<code>$0</code>は「ファイル名」になります。<br>
+<p data-sourcepos="22:1-23:69">当然ですが、ファイルをローカルに保存して、ローカルから呼び出すと<code>$0</code>は「ファイル名」になります。<br>
 shだろうがbashだろうがzshだろうがファイル名です。</p>
-
-<h3>
+<h3 data-sourcepos="25:1-25:19">
 <span id="補足の補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3%E3%81%AE%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足の補足</h3>
-
-<p>試しに、<code>which sh</code>の結果である<code>/bin/sh</code>で実行したところ、結果は<code>/bin/sh</code>になりました。</p>
-
-<div class="code-frame" data-lang="shell">
+<p data-sourcepos="26:1-26:115">試しに、<code>which sh</code>の結果である<code>/bin/sh</code>で実行したところ、結果は<code>/bin/sh</code>になりました。</p>
+<div class="code-frame" data-lang="shell" data-sourcepos="28:1-30:3">
 <div class="code-lang"><span class="bold">curl_$0.sh</span></div>
 <div class="highlight"><pre><code>curl <span class="nt">-sf</span> https://raw.githubusercontent.com/shimajima-eiji/Settings_Environment/%2314_20211225_ver1_brew_upgrade_sh/for_Mac/r_and_d.sh | /bin/sh <span class="nt">-s</span>
 </code></pre></div>
 </div>
-
-<p>これもbashのフルパス、zshのフルパスに変えてもそれぞれ同様の結果です。</p>
-
-<h2>
+<p data-sourcepos="32:1-32:100">これもbashのフルパス、zshのフルパスに変えてもそれぞれ同様の結果です。</p>
+<h2 data-sourcepos="34:1-34:39">
 <span id="疑問そして理解したこと" class="fragment"></span><a href="#%E7%96%91%E5%95%8F%E3%81%9D%E3%81%97%E3%81%A6%E7%90%86%E8%A7%A3%E3%81%97%E3%81%9F%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>疑問、そして理解したこと</h2>
-
-<p>これは質問に投稿するべきだと思ったのですが、記事を分けると上記を説明する必要があるので気付いた有識者の方に見てもらえればと思います。</p>
-
-<h3>
+<p data-sourcepos="35:1-35:198">これは質問に投稿するべきだと思ったのですが、記事を分けると上記を説明する必要があるので気付いた有識者の方に見てもらえればと思います。</p>
+<h3 data-sourcepos="37:1-37:42">
 <span id="0とはそもそもなんなのか" class="fragment"></span><a href="#0%E3%81%A8%E3%81%AF%E3%81%9D%E3%82%82%E3%81%9D%E3%82%82%E3%81%AA%E3%82%93%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>$0とはそもそもなんなのか？</h3>
-
-<p>私は「スクリプトを実行しているもの（名前）が格納されている」という認識をしていました。<br>
+<p data-sourcepos="38:1-39:12">私は「スクリプトを実行しているもの（名前）が格納されている」という認識をしていました。<br>
 なので、</p>
-
-<ul>
-<li>shで実行すればshが、</li>
-<li>/bin/shで実行すれば/bin/shが</li>
-<li>ファイル名から呼び出せばファイル名が</li>
+<ul data-sourcepos="41:1-44:0">
+<li data-sourcepos="41:1-41:30">shで実行すればshが、</li>
+<li data-sourcepos="42:1-42:37">/bin/shで実行すれば/bin/shが</li>
+<li data-sourcepos="43:1-44:0">ファイル名から呼び出せばファイル名が</li>
 </ul>
-
-<p>それぞれに入っているという認識です。</p>
-
-<p>今回の場合、curlでファイルを<strong>文字列として受け取って、それをパイプ先に渡しているだけ</strong>なので、実体はパイプで指定したものなんだろうという認識をしました。<br>
+<p data-sourcepos="45:1-45:54">それぞれに入っているという認識です。</p>
+<p data-sourcepos="47:1-48:257">今回の場合、curlでファイルを<strong>文字列として受け取って、それをパイプ先に渡しているだけ</strong>なので、実体はパイプで指定したものなんだろうという認識をしました。<br>
 これは、例えばログインシェル（対話モード）で<code>echo $0</code>を実行した時の結果がそのまま出ている（$SHELLと同じはず）ので、同じことが<code>curl... | sh</code>にも起こっただけなんだろうという理解です。</p>

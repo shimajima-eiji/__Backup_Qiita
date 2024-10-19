@@ -1,15 +1,11 @@
-<p>ドヤ記事にすれば、もっといい方法をドヤってくれるshell芸達者が現れるはず！というきたない根性で書き残します。</p>
-
-<h1>
+<p data-sourcepos="1:1-1:158">ドヤ記事にすれば、もっといい方法をドヤってくれるshell芸達者が現れるはず！というきたない根性で書き残します。</p>
+<h1 data-sourcepos="3:1-3:20">
 <span id="やりたいこと" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やりたいこと</h1>
-
-<p>ubuntu(デフォルトがbash）で<code>sh test.sh</code>を実施した時に<code>sh</code>で実施された事を検知したい。<br>
+<p data-sourcepos="4:1-5:69">ubuntu(デフォルトがbash）で<code>sh test.sh</code>を実施した時に<code>sh</code>で実施された事を検知したい。<br>
 同様に、<code>zsh test.sh</code>と実施した場合は<code>zsh</code>を得たい。</p>
-
-<h1>
+<h1 data-sourcepos="7:1-7:8">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h1>
-
-<div class="code-frame" data-lang="shell">
+<div class="code-frame" data-lang="shell" data-sourcepos="8:1-13:3">
 <div class="code-lang"><span class="bold">test.sh</span></div>
 <div class="highlight"><pre><code><span class="c">#!/bin/sh</span>
 ps h <span class="nt">-p</span> <span class="nv">$$</span> <span class="nt">-o</span> <span class="nb">comm</span>  <span class="c"># 期待する結果を得られる</span>
@@ -17,42 +13,33 @@ ps h <span class="nt">-p</span> <span class="nv">$$</span> <span class="nt">-o</
 <span class="c"># echo ${SHELL##*/}   # 検証用：何をやってもbashが返ってくる</span>
 </code></pre></div>
 </div>
-
-<p>実行時に</p>
-
-<ul>
-<li>
+<p data-sourcepos="15:1-15:12">実行時に</p>
+<ul data-sourcepos="17:1-20:0">
+<li data-sourcepos="17:1-17:20">
 <code>sh test.sh</code>  # sh</li>
-<li>
+<li data-sourcepos="18:1-18:24">
 <code>bash test.sh</code>  # bash</li>
-<li>
+<li data-sourcepos="19:1-20:0">
 <code>zsh test.sh</code>  # zsh</li>
 </ul>
-
-<p>を取得できる。</p>
-
-<h1>
+<p data-sourcepos="21:1-21:21">を取得できる。</p>
+<h1 data-sourcepos="23:1-23:46">
 <span id="psコマンドのオプションについて" class="fragment"></span><a href="#ps%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>psコマンドのオプションについて</h1>
-
-<ul>
-<li>
+<ul data-sourcepos="24:1-28:0">
+<li data-sourcepos="24:1-24:31">
 <code>h</code>: ヘッダーを非表示</li>
-<li>
+<li data-sourcepos="25:1-25:29">
 <code>-p</code>: 対象をPIDで指定</li>
-<li>
+<li data-sourcepos="26:1-26:25">
 <code>$$</code>: sh実行中のPID</li>
-<li>
+<li data-sourcepos="27:1-28:0">
 <code>-o</code>: 抽出。COMMANDはcomm（ここの情報が見つからなかった）</li>
 </ul>
-
-<h1>
+<h1 data-sourcepos="29:1-29:22">
 <span id="shellについて" class="fragment"></span><a href="#shell%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a><code>$SHELL</code>について</h1>
-
-<p>$SHELLで得られる結果はターミナルでログイン中のシェル（親シェル）であるため、shファイル内に互換性のない書き方をしている場合は何らかのフォローを検討するのが親切。<br>
+<p data-sourcepos="30:1-31:193">$SHELLで得られる結果はターミナルでログイン中のシェル（親シェル）であるため、shファイル内に互換性のない書き方をしている場合は何らかのフォローを検討するのが親切。<br>
 <code>chsh $(which zsh)</code>などで親シェル自体を変えてしまう方法もあるが、一つのスクリプトを実行するためだけにいちいち変更するのも手間がかかる。</p>
-
-<h1>
+<h1 data-sourcepos="33:1-33:20">
 <span id="反省後記" class="fragment"></span><a href="#%E5%8F%8D%E7%9C%81%E5%BE%8C%E8%A8%98"><i class="fa fa-link"></i></a>反省（後記）</h1>
-
-<p>最初から<code>man ps</code>を読めばこんなにハマらなかった。<br>
+<p data-sourcepos="34:1-35:117">最初から<code>man ps</code>を読めばこんなにハマらなかった。<br>
 <code>ps --help</code>が使えないので諦めていたが、helpがダメならmanがあるよ、という灯台下暗し。</p>

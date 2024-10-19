@@ -1,83 +1,62 @@
-<p>考え方の話なので、rubyでも同様にできます。<br>
+<p data-sourcepos="1:1-2:103">考え方の話なので、rubyでも同様にできます。<br>
 ここでは書いてませんが、<strong>github_changelog_generator</strong>と開発のrubyを分けてます。</p>
-
-<h2>
+<h2 data-sourcepos="4:1-4:21">
 <span id="やりたいこと" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>やりたいこと</h2>
-
-<ul>
-<li>
+<ul data-sourcepos="5:1-8:0">
+<li data-sourcepos="5:1-5:54">
 <strong>github-changes</strong>を実行するnpmはsudoを使う</li>
-<li>開発中のnpmのバージョンは最新にしたい</li>
-<li>WSLで完結させる</li>
+<li data-sourcepos="6:1-6:56">開発中のnpmのバージョンは最新にしたい</li>
+<li data-sourcepos="7:1-8:0">WSLで完結させる</li>
 </ul>
-
-<h2>
+<h2 data-sourcepos="9:1-9:9">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
-
-<ul>
-<li>
+<ul data-sourcepos="10:1-14:0">
+<li data-sourcepos="10:1-11:116">
 <code>sudo su -</code>でrootになってからnpmをインストール
-
-<ul>
-<li>
+<ul data-sourcepos="11:3-11:116">
+<li data-sourcepos="11:3-11:116">
 <strong>/root/.nodenv</strong>などにインストールしても良いし、拘らなければ<code>apt install npm</code>でも良い</li>
 </ul>
 </li>
-<li>別途nodenv等を使って入れたnpmにパスを通す</li>
-<li>
+<li data-sourcepos="12:1-12:59">別途nodenv等を使って入れたnpmにパスを通す</li>
+<li data-sourcepos="13:1-14:0">
 <code>sudo which npm</code>と<code>which npm</code>の結果が異なっている</li>
 </ul>
-
-<h3>
+<h3 data-sourcepos="15:1-15:10">
 <span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意</h3>
-
-<p>コマンドに直接<code>npm</code>と掛ける場合は、<code>which npm</code>の結果がsudoとそうでない場合でパスを分ければよい、つまりrootで使えるnpmのフルパスと、ユーザーや環境ごとに使いたいnpmのフルパスを明示的に書いて分けるべきです。<br>
-なので、シンプルに<code>npm install パッケージ</code>とするなら<code>$(sudo which npm) install</code>か<code>$(which npm) install</code>で書くべきです。<sup id="fnref1"><a href="#fn1" title="【$(sudo which npm)と$(which npm)】説明のために端折ってますが、正しくフルパスで書きます">1</a></sup><br>
-今回の要件はgithub-changes<code>内で使われているnpmを指定したいのと、開発で使っているnpmのバージョンを分ける必要があったので、運用中の</code>sudo npm`専用のコンテナや開発のための専用コンテナなりを用意するのがベストですが、個人開発なのでわがままセットな環境を作りたかったのでこういうやり方をしてます。</p>
-
-<h2>
+<p data-sourcepos="16:1-17:151">コマンドに直接<code>npm</code>と掛ける場合は、<code>which npm</code>の結果がsudoとそうでない場合でパスを分ければよい、つまりrootで使えるnpmのフルパスと、ユーザーや環境ごとに使いたいnpmのフルパスを明示的に書いて分けるべきです。<br>
+なので、シンプルに<code>npm install パッケージ</code>とするなら<code>$(sudo which npm) install</code>か<code>$(which npm) install</code>で書くべきです。<sup><a href="#fn-1" id="fnref-1">1</a></sup></p>
+<p data-sourcepos="20:1-20:418">今回の要件はgithub-changes<code>内で使われているnpmを指定したいのと、開発で使っているnpmのバージョンを分ける必要があったので、運用中の</code>sudo npm`専用のコンテナや開発のための専用コンテナなりを用意するのがベストですが、個人開発なのでわがままセットな環境を作りたかったのでこういうやり方をしてます。</p>
+<h2 data-sourcepos="22:1-22:9">
 <span id="前提" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>前提</h2>
-
-<p>いつもどおり、WSLを使ってます。<br>
+<p data-sourcepos="23:1-24:86">いつもどおり、WSLを使ってます。<br>
 開発で使うnodeと運用で使うnodeを分ける必要があったのですが、</p>
-
-<ul>
-<li>運用で使用するnodeにsudo権限が必要なパッケージがあった</li>
-<li>開発で使うためのnodeのバージョンは管理しておきたい</li>
+<ul data-sourcepos="26:1-28:0">
+<li data-sourcepos="26:1-26:79">運用で使用するnodeにsudo権限が必要なパッケージがあった</li>
+<li data-sourcepos="27:1-28:0">開発で使うためのnodeのバージョンは管理しておきたい</li>
 </ul>
-
-<p>という要件を満たす必要があったので、これを解決する方法を探していました。</p>
-
-<h2>
+<p data-sourcepos="29:1-29:108">という要件を満たす必要があったので、これを解決する方法を探していました。</p>
+<h2 data-sourcepos="31:1-31:12">
 <span id="やり方" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>やり方</h2>
-
-<p>結論にも書いてます。<strong>nodenv</strong>をrootでインストールとuserでインストールの-２回分でやればいいです。<br>
+<p data-sourcepos="32:1-33:84">結論にも書いてます。<strong>nodenv</strong>をrootでインストールとuserでインストールの-２回分でやればいいです。<br>
 ただし、インストールする場所は当然変える必要があります。</p>
-
-<p>nodenvはそれぞれの<code>~/.nodenv</code>に作成されるので、<br>
-ちょっと検証してみたんですが、anyenv自体のバージョンを分ける必要はないので<strong>/opt</strong>に置いて検証したところ共通のanyenvでそれぞれのnodenvが作られるので、anyenvを分ける必要はなさそうです。<sup id="fnref2"><a href="#fn2" title="【anyenvを分ける必要はない】よく考えれば、linuxbrewを入れた時は/home/linuxbrewに作られ、ユーザー問わずlinuxbrew以下を参照するので、共通のanyenvを使っている事になりますね。">2</a></sup></p>
-
-<h2>
+<p data-sourcepos="35:1-36:264">nodenvはそれぞれの<code>~/.nodenv</code>に作成されるので、<br>
+ちょっと検証してみたんですが、anyenv自体のバージョンを分ける必要はないので**/opt**に置いて検証したところ共通のanyenvでそれぞれのnodenvが作られるので、anyenvを分ける必要はなさそうです。<sup><a href="#fn-2" id="fnref-2">2</a></sup></p>
+<h2 data-sourcepos="39:1-39:18">
 <span id="コマンド例" class="fragment"></span><a href="#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E4%BE%8B"><i class="fa fa-link"></i></a>コマンド例</h2>
-
-<p>思いついたらちょこちょこ直しているので、Githubを貼り付けておきます</p>
-
-<p><qiita-embed-ogp src="https://github.com/shimajima-eiji/Settings_Environment/blob/main/for_clean_install/WSL_setup.sh"></qiita-embed-ogp></p>
-
-<h3>
+<p data-sourcepos="40:1-40:96">思いついたらちょこちょこ直しているので、Githubを貼り付けておきます</p>
+<p data-sourcepos="42:1-42:95"><iframe id="qiita-embed-content__917f3e05658874300b6663cbb186d202" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__917f3e05658874300b6663cbb186d202" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2FSettings_Environment%2Fblob%2Fmain%2Ffor_clean_install%2FWSL_setup.sh" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h3 data-sourcepos="44:1-44:10">
 <span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
-
-<div class="footnotes">
-<hr>
+<section class="footnotes">
 <ol>
-
-<li id="fn1">
-<p>【<code>$(sudo which npm)</code>と<code>$(which npm)</code>】説明のために端折ってますが、正しくフルパスで書きます <a href="#fnref1">↩</a></p>
+<li id="fn-1">
+<p data-sourcepos="18:7-18:126">【<code>$(sudo which npm)</code>と<code>$(which npm)</code>】説明のために端折ってますが、正しくフルパスで書きます <a href="#fnref-1" class="">↩</a></p>
 </li>
-
-<li id="fn2">
-<p>【anyenvを分ける必要はない】よく考えれば、linuxbrewを入れた時は<strong>/home/linuxbrew</strong>に作られ、ユーザー問わずlinuxbrew以下を参照するので、共通のanyenvを使っている事になりますね。 <a href="#fnref2">↩</a></p>
+<li id="fn-2">
+<p data-sourcepos="37:7-37:244">【anyenvを分ける必要はない】よく考えれば、linuxbrewを入れた時は**/home/linuxbrew**に作られ、ユーザー問わずlinuxbrew以下を参照するので、共通のanyenvを使っている事になりますね。 <a href="#fnref-2" class="">↩</a></p>
 </li>
-
 </ol>
-</div>
+</section>

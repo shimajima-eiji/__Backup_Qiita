@@ -1,50 +1,37 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:15">
 <span id="想定読者" class="fragment"></span><a href="#%E6%83%B3%E5%AE%9A%E8%AA%AD%E8%80%85"><i class="fa fa-link"></i></a>想定読者</h2>
-
-<ul>
-<li>※ 普段からVSCodeを嗜んでいる方</li>
-<li>電卓＝Web電卓とかWindows電卓(Calc）を使っている方</li>
-<li>四則計算の履歴を見たい方
-
-<ul>
-<li>ふるさと納税の計算で課税所得を計算している方</li>
-<li>今年の収入と経費をざっくり把握しておきたい方</li>
-<li>確定申告の計算で課税所得を計算している方</li>
+<ul data-sourcepos="2:1-9:0">
+<li data-sourcepos="2:1-2:45">※ 普段からVSCodeを嗜んでいる方</li>
+<li data-sourcepos="3:1-3:68">電卓＝Web電卓とかWindows電卓(Calc）を使っている方</li>
+<li data-sourcepos="4:1-7:64">四則計算の履歴を見たい方
+<ul data-sourcepos="5:3-7:64">
+<li data-sourcepos="5:3-5:70">ふるさと納税の計算で課税所得を計算している方</li>
+<li data-sourcepos="6:3-6:70">今年の収入と経費をざっくり把握しておきたい方</li>
+<li data-sourcepos="7:3-7:64">確定申告の計算で課税所得を計算している方</li>
 </ul>
 </li>
-<li>VSCodeは好きだけど、ターミナルは画面が黒くて怖いというブロガー/ライターの方</li>
+<li data-sourcepos="8:1-9:0">VSCodeは好きだけど、ターミナルは画面が黒くて怖いというブロガー/ライターの方</li>
 </ul>
-
-<p>内容が内容なのでプログラミングの話は若干外れますが、フリーランスエンジニアの方には何気に需要があると思います。</p>
-
-<h2>
+<p data-sourcepos="10:1-10:165">内容が内容なのでプログラミングの話は若干外れますが、フリーランスエンジニアの方には何気に需要があると思います。</p>
+<h2 data-sourcepos="12:1-12:12">
 <span id="やり方" class="fragment"></span><a href="#%E3%82%84%E3%82%8A%E6%96%B9"><i class="fa fa-link"></i></a>やり方</h2>
-
-<p>計算したい内容が閃いたら、おもむろにターミナルを開き</p>
-
-<div class="code-frame" data-lang="batchfile">
+<p data-sourcepos="13:1-13:78">計算したい内容が閃いたら、おもむろにターミナルを開き</p>
+<div class="code-frame" data-lang="batchfile" data-sourcepos="15:1-17:3">
 <div class="code-lang"><span class="bold">cmd.bat</span></div>
 <div class="highlight"><pre><code><span class="kd">set</span> <span class="na">/a </span>【計算】
 </code></pre></div>
 </div>
-
-<div class="code-frame" data-lang="shell">
+<div class="code-frame" data-lang="shell" data-sourcepos="19:1-22:3">
 <div class="code-lang"><span class="bold">wsl.sh</span></div>
 <div class="highlight"><pre><code><span class="c"># $((【計算】))で良いですが、「command not found」エラーメッセージも表示されるので、echoを入れてます</span>
 <span class="nb">echo</span> <span class="k">$((</span>【計算】<span class="k">))</span>
 </code></pre></div>
 </div>
-
-<p>とすると計算できます。</p>
-
-<p>これでいちいちVSCode用の拡張機能で電卓探したり、Web電卓を使わなくても良くなりました。</p>
-
-<h2>
+<p data-sourcepos="24:1-24:33">とすると計算できます。</p>
+<p data-sourcepos="26:1-26:123">これでいちいちVSCode用の拡張機能で電卓探したり、Web電卓を使わなくても良くなりました。</p>
+<h2 data-sourcepos="28:1-28:79">
 <span id="補足-ターミナルをwslなどlinux系にすると履歴が見れます" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3-%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB%E3%82%92wsl%E3%81%AA%E3%81%A9linux%E7%B3%BB%E3%81%AB%E3%81%99%E3%82%8B%E3%81%A8%E5%B1%A5%E6%AD%B4%E3%81%8C%E8%A6%8B%E3%82%8C%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>補足: ターミナルをWSLなどLinux系にすると履歴が見れます</h2>
-
-<p>cmdでもF7キーを押す事で履歴を見る事はできますが、今回実行した結果しか見れません。<br>
+<p data-sourcepos="29:1-31:84">cmdでもF7キーを押す事で履歴を見る事はできますが、今回実行した結果しか見れません。<br>
 たかが計算処理ぐらいならこれでも良いですが、経理業務をやっていたらウッカリcmdを落としてしまう事はよくあります。<br>
 その場合、過去の履歴を参照する事ができないので不便です。</p>
-
-<p>WSLを使うと、計算内容がhistoryに残るので、上キーをポチポチやるとすぐに結果を見れるのでおすすめです。</p>
+<p data-sourcepos="33:1-33:145">WSLを使うと、計算内容がhistoryに残るので、上キーをポチポチやるとすぐに結果を見れるのでおすすめです。</p>

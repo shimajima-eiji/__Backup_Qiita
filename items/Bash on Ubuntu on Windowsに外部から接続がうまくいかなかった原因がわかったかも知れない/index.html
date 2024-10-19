@@ -1,29 +1,21 @@
-<p>Bash on Ubuntu on Windowsを起動した端末からttyを使った話は多くある。<br>
+<p data-sourcepos="1:1-3:81">Bash on Ubuntu on Windowsを起動した端末からttyを使った話は多くある。<br>
 が、起動した端末にsshなりでつないで外から開発したいケースがある場合の記事がなかったので、みんなが当たり前に出来るから書いてないのか、需要がないのか分からないが見つからなかった。<br>
 そういうマニアックなユーザー向けに活用できれば幸いだ。</p>
-
-<p>※仲間内に向けての備忘録なので説明がざっくりしてますが、適宜補足するかも<br>
+<p data-sourcepos="5:1-6:93">※仲間内に向けての備忘録なので説明がざっくりしてますが、適宜補足するかも<br>
 ※ただし、SSHの立て方やポートフォワーディングについては省略する</p>
-
-<h1>
+<h1 data-sourcepos="8:1-8:8">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h1>
-
-<p>予想：Windows10 HomeがSSHに対応していないのでは？<br>
+<p data-sourcepos="9:1-11:41">予想：Windows10 HomeがSSHに対応していないのでは？<br>
 →そんなことはないハズ<br>
 <a href="http://ascii.jp/elem/000/001/555/1555599/" class="autolink" rel="nofollow noopener" target="_blank">http://ascii.jp/elem/000/001/555/1555599/</a></p>
-
-<p>Bash on Ubuntu on Windowsをインストールしてsshを立てたらUbuntuに向けてポートフォワーディングをしてあげると接続できる、はず。<br>
+<p data-sourcepos="13:1-15:54">Bash on Ubuntu on Windowsをインストールしてsshを立てたらUbuntuに向けてポートフォワーディングをしてあげると接続できる、はず。<br>
 設定の状況によっては何もやらなくてもWindowsでSSHを立てるだけで良いかもしれない。<br>
 当然、Ubuntu内でもSSHを立てておくこと。</p>
-
-<p>それができれば、お好みのttyと端末を使って開発したい人は上記で対応できるはず。<br>
+<p data-sourcepos="17:1-18:88">それができれば、お好みのttyと端末を使って開発したい人は上記で対応できるはず。<br>
 手持ちのWindows10 Proでは出来たので、この辺に原因がありそうだ。</p>
-
-<h1>
+<h1 data-sourcepos="20:1-20:11">
 <span id="代替案" class="fragment"></span><a href="#%E4%BB%A3%E6%9B%BF%E6%A1%88"><i class="fa fa-link"></i></a>代替案</h1>
-
-<p>難しいことをしなくても、Windows10の端末からUbuntuには接続できるのだから、Windows10にリモート接続できればよい。<br>
+<p data-sourcepos="21:1-23:54">難しいことをしなくても、Windows10の端末からUbuntuには接続できるのだから、Windows10にリモート接続できればよい。<br>
 Windows間ならリモートデスクトップツールがあるし、そうでなければGoogle Remote Desktopなりを使えば良い。要はUbuntuを起動しているWindows10の端末に入れればよい。<br>
 そこからUbuntuにつなげれば解決できる。</p>
-
-<p>（検証でき次第追記）</p>
+<p data-sourcepos="25:1-25:30">（検証でき次第追記）</p>

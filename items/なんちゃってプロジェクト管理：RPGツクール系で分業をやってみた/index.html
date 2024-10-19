@@ -1,140 +1,92 @@
-
-<h1>
-<span id="まずはじめに" class="fragment"></span><a href="#%E3%81%BE%E3%81%9A%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>まずはじめに</h1>
-
-<p>この方法が良いとは思ってませんが、当時大学生サークルでゴリゴリ開発していた時の色々な反省点を踏まえ、今風に調整して公開してます。</p>
-
-<ul>
-<li>こういう方法があるよ！</li>
-<li>こんなんどうよ？</li>
+<p data-sourcepos="1:1-2:192">#まずはじめに<br>
+この方法が良いとは思ってませんが、当時大学生サークルでゴリゴリ開発していた時の色々な反省点を踏まえ、今風に調整して公開してます。</p>
+<ul data-sourcepos="4:1-6:0">
+<li data-sourcepos="4:1-4:35">こういう方法があるよ！</li>
+<li data-sourcepos="5:1-6:0">こんなんどうよ？</li>
 </ul>
-
-<p>とかバンバンください！</p>
-
-<h1>
-<span id="概要" class="fragment"></span><a href="#%E6%A6%82%E8%A6%81"><i class="fa fa-link"></i></a>概要</h1>
-
-<p>こういう作りになってる背景をちょっとだけ。<br>
+<p data-sourcepos="7:1-7:33">とかバンバンください！</p>
+<p data-sourcepos="9:1-11:33">#概要<br>
+こういう作りになってる背景をちょっとだけ。<br>
 メンバーは以下のとおり</p>
-
-<p>私：一応代表やらせてもらってます。RGSS時代に一度挫折したけど今回帰ってきた出戻りスクリプター<br>
+<p data-sourcepos="13:1-17:58">私：一応代表やらせてもらってます。RGSS時代に一度挫折したけど今回帰ってきた出戻りスクリプター<br>
 F君：絵も文も書けるナイスガイ、そしてツクラー。スクリプトもちょっと書けるよ！<br>
 I君：ADVメインのツクラー。素材は凝る。UI作る能力がハンパない<br>
 S君：非ツクラー。難しい事は分からんが何でもやります。メインは動画・マンガの人<br>
 J君：デジ塗り専門。背景とかもバッチリ！</p>
-
-<p>やたらとシナリオ書きたい人が多いサークルですが、彼らのやりたい事を考慮しつつ、うまいこと作成していく</p>
-
-<h1>
-<span id="担当" class="fragment"></span><a href="#%E6%8B%85%E5%BD%93"><i class="fa fa-link"></i></a>担当</h1>
-
-<p>PM：私<br>
+<p data-sourcepos="19:1-26:24">やたらとシナリオ書きたい人が多いサークルですが、彼らのやりたい事を考慮しつつ、うまいこと作成していく<br>
+#担当<br>
+PM：私<br>
 スクリプト：私<br>
 マップデザイン・クリエイト：I君<br>
 ADVパート：みんな<br>
 RPGパート：私<br>
 デバッガ：みんな</p>
-
-<p>素材とか色々ありますが、ややこしくなるのでここでは省きます。</p>
-
-<h1>
+<p data-sourcepos="28:1-28:90">素材とか色々ありますが、ややこしくなるのでここでは省きます。</p>
+<h1 data-sourcepos="30:1-30:23">
 <span id="なんちゃって例" class="fragment"></span><a href="#%E3%81%AA%E3%82%93%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A6%E4%BE%8B"><i class="fa fa-link"></i></a>なんちゃって例</h1>
-
-<p><a href="https://camo.qiitausercontent.com/4d2d42597eeaab23bfde3dfb4d6caaa667bb00e3/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f32646332343862632d303062622d666566372d303736362d3639653831653131346234612e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F2dc248bc-00bb-fef7-0766-69e81e114b4a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d3b7faeb37ece5c50be52835ffa475fb" alt="qiita_RPGMV.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/2dc248bc-00bb-fef7-0766-69e81e114b4a.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F2dc248bc-00bb-fef7-0766-69e81e114b4a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=83ce6e95bccf4b7a3e2701ea00a47299 1x" loading="lazy"></a></p>
-
-<h1>
-<span id="使い方と各コメント" class="fragment"></span><a href="#%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%A8%E5%90%84%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>使い方と各コメント</h1>
-
-<p>基本的には開発環境でガッツリ、ある程度安定版を出せればテスト環境に移行していく。<br>
+<p data-sourcepos="31:1-31:112"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F2dc248bc-00bb-fef7-0766-69e81e114b4a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d3b7faeb37ece5c50be52835ffa475fb" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F2dc248bc-00bb-fef7-0766-69e81e114b4a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d3b7faeb37ece5c50be52835ffa475fb" alt="qiita_RPGMV.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F2dc248bc-00bb-fef7-0766-69e81e114b4a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=83ce6e95bccf4b7a3e2701ea00a47299 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/2dc248bc-00bb-fef7-0766-69e81e114b4a.png" loading="lazy"></a></p>
+<p data-sourcepos="34:1-37:117">#使い方と各コメント<br>
+基本的には開発環境でガッツリ、ある程度安定版を出せればテスト環境に移行していく。<br>
 ドキュメント整理も立派な仕事なので、各担当者に徹底させるようにすると、「締め切りに間に合わない時に代表がキャッチアップできる」というメリットがある。<br>
 当日、会場に行ってプレスする羽目にならないように普段から進捗管理を心がけよう。</p>
-
-<p><em>「今、困ってる事はない？」</em></p>
-
-<h2>
+<p data-sourcepos="39:1-39:41"><em>「今、困ってる事はない？」</em></p>
+<h2 data-sourcepos="41:1-41:7">
 <span id="root" class="fragment"></span><a href="#root"><i class="fa fa-link"></i></a>root</h2>
-
-<p>なんかあった時のために置いてる。<br>
+<p data-sourcepos="42:1-43:184">なんかあった時のために置いてる。<br>
 なんでこういう作りにしようと思ったのかは覚えてないけど、root以下をまるっとコピペする方法が当時はなかった気がする。今もない？</p>
-
-<h2>
+<h2 data-sourcepos="45:1-45:12">
 <span id="環境別" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E5%88%A5"><i class="fa fa-link"></i></a>環境別</h2>
-
-<p>当時やってなかったけど、これをやらなかった所為でファイルが管理出来なかった。<br>
+<p data-sourcepos="46:1-48:173">当時やってなかったけど、これをやらなかった所為でファイルが管理出来なかった。<br>
 完成版とテスト版のマップがどれか分からないので、マップ名に[本番]とか書いてた気がする。<br>
 -&gt;この対応自体はやるだろうけど、親フォルダがどこにあるのかわからなくなるので、予め対応すると探すのが劇的に楽になる。</p>
-
-<h2>
+<h2 data-sourcepos="50:1-50:24">
 <span id="バージョン管理" class="fragment"></span><a href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86"><i class="fa fa-link"></i></a>バージョン管理</h2>
-
-<p>このバージョン管理の目的は<em>いつエターナっても適当に切り上げられるようにする</em>ための措置。<br>
+<p data-sourcepos="51:1-54:174">このバージョン管理の目的は<em>いつエターナっても適当に切り上げられるようにする</em>ための措置。<br>
 個人開発だとポシャって非公開で良いんだけど集団開発しているとポシャった時のフォローが大変。<br>
 完成していなくても公開はしよう、という意見は絶対出てくるのでサークルの空中分解を防ぐのに大きく貢献してくれる。<br>
 当然、学生時代にそんな事に気が回らなかったので頑張って手作業で動くところまで復旧して空中分解を阻止していた過去が…。</p>
-
-<h3>
+<h3 data-sourcepos="56:1-56:37">
 <span id="テスト環境のバージョン" class="fragment"></span><a href="#%E3%83%86%E3%82%B9%E3%83%88%E7%92%B0%E5%A2%83%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3"><i class="fa fa-link"></i></a>テスト環境のバージョン</h3>
-
-<p>テスト環境の場合、赤ペン先生のごとくあーでもないこーでもないとバグが見つかる。<br>
+<p data-sourcepos="57:1-59:99">テスト環境の場合、赤ペン先生のごとくあーでもないこーでもないとバグが見つかる。<br>
 基本的にその処理さえ動けばいいや、という作り方をしているダメな設計のプログラマーがプレゼン中にバグを披露するという恥ずかしい事態に陥りやすいための措置。<br>
 RPGパートをスクリプト屋以外の人間が分業していたら意味はあると思う。</p>
-
-<p>ある程度形になってきた時に開発者一同が気晴らしに自分のゲームをしたい時にも使える。</p>
-
-<h3>
+<p data-sourcepos="61:1-61:123">ある程度形になってきた時に開発者一同が気晴らしに自分のゲームをしたい時にも使える。</p>
+<h3 data-sourcepos="63:1-63:52">
 <span id="テスト環境デバッガーおかしく" class="fragment"></span><a href="#%E3%83%86%E3%82%B9%E3%83%88%E7%92%B0%E5%A2%83%E3%83%87%E3%83%90%E3%83%83%E3%82%AC%E3%83%BC%E3%81%8A%E3%81%8B%E3%81%97%E3%81%8F"><i class="fa fa-link"></i></a>テスト環境：デバッガー／おかしく</h3>
-
-<p><em>テスト環境：デバッガー／おかしくなったら作りなおす</em><br>
+<p data-sourcepos="64:1-66:153"><em>テスト環境：デバッガー／おかしくなったら作りなおす</em><br>
 作りなおしたりバージョンを差し替える時は場所移動の変更をお忘れなく。<br>
 よく忘れるのはデスルーラの移動先設定。デスルーラってマップを作ってそこで飛ばす方法が良いかもしれない。</p>
-
-<h2>
+<h2 data-sourcepos="68:1-68:24">
 <span id="シンタイトル" class="fragment"></span><a href="#%E3%82%B7%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB"><i class="fa fa-link"></i></a>シン・タイトル</h2>
-
-<p>デフォルトのタイトル画面でも良いんだけど、RPGMVの細かいの見てると色々いじれそうなので別に作ってみた。<br>
+<p data-sourcepos="69:1-71:108">デフォルトのタイトル画面でも良いんだけど、RPGMVの細かいの見てると色々いじれそうなので別に作ってみた。<br>
 凝りだすといつまでたっても終わらないのはcatsystem2とかYU-RISとかあの辺のADVエンジンで経験済み。<br>
 デザインやりたいスクリプト屋なら凝る可能性を憂慮してここでは分けてみた。</p>
-
-<h2>
+<h2 data-sourcepos="73:1-73:75">
 <span id="マップのエンカウントの有無シンボルエンカウント" class="fragment"></span><a href="#%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E3%82%A8%E3%83%B3%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E6%9C%89%E7%84%A1%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AB%E3%82%A8%E3%83%B3%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>マップのエンカウントの有無・シンボルエンカウント</h2>
-
-<p>これはマップの広さに関わってくる。<br>
+<p data-sourcepos="74:1-76:87">これはマップの広さに関わってくる。<br>
 VX時代からでも描画関連で色々な問題があったのに、MVで問題にならないわけがない。<br>
 対象のマシンスペックを考慮してしっかりと定義しておくこと。</p>
-
-<h2>
+<h2 data-sourcepos="78:1-78:15">
 <span id="advパート" class="fragment"></span><a href="#adv%E3%83%91%E3%83%BC%E3%83%88"><i class="fa fa-link"></i></a>ADVパート</h2>
-
-<p>ぶっちゃけバージョンを分ける必要はない。が、ノンプログラマー的にはちょっとカッコ良く見えるらしい。<br>
+<p data-sourcepos="79:1-80:78">ぶっちゃけバージョンを分ける必要はない。が、ノンプログラマー的にはちょっとカッコ良く見えるらしい。<br>
 テンションを上げるための努力をするのも代表の仕事だ。</p>
-
-<h2>
+<h2 data-sourcepos="82:1-82:21">
 <span id="プレゼンmtg" class="fragment"></span><a href="#%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3mtg"><i class="fa fa-link"></i></a>プレゼン・MTG</h2>
-
-<p>これがあるとチャットワークスなりスカイプなりの会議が捗る。<br>
+<p data-sourcepos="83:1-84:147">これがあるとチャットワークスなりスカイプなりの会議が捗る。<br>
 議題にするファイルを予め入れて、それらが動くような形に設定してプロジェクト自体を配布するのが良い。</p>
-
-<p>ついでに、プレゼンで使った時点のプロジェクトはどこかに持っておくようにしよう。<br>
+<p data-sourcepos="86:1-87:54">ついでに、プレゼンで使った時点のプロジェクトはどこかに持っておくようにしよう。<br>
 それがそのままバックアップに使える。</p>
-
-<h2>
+<h2 data-sourcepos="89:1-89:15">
 <span id="デプロイ" class="fragment"></span><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4"><i class="fa fa-link"></i></a>デプロイ</h2>
-
-<p>VXまでは容量削減のため、開発プロジェクトを保存しておきデプロイプロジェクトは本番環境以外ごっそり削って、デプロイしたファイルを使って通しプレイをする、というのが当たり前だった。<br>
+<p data-sourcepos="90:1-91:56">VXまでは容量削減のため、開発プロジェクトを保存しておきデプロイプロジェクトは本番環境以外ごっそり削って、デプロイしたファイルを使って通しプレイをする、というのが当たり前だった。<br>
 MVもあんまり変わらない気がしているが…</p>
-
-<h2>
+<h2 data-sourcepos="94:1-94:21">
 <span id="結局のところ" class="fragment"></span><a href="#%E7%B5%90%E5%B1%80%E3%81%AE%E3%81%A8%E3%81%93%E3%82%8D"><i class="fa fa-link"></i></a>結局のところ</h2>
-
-<p>ツクラーあるある対策は一部盛り込んだつもりですが、そのチームのクセを見ぬいて最適化してあげるのが一番良いでしょう。<br>
+<p data-sourcepos="95:1-96:120">ツクラーあるある対策は一部盛り込んだつもりですが、そのチームのクセを見ぬいて最適化してあげるのが一番良いでしょう。<br>
 この形は私のサークルではある程度まとまりが取れていたので、この形にしていました。</p>
-
-<h2>
+<h2 data-sourcepos="98:1-98:18">
 <span id="ぶっちゃけ" class="fragment"></span><a href="#%E3%81%B6%E3%81%A3%E3%81%A1%E3%82%83%E3%81%91"><i class="fa fa-link"></i></a>ぶっちゃけ</h2>
-
-<p>ソロで開発したほうが楽な事が目立つかも知れない…</p>
-
-<h1>
+<p data-sourcepos="99:1-99:72">ソロで開発したほうが楽な事が目立つかも知れない…</p>
+<h1 data-sourcepos="101:1-101:47">
 <span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
-
-<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+<p data-sourcepos="102:1-102:150">どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

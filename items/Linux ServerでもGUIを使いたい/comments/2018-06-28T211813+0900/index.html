@@ -1,10 +1,11 @@
-<blockquote>
-<p>以下、注意事項です。<br>
-- クライアントがGUIに対応していないと表示されない<br>
-- つまり、Desktop版からsshで接続する必要があります。<br>
-- Windows Subsystem for Linux(Bash on Windows on Ubuntu)だとダメでした。</p>
+<blockquote data-sourcepos="1:1-1:32">
+<p data-sourcepos="1:3-1:32">以下、注意事項です。</p>
 </blockquote>
-
-<p>LinuxでのGUIはX(X Windows System)を使っていますので、操作する側(画面・キーボード・マウスを使う側)で<strong>Xサーバソフトウェア</strong>を起動させておく必要があります。<br>
+<ul data-sourcepos="2:1-5:0">
+<li data-sourcepos="2:1-2:71">クライアントがGUIに対応していないと表示されない</li>
+<li data-sourcepos="3:1-3:72">つまり、Desktop版からsshで接続する必要があります。</li>
+<li data-sourcepos="4:1-5:0">Windows Subsystem for Linux(Bash on Windows on Ubuntu)だとダメでした。</li>
+</ul>
+<p data-sourcepos="6:1-8:336">LinuxでのGUIはX(X Windows System)を使っていますので、操作する側(画面・キーボード・マウスを使う側)で<strong>Xサーバソフトウェア</strong>を起動させておく必要があります。<br>
 「クライアントがGUIに対応していないと」は、正しくは「クライアントでXサーバをインストール・起動していないと」です。<br>
 で、Windows Subsystem for LinuxにはXサーバソフトが付属していません。それにWindowsそのものはXサーバの役割を持ちません。なので、何かしらXサーバソフトを用意する必要があります。( 今だと VcXsrv が良いと思います。qiitaにも幾つか記事があるようです )</p>

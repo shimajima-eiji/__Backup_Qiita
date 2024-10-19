@@ -1,57 +1,42 @@
-
-<h2>
+<h2 data-sourcepos="1:1-1:18">
 <span id="ごあいさつ" class="fragment"></span><a href="#%E3%81%94%E3%81%82%E3%81%84%E3%81%95%E3%81%A4"><i class="fa fa-link"></i></a>ごあいさつ</h2>
-
-<p>古い記事を参考にしながら試行錯誤をしていたが、既にリンク切れになっていたりもっと良い物が出ていたりしたので、古い記事を修正するより新しく出した方がわかりやすいな、と思って新記事にしてます。<br>
+<p data-sourcepos="2:1-5:87">古い記事を参考にしながら試行錯誤をしていたが、既にリンク切れになっていたりもっと良い物が出ていたりしたので、古い記事を修正するより新しく出した方がわかりやすいな、と思って新記事にしてます。<br>
 似たような記事はいくつか出してますが、ここでは過去の記事を見なくても良いよう、重複を含む事にしました。<br>
 必要であれば適宜参考リンクを張りますが、原則リンク先から引用する形でまとめておきたいと思います。<br>
 （後日、自分で見たときに絶対にハマるだろうことを見越して）</p>
-
-<h2>
+<h2 data-sourcepos="7:1-7:21">
 <span id="本稿のゴール" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AE%E3%82%B4%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>本稿のゴール</h2>
-
-<ul>
-<li>WSLをリセット・クリーンインストールした後でも<strong>安心・安全</strong>な状態で稼働できるようにする</li>
-<li>同じディストリビューションなら使い回せるように手順やコードを整備する</li>
+<ul data-sourcepos="8:1-10:0">
+<li data-sourcepos="8:1-8:129">WSLをリセット・クリーンインストールした後でも<strong>安心・安全</strong>な状態で稼働できるようにする</li>
+<li data-sourcepos="9:1-10:0">同じディストリビューションなら使い回せるように手順やコードを整備する</li>
 </ul>
-
-<h2>
+<h2 data-sourcepos="11:1-11:9">
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
-
-<p>環境が壊れるかもしれないので、はじめてやる場合は使っていないディストリビューションでやりましょう。<br>
+<p data-sourcepos="12:1-13:218">環境が壊れるかもしれないので、はじめてやる場合は使っていないディストリビューションでやりましょう。<br>
 Windows10 ProユーザーならHyper-Vも使えますので、いきなり手元にできあがっている開発環境を使って動かなくなって困るような状況にしないように注意しましょう。</p>
-
-<h2>
+<h2 data-sourcepos="15:1-15:9">
 <span id="前提" class="fragment"></span><a href="#%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>前提</h2>
-
-<ul>
-<li>本稿ではUbuntuでやってます。</li>
-<li>事前にWindows側のWSL関連の設定を完了されているものとします。</li>
-<li>再起動もお忘れなく！</li>
-<li><strong>どうせ後で削除（修復・リセット）をするだろうと考えているので動けばOKの現場猫主義な構築です。</strong></li>
+<ul data-sourcepos="16:1-20:0">
+<li data-sourcepos="16:1-16:41">本稿ではUbuntuでやってます。</li>
+<li data-sourcepos="17:1-17:87">事前にWindows側のWSL関連の設定を完了されているものとします。</li>
+<li data-sourcepos="18:1-18:32">再起動もお忘れなく！</li>
+<li data-sourcepos="19:1-20:0"><strong>どうせ後で削除（修復・リセット）をするだろうと考えているので動けばOKの現場猫主義な構築です。</strong></li>
 </ul>
-
-<h2>
+<h2 data-sourcepos="21:1-21:9">
 <span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h2>
-
-<h3>
+<h3 data-sourcepos="22:1-22:36">
 <span id="1-なにはともあれapt" class="fragment"></span><a href="#1-%E3%81%AA%E3%81%AB%E3%81%AF%E3%81%A8%E3%82%82%E3%81%82%E3%82%8Capt"><i class="fa fa-link"></i></a>1. なにはともあれ、<code>apt</code>
 </h3>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sudo apt update &amp;&amp; \
+<div class="code-frame" data-lang="text" data-sourcepos="23:1-26:3"><div class="highlight"><pre><code>sudo apt update &amp;&amp; \
 sudo apt upgrade -y
 </code></pre></div></div>
-
-<p>説明不要ですね。<br>
+<p data-sourcepos="28:1-30:135">説明不要ですね。<br>
 <code>echo (password) | sudo -S</code>で実行するとパスワード入力をスキップできます。<br>
 念の為、<code>history -c</code>をやっておくとウッカリパスワードを流出！という事も防げます。（※悪用厳禁）</p>
-
-<p>初回実施時は<code>sudo apt autoremove -y</code>は要らないですが、気がついたタイミングで使われなくなったパッケージを削除しておきましょう。</p>
-
-<h3>
+<p data-sourcepos="32:1-32:177">初回実施時は<code>sudo apt autoremove -y</code>は要らないですが、気がついたタイミングで使われなくなったパッケージを削除しておきましょう。</p>
+<h3 data-sourcepos="34:1-34:43">
 <span id="2-linuxbrewをインストールする" class="fragment"></span><a href="#2-linuxbrew%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>2. linuxbrewをインストールする</h3>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+<div class="code-frame" data-lang="text" data-sourcepos="36:1-45:3"><div class="highlight"><pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
 # 実行後に ==&gt; Next steps:が出てくるので、その手順を実施
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' &gt;&gt; /home/ubuntu/.profile
@@ -60,115 +45,86 @@ sudo apt install build-essential
 
 brew update  # Already up-to-date.と出力されるはずだが、何らかの成功メッセージが表示されれば完了
 </code></pre></div></div>
-
-<p>これで心置きなく、(brewが使えるようになったので)Mac環境の記事も参照できるようになります。</p>
-
-<h4>
+<p data-sourcepos="47:1-47:129">これで心置きなく、(brewが使えるようになったので)Mac環境の記事も参照できるようになります。</p>
+<h4 data-sourcepos="49:1-49:11">
 <span id="補足" class="fragment"></span><a href="#%E8%A3%9C%E8%B6%B3"><i class="fa fa-link"></i></a>補足</h4>
-
-<p>updateはaptとbrewの両方を実施する必要があります。</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>brew upgrade
+<p data-sourcepos="50:1-50:67">updateはaptとbrewの両方を実施する必要があります。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="52:1-54:3"><div class="highlight"><pre><code>brew upgrade
 </code></pre></div></div>
-
-<p><code>brew update</code>はbrew自体の更新で、upgradeはbrew自体とパッケージも含みます。<br>
+<p data-sourcepos="56:1-57:71"><code>brew update</code>はbrew自体の更新で、upgradeはbrew自体とパッケージも含みます。<br>
 なので、基本的には<code>brew upgrade</code>だけで良さそうです。</p>
-
-<p>ウッカリやりがちですが、<code>apt install</code>より<code>brew install</code>を心がけたほうが、せっかくのbrewを活かしやすいです。</p>
-
-<h4>
+<p data-sourcepos="59:1-59:145">ウッカリやりがちですが、<code>apt install</code>より<code>brew install</code>を心がけたほうが、せっかくのbrewを活かしやすいです。</p>
+<h4 data-sourcepos="61:1-61:14">
 <span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意！</h4>
-
-<p><code>brew</code>は<code>sudo</code>で実行できません。<br>
+<p data-sourcepos="62:1-63:78"><code>brew</code>は<code>sudo</code>で実行できません。<br>
 つまり<code>brew</code>で入れたパッケージを<code>sudo</code>で実行できません。</p>
-
-<p>よくあるのが、<code>npm</code>やら<code>gem</code>で入れたパッケージをグローバルで使いたい場合やどうしても<code>sudo</code>を求められる場合は<code>brew</code>で入れることができません。<br>
+<p data-sourcepos="65:1-66:227">よくあるのが、<code>npm</code>やら<code>gem</code>で入れたパッケージをグローバルで使いたい場合やどうしても<code>sudo</code>を求められる場合は<code>brew</code>で入れることができません。<br>
 あえて使い分けるなら、globalで実行するものは環境に依存しないもの、brewで実行するもの(local)は環境に依存するものとして管理するとバージョン差異を吸収できます。</p>
-
-<h3>
+<h3 data-sourcepos="68:1-68:34">
 <span id="3-開発環境を整備する" class="fragment"></span><a href="#3-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%92%E6%95%B4%E5%82%99%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3. 開発環境を整備する</h3>
-
-<p><strong>長期的に運用するなら、運用専門のディストリビューションを決めてそちらで使ったほうが良いです。</strong><br>
+<p data-sourcepos="69:1-71:59"><strong>長期的に運用するなら、運用専門のディストリビューションを決めてそちらで使ったほうが良いです。</strong><br>
 というのも、linuxbrew + anyenv + ○○envの構成は、パッケージ管理のアプローチが冗長すぎてパスで躓く事が考えられます。<br>
 （例：<code>github-changes</code>、<code>github_changelog_generator</code>）</p>
-
-<p>こういう可能性もあるので、凝った運用をする場合はパッケージ管理しすぎ問題を回避する方が望ましいでしょう。<br>
+<p data-sourcepos="73:1-74:192">こういう可能性もあるので、凝った運用をする場合はパッケージ管理しすぎ問題を回避する方が望ましいでしょう。<br>
 とはいえ、anyenv自体は非常に便利で使い勝手が良く、これ自体が干渉することはないのでお使いの環境にあった構成をするのが良いでしょう。</p>
-
-<h4>
+<h4 data-sourcepos="76:1-76:37">
 <span id="30-anyenvを導入する前に" class="fragment"></span><a href="#30-anyenv%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB"><i class="fa fa-link"></i></a>3.0. anyenvを導入する前に</h4>
-
-<ol>
-<li>まずは<code>brew</code>で環境を整えてみて、動く状態を作ります。</li>
-<li>動くものをanyenvで実行するディストリビューションに移行し、環境を作ります。</li>
-<li>anyenvで入れた環境で動けばOK、動かなければ再検討をする</li>
+<ol data-sourcepos="77:1-80:0">
+<li data-sourcepos="77:1-77:78">まずは<code>brew</code>で環境を整えてみて、動く状態を作ります。</li>
+<li data-sourcepos="78:1-78:111">動くものをanyenvで実行するディストリビューションに移行し、環境を作ります。</li>
+<li data-sourcepos="79:1-80:0">anyenvで入れた環境で動けばOK、動かなければ再検討をする</li>
 </ol>
-
-<p>ぐらいで良いでしょう。<br>
+<p data-sourcepos="81:1-82:97">ぐらいで良いでしょう。<br>
 何度も言いますが、<strong>凝った運用をしなければ</strong>anyenvは非常に便利です。</p>
-
-<h4>
+<h4 data-sourcepos="84:1-84:43">
 <span id="31-anyenvをインストールする" class="fragment"></span><a href="#31-anyenv%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.1. anyenvをインストールする</h4>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>brew install anyenv 
+<div class="code-frame" data-lang="text" data-sourcepos="85:1-87:3"><div class="highlight"><pre><code>brew install anyenv 
 </code></pre></div></div>
-
-<p>超簡単！</p>
-
-<h4>
+<p data-sourcepos="89:1-89:12">超簡単！</p>
+<h4 data-sourcepos="91:1-91:43">
 <span id="32-anyenvを使えるようにする" class="fragment"></span><a href="#32-anyenv%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.2. anyenvを使えるようにする</h4>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>anyenv install --init
+<div class="code-frame" data-lang="text" data-sourcepos="92:1-97:3"><div class="highlight"><pre><code>anyenv install --init
 echo 'export PATH="$HOME/.anyenv/bin:$PATH"' &gt;&gt;~/.profile
 echo eval "$(anyenv init -)" &gt;&gt;~/.profile
 source ~/.profile
 </code></pre></div></div>
-
-<p>これは上記コマンドを実行した後にも、コンソール上で実施するように促されるのでおそらく大丈夫。</p>
-
-<h4>
+<p data-sourcepos="99:1-99:138">これは上記コマンドを実行した後にも、コンソール上で実施するように促されるのでおそらく大丈夫。</p>
+<h4 data-sourcepos="101:1-101:58">
 <span id="33-お好みのenvをインストールする" class="fragment"></span><a href="#33-%E3%81%8A%E5%A5%BD%E3%81%BF%E3%81%AEenv%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>3.3. お好みの○○envをインストールする</h4>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>anyenv install -l
+<div class="code-frame" data-lang="text" data-sourcepos="102:1-104:3"><div class="highlight"><pre><code>anyenv install -l
 </code></pre></div></div>
-
-<p>でインストールできるものが一覧表示されるので、任意で入れていきましょう。<br>
+<p data-sourcepos="106:1-107:72">でインストールできるものが一覧表示されるので、任意で入れていきましょう。<br>
 試しに、rbenvを入れてrubyを使えるようにしてみます。</p>
-
-<p><qiita-embed-ogp src="https://qiita.com/nomurasan/items/5c7f70d7c0979b478639"></qiita-embed-ogp></p>
-
-<h3>
+<p data-sourcepos="109:1-109:54"><iframe id="qiita-embed-content__4aee46e9ab57fc65026e2b33c77a262f" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__4aee46e9ab57fc65026e2b33c77a262f" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F5c7f70d7c0979b478639" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h3 data-sourcepos="111:1-111:25">
 <span id="4-dockerを入れる" class="fragment"></span><a href="#4-docker%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B"><i class="fa fa-link"></i></a>4. Dockerを入れる</h3>
-
-<p>厳密に言うとWSLにDockerではなく、WindowsのHyper-VにDockerを入れるのでPro限定です。<br>
+<p data-sourcepos="112:1-113:93">厳密に言うとWSLにDockerではなく、WindowsのHyper-VにDockerを入れるのでPro限定です。<br>
 解説すると長くなるので、別記事にします（後日：参考リンクのみ）</p>
-
-<p><qiita-embed-ogp src="https://blog.ecbeing.tech/entry/2021/09/07/150000"></qiita-embed-ogp></p>
-
-<h2>
+<p data-sourcepos="115:1-115:49"><iframe id="qiita-embed-content__7d7708af4ba7d82c893c287ac4868fd8" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__7d7708af4ba7d82c893c287ac4868fd8" data-content="https%3A%2F%2Fblog.ecbeing.tech%2Fentry%2F2021%2F09%2F07%2F150000" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="117:1-117:45">
 <span id="ubuntuを削除初期化したい時は" class="fragment"></span><a href="#ubuntu%E3%82%92%E5%89%8A%E9%99%A4%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%97%E3%81%9F%E3%81%84%E6%99%82%E3%81%AF"><i class="fa fa-link"></i></a>Ubuntuを削除・初期化したい時は</h2>
-
-<p><qiita-embed-ogp src="https://zenn.dev/kawacdev/articles/3de7892fd13df3"></qiita-embed-ogp></p>
-
-<ol>
-<li>Windows10のコントロールパネルを開く</li>
-<li>アプリ</li>
-<li>アプリと機能</li>
-<li>Ubuntu
-
-<ol>
-<li>詳細オプション</li>
+<p data-sourcepos="119:1-119:49"><iframe id="qiita-embed-content__82eb8fc2b22857c74746cd365d0d59b5" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__82eb8fc2b22857c74746cd365d0d59b5" data-content="https%3A%2F%2Fzenn.dev%2Fkawacdev%2Farticles%2F3de7892fd13df3" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<ol data-sourcepos="121:1-127:0">
+<li data-sourcepos="121:1-121:51">Windows10のコントロールパネルを開く</li>
+<li data-sourcepos="122:1-122:12">アプリ</li>
+<li data-sourcepos="123:1-123:21">アプリと機能</li>
+<li data-sourcepos="124:1-125:28">Ubuntu
+<ol data-sourcepos="125:5-125:28">
+<li data-sourcepos="125:5-125:28">詳細オプション</li>
 </ol>
 </li>
-<li>修復、あるいはリセット。場合によりアンインストール</li>
+<li data-sourcepos="126:1-127:0">修復、あるいはリセット。場合によりアンインストール</li>
 </ol>
-
-<p>ここで削除したディストリビューションは「MS Sore」を開いて検索すればまたダウンロード・インストールできます。<br>
+<p data-sourcepos="128:1-129:55">ここで削除したディストリビューションは「MS Sore」を開いて検索すればまたダウンロード・インストールできます。<br>
 ※Windowsの再起動が必要な事もあります。</p>
-
-<h2>
+<h2 data-sourcepos="131:1-131:9">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h2>
-
-<ul>
-<li><a href="https://fukatsu.tech/linuxbrew" rel="nofollow noopener" target="_blank">Linuxbrewのインストール方法(執筆時点の最終更新日:2019/4/6)</a></li>
+<ul data-sourcepos="132:1-132:113">
+<li data-sourcepos="132:1-132:113"><a href="https://fukatsu.tech/linuxbrew" rel="nofollow noopener" target="_blank">Linuxbrewのインストール方法(執筆時点の最終更新日:2019/4/6)</a></li>
 </ul>

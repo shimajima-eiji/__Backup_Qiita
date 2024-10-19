@@ -1,8 +1,6 @@
-
-<h1>
+<h1 data-sourcepos="1:1-1:20">
 <span id="ソースコード" class="fragment"></span><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89"><i class="fa fa-link"></i></a>ソースコード</h1>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>#!/bin/sh
+<div class="code-frame" data-lang="text" data-sourcepos="2:1-17:3"><div class="highlight"><pre><code>#!/bin/sh
 : &lt;&lt;__For_copy
 |
 \
@@ -17,39 +15,28 @@ __For_copy
 set -u
 ${1} | ${2}
 </code></pre></div></div>
-
-<h1>
+<h1 data-sourcepos="19:1-19:11">
 <span id="使い方" class="fragment"></span><a href="#%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-link"></i></a>使い方</h1>
-
-<p>'''<br>
+<p data-sourcepos="20:1-22:3">'''<br>
 sh pype.sh '実行したいコマンド' 'パイプ実行したいコマンド'<br>
 '''</p>
-
-<h1>
+<h1 data-sourcepos="24:1-24:17">
 <span id="アドバイス" class="fragment"></span><a href="#%E3%82%A2%E3%83%89%E3%83%90%E3%82%A4%E3%82%B9"><i class="fa fa-link"></i></a>アドバイス</h1>
-
-<p>本当はパイプを入力できるようにするのが好ましいのですが、面倒なことが往々にしてあると思います。<br>
+<p data-sourcepos="25:1-26:109">本当はパイプを入力できるようにするのが好ましいのですが、面倒なことが往々にしてあると思います。<br>
 とりあえず入力に困りそうなキーをForCopyの中に入れておくと何気に助かります。</p>
-
-<p>使うときは、自前のサーバーなどでSAMBAを使うなり、Wgetなどで取得できるようにしておくと組織でも簡単に共有できます。</p>
-
-<p>複数のパイプに対応したい場合は、</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>${1} | ${2} | ${3} ...
+<p data-sourcepos="28:1-28:165">使うときは、自前のサーバーなどでSAMBAを使うなり、Wgetなどで取得できるようにしておくと組織でも簡単に共有できます。</p>
+<p data-sourcepos="30:1-30:48">複数のパイプに対応したい場合は、</p>
+<div class="code-frame" data-lang="text" data-sourcepos="32:1-34:3"><div class="highlight"><pre><code>${1} | ${2} | ${3} ...
 </code></pre></div></div>
-
-<p>のように引数を増やすと使えます。<br>
+<p data-sourcepos="36:1-37:88">のように引数を増やすと使えます。<br>
 &amp;&amp;や||もこれで作れるので、やりたいように作り変えてください。</p>
-
-<h1>
+<h1 data-sourcepos="39:1-39:35">
 <span id="キーボード変更について" class="fragment"></span><a href="#%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E5%A4%89%E6%9B%B4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>キーボード変更について</h1>
-
-<p>英語キーボードを使っているなら</p>
-
-<div class="code-frame" data-lang="text"><div class="highlight"><pre><code>sudo loadkeys us
+<p data-sourcepos="40:1-40:45">英語キーボードを使っているなら</p>
+<div class="code-frame" data-lang="text" data-sourcepos="42:1-44:3"><div class="highlight"><pre><code>sudo loadkeys us
 </code></pre></div></div>
-
-<h1>
+<h1 data-sourcepos="46:1-46:8">
 <span id="感謝" class="fragment"></span><a href="#%E6%84%9F%E8%AC%9D"><i class="fa fa-link"></i></a>感謝</h1>
-
-<p><qiita-embed-ogp src="http://d.hatena.ne.jp/matoken/20090905/1252164012"></qiita-embed-ogp></p>
+<p data-sourcepos="47:1-47:49"><iframe id="qiita-embed-content__84cacd99a0f8e46db4a0a5355c37b5b6" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__84cacd99a0f8e46db4a0a5355c37b5b6" data-content="http%3A%2F%2Fd.hatena.ne.jp%2Fmatoken%2F20090905%2F1252164012" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>

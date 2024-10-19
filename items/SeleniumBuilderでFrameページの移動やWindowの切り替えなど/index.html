@@ -1,224 +1,132 @@
-<p>【Attention】<br>
+<p data-sourcepos="1:1-2:126">【Attention】<br>
 思ったより長くなってしまったので、検索で来られた方はCtrl+Fしてそこまで飛んでください。</p>
-
-<h1>
-<span id="使用環境" class="fragment"></span><a href="#%E4%BD%BF%E7%94%A8%E7%92%B0%E5%A2%83"><i class="fa fa-link"></i></a>使用環境</h1>
-
-<ul>
-<li>Firefox
-
-<ul>
-<li>45.0.2 Japanese</li>
-<li>Beta(46.0) English(JP-lang)</li>
+<p data-sourcepos="4:1-4:13">#使用環境</p>
+<ul data-sourcepos="6:1-12:0">
+<li data-sourcepos="6:1-6:9">Firefox</li>
+<li data-sourcepos="7:2-7:18">45.0.2 Japanese</li>
+<li data-sourcepos="8:2-8:30">Beta(46.0) English(JP-lang)</li>
+<li data-sourcepos="9:1-9:10">Selenium</li>
+<li data-sourcepos="10:2-10:15">Builder3.0.9</li>
+<li data-sourcepos="11:2-12:0">Builder2.3.5 [2016/08/22 追記／firefox48.0.0以降は使用できません]</li>
 </ul>
-</li>
-<li>Selenium
-
-<ul>
-<li>Builder3.0.9</li>
-<li>Builder2.3.5 [2016/08/22 追記／firefox48.0.0以降は使用できません]</li>
-</ul>
-</li>
-</ul>
-
-<h1>
-<span id="環境説明" class="fragment"></span><a href="#%E7%92%B0%E5%A2%83%E8%AA%AC%E6%98%8E"><i class="fa fa-link"></i></a>環境説明</h1>
-
-<p>以下のようなフレームを使ったページ構成があったとします。</p>
-
-<p><a href="https://camo.qiitausercontent.com/9a4846032fe63023a24284a88e42fa98e3b3b3c2/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f37323933333738662d666364312d383539622d633531312d3534646161663462613738302e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" alt="frame.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/7293378f-fcd1-859b-c511-54daaf4ba780.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=455e3f815fbc36d09062dea386d86955 1x" loading="lazy"></a></p>
-
-<p>絵ではtopフレームとmainフレームにだいぶスキマがありますが、実際ないものとしておいてください。<br>
+<p data-sourcepos="13:1-14:84">#環境説明<br>
+以下のようなフレームを使ったページ構成があったとします。</p>
+<p data-sourcepos="16:1-16:106"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" alt="frame.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=455e3f815fbc36d09062dea386d86955 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/7293378f-fcd1-859b-c511-54daaf4ba780.png" loading="lazy"></a></p>
+<p data-sourcepos="18:1-19:99">絵ではtopフレームとmainフレームにだいぶスキマがありますが、実際ないものとしておいてください。<br>
 topフレーム内の要素に対してアプローチするときは以下のようにします。</p>
-
-<p><a href="https://camo.qiitausercontent.com/bb3961a931528702abbc8876027bb4d91ea185f1/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f35626566663130362d376235312d303439632d343666332d3865653864313937383832362e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5beff106-7b51-049c-46f3-8ee8d1978826.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1d6e0f26ad4c1cc75a702920ceacdd50" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/5beff106-7b51-049c-46f3-8ee8d1978826.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5beff106-7b51-049c-46f3-8ee8d1978826.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=eb9101eef2ef1498ddb7abbac42922f9 1x" loading="lazy"></a></p>
-
-<p>とても簡単ですね！</p>
-
-<h2>
-<span id="フレームタッチmain" class="fragment"></span><a href="#%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%BF%E3%83%83%E3%83%81main"><i class="fa fa-link"></i></a>フレームタッチ：main</h2>
-
-<p>では次に、mainにアプローチしてみましょう</p>
-
-<p><a href="https://camo.qiitausercontent.com/96c93dd9f42b0fd1be2d4c47246f73512549c798/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f66653739396133612d333237342d383163622d306536302d6566316263653138343364382e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ffe799a3a-3274-81cb-0e60-ef1bce1843d8.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=fc7b8057ac9599078877b4c0d1bf2ba7" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/fe799a3a-3274-81cb-0e60-ef1bce1843d8.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ffe799a3a-3274-81cb-0e60-ef1bce1843d8.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=bf1cdbde95c004292fe62e87229edb6a 1x" loading="lazy"></a></p>
-
-<p>こう書くと思いますが、これは失敗するんです。<br>
+<p data-sourcepos="21:1-21:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5beff106-7b51-049c-46f3-8ee8d1978826.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1d6e0f26ad4c1cc75a702920ceacdd50" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5beff106-7b51-049c-46f3-8ee8d1978826.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1d6e0f26ad4c1cc75a702920ceacdd50" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F5beff106-7b51-049c-46f3-8ee8d1978826.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=eb9101eef2ef1498ddb7abbac42922f9 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/5beff106-7b51-049c-46f3-8ee8d1978826.png" loading="lazy"></a></p>
+<p data-sourcepos="23:1-23:27">とても簡単ですね！</p>
+<p data-sourcepos="25:1-26:58">##フレームタッチ：main<br>
+では次に、mainにアプローチしてみましょう</p>
+<p data-sourcepos="28:1-28:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ffe799a3a-3274-81cb-0e60-ef1bce1843d8.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=fc7b8057ac9599078877b4c0d1bf2ba7" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ffe799a3a-3274-81cb-0e60-ef1bce1843d8.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=fc7b8057ac9599078877b4c0d1bf2ba7" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Ffe799a3a-3274-81cb-0e60-ef1bce1843d8.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=bf1cdbde95c004292fe62e87229edb6a 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/fe799a3a-3274-81cb-0e60-ef1bce1843d8.png" loading="lazy"></a></p>
+<p data-sourcepos="30:1-31:12">こう書くと思いますが、これは失敗するんです。<br>
 何故か？</p>
-
-<p>答えは簡単で、フレームtop内にフレームmainがいないからですね。<br>
+<p data-sourcepos="33:1-34:78">答えは簡単で、フレームtop内にフレームmainがいないからですね。<br>
 なのでいったんフレームtopから抜けなければなりません。</p>
-
-<p>こうしましょう。</p>
-
-<p><a href="https://camo.qiitausercontent.com/fe174249c92051205bb92a0dde69032dc3bd553a/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f64623061316564652d393937302d623764612d366561612d3435373864303933653934372e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fdb0a1ede-9970-b7da-6eaa-4578d093e947.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=7b5317a36648f98f72f3678ca1dffb71" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/db0a1ede-9970-b7da-6eaa-4578d093e947.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fdb0a1ede-9970-b7da-6eaa-4578d093e947.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=a16d0d2fd4985b0dafb62c5908ba1432 1x" loading="lazy"></a></p>
-
-<p>いったん一番上のフレームに戻るようにしてあげればmainフレームへ行けます。</p>
-
-<h2>
-<span id="フレームタッチmain-left" class="fragment"></span><a href="#%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%BF%E3%83%83%E3%83%81main-left"><i class="fa fa-link"></i></a>フレームタッチ：main-left</h2>
-
-<p>では次に、main-leftフレームへ行きましょう。<br>
+<p data-sourcepos="36:1-36:24">こうしましょう。</p>
+<p data-sourcepos="38:1-38:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fdb0a1ede-9970-b7da-6eaa-4578d093e947.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=7b5317a36648f98f72f3678ca1dffb71" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fdb0a1ede-9970-b7da-6eaa-4578d093e947.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=7b5317a36648f98f72f3678ca1dffb71" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fdb0a1ede-9970-b7da-6eaa-4578d093e947.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=a16d0d2fd4985b0dafb62c5908ba1432 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/db0a1ede-9970-b7da-6eaa-4578d093e947.png" loading="lazy"></a></p>
+<p data-sourcepos="40:1-40:106">いったん一番上のフレームに戻るようにしてあげればmainフレームへ行けます。</p>
+<p data-sourcepos="42:1-44:54">##フレームタッチ：main-left<br>
+では次に、main-leftフレームへ行きましょう。<br>
 これはさっきと同じ考え方でできます。</p>
-
-<p><a href="https://camo.qiitausercontent.com/2694e04fa27e8880c6d80446c7f33802eda0554f/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f34626239656135372d613765642d313461612d323061372d6366323062333337623037662e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=be7833b4db791a60e89a6a68a45f0e57" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=64265123fb842a59087055f7e053e370 1x" loading="lazy"></a></p>
-
-<h2>
-<span id="フレームタッチmain-right" class="fragment"></span><a href="#%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%BF%E3%83%83%E3%83%81main-right"><i class="fa fa-link"></i></a>フレームタッチ：main-right</h2>
-
-<p>用事が済んだのでmain-rightフレームへ行きましょう。<br>
+<p data-sourcepos="46:1-46:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=be7833b4db791a60e89a6a68a45f0e57" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=be7833b4db791a60e89a6a68a45f0e57" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=64265123fb842a59087055f7e053e370 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/4bb9ea57-a7ed-14aa-20a7-cf20b337b07f.png" loading="lazy"></a></p>
+<p data-sourcepos="48:1-50:100">##フレームタッチ：main-right<br>
+用事が済んだのでmain-rightフレームへ行きましょう。<br>
 main-rightフレームはmain-leftの中にはないのでいったんフレームを戻します。</p>
-
-<p><a href="https://camo.qiitausercontent.com/874e9fd7993210d463044a8008fbfb28d8908527/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f30636461316131642d313666382d396433312d323561662d3631373031653263623031642e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0cda1a1d-16f8-9d31-25af-61701e2cb01d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6b3251e91e8aa8259d7b368fe8f6305a" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/0cda1a1d-16f8-9d31-25af-61701e2cb01d.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0cda1a1d-16f8-9d31-25af-61701e2cb01d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=8118529efa208c64bb23bed9e276ea76 1x" loading="lazy"></a></p>
-
-<p>実はこれ、失敗します。</p>
-
-<p>何故か？<br>
+<p data-sourcepos="52:1-52:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0cda1a1d-16f8-9d31-25af-61701e2cb01d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6b3251e91e8aa8259d7b368fe8f6305a" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0cda1a1d-16f8-9d31-25af-61701e2cb01d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6b3251e91e8aa8259d7b368fe8f6305a" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F0cda1a1d-16f8-9d31-25af-61701e2cb01d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=8118529efa208c64bb23bed9e276ea76 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/0cda1a1d-16f8-9d31-25af-61701e2cb01d.png" loading="lazy"></a></p>
+<p data-sourcepos="54:1-54:33">実はこれ、失敗します。</p>
+<p data-sourcepos="56:1-59:21">何故か？<br>
 ページの直下にmain-rightフレームはないからです。<br>
 Selenium Builderのエレベーターは上に登れても下には降りれないんですね、と私は理解しました。<br>
 ソースで言うと</p>
-
-<div class="code-frame" data-lang="java">
+<div class="code-frame" data-lang="java" data-sourcepos="61:1-64:3">
 <div class="code-lang"><span class="bold">switchToMoveFrame.java</span></div>
 <div class="highlight"><pre><code><span class="c1">//最上階直通エレベーターのみ</span>
 <span class="n">pageObject</span><span class="o">.</span><span class="na">switchTo</span><span class="o">().</span><span class="na">defaultContent</span><span class="o">();</span>
 </code></pre></div>
 </div>
-
-<p>ですね。<br>
+<p data-sourcepos="66:1-67:54">ですね。<br>
 この場合は諦めて階段を使いましょう。</p>
-
-<div class="code-frame" data-lang="java">
+<div class="code-frame" data-lang="java" data-sourcepos="69:1-72:3">
 <div class="code-lang"><span class="bold">switchToMoveFrame.java</span></div>
 <div class="highlight"><pre><code><span class="c1">//階段</span>
 <span class="n">pageObject</span><span class="o">.</span><span class="na">switchTo</span><span class="o">().</span><span class="na">frame</span><span class="o">(</span><span class="s">"一つ下の階層"</span><span class="o">);</span>
 </code></pre></div>
 </div>
-
-<p><a href="https://camo.qiitausercontent.com/1154000bcc112c40bbf8435e6a7df12e915a24a9/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f61346132386535612d353433612d623163302d626232302d6163396333616437373030322e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fa4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c3383814672c200806ef5fe3f7f9947d" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/a4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fa4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=f2ce80244e924d03d020afa68c0af754 1x" loading="lazy"></a></p>
-
-<h1>
-<span id="topmainをウィンドウと見た場合" class="fragment"></span><a href="#topmain%E3%82%92%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%A8%E8%A6%8B%E3%81%9F%E5%A0%B4%E5%90%88"><i class="fa fa-link"></i></a>top・mainをウィンドウと見た場合</h1>
-
-<p>実はこの想定で絵をかいてました。だからスキマを開けていました。</p>
-
-<p>さて、現在topウィンドウにいて、blankなりでmainウィンドウを生成した状態です。<br>
+<p data-sourcepos="74:1-74:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fa4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c3383814672c200806ef5fe3f7f9947d" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fa4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c3383814672c200806ef5fe3f7f9947d" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fa4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=f2ce80244e924d03d020afa68c0af754 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/a4a28e5a-543a-b1c0-bb20-ac9c3ad77002.png" loading="lazy"></a></p>
+<p data-sourcepos="76:1-77:93">#top・mainをウィンドウと見た場合<br>
+実はこの想定で絵をかいてました。だからスキマを開けていました。</p>
+<p data-sourcepos="79:1-80:48">さて、現在topウィンドウにいて、blankなりでmainウィンドウを生成した状態です。<br>
 もういちどさっきの絵を出します。</p>
-
-<p><a href="https://camo.qiitausercontent.com/9a4846032fe63023a24284a88e42fa98e3b3b3c2/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f37323933333738662d666364312d383539622d633531312d3534646161663462613738302e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" alt="frame.png" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/7293378f-fcd1-859b-c511-54daaf4ba780.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=455e3f815fbc36d09062dea386d86955 1x" loading="lazy"></a></p>
-
-<p>mainウィンドウ内はmain-leftフレームとmain-rightフレームがあるという状態です。<br>
+<p data-sourcepos="82:1-82:106"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=6e1859d3d243110280c17eb0e768453f" alt="frame.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F7293378f-fcd1-859b-c511-54daaf4ba780.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=455e3f815fbc36d09062dea386d86955 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/7293378f-fcd1-859b-c511-54daaf4ba780.png" loading="lazy"></a></p>
+<p data-sourcepos="84:1-85:117">mainウィンドウ内はmain-leftフレームとmain-rightフレームがあるという状態です。<br>
 が、ただのウィンドウ・フレームの混合ケースなのでこれでサクッと出来ちゃいます。</p>
-
-<p><a href="https://camo.qiitausercontent.com/008d34877c10e51dfebc2a10ab798813aa3b8224/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f62643266333663632d653330662d613061352d663733352d6335666130633262366133332e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=dcafa02793dfc7ed3305df07a7450a4d" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/bd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=10b06937271c76ea2091bf3015f534ff 1x" loading="lazy"></a></p>
-
-<h2>
-<span id="注意" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F"><i class="fa fa-link"></i></a>注意！</h2>
-
-<h3>
-<span id="追記-20160822" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98-20160822"><i class="fa fa-link"></i></a>追記 2016/08/22]</h3>
-
-<p>Firefox48.0.0以降、xpinstall.signatures.required = falseとしても未署名のアドオンが使えなく（制限から禁止へ）されてしまったので、この方法はFirefox47.0.1以前か、Firefox Developer Editionをご活用ください。</p>
-
-<h3>
-<span id="原文" class="fragment"></span><a href="#%E5%8E%9F%E6%96%87"><i class="fa fa-link"></i></a>原文</h3>
-
-<p>あ…<br>
+<p data-sourcepos="87:1-87:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=dcafa02793dfc7ed3305df07a7450a4d" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=dcafa02793dfc7ed3305df07a7450a4d" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2Fbd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=10b06937271c76ea2091bf3015f534ff 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/bd2f36cc-e30f-a0a5-f735-c5fa0c2b6a33.png" loading="lazy"></a></p>
+<p data-sourcepos="89:1-91:259">##注意！<br>
+###追記 2016/08/22]<br>
+Firefox48.0.0以降、xpinstall.signatures.required = falseとしても未署名のアドオンが使えなく（制限から禁止へ）されてしまったので、この方法はFirefox47.0.1以前か、Firefox Developer Editionをご活用ください。</p>
+<p data-sourcepos="93:1-96:18">###原文<br>
+あ…<br>
 この記事書いてて知ったんですが、*<em>セレニウムビルダー3.xには『ここから実行』がないので気を付けてください。</em><br>
 しくじった…</p>
-
-<p>皆さんはやらなくていいんですが、一応手順書いときます。<br>
+<p data-sourcepos="98:1-100:51">皆さんはやらなくていいんですが、一応手順書いときます。<br>
 この記事を参考にSelenium Builder2.3.5を入れます。<br>
 <a href="http://qiita.com/mihonak/items/28258ec5c242dfe5fe5e" class="autolink" id="reference-99534a10bc49b2fd6aeb">http://qiita.com/mihonak/items/28258ec5c242dfe5fe5e</a></p>
-
-<p>念のために3.xは無効化しておきましょう。</p>
-
-<p><a href="https://camo.qiitausercontent.com/c08c24a428546e1e8591c2f1bc1af6da904b122e/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f35383966303433662d323532622d643633632d303862362d3265376432656463623165352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F589f043f-252b-d63c-08b6-2e7d2edcb1e5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=73de94fb291c02a0745203432dbbf468" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/589f043f-252b-d63c-08b6-2e7d2edcb1e5.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F589f043f-252b-d63c-08b6-2e7d2edcb1e5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=da0fc773e94658a22af95a7f7546093d 1x" loading="lazy"></a></p>
-
-<p>ちょっと絵からは分かりにくいですが、2.3.5を入れて3.xを無効化した状態です。<br>
+<p data-sourcepos="102:1-102:57">念のために3.xは無効化しておきましょう。</p>
+<p data-sourcepos="104:1-104:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F589f043f-252b-d63c-08b6-2e7d2edcb1e5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=73de94fb291c02a0745203432dbbf468" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F589f043f-252b-d63c-08b6-2e7d2edcb1e5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=73de94fb291c02a0745203432dbbf468" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F589f043f-252b-d63c-08b6-2e7d2edcb1e5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=da0fc773e94658a22af95a7f7546093d 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/589f043f-252b-d63c-08b6-2e7d2edcb1e5.png" loading="lazy"></a></p>
+<p data-sourcepos="106:1-107:88">ちょっと絵からは分かりにくいですが、2.3.5を入れて3.xを無効化した状態です。<br>
 この後Firefoxを再起動をすると設定が適用されるようになります。</p>
-
-<p><a href="https://camo.qiitausercontent.com/8e2a887c0811a2458f45dd553c40df1c0f1fdc26/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f33386533666537642d383339342d333237362d626634612d6561666263666133303362352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=d12e523163668624bc1c2c23d6fad540 1x" loading="lazy"></a></p>
-
-<p>では、今後はスクリプトの9行目から実施していく事にします。</p>
-
-<h1>
-<span id="ちょっと脱線selenium-builderでコメントを書く" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%84%B1%E7%B7%9Aselenium-builder%E3%81%A7%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E6%9B%B8%E3%81%8F"><i class="fa fa-link"></i></a>ちょっと脱線：Selenium Builderでコメントを書く</h1>
-
-<p>Selenium Builderのコメントの書き方は8のようにやってます。<br>
+<p data-sourcepos="109:1-109:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=d12e523163668624bc1c2c23d6fad540 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png" loading="lazy"></a></p>
+<p data-sourcepos="111:1-111:85">では、今後はスクリプトの9行目から実施していく事にします。</p>
+<p data-sourcepos="113:1-116:145">#ちょっと脱線：Selenium Builderでコメントを書く<br>
+Selenium Builderのコメントの書き方は8のようにやってます。<br>
 これが良い方法かは分かりませんが、暫定対処でこうしました。<br>
 設定の仕方はこんな感じ。変数は未設定でもいいんですが分かりやすいようにdevnullとでも言っておきます。</p>
-
-<p><a href="https://camo.qiitausercontent.com/511c058f19744b3c51015d0c9c986f1028856c56/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f39366430316637362d356163362d656633382d383430662d3364313631643163366337362e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F96d01f76-5ac6-ef38-840f-3d161d1c6c76.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c7ba5365788320252bf151fc38e17730" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/96d01f76-5ac6-ef38-840f-3d161d1c6c76.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F96d01f76-5ac6-ef38-840f-3d161d1c6c76.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=f60ca53a3913c5775c6b4a77f7dcdae4 1x" loading="lazy"></a></p>
-
-<h2>
-<span id="もっといい方法" class="fragment"></span><a href="#%E3%82%82%E3%81%A3%E3%81%A8%E3%81%84%E3%81%84%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>もっといい？方法</h2>
-
-<p>2016/08/22 追記<br>
+<p data-sourcepos="118:1-118:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F96d01f76-5ac6-ef38-840f-3d161d1c6c76.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c7ba5365788320252bf151fc38e17730" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F96d01f76-5ac6-ef38-840f-3d161d1c6c76.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=c7ba5365788320252bf151fc38e17730" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F96d01f76-5ac6-ef38-840f-3d161d1c6c76.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=f60ca53a3913c5775c6b4a77f7dcdae4 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/96d01f76-5ac6-ef38-840f-3d161d1c6c76.png" loading="lazy"></a></p>
+<p data-sourcepos="120:1-125:90">##もっといい？方法<br>
+2016/08/22 追記<br>
 記録-&gt;値の保存　があります。<br>
 スクリプトの保存よりゴチャゴチャしてないので、個人でやるならこっちがお勧めです。<br>
 保守を想定した場合は明示的にコメントにする必要があるので、スクリプトの保存でdevnullにするといいでしょう。<br>
 運用の方法も色々あると思いますが、私はそうしてきた（出川感）</p>
-
-<h1>
-<span id="selenium-builderでウィンドウを切り替える" class="fragment"></span><a href="#selenium-builder%E3%81%A7%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B"><i class="fa fa-link"></i></a>Selenium Builderでウィンドウを切り替える</h1>
-
-<p>ここからですね。<br>
+<p data-sourcepos="127:1-129:6">#Selenium Builderでウィンドウを切り替える<br>
+ここからですね。<br>
 再掲</p>
-
-<p><a href="https://camo.qiitausercontent.com/8e2a887c0811a2458f45dd553c40df1c0f1fdc26/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f33386533666537642d383339342d333237362d626634612d6561666263666133303362352e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=d12e523163668624bc1c2c23d6fad540 1x" loading="lazy"></a></p>
-
-<p>実はこの画像の通りにやると失敗します。</p>
-
-<p>何故か？<br>
+<p data-sourcepos="131:1-131:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=b13c841acbf571da394bc06099298c9b" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=d12e523163668624bc1c2c23d6fad540 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/38e3fe7d-8394-3276-bf4a-eafbcfa303b5.png" loading="lazy"></a></p>
+<p data-sourcepos="133:1-133:57">実はこの画像の通りにやると失敗します。</p>
+<p data-sourcepos="135:1-138:24">何故か？<br>
 target="_blank"で開いたウィンドウには名前がないからです。<br>
 これは知らないとハマります。<br>
 解決方法は以下。</p>
-
-<p><a href="https://camo.qiitausercontent.com/21c0bbad1fd7871b6fec16608f757617e3eebd92/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e616d617a6f6e6177732e636f6d2f302f3132323830302f38663134383131662d393731302d616139372d653063322d6430333735333265353463632e706e67" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8f14811f-9710-aa97-e0c2-d037532e54cc.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=86d7bd8a5441845e8ef9c91a5819a505" alt="image" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/8f14811f-9710-aa97-e0c2-d037532e54cc.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8f14811f-9710-aa97-e0c2-d037532e54cc.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=4c3ed34509ebd76c383075666352c958 1x" loading="lazy"></a></p>
-
-<p>SeleniumBuilderの問題解析は結構大変です。<br>
+<p data-sourcepos="140:1-140:102"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8f14811f-9710-aa97-e0c2-d037532e54cc.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=86d7bd8a5441845e8ef9c91a5819a505" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8f14811f-9710-aa97-e0c2-d037532e54cc.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=86d7bd8a5441845e8ef9c91a5819a505" alt="image" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2F0%2F122800%2F8f14811f-9710-aa97-e0c2-d037532e54cc.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=4c3ed34509ebd76c383075666352c958 1x" data-canonical-src="https://qiita-image-store.s3.amazonaws.com/0/122800/8f14811f-9710-aa97-e0c2-d037532e54cc.png" loading="lazy"></a></p>
+<p data-sourcepos="142:1-144:143">SeleniumBuilderの問題解析は結構大変です。<br>
 この問題の場合、Javaからソースレベルで追えなければ諦めていたぐらいのレベルです…<br>
 この問題（仕様）自体はMozillaのページのどこかに書いてそうなもんですが、HTMLの仕様かな？分からない…</p>
-
-<h2>
-<span id="注意-1" class="fragment"></span><a href="#%E6%B3%A8%E6%84%8F-1"><i class="fa fa-link"></i></a>注意</h2>
-
-<p>この方法を使う（使わざるを得ない状態）になると、ローカル実行とサーバー実行の互換性がなくなります。<br>
+<p data-sourcepos="146:1-149:113">##注意<br>
+この方法を使う（使わざるを得ない状態）になると、ローカル実行とサーバー実行の互換性がなくなります。<br>
 具体的にはバージョン2と3に互換性がなくなります。<br>
 ソースレベルでいうとswitchTo.window("ここの番号がどう頑張っても変わる");からです。</p>
-
-<div class="code-frame" data-lang="java">
+<div class="code-frame" data-lang="java" data-sourcepos="151:1-153:3">
 <div class="code-lang"><span class="bold">switchToWindow.java</span></div>
 <div class="highlight"><pre><code><span class="n">switchTo</span><span class="o">().</span><span class="na">window</span><span class="o">(</span><span class="err">”</span><span class="nc">Selenium2の場合は２以降</span><span class="err">”</span><span class="o">);</span>
 </code></pre></div>
 </div>
-
-<p>（画像はブログにて。すみません）</p>
-
-<h2>
-<span id="運用案" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E6%A1%88"><i class="fa fa-link"></i></a>運用案</h2>
-
-<p>10行目がSelenium3の場合1以降となります。<br>
+<p data-sourcepos="154:1-154:48">（画像はブログにて。すみません）</p>
+<p data-sourcepos="156:1-160:63">##運用案<br>
+10行目がSelenium3の場合1以降となります。<br>
 以降なんてキレイに言ってますが、身もふたもなく言えばよっぽど大きなテストをしない限り固定値みたいなものです。<br>
 回避方法としては、サーバー実行時は意味のないページを一つ置いて、そこからテストしたいページの_blankリンクを置いて切り替えるのが一番手っ取り早いです。<br>
 その場合、以下手順を追加する事になります。</p>
-
-<ul>
-<li>ブランク用のページを開く（ウィンドウインデックス0）</li>
-<li>ブランク用のページのブランクリンクをクリック（その結果、新しいウィンドウが開かれる）</li>
-<li>switchTo().window(1);   /* seleniumbuilderのバージョンに注意してください。 */</li>
+<ul data-sourcepos="162:1-165:0">
+<li data-sourcepos="162:1-162:78">ブランク用のページを開く（ウィンドウインデックス0）</li>
+<li data-sourcepos="163:1-163:128">ブランク用のページのブランクリンクをクリック（その結果、新しいウィンドウが開かれる）</li>
+<li data-sourcepos="164:1-165:0">switchTo().window(1);   /* seleniumbuilderのバージョンに注意してください。 */</li>
 </ul>
-
-<p>（画像はブログにて。すみません）</p>
-
-<h1>
-<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h1>
-
-<p>見た目はちょっと良くないですが、やりたいことは実現できます。<br>
+<p data-sourcepos="166:1-166:48">（画像はブログにて。すみません）</p>
+<p data-sourcepos="168:1-171:181">#まとめ<br>
+見た目はちょっと良くないですが、やりたいことは実現できます。<br>
 topウィンドウからmainウィンドウを開いた時も同じ要領でウィンドウを切り替えればよいのです。<br>
 その場合、ウィンドウのインデックスは2。既存コードを書き換える事なく、ローカルとサーバーの同期？が出来るようになりました。</p>
-
-<h1>
+<h1 data-sourcepos="173:1-173:47">
 <span id="読了後いいねをお願いします" class="fragment"></span><a href="#%E8%AA%AD%E4%BA%86%E5%BE%8C%E3%81%84%E3%81%84%E3%81%AD%E3%82%92%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99"><i class="fa fa-link"></i></a>読了後いいね！をお願いします。</h1>
-
-<p>どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>
+<p data-sourcepos="174:1-174:150">どれだけの方に読んでもらっているか知りたいので、お手数をおかけしますがご協力いただけると嬉しいです。</p>

@@ -1,182 +1,132 @@
-
-<h1>
+<h1 data-sourcepos="1:1-1:11">
 <span id="もくじ" class="fragment"></span><a href="#%E3%82%82%E3%81%8F%E3%81%98"><i class="fa fa-link"></i></a>もくじ</h1>
-
-<ul>
-<li>WindowsのIDEで開発したものをそのまま使える環境を作る</li>
-<li>開発用で使えるWebサーバーを作る</li>
-<li>テスト・デバッグで使えるAPIサーバーを構築する</li>
-<li>MySQLを入れてMysql Workbenchをもっと快適にする</li>
-<li>Dockerを入れて環境を壊しやすくする</li>
+<ul data-sourcepos="2:1-7:0">
+<li data-sourcepos="2:1-2:75">WindowsのIDEで開発したものをそのまま使える環境を作る</li>
+<li data-sourcepos="3:1-3:47">開発用で使えるWebサーバーを作る</li>
+<li data-sourcepos="4:1-4:68">テスト・デバッグで使えるAPIサーバーを構築する</li>
+<li data-sourcepos="5:1-5:61">MySQLを入れてMysql Workbenchをもっと快適にする</li>
+<li data-sourcepos="6:1-7:0">Dockerを入れて環境を壊しやすくする</li>
 </ul>
-
-<h1>
+<h1 data-sourcepos="8:1-8:14">
 <span id="事前準備" class="fragment"></span><a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><i class="fa fa-link"></i></a>事前準備</h1>
-
-<p>インストールについては他にいっぱいやり方が書いてあるのでそちらを参照のこと。<br>
+<p data-sourcepos="9:1-11:67">インストールについては他にいっぱいやり方が書いてあるのでそちらを参照のこと。<br>
 ここでは便宜的にwinrootというユーザーとする。<br>
 また、インストール後はapt updateを実施している。</p>
-
-<h1>
+<h1 data-sourcepos="13:1-13:76">
 <span id="windowsのideで開発したものをそのまま使える環境を作る" class="fragment"></span><a href="#windows%E3%81%AEide%E3%81%A7%E9%96%8B%E7%99%BA%E3%81%97%E3%81%9F%E3%82%82%E3%81%AE%E3%82%92%E3%81%9D%E3%81%AE%E3%81%BE%E3%81%BE%E4%BD%BF%E3%81%88%E3%82%8B%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>WindowsのIDEで開発したものをそのまま使える環境を作る</h1>
-
-<p>ちょっとしたものを作るぐらいならエディタでいいけど、凝ったものを作り出すと主にデバッグ・トレース面でキツいのでなるべくIDEを使いたいというところから。<br>
+<p data-sourcepos="14:1-15:259">ちょっとしたものを作るぐらいならエディタでいいけど、凝ったものを作り出すと主にデバッグ・トレース面でキツいのでなるべくIDEを使いたいというところから。<br>
 IDEのソースフォルダをgitに上げて対象サーバーでpullとかも考えたんですが、IDEで開発してエディタでデバッグ修正して、とやると管理が非常に面倒な事になるので、これはやりたくなかった。</p>
-
-<h2>
+<h2 data-sourcepos="17:1-17:39">
 <span id="直接ファイルを渡してみる" class="fragment"></span><a href="#%E7%9B%B4%E6%8E%A5%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E6%B8%A1%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B"><i class="fa fa-link"></i></a>直接ファイルを渡してみる</h2>
-
-<p>まずはWindowsのエクスプローラーでもcmdでもいいが、winrootを検索してみよう。<br>
+<p data-sourcepos="18:1-20:124">まずはWindowsのエクスプローラーでもcmdでもいいが、winrootを検索してみよう。<br>
 すると以下がヒット。<br>
 C:\Users(Your name)\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_(なんかいろいろ)\LocalState\rootfs\</p>
-
-<p>この辺りはバージョンとかが影響するのかな？<br>
+<p data-sourcepos="22:1-24:80">この辺りはバージョンとかが影響するのかな？<br>
 細かい事はよくわかってないですが、どうやらここがルートカレントっぽい。<br>
 試しにエクスプローラーからファイルを作ってlsしてみる。</p>
-
-<p>が、出てこない…。<br>
+<p data-sourcepos="26:1-27:47">が、出てこない…。<br>
 では、逆にUbuntu側でtouchしてみる。</p>
-
-<p>出た！</p>
-
-<p>なんでだ？と思ったんですが、Windowsで新規作成したファイルをUbuntuがさわると大変な事になるらしいので、対策としてそうなっているんだろう、というところで納得。<br>
+<p data-sourcepos="29:1-29:9">出た！</p>
+<p data-sourcepos="31:1-32:114">なんでだ？と思ったんですが、Windowsで新規作成したファイルをUbuntuがさわると大変な事になるらしいので、対策としてそうなっているんだろう、というところで納得。<br>
 細かい話がよく分からなかったので、今はそう理解しているが人に説明できない…。</p>
-
-<h2>
+<h2 data-sourcepos="34:1-34:15">
 <span id="暫定対応" class="fragment"></span><a href="#%E6%9A%AB%E5%AE%9A%E5%AF%BE%E5%BF%9C"><i class="fa fa-link"></i></a>暫定対応</h2>
-
-<p>/mnt/(ドライブ）/...にシンボリックリンク張るのが楽かなと。<br>
+<p data-sourcepos="35:1-38:96">/mnt/(ドライブ）/...にシンボリックリンク張るのが楽かなと。<br>
 SCPで渡したり2窓を開いてgitを叩かなくても良くなったのはある意味ありがたい。<br>
 あとは運用の問題だけど、間違ってもエディタを開いて編集とかやらない。やってもIDE側のソースを優先する。<br>
 結局本質的な問題は解決出来ていないけど、窓を減らせたのは大きい。</p>
-
-<h1>
+<h1 data-sourcepos="40:1-40:47">
 <span id="開発用で使えるwebサーバーを作る" class="fragment"></span><a href="#%E9%96%8B%E7%99%BA%E7%94%A8%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8Bweb%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>開発用で使えるWebサーバーを作る</h1>
-
-<p>これは簡単。<br>
+<p data-sourcepos="41:1-42:111">これは簡単。<br>
 apache2をインストールして/etc/init.d/apache2 startとすると<a href="http://localhost:80%E3%81%A7%E6%8E%A5%E7%B6%9A%E3%81%A7%E3%81%8D%E3%82%8B%E3%80%82" class="autolink">http://localhost:80で接続できる。</a></p>
-
-<div class="code-frame" data-lang="shell">
+<div class="code-frame" data-lang="shell" data-sourcepos="44:1-47:3">
 <div class="code-lang"><span class="bold">commands</span></div>
 <div class="highlight"><pre><code><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-t</span> apache2
 <span class="nb">sudo</span> /etc/init.d/apache2 start
 </code></pre></div>
 </div>
-
-<h2>
+<h2 data-sourcepos="49:1-49:9">
 <span id="検証" class="fragment"></span><a href="#%E6%A4%9C%E8%A8%BC"><i class="fa fa-link"></i></a>検証</h2>
-
-<p>sshでつなげるかやってみた。<br>
+<p data-sourcepos="50:1-52:79">sshでつなげるかやってみた。<br>
 まずはUbuntuをservice ssh startで接続できるようにする。<br>
 で、他の端末から従来通りsshコマンドで……<strong>入れない</strong>。</p>
-
-<p>起動時にキーが見つからないと言われたのでこの辺りが関係ありそうだ。<br>
+<p data-sourcepos="54:1-57:117">起動時にキーが見つからないと言われたのでこの辺りが関係ありそうだ。<br>
 パス認証ではcmdベースでは入れたっぽい。lsもpwdも使えないけどdirが使えたので変な笑いが出た。<br>
 Windows-Windowsなのでリモートデスクトップをすればcmdを使う以上に色々出来るけど、窓を減らすためにもう一工夫が必要と思われる。<br>
 出来そうな気はするけど、そこまで頑張らなくてもいいや、と思ったので今回は断念。</p>
-
-<h1>
+<h1 data-sourcepos="59:1-59:68">
 <span id="テストデバッグで使えるapiサーバーを構築する" class="fragment"></span><a href="#%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8Bapi%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E6%A7%8B%E7%AF%89%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>テスト・デバッグで使えるAPIサーバーを構築する</h1>
-
-<p>APIサーバーと言えばSinatraのイメージが強い。が、RubyとかchefはまぁいいとしてRuby on Railsに抵抗値がすさまじく高い私としてはなるべく避けたい、という思いがあった。<br>
+<p data-sourcepos="60:1-61:95">APIサーバーと言えばSinatraのイメージが強い。が、RubyとかchefはまぁいいとしてRuby on Railsに抵抗値がすさまじく高い私としてはなるべく避けたい、という思いがあった。<br>
 そこで、Json-server（nodejs）を使ってみたところ、とても簡単に入った。</p>
-
-<div class="code-frame" data-lang="shell">
+<div class="code-frame" data-lang="shell" data-sourcepos="63:1-66:3">
 <div class="code-lang"><span class="bold">commands</span></div>
 <div class="highlight"><pre><code><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> npm
 <span class="nb">sudo </span>npm <span class="nb">install</span> <span class="nt">-y</span> json-server
 </code></pre></div>
 </div>
-
-<p>私がこれをやった時は先にnodejsを入れてしまったので、このままだとnodeが見つからないと怒られるかもしれない。<br>
+<p data-sourcepos="67:1-68:92">私がこれをやった時は先にnodejsを入れてしまったので、このままだとnodeが見つからないと怒られるかもしれない。<br>
 そんな時は、/usr/binのnodejsへシンボリックリンクを張って対応する。</p>
-
-<h1>
+<h1 data-sourcepos="70:1-70:61">
 <span id="mysqlを入れてmysql-workbenchをもっと快適にする" class="fragment"></span><a href="#mysql%E3%82%92%E5%85%A5%E3%82%8C%E3%81%A6mysql-workbench%E3%82%92%E3%82%82%E3%81%A3%E3%81%A8%E5%BF%AB%E9%81%A9%E3%81%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>MySQLを入れてMysql Workbenchをもっと快適にする</h1>
-
-<p>これも簡単</p>
-
-<div class="code-frame" data-lang="shell">
+<p data-sourcepos="71:1-71:15">これも簡単</p>
+<div class="code-frame" data-lang="shell" data-sourcepos="73:1-76:3">
 <div class="code-lang"><span class="bold">commands</span></div>
 <div class="highlight"><pre><code><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> mysql-server
 <span class="nb">sudo</span> /etc/init.d/mysql start
 </code></pre></div>
 </div>
-
-<p>mysqlのrootユーザー/パスワードをサクッと入れればOK。慣れない人は一瞬ビビる。<br>
+<p data-sourcepos="77:1-78:66">mysqlのrootユーザー/パスワードをサクッと入れればOK。慣れない人は一瞬ビビる。<br>
 あとはSQLを持っていくなりすれば環境が作れる。</p>
-
-<h1>
+<h1 data-sourcepos="80:1-80:50">
 <span id="dockerを入れて環境を壊しやすくする" class="fragment"></span><a href="#docker%E3%82%92%E5%85%A5%E3%82%8C%E3%81%A6%E7%92%B0%E5%A2%83%E3%82%92%E5%A3%8A%E3%81%97%E3%82%84%E3%81%99%E3%81%8F%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>Dockerを入れて環境を壊しやすくする</h1>
-
-<p>最初に結論を書くが、Dockerは入るけどデーモンが動かないので本当にやりたい事は出来なかった。<br>
+<p data-sourcepos="81:1-83:105">最初に結論を書くが、Dockerは入るけどデーモンが動かないので本当にやりたい事は出来なかった。<br>
 詳細は参考欄を参照のこと。<br>
 とりあえずVargrantとかVirtualBoxとかはあるので困りはしないけど残念感もある。</p>
-
-<h1>
+<h1 data-sourcepos="85:1-85:20">
 <span id="ちょっとメモ" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%83%A1%E3%83%A2"><i class="fa fa-link"></i></a>ちょっとメモ</h1>
-
-<p>MySQLとかはインストールにめちゃくちゃ時間が掛かったので、環境構築は余裕がある時か、可能なら夜に回して帰るとかした方がいいです。</p>
-
-<h2>
+<p data-sourcepos="86:1-86:188">MySQLとかはインストールにめちゃくちゃ時間が掛かったので、環境構築は余裕がある時か、可能なら夜に回して帰るとかした方がいいです。</p>
+<h2 data-sourcepos="88:1-88:6">
 <span id="git" class="fragment"></span><a href="#git"><i class="fa fa-link"></i></a>git</h2>
-
-<p>入ってた。2.7.4。アップデートしよう。</p>
-
-<h2>
+<p data-sourcepos="89:1-89:53">入ってた。2.7.4。アップデートしよう。</p>
+<h2 data-sourcepos="91:1-91:9">
 <span id="python" class="fragment"></span><a href="#python"><i class="fa fa-link"></i></a>python</h2>
-
-<p>入ってた。2.7.12。アップデートしよう。</p>
-
-<h2>
+<p data-sourcepos="92:1-92:54">入ってた。2.7.12。アップデートしよう。</p>
+<h2 data-sourcepos="94:1-94:7">
 <span id="cron" class="fragment"></span><a href="#cron"><i class="fa fa-link"></i></a>cron</h2>
-
-<p>去年ぐらいに<a href="https://qiita.com/nomurasan/items/dba72d1ec1d194b74a33" id="reference-91934d69be6efeb7f5f8">Windowsでcronみたいな事をやらせる</a>って記事を書いたんですが、Windows Subsystem for Linuxだとそんな事しなくても普通にcronが使えます。</p>
-
-<h3>
+<p data-sourcepos="95:1-95:261">去年ぐらいに<a href="https://qiita.com/nomurasan/items/dba72d1ec1d194b74a33" id="reference-91934d69be6efeb7f5f8">Windowsでcronみたいな事をやらせる</a>って記事を書いたんですが、Windows Subsystem for Linuxだとそんな事しなくても普通にcronが使えます。</p>
+<h3 data-sourcepos="97:1-97:57">
 <span id="20211207追記-考察wslにcronは必要か" class="fragment"></span><a href="#20211207%E8%BF%BD%E8%A8%98-%E8%80%83%E5%AF%9Fwsl%E3%81%ABcron%E3%81%AF%E5%BF%85%E8%A6%81%E3%81%8B"><i class="fa fa-link"></i></a>[2021/12/07追記] 考察：WSLにcronは必要か？</h3>
-
-<p>まず結論を言うと要らないと思ってます。<br>
+<p data-sourcepos="98:1-99:271">まず結論を言うと要らないと思ってます。<br>
 WSLにはWindowsタスクスケジューラがあります。ここからコマンドを実行できるので、やりたいコマンドをまとめたshellファイルをおいて、cronではなくタスクスケジューラから呼べば同じことができます。</p>
-
-<p>WSLで実行する場合、<br>
-1. <strong>Windowsを起動（タスクスケジューラでもいる）</strong><br>
-1. WSLを起動（いらない）<br>
-1. crondを起動（いらない）<br>
-1. crondの自動起動の設定（いらない）<br>
-1. <strong>実行するコマンドの設定（いる）</strong></p>
-
-<p>の手順が必要なので、実行までの手順が多くなります。<br>
+<p data-sourcepos="101:1-101:27">WSLで実行する場合、</p>
+<ol data-sourcepos="102:1-107:0">
+<li data-sourcepos="102:1-102:68"><strong>Windowsを起動（タスクスケジューラでもいる）</strong></li>
+<li data-sourcepos="103:1-103:33">WSLを起動（いらない）</li>
+<li data-sourcepos="104:1-104:35">crondを起動（いらない）</li>
+<li data-sourcepos="105:1-105:50">crondの自動起動の設定（いらない）</li>
+<li data-sourcepos="106:1-107:0"><strong>実行するコマンドの設定（いる）</strong></li>
+</ol>
+<p data-sourcepos="108:1-109:191">の手順が必要なので、実行までの手順が多くなります。<br>
 なので、WSLにcronを入れるよりは、タスクスケジューラを実行して処理したいコマンドはcronを実行する時と同様に設定してあげれば良いです。</p>
-
-<p>[WSL]いちいち更新コマンドを打ちたくない個人の方向け自動化提案<br>
+<p data-sourcepos="111:1-112:54">[WSL]いちいち更新コマンドを打ちたくない個人の方向け自動化提案<br>
 <a href="https://qiita.com/nomurasan/items/68a5ee741eb04ab50714" class="autolink" id="reference-d656dade2f80dc8811e0">https://qiita.com/nomurasan/items/68a5ee741eb04ab50714</a></p>
-
-<h1>
+<h1 data-sourcepos="114:1-114:8">
 <span id="参考" class="fragment"></span><a href="#%E5%8F%82%E8%80%83"><i class="fa fa-link"></i></a>参考</h1>
-
-<p>敬称略</p>
-
-<p>テスト用REST-APIサーバーをコマンド一発で！「json-server」（cup!OF）<br>
+<p data-sourcepos="115:1-115:9">敬称略</p>
+<p data-sourcepos="117:1-118:31">テスト用REST-APIサーバーをコマンド一発で！「json-server」（cup!OF）<br>
 <a href="http://co.bsnws.net/article/239" class="autolink" rel="nofollow noopener" target="_blank">http://co.bsnws.net/article/239</a></p>
-
-<p>Sinatra入門(<a href="/kimioka0" class="user-mention js-hovercard" title="kimioka0" data-hovercard-target-type="user" data-hovercard-target-name="kimioka0">@kimioka0</a>)<br>
+<p data-sourcepos="120:1-121:53">Sinatra入門(<a href="/kimioka0" class="user-mention js-hovercard" title="kimioka0" data-hovercard-target-type="user" data-hovercard-target-name="kimioka0">@kimioka0</a>)<br>
 <a href="https://qiita.com/kimioka0/items/751e460cbb59c70379c6" class="autolink" id="reference-414e55e591ab952fc1e5">https://qiita.com/kimioka0/items/751e460cbb59c70379c6</a></p>
-
-<p>BashOnUbuntuOnWindowsでMySQLを起動させる。(<a href="/akahirout2641" class="user-mention js-hovercard" title="akahirout2641" data-hovercard-target-type="user" data-hovercard-target-name="akahirout2641">@akahirout2641</a>)<br>
+<p data-sourcepos="123:1-124:58">BashOnUbuntuOnWindowsでMySQLを起動させる。(<a href="/akahirout2641" class="user-mention js-hovercard" title="akahirout2641" data-hovercard-target-type="user" data-hovercard-target-name="akahirout2641">@akahirout2641</a>)<br>
 <a href="https://qiita.com/akahirout2641/items/047a0f01a051691637dc" class="autolink" id="reference-20a13d5f1a4f1bde7b31">https://qiita.com/akahirout2641/items/047a0f01a051691637dc</a></p>
-
-<p>WSL(Bash on Windows)でDockerを使用する（<a href="/yoichiwo7" class="user-mention js-hovercard" title="yoichiwo7" data-hovercard-target-type="user" data-hovercard-target-name="yoichiwo7">@yoichiwo7</a>）<br>
+<p data-sourcepos="126:1-127:54">WSL(Bash on Windows)でDockerを使用する（<a href="/yoichiwo7" class="user-mention js-hovercard" title="yoichiwo7" data-hovercard-target-type="user" data-hovercard-target-name="yoichiwo7">@yoichiwo7</a>）<br>
 <a href="https://qiita.com/yoichiwo7/items/0b2aaa3a8c26ce8e87fe" class="autolink" id="reference-3b8955704f8b1907412c">https://qiita.com/yoichiwo7/items/0b2aaa3a8c26ce8e87fe</a></p>
-
-<p>すごく勉強になったので紹介。<br>
+<p data-sourcepos="129:1-131:57">すごく勉強になったので紹介。<br>
 WebAPIについての説明（<a href="/busyoumono99" class="user-mention js-hovercard" title="busyoumono99" data-hovercard-target-type="user" data-hovercard-target-name="busyoumono99">@busyoumono99</a>）<br>
 <a href="https://qiita.com/busyoumono99/items/9b5ffd35dd521bafce47" class="autolink" id="reference-b761518bf0966795b3cd">https://qiita.com/busyoumono99/items/9b5ffd35dd521bafce47</a></p>
-
-<p>記事書いてから知った…。<br>
+<p data-sourcepos="133:1-135:49">記事書いてから知った…。<br>
 【ubuntu-make】 Ubuntuでいろいろな開発環境をらくらく構築(<a href="/ygkn" class="user-mention js-hovercard" title="ygkn" data-hovercard-target-type="user" data-hovercard-target-name="ygkn">@ygkn</a>)<br>
 <a href="https://qiita.com/ygkn/items/0f5d7a7778c7b06220f5" class="autolink" id="reference-0127a75c034463fbf55a">https://qiita.com/ygkn/items/0f5d7a7778c7b06220f5</a></p>
-
-<p>開発環境の構築ではないが、あると便利なもの。<br>
+<p data-sourcepos="137:1-139:41">開発環境の構築ではないが、あると便利なもの。<br>
 作業がグッと楽になる screen を使おう！（bacchi.me）<br>
 <a href="https://bacchi.me/linux/how-2-use-screen/" class="autolink" rel="nofollow noopener" target="_blank">https://bacchi.me/linux/how-2-use-screen/</a></p>
