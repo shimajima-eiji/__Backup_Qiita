@@ -1,11 +1,9 @@
-<p>私が主に使うのはRedHat/CentOSですが、そういう場面なら</p>
-
-<ul>
-<li>インストーラDVDで起動 ( 場合によってはPXEブート )</li>
-<li>普通にインストーラの画面を出してから、Ctrl+Alt+F2あたりでシェルに抜ける</li>
-<li>仮のディレクトリを(メモリ上に)作って元のディスクの領域をマウントし、そこにchroot</li>
+<p data-sourcepos="1:1-1:73">私が主に使うのはRedHat/CentOSですが、そういう場面なら</p>
+<ul data-sourcepos="3:1-6:0">
+<li data-sourcepos="3:1-3:70">インストーラDVDで起動 ( 場合によってはPXEブート )</li>
+<li data-sourcepos="4:1-4:103">普通にインストーラの画面を出してから、Ctrl+Alt+F2あたりでシェルに抜ける</li>
+<li data-sourcepos="5:1-6:0">仮のディレクトリを(メモリ上に)作って元のディスクの領域をマウントし、そこにchroot</li>
 </ul>
-
-<p>これでインストーラ実行中でありながら、元のシステムにアクセスできますので、後はgrubの修復を行います。<br>
+<p data-sourcepos="7:1-9:119">これでインストーラ実行中でありながら、元のシステムにアクセスできますので、後はgrubの修復を行います。<br>
 <a href="https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/7/html/system_administrators_guide/sec-reinstalling_grub_2" rel="nofollow noopener" target="_blank">RedHat社のドキュメント</a>が分かり易いです。<br>
 そこにも出てますが、BIOSモードかUEFIモードかで大きく変わりますので注意が必要です。</p>
