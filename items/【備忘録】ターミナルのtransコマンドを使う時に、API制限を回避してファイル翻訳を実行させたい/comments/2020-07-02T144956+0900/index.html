@@ -1,7 +1,5 @@
-<p><code>/bin/sh</code>(dash)でランダム</p>
-
-<div class="code-frame" data-lang="sh"><div class="highlight"><pre><code><span class="nv">$ </span><span class="nb">echo </span><span class="nv">scale</span><span class="o">=</span>0<span class="se">\;</span><span class="sb">`</span>&lt; /dev/urandom <span class="nb">tr</span> <span class="nt">-dc</span> 0-9|fold <span class="nt">-12</span>|head <span class="nt">-1</span><span class="sb">`</span>%5+5|bc <span class="nt">-l</span>
+<p data-sourcepos="1:1-1:30"><code>/bin/sh</code>(dash)でランダム</p>
+<div class="code-frame" data-lang="sh" data-sourcepos="3:1-6:3"><div class="highlight"><pre><code><span class="nv">$ </span><span class="nb">echo </span><span class="nv">scale</span><span class="o">=</span>0<span class="se">\;</span><span class="sb">`</span>&lt; /dev/urandom <span class="nb">tr</span> <span class="nt">-dc</span> 0-9|fold <span class="nt">-12</span>|head <span class="nt">-1</span><span class="sb">`</span>%5+5|bc <span class="nt">-l</span>
 9
 </code></pre></div></div>
-
-<p>あと<code>input</code>と<code>output</code>は<code>input="$1"</code>と<code>output="$2"</code>みたいにコマンドライン引数にしたいですね。</p>
+<p data-sourcepos="8:1-8:118">あと<code>input</code>と<code>output</code>は<code>input="$1"</code>と<code>output="$2"</code>みたいにコマンドライン引数にしたいですね。</p>
