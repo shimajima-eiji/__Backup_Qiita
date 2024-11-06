@@ -1,0 +1,106 @@
+<div data-sourcepos="1:1-3:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="2:1-2:174">私が教材として作る際は、以下内容は必ず網羅してますよ、という話です。要するに宣伝ですが、役に立つ話なので公開します。</p>
+</div>
+</div>
+<p data-sourcepos="5:1-6:150">一気に見ると大変なので、学習状況によって一つずつ見てくださいね。<br>
+一気見すると一瞬ですが、きちんと学習しようとすると、半日＋半日以上かかるつもりで読み進めてください。</p>
+<h2 data-sourcepos="8:1-8:9">
+<span id="目次" class="fragment"></span><a href="#%E7%9B%AE%E6%AC%A1"><i class="fa fa-link"></i></a>目次</h2>
+<ul data-sourcepos="9:1-12:0">
+<li data-sourcepos="9:1-9:77"><a href="https://qiita.com/nomurasan/private/4a40feb042bbb71cb650">条件分岐編</a></li>
+<li data-sourcepos="10:1-10:35">繰り返し処理編（ここ）</li>
+<li data-sourcepos="11:1-12:0"><a href="https://qiita.com/nomurasan/private/ec01ba58ba295a4fa80f">配列・連想配列・オブジェクト編</a></li>
+</ul>
+<h3 data-sourcepos="13:1-13:97">
+<span id="for文を理解する前にコードを分解してからフローチャートをみよう" class="fragment"></span><a href="#for%E6%96%87%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%88%86%E8%A7%A3%E3%81%97%E3%81%A6%E3%81%8B%E3%82%89%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E3%82%92%E3%81%BF%E3%82%88%E3%81%86"><i class="fa fa-link"></i></a>for文を理解する前に、コードを分解してからフローチャートをみよう</h3>
+<div class="code-frame" data-lang="js" data-sourcepos="14:1-18:3"><div class="highlight"><pre><code><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ここに繰り返し実行したい処理</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p data-sourcepos="20:1-20:42">これを理解するためには、まず</p>
+<div class="code-frame" data-lang="js" data-sourcepos="22:1-28:3"><div class="highlight"><pre><code><span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">){</span>
+  <span class="c1">// ここに実行したい処理</span>
+<span class="p">}</span>
+<span class="nx">i</span><span class="o">++</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p data-sourcepos="30:1-31:57">をそれぞれに理解する必要があります。<br>
+分解したコードをフローチャートで書くと</p>
+<iframe id="qiita-embed-content__8be3cdc4328eb70353767d21f1ae4816" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__8be3cdc4328eb70353767d21f1ae4816" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"True\"| C[i ← i + 1]\n C --&gt; D[続きの処理]\n B --&gt;|\"False\"| D","key":"9c2f382d96d00dd158ea6d7d3d919a12"}'>
+</iframe>
+
+<p data-sourcepos="41:1-42:27">となります。<br>
+これをfor文にすると</p>
+<iframe id="qiita-embed-content__a565ddc498030a09ef0d181d32288701" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__a565ddc498030a09ef0d181d32288701" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"False\"| E[繰り返し処理を抜けた後の処理]\n B --&gt;|\"True\"| C[ここに実行したい処理]\n C --&gt; D[i ← i + 1]\n D --&gt; B","key":"b5cfc3b66e2510dcf2da237ef1755de5"}'>
+</iframe>
+
+<p data-sourcepos="53:1-54:109">このように変わります。<br>
+（mermaidで綺麗に描けなかったので、ちょっと良くない図になってしまいました）</p>
+<p data-sourcepos="56:1-56:159">本質的にはif文のフローチャートの流れで、Trueの時にもう一度処理を繰り返すのだ、と理解すればわかりやすいです。</p>
+<div data-sourcepos="58:1-60:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<p data-sourcepos="59:1-59:90">条件や実行処理を間違えると無限ループになる危険性があります。</p>
+</div>
+</div>
+<div data-sourcepos="62:1-64:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="63:1-63:165">無限ループになるとシステムが止まったり落ちたりしてしまいますので、繰り返し条件は確実に満たすようにしましょう。</p>
+</div>
+</div>
+<div data-sourcepos="66:1-68:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="67:1-67:99">繰り返し条件は「繰り返し処理をやめる条件」という考え方もできます。</p>
+</div>
+</div>
+<h2 data-sourcepos="70:1-70:20">
+<span id="while文とは" class="fragment"></span><a href="#while%E6%96%87%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>while文とは？</h2>
+<p data-sourcepos="71:1-71:27">for文と比較すると、</p>
+<ul data-sourcepos="73:1-75:0">
+<li data-sourcepos="73:1-73:20">初期化がない</li>
+<li data-sourcepos="74:1-75:0">繰り返し処理が終了した時に毎度実施する処理がない</li>
+</ul>
+<p data-sourcepos="76:1-76:39">というのが大きな変化です。</p>
+<iframe id="qiita-embed-content__ef512915e37ac4afad5e4898256377e4" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__ef512915e37ac4afad5e4898256377e4" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n B{i &lt;= 10}\n C[ここに実行したい処理]\n D[繰り返し処理を抜けた後の処理]\n B --&gt;|\"True\"| C\n C --&gt; B\n B --&gt;|\"False\"| D","key":"d98ef0ae4fdfc3e1154b86acf18ffddd"}'>
+</iframe>
+
+<p data-sourcepos="88:1-88:51">これを念頭に置いて、コードをみます</p>
+<div class="code-frame" data-lang="js" data-sourcepos="90:1-95:3"><div class="highlight"><pre><code><span class="k">while</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ここに実行したい処理</span>
+<span class="p">}</span>
+<span class="c1">// 繰り返し処理を抜けた後の処理</span>
+</code></pre></div></div>
+<p data-sourcepos="97:1-98:192"><code>let i = 1;</code>と、<code>i = i + 1;</code>がありませんね。<br>
+そのため、for文の構造や思想を理解してから、あえてforを使わないという選択肢が持てるようになって初めて使えるものだと認識しましょう。</p>
+<h3 data-sourcepos="100:1-100:12">
+<span id="do-while" class="fragment"></span><a href="#do-while"><i class="fa fa-link"></i></a>do-while</h3>
+<div class="code-frame" data-lang="js" data-sourcepos="101:1-107:3"><div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 繰り返しをわかりやすくするため、敢えて書きます</span>
+<span class="k">do</span> <span class="p">{</span>
+  <span class="c1">// ここに実行したい処理1</span>
+  <span class="c1">// わかりやすくするために複数処理を入れます</span>
+<span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+<iframe id="qiita-embed-content__da40e942a8970346db7ab45f8a8ae188" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__da40e942a8970346db7ab45f8a8ae188" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1]\n B[ここに実行したい処理]\n E[わかりやすくするために複数処理を入れます]\n C{i &lt;= 10}\n D[繰り返し処理を抜けた後の処理]\n A --&gt; B\n B --&gt; E\n E --&gt; C\n C --&gt;|\"True\"| B\n C --&gt;|\"False\"| D","key":"c15cd5143b8915124514909d1ef2d60f"}'>
+</iframe>
+
+<p data-sourcepos="123:1-124:114">先ほどのwhile文との違い、繰り返し処理を１回実行してから判定をしています。<br>
+do-whileとwhileの違いで比較しやすいですが、for文とdo-whileで比較できるのが理想です。</p>
+<div data-sourcepos="126:1-131:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="127:1-127:33">専門用語っぽく言うと、</p>
+<ul data-sourcepos="128:1-130:21">
+<li data-sourcepos="128:1-128:79">前置判定: 条件分岐を「先」に書いて繰り返し処理を実施</li>
+<li data-sourcepos="129:1-130:21">後置判定: 条件分岐を「後」に書いて繰り返し処理を実施<br>
+という違いです</li>
+</ul>
+</div>
+</div>
+<p data-sourcepos="133:1-134:68">どちらが良いのか？という表現ができるうちはforを使った方がいいです。<br>
+forで解決できないものをdo-whileで解決しましょう。</p>
+<h2 data-sourcepos="136:1-136:15">
+<span id="次の章へ" class="fragment"></span><a href="#%E6%AC%A1%E3%81%AE%E7%AB%A0%E3%81%B8"><i class="fa fa-link"></i></a>次の章へ</h2>
+<ul data-sourcepos="137:1-139:107">
+<li data-sourcepos="137:1-137:77"><a href="https://qiita.com/nomurasan/private/4a40feb042bbb71cb650">条件分岐編</a></li>
+<li data-sourcepos="138:1-138:35">繰り返し処理編（ここ）</li>
+<li data-sourcepos="139:1-139:107"><a href="https://qiita.com/nomurasan/private/ec01ba58ba295a4fa80f">配列・連想配列・オブジェクト編</a></li>
+</ul>

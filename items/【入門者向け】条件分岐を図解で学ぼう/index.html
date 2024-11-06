@@ -1,0 +1,138 @@
+<div data-sourcepos="1:1-3:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="2:1-2:174">私が教材として作る際は、以下内容は必ず網羅してますよ、という話です。要するに宣伝ですが、役に立つ話なので公開します。</p>
+</div>
+</div>
+<p data-sourcepos="5:1-6:150">一気に見ると大変なので、学習状況によって一つずつ見てくださいね。<br>
+一気見すると一瞬ですが、きちんと学習しようとすると、半日＋半日以上かかるつもりで読み進めてください。</p>
+<h2 data-sourcepos="8:1-8:18">
+<span id="目次1" class="fragment"></span><a href="#%E7%9B%AE%E6%AC%A11"><i class="fa fa-link"></i></a>目次<sup><a href="#fn-%E7%9B%AE%E6%AC%A1" id="fnref-%E7%9B%AE%E6%AC%A1">1</a></sup>
+</h2>
+<ul data-sourcepos="9:1-12:0">
+<li data-sourcepos="9:1-9:29">条件分岐編（ここ）</li>
+<li data-sourcepos="10:1-10:83"><a href="https://qiita.com/nomurasan/private/871f4be9410451dd9143">繰り返し処理編</a></li>
+<li data-sourcepos="11:1-12:0"><a href="https://qiita.com/nomurasan/private/ec01ba58ba295a4fa80f">配列・連想配列・オブジェクト編</a></li>
+</ul>
+<h3 data-sourcepos="15:1-15:72">
+<span id="if文を理解する前にフローチャートの話からする" class="fragment"></span><a href="#if%E6%96%87%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E5%89%8D%E3%81%AB%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E3%81%AE%E8%A9%B1%E3%81%8B%E3%82%89%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>if文を理解する前に、フローチャートの話からする</h3>
+<p data-sourcepos="16:1-17:127">まずは分からないなりにコードを見てみます。<br>
+ここでは、アルゴリズム学習でよく採用するJavaScriptを例にしましたが、言語知識は不問です。</p>
+<div class="code-frame" data-lang="js" data-sourcepos="19:1-26:3"><div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">次の処理はここにかく</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">その後の処理</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+<p data-sourcepos="28:1-28:48">これを、フローチャートにします。</p>
+<iframe id="qiita-embed-content__4f06a771d7f39fa90522416092155051" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__4f06a771d7f39fa90522416092155051" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"True\"| C[OKと出力する]\n C --&gt; D[次の処理はここにかく]\n D --&gt; E\n B --&gt;|\"False\"| E[その後の処理]","key":"0d68a3f503caff4312452ed4a08d4a7e"}'>
+</iframe>
+
+<ul data-sourcepos="39:1-43:0">
+<li data-sourcepos="39:1-39:13">ifが菱形</li>
+<li data-sourcepos="40:1-41:37">ifのカッコ内｛｝に書いた処理だけやる。ここでは2つの処理を書いている
+<ul data-sourcepos="41:3-41:37">
+<li data-sourcepos="41:3-41:37">その後の処理も実行する</li>
+</ul>
+</li>
+<li data-sourcepos="42:1-43:0">ifの菱形の条件を満たさない場合は、その後の処理だけやる</li>
+</ul>
+<h3 data-sourcepos="44:1-44:14">
+<span id="if-else文" class="fragment"></span><a href="#if-else%E6%96%87"><i class="fa fa-link"></i></a>if-else文</h3>
+<p data-sourcepos="45:1-47:145">説明のコツは「if文とif-else文は似ている別の処理」と指導する事です。<br>
+そうしておくと、if-elseif文のバイアスが消せます。<br>
+なお、先にif-elseifを教えてから、if-elseを教える方法も有効ですが、教材によってはそうなっていないかも。</p>
+<div data-sourcepos="49:1-51:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="50:1-50:190">個人的には「if」と「else-if」が仲間で、これらに当たらない条件全てをelseと考えてもらう方が教えやすいと思っていますが、賛否あります。</p>
+</div>
+</div>
+<div class="code-frame" data-lang="js" data-sourcepos="53:1-61:3"><div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">NG-OK</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">その後の処理</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+<iframe id="qiita-embed-content__957e89e097f36f528b8bc5344b0b5ed9" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__957e89e097f36f528b8bc5344b0b5ed9" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"True\"| C[OKと出力する]\n C --&gt; D[True/Falseそれぞれの続きの処理]\n B --&gt;|\"False\"| E{i &lt;= 5}\n E --&gt;|\"True\"| F[NG-OKと出力する]\n F --&gt; D\n E --&gt;|\"False\"| D","key":"abeb292d7e5642b468c9092ce2cfc4b1"}'>
+</iframe>
+
+<p data-sourcepos="74:1-75:90">このように処理が実行されます。<br>
+この時、変数iにどのような数値を入れればNG-OKになるでしょうか？</p>
+<details>
+<summary>答え</summary>
+<hr data-sourcepos="80:1-81:0">
+<div data-sourcepos="82:1-86:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="83:1-85:145">答えは「ない」です。<br>
+ぱっと見、<code>i &lt;= 5</code>が見えるので、5以下を入れたくなりますが、先に<code>i &lt;= 10</code>の条件に当たってしまいます。<br>
+そして、<code>i &lt;= 10</code>の条件に当たらないケースは、iが10より大きいため、絶対に<code>i &lt;= 5</code>の条件はFalseになります。</p>
+</div>
+</div>
+<p data-sourcepos="88:1-88:261">このように、フローチャートを使えばこのようなミスも図を見ながら流れを追いやすくなりますので、プログラミングに慣れないうちはフローチャートを書く・読む癖をつけると良いでしょう。</p>
+<hr data-sourcepos="90:1-91:0">
+</details>
+<p data-sourcepos="94:1-94:118">なお、else-ifは省略できます。先ほどのコードでもエラーにならずに動いていましたね？</p>
+<h3 data-sourcepos="96:1-96:54">
+<span id="else-if文からelseを外すとどうなるか" class="fragment"></span><a href="#else-if%E6%96%87%E3%81%8B%E3%82%89else%E3%82%92%E5%A4%96%E3%81%99%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>else-if文からelseを外すとどうなるか？</h3>
+<div class="code-frame" data-lang="js" data-sourcepos="97:1-108:3"><div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// else if文からelseを外してみる</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">NG-OK</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">その後の処理</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+<iframe id="qiita-embed-content__8bae433c382aedbf8acc1c36edfdfd99" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__8bae433c382aedbf8acc1c36edfdfd99" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"True\"| C[OKと出力する]\n C --&gt; D{i &lt;= 5}\n B --&gt;|\"False\"| D\n D --&gt;|\"True\"| E[NG-OKと出力する]\n E --&gt; F[その後の処理]\n D --&gt;|\"False\"| F","key":"c06a9de3e4f0cbce57c5d70aa50144ea"}'>
+</iframe>
+
+<p data-sourcepos="121:1-123:54">NG-OKの意味が変わってしまいましたね。<br>
+このように書き直すと、<code>i = 1</code>の場合はOKとNG-OKが出力されます。<br>
+<code>i = 7</code>であれば、OKのみが出力されます。</p>
+<div data-sourcepos="125:1-127:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="126:1-126:97">「if-elseif文」のelseif文からelseを取ると、全く意味の違う図になります。</p>
+</div>
+</div>
+<h3 data-sourcepos="129:1-129:14">
+<span id="if-else文-1" class="fragment"></span><a href="#if-else%E6%96%87-1"><i class="fa fa-link"></i></a>if-else文</h3>
+<iframe id="qiita-embed-content__d910d0ec5d484f134ec2a2fdeb49613a" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__d910d0ec5d484f134ec2a2fdeb49613a" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n A[i ← 1] --&gt; B{i &lt;= 10}\n B --&gt;|\"True\"| C[OKと出力する]\n B --&gt;|\"False\"| D[NGと出力する]\n C --&gt; E[True/Falseそれぞれの続きの処理]\n D --&gt; E","key":"fead228d4d565e3ac871f31fd5392f54"}'>
+</iframe>
+
+<iframe id="qiita-embed-content__3260eff9ca071f1d7e0965533a27caa4" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__3260eff9ca071f1d7e0965533a27caa4" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content="{&quot;data&quot;:&quot;graph TD\n A[let i = 1;] --&gt; B{if（i &lt;= 10） }\n B --&gt;|\&quot;True\&quot;| C[console.log（'OK'）;] \n B --&gt;|\&quot;False\&quot;| D[console.log（'NG'）;]\n C --&gt; E[ console.log（'True/Falseそれぞれの続きの処理'）; ]\n D --&gt; E&quot;,&quot;key&quot;:&quot;5f7ca18724eff85eaa580398c81fa3ad&quot;}">
+</iframe>
+
+<div class="code-frame" data-lang="js" data-sourcepos="150:1-159:3"><div class="highlight"><pre><code><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">NG</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Yes/Noそれぞれの続きの処理</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+<div data-sourcepos="161:1-163:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="162:1-162:59">最初のif文と見比べてみると良いでしょう。</p>
+</div>
+</div>
+<h2 data-sourcepos="165:1-165:15">
+<span id="次の章へ" class="fragment"></span><a href="#%E6%AC%A1%E3%81%AE%E7%AB%A0%E3%81%B8"><i class="fa fa-link"></i></a>次の章へ</h2>
+<ul data-sourcepos="166:1-169:0">
+<li data-sourcepos="166:1-166:29">条件分岐編（ここ）</li>
+<li data-sourcepos="167:1-167:83"><a href="https://qiita.com/nomurasan/private/871f4be9410451dd9143">繰り返し処理編</a></li>
+<li data-sourcepos="168:1-169:0"><a href="https://qiita.com/nomurasan/private/ec01ba58ba295a4fa80f">配列・連想配列・オブジェクト編</a></li>
+</ul>
+<h3 data-sourcepos="170:1-170:10">
+<span id="注釈" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88"><i class="fa fa-link"></i></a>注釈</h3>
+<section class="footnotes">
+<ol>
+<li id="fn-%E7%9B%AE%E6%AC%A1">
+<p data-sourcepos="13:12-13:138">【目次いる？】Qiitaに慣れていると右側を見ますが、想定読者は非Qiita民のため設置してます。 <a href="#fnref-%E7%9B%AE%E6%AC%A1" class="">↩</a></p>
+</li>
+</ol>
+</section>
