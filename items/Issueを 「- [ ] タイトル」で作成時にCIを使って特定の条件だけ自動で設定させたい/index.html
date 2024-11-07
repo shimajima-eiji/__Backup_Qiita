@@ -1,0 +1,253 @@
+<h1 data-sourcepos="1:1-1:17">
+<span id="発端記事" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF%E8%A8%98%E4%BA%8B"><i class="fa fa-link"></i></a>発端・記事</h1>
+<p data-sourcepos="2:1-2:46"><iframe id="qiita-embed-content__eeac234150905f82ef434ca34d4b5200" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__eeac234150905f82ef434ca34d4b5200" data-content="https%3A%2F%2Fqiita.com%2Fprivate%2Fa851656aa390e1be60b2" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="4:1-4:27">
+<span id="ポイントのみ解説" class="fragment"></span><a href="#%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AE%E3%81%BF%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>ポイントのみ解説</h2>
+<p data-sourcepos="5:1-5:9">疲れた</p>
+<p data-sourcepos="7:1-7:203">自分用メモに残すが、後で見直した時にAIにコードをぶん投げそうなので、そんな手間を掛けなくてもいいように準備するところまでをゴールにする。</p>
+<h3 data-sourcepos="9:1-9:39">
+<span id="patにrepoとproject権限が必要" class="fragment"></span><a href="#pat%E3%81%ABrepo%E3%81%A8project%E6%A8%A9%E9%99%90%E3%81%8C%E5%BF%85%E8%A6%81"><i class="fa fa-link"></i></a>PATにrepoとproject権限が必要</h3>
+<p data-sourcepos="10:1-10:144">Personal Access Token(PAT)の設定が必要。2種類の権限を作って使い分けるか、まとめて使えるものを用意しよう。</p>
+<p data-sourcepos="12:1-13:34">PATの設定は、GitHubアカウントにログインして以下を開く<br>
+<a href="https://github.com/settings/tokens" class="autolink" rel="nofollow noopener" target="_blank">https://github.com/settings/tokens</a></p>
+<p data-sourcepos="15:1-15:30">権限設定は以下の通り</p>
+<ul data-sourcepos="17:1-22:0">
+<li data-sourcepos="17:1-19:59">repo
+<ul data-sourcepos="18:3-19:59">
+<li data-sourcepos="18:3-18:120">Issue自体を書き換えるため必要。具体的にはラベル・マイルストーン・プロジェクト欄</li>
+<li data-sourcepos="19:3-19:59">ただし、プロジェクトはrepoだけではダメ</li>
+</ul>
+</li>
+<li data-sourcepos="20:1-22:0">project
+<ul data-sourcepos="21:3-22:0">
+<li data-sourcepos="21:3-22:0">GitHub APIを使用するため。projectはrepoに紐づかないので別権限が必要</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="23:1-23:78">
+<span id="プロジェクト固有のidを取得するスクリプトを用意する" class="fragment"></span><a href="#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E5%9B%BA%E6%9C%89%E3%81%AEid%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>プロジェクト固有のIDを取得するスクリプトを用意する</h3>
+<ul data-sourcepos="24:1-28:0">
+<li data-sourcepos="24:1-24:60">YOUR_PAT_REQUEST_READ_PROJECT: 前段で作成したもの</li>
+<li data-sourcepos="25:1-25:41">YOUR_USERNAME: GitHubアカウント名</li>
+<li data-sourcepos="26:1-28:0">YOUR_PROJECT_NUMBER:
+<ul data-sourcepos="27:3-28:0">
+<li data-sourcepos="27:3-28:0"><code>https://github.com/users/(YOUR_USERNAME)/projects/(ここ)</code></li>
+</ul>
+</li>
+</ul>
+<div class="code-frame" data-lang="shell" data-sourcepos="29:1-35:3">
+<div class="code-lang"><span class="bold">command.sh</span></div>
+<div class="highlight"><pre><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: bearer YOUR_PAT_REQUEST_READ_PROJECT"</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<span class="nt">-X</span> POST <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"query": "query { user(login: \"YOUR_USERNAME\") { projectV2(number: YOUR_PROJECT_NUMBER) { id } } }"}'</span> <span class="se">\</span>
+https://api.github.com/graphql
+</code></pre></div>
+</div>
+<p data-sourcepos="37:1-37:40">PVT_から始まるprojectV2が取れる</p>
+<div class="code-frame" data-lang="json" data-sourcepos="39:1-41:3">
+<div class="code-lang"><span class="bold">result.json</span></div>
+<div class="highlight"><pre><code><span class="p">{</span><span class="nl">"data"</span><span class="p">:{</span><span class="nl">"user"</span><span class="p">:{</span><span class="nl">"projectV2"</span><span class="p">:{</span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"PVT_hogefugapiyo"</span><span class="p">}}}}</span><span class="w">
+</span></code></pre></div>
+</div>
+<p data-sourcepos="43:1-43:58">PATもPVT_も後で使うのでなくさないように。</p>
+<h3 data-sourcepos="45:1-45:75">
+<span id="ciで使えるようにシークレット変数に登録順不同" class="fragment"></span><a href="#ci%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%82%B7%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%E5%A4%89%E6%95%B0%E3%81%AB%E7%99%BB%E9%8C%B2%E9%A0%86%E4%B8%8D%E5%90%8C"><i class="fa fa-link"></i></a>CIで使えるようにシークレット変数に登録（順不同）</h3>
+<ol data-sourcepos="46:1-49:0">
+<li data-sourcepos="46:1-46:49">repo権限を持つPAT（先ほど作成済）</li>
+<li data-sourcepos="47:1-47:57">read-project権限を持つPAT（先ほど作成済）</li>
+<li data-sourcepos="48:1-49:0">PVT_hogefugapiyo（先ほど取得済み）</li>
+</ol>
+<p data-sourcepos="50:1-52:110">を登録する。<br>
+ここでは説明を簡略化するため、1.2.をまとめて設定しておく<br>
+（以下コードでいう <code>YOUR_PAT_WITH_PROJECT_SCOPE</code> と <code>PROJECT_NODE_ID</code> にそれぞれ格納した）</p>
+<h3 data-sourcepos="54:1-54:15">
+<span id="ciを書く" class="fragment"></span><a href="#ci%E3%82%92%E6%9B%B8%E3%81%8F"><i class="fa fa-link"></i></a>CIを書く</h3>
+<p data-sourcepos="55:1-55:89">書いたコードをAIに丸投げしてコメントを追記後、手直ししている</p>
+<div class="code-frame" data-lang="yaml" data-sourcepos="57:1-121:3">
+<div class="code-lang"><span class="bold">for_advent-calendar.yml</span></div>
+<div class="highlight"><pre><code><span class="c1"># このファイルは、GitHub Actionsのワークフローを定義しています。</span>
+<span class="c1"># GitHub Actionsは、GitHubリポジトリ内で自動的にタスクを実行するための機能です。</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Issue Automation for アドベントカレンダー</span>  <span class="c1"># このワークフローの名前</span>
+
+<span class="c1"># このワークフローがいつ実行されるかを定義</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">issues</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>  <span class="c1"># Issueが作成されたり編集されたときに実行</span>
+
+<span class="na">jobs</span><span class="pi">:</span>  <span class="c1"># 実行されるジョブの定義</span>
+  <span class="na">automate_issue</span><span class="pi">:</span>  <span class="c1"># ジョブ名</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>  <span class="c1"># このジョブが実行される環境（ここではUbuntu最新版）</span>
+    <span class="na">steps</span><span class="pi">:</span>  <span class="c1"># ジョブ内で実行される一連のステップ</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Automate Issue</span>  <span class="c1"># このステップの名前</span>
+        <span class="na">env</span><span class="pi">:</span>  <span class="c1"># 環境変数の設定</span>
+          <span class="c1"># これらの変数は、GitHubの機密情報やIssueの情報を含んでいます</span>
+          <span class="na">GITHUB_PAT</span><span class="pi">:</span> <span class="s">${{ secrets.YOUR_PAT_WITH_PROJECT_SCOPE }}</span>  <span class="c1"># GitHub Personal Access Token。前段の作業でやったもの</span>
+          <span class="na">ISSUE_TITLE</span><span class="pi">:</span> <span class="s">${{ github.event.issue.title }}</span>  <span class="c1"># Issueのタイトル</span>
+          <span class="na">ISSUE_NUMBER</span><span class="pi">:</span> <span class="s">${{ github.event.issue.number }}</span>  <span class="c1"># Issueの番号</span>
+          <span class="na">ISSUE_ID</span><span class="pi">:</span> <span class="s">${{ github.event.issue.node_id }}</span>  <span class="c1"># IssueのID</span>
+          <span class="na">PROJECT_ID</span><span class="pi">:</span> <span class="s">${{ secrets.PROJECT_NODE_ID }}</span>  <span class="c1"># プロジェクトのID。これも前段の作業で格納したもの</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>  <span class="c1"># 実行するシェルスクリプト</span>
+          <span class="s"># Issueのタイトルが「adcal」で始まるかチェック</span>
+          <span class="s">if [[ "$ISSUE_TITLE" == adcal* ]]; then</span>
+            <span class="s">echo "Issue title matches the condition. Proceeding with automation."</span>
+          <span class="no">  </span>
+            <span class="s"># 「アドカレ」ラベルを追加。今回は決め打ちだが、シークレットに入れておくと使い回しが楽</span>
+            <span class="s"># curlコマンドを使用してGitHub APIにリクエストを送信</span>
+            <span class="s">label_response=$(curl -s -X POST \</span>
+              <span class="s">-H "Authorization: token $GITHUB_PAT" \</span>
+              <span class="s">-H "Accept: application/vnd.github.v3+json" \</span>
+              <span class="s">"https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/labels" \</span>
+              <span class="s">-d '{"labels":["アドカレ"]}')</span>
+            <span class="s">echo "Label response: $label_response"</span>
+          <span class="no">  </span>
+            <span class="s"># 「マイルストーンID:1」のマイルストーンを設定。本当はここもシークレットにすべきだね</span>
+            <span class="s"># 同様にcurlを使用してマイルストーンを設定。</span>
+            <span class="s">milestone_response=$(curl -s -X PATCH \</span>
+              <span class="s">-H "Authorization: token $GITHUB_PAT" \</span>
+              <span class="s">-H "Accept: application/vnd.github.v3+json" \</span>
+              <span class="s">"https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" \</span>
+              <span class="s">-d '{"milestone":1}')</span>
+            <span class="s">echo "Milestone response: $milestone_response"</span>
+          <span class="no">  </span>
+            <span class="s"># Issueをプロジェクトに追加</span>
+            <span class="s"># GraphQL APIを使用してIssueをプロジェクトに追加</span>
+            <span class="s">project_response=$(curl -s -X POST \</span>
+              <span class="s">-H "Authorization: bearer $GITHUB_PAT" \</span>
+              <span class="s">-H "Accept: application/vnd.github.v3+json" \</span>
+              <span class="s">-H "Content-Type: application/json" \</span>
+              <span class="s">https://api.github.com/graphql \</span>
+              <span class="s">-d "{\"query\":\"mutation {addProjectV2ItemById(input: {projectId: \\\"$PROJECT_ID\\\" contentId: \\\"$ISSUE_ID\\\"}) {item {id}}}\"}")</span>
+            <span class="s">echo "Project response: $project_response"</span>
+          <span class="no">  </span>
+            <span class="s">echo "Issue #$ISSUE_NUMBER has been automated for アドカレ"</span>
+
+          <span class="s"># Issueのタイトルが「adcal」で始まらない場合。通常のIssueのケースなのでエラーではない。そもそも何もしなくていいんだけど、今回はみやすさのため追加</span>
+          <span class="s">else</span>
+            <span class="s"># Issueのタイトルが条件に一致しない場合のメッセージ</span>
+            <span class="s">echo "Issue #$ISSUE_NUMBER does not start with アドカレ. No automation applied."</span>
+            <span class="s">echo "Issue title: $ISSUE_TITLE"</span>
+          <span class="s">fi</span>
+</code></pre></div>
+</div>
+<p data-sourcepos="123:1-125:195">コマンドの部分が面倒臭い。<br>
+全部curlを使ってGitHub APIを叩いている。<br>
+通常通りIssueを追加するだけならIssue_template.mdなりを使えばいいんだけど、今回は <code>- [ ] タイトル</code> からconvert to issueにするのでこの方法は使えない</p>
+<h2 data-sourcepos="127:1-127:76">
+<span id="運用github-projectでissueをリポジトリ横断で管理したい" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8github-project%E3%81%A7issue%E3%82%92%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E6%A8%AA%E6%96%AD%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%97%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>運用：GitHub ProjectでIssueをリポジトリ横断で管理したい</h2>
+<div data-sourcepos="128:1-130:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<p data-sourcepos="129:1-129:109">Issueテンプレートを使いたかったので、結果的に<code>- [ ] タイトル</code>での運用をやめた</p>
+</div>
+</div>
+<div data-sourcepos="132:1-134:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="133:1-133:106">Issueを作成する時にCIを実行するという要件は満たせているため、無駄ではない</p>
+</div>
+</div>
+<p data-sourcepos="136:1-136:388">実は本稿は記事を公開する前（9/21）に下書きで置いていたのだが、我ながらめちゃくちゃ有用だな、と思った（試験運用しようと思って、思い出すために何度も開いた）ので、個人でもGitHub Issueでチケット運用する場合は一時的にブックマーク・後で読むに入れておくことをお勧めする。</p>
+<h3 data-sourcepos="138:1-138:34">
+<span id="ユースケースを考える" class="fragment"></span><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%92%E8%80%83%E3%81%88%E3%82%8B"><i class="fa fa-link"></i></a>ユースケースを考える</h3>
+<h4 data-sourcepos="140:1-140:20">
+<span id="仕様を知る" class="fragment"></span><a href="#%E4%BB%95%E6%A7%98%E3%82%92%E7%9F%A5%E3%82%8B"><i class="fa fa-link"></i></a>仕様を知る</h4>
+<ul data-sourcepos="141:1-145:0">
+<li data-sourcepos="141:1-141:68">プロジェクト自体へのアクセス権限を設定できる</li>
+<li data-sourcepos="142:1-142:70">リポジトリ（Issue）へのアクセス権限を設定できる</li>
+<li data-sourcepos="143:1-145:0">パブリックなプロジェクトにクローズドなリポジトリのIssueを登録しても、リポジトリへのアクセス権限がなければIssueは見れない
+<ul data-sourcepos="144:3-145:0">
+<li data-sourcepos="144:3-145:0">Issueがあることは公開権限がなくてもわかる</li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="146:1-147:58">（この項目を書いている日付も特定できるが、気にせず公開する）<br>
+<a href="https://github.com/users/shimajima-eiji/projects/8/views/1" class="autolink" rel="nofollow noopener" target="_blank">https://github.com/users/shimajima-eiji/projects/8/views/1</a></p>
+<p data-sourcepos="149:1-149:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F76b94d2f-f2cc-028c-1f24-9ba4ced04250.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0ab05a0ae3a9a87261f5ccaef09024de" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F76b94d2f-f2cc-028c-1f24-9ba4ced04250.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0ab05a0ae3a9a87261f5ccaef09024de" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F76b94d2f-f2cc-028c-1f24-9ba4ced04250.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=8d61376f57c4a1e530d19259d4022f23 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/76b94d2f-f2cc-028c-1f24-9ba4ced04250.png"></a></p>
+<p data-sourcepos="151:1-151:152">見直してみると「Issueを書くリポジトリを間違えたな」と思う事もあるので、リポジトリ別に見れた方がいいね。</p>
+<p data-sourcepos="153:1-153:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fbe7f50bf-7135-acb3-649a-0cf33cc45099.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1d7638e52db3356ff521ce5575e54fc2" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fbe7f50bf-7135-acb3-649a-0cf33cc45099.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=1d7638e52db3356ff521ce5575e54fc2" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fbe7f50bf-7135-acb3-649a-0cf33cc45099.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=18407fc571fbe68851ed72a2933bb82c 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/be7f50bf-7135-acb3-649a-0cf33cc45099.png"></a></p>
+<p data-sourcepos="155:1-156:18">というわけで、作った。<br>
+いい感じだ。</p>
+<h4 data-sourcepos="158:1-158:11">
+<span id="運用" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8"><i class="fa fa-link"></i></a>運用</h4>
+<p data-sourcepos="159:1-159:75">運用目線で、繰り返しになるが公開範囲を確認しておく</p>
+<ul data-sourcepos="161:1-164:0">
+<li data-sourcepos="161:1-161:65">公開したいIssueはパブリックなroadmapリポジトリ</li>
+<li data-sourcepos="162:1-162:79">日報はプライベートなdiaryリポジトリに書いているとする</li>
+<li data-sourcepos="163:1-164:0">プロジェクト自体はオープン（誰でも見れる）</li>
+</ul>
+<p data-sourcepos="165:1-167:76">Issueを全体公開をするためには、２段階の公開設定をしておく必要があるので安心だ。<br>
+なお、日報は一日ごとに#を書かれるしプライベートな内容を書き込む可能性が高い。<br>
+roadmapにはプライベートな内容を書くことはない、とする</p>
+<h3 data-sourcepos="169:1-169:31">
+<span id="運用を意識した実装" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E3%82%92%E6%84%8F%E8%AD%98%E3%81%97%E3%81%9F%E5%AE%9F%E8%A3%85"><i class="fa fa-link"></i></a>運用を意識した実装</h3>
+<p data-sourcepos="170:1-170:190">まず、Issue自体にはより複雑な内容を埋め込みたいので、メンテナンス性を高めるために<code>.github/ISSUE_TEMPLATE/name.md</code>と組み合わせることにする。</p>
+<div class="code-frame" data-lang="gcc-machine-description" data-sourcepos="172:1-174:3">
+<div class="code-lang"><span class="bold">.github/ISSUE_TEMPLATE/name.md</span></div>
+<div class="highlight"><pre><code>ここに色々書いていく。今回はメイン
+</code></pre></div>
+</div>
+<p data-sourcepos="176:1-178:185">これをCIと組み合わせる。特にテンプレートではプロジェクトを追加できない。<br>
+（ラベルとマイルストーンはリポジトリに依存するのでできる）<br>
+ここで想定する運用要件として、Issueをプロジェクトに追加するとリポジトリを横断できるという強みがあるので積極的に活用していく。</p>
+<div class="code-frame" data-lang="shell" data-sourcepos="180:1-187:3">
+<div class="code-lang"><span class="bold">command.shからPVT_だけ取得する.sh</span></div>
+<div class="highlight"><pre><code><span class="nv">PROJECT_NODE_ID</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-H</span> <span class="s2">"Authorization: bearer YOUR_PAT_REQUEST_READ_PROJECT"</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<span class="nt">-X</span> POST <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"query": "query { user(login: \"YOUR_USERNAME\") { projectV2(number: YOUR_PROJECT_NUMBER) { id } } }"}'</span> <span class="se">\</span>
+https://api.github.com/graphql <span class="se">\</span>
+| jq <span class="nt">-r</span> <span class="s1">'.data.user.projectV2.id'</span><span class="si">)</span>
+</code></pre></div>
+</div>
+<p data-sourcepos="189:1-190:110">として、変数で受け取れるようにしておくと捗る。<br>
+が、AIに聞いたところ、こんな事をしなくてももっと楽な方法で構築できるらしい</p>
+<div class="code-frame" data-lang="yml" data-sourcepos="192:1-235:3"><div class="highlight"><pre><code><span class="c1"># TITLE_PATTERN: 対象となるIssueのタイトルのパターン（正規表現）</span>
+<span class="c1"># PROJECT_NUMBER: 対象となるプロジェクト番号</span>
+<span class="c1"># ADD_TO_PROJECT_PAT: repoとproject権限があるもの</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Issueをプロジェクトに追加</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">issues</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>  <span class="c1"># デバッグするならeditedを入れると楽</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">add-to-projects</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Issueのタイトルをチェック</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">check_title</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">TITLE_PATTERN</span><span class="pi">:</span> <span class="s">${{ secrets.TITLE_PATTERN }}</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">TITLE="${{ github.event.issue.title }}"</span>
+          <span class="s">if [[ $TITLE =~ $TITLE_PATTERN ]]; then</span>
+            <span class="s">echo "PROCESS_ISSUE=true" &gt;&gt; $GITHUB_OUTPUT</span>
+            <span class="s">echo "REPORT_DATE=$(echo $TITLE | awk '{print $2}')" &gt;&gt; $GITHUB_OUTPUT</span>
+          <span class="s">else</span>
+            <span class="s">echo "PROCESS_ISSUE=false" &gt;&gt; $GITHUB_OUTPUT</span>
+          <span class="s">fi</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">プロジェクトにIssueを追加</span>
+        <span class="na">if</span><span class="pi">:</span> <span class="s">steps.check_title.outputs.PROCESS_ISSUE == 'true'</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/add-to-project@v0.5.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">project-url</span><span class="pi">:</span> <span class="s">https://github.com/users/${{ github.event.issue.user.login }}/projects/${{ secrets.PROJECT_NUMBER }}</span>
+          <span class="na">github-token</span><span class="pi">:</span> <span class="s">${{ secrets.ADD_TO_PROJECT_PAT }}</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">処理結果を記録</span>
+        <span class="na">if</span><span class="pi">:</span> <span class="s">steps.check_title.outputs.PROCESS_ISSUE == 'true'</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">echo "日報 ${{ steps.check_title.outputs.REPORT_DATE }} を各プロジェクトに追加しました。"</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">処理をスキップ</span>
+        <span class="na">if</span><span class="pi">:</span> <span class="s">steps.check_title.outputs.PROCESS_ISSUE == 'false'</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo "Issueのタイトルが指定されたパターンと一致しません。処理をスキップします。"</span>
+</code></pre></div></div>
+<p data-sourcepos="237:1-237:18">これは便利！</p>
+<h2 data-sourcepos="239:1-239:27">
+<span id="追記運用所感" class="fragment"></span><a href="#%E8%BF%BD%E8%A8%98%E9%81%8B%E7%94%A8%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>【追記】運用所感</h2>
+<p data-sourcepos="240:1-241:42">この記事の下書き自体はかなり早い時期に書き上げていて、その後運用していて色々な気付きがあったが、まとめきれていないので現行版でGoとした<br>
+落ち着き次第、続報を書きたい</p>
