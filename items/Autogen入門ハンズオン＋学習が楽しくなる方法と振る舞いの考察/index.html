@@ -1,0 +1,74 @@
+<h2 data-sourcepos="2:1-2:36">
+<span id="本日のイベント勉強会" class="fragment"></span><a href="#%E6%9C%AC%E6%97%A5%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%8B%89%E5%BC%B7%E4%BC%9A"><i class="fa fa-link"></i></a>本日のイベント・勉強会</h2>
+<p data-sourcepos="3:1-3:49"><iframe id="qiita-embed-content__408a4d41abfff0d671d0aa56feb6814b" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__408a4d41abfff0d671d0aa56feb6814b" data-content="https%3A%2F%2Fhannari-python.connpass.com%2Fevent%2F331175%2F" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="5:1-5:237">ハンズオンパートでも自分の意見を言いたい参加者が複数名いて収拾がつかなかったので、ハンズオン資料を読みながらやりながら、私が感じた話だけを書き連ねていきます。</p>
+<p data-sourcepos="7:1-7:45">なお、資料は公開されています。</p>
+<p data-sourcepos="9:1-9:78"><iframe id="qiita-embed-content__18a83cde47b3fc8620f394d8e8226c20" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__18a83cde47b3fc8620f394d8e8226c20" data-content="https%3A%2F%2Fgithub.com%2Fhideyuki-ogawa%2Fautogen-hands-on%2Fblob%2Fmain%2Fautogen_pt2.ipynb" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="11:1-11:61">OpenAI APIキーは事前に取得しておきましょう。</p>
+<h3 data-sourcepos="13:1-13:67">
+<span id="アンケートがなかったので勝手にアンケート" class="fragment"></span><a href="#%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88%E3%81%8C%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%AE%E3%81%A7%E5%8B%9D%E6%89%8B%E3%81%AB%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88"><i class="fa fa-link"></i></a>アンケートがなかったので、勝手にアンケート</h3>
+<div data-sourcepos="14:1-16:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="15:1-15:106">AutoGenに触れてみよう、と思ったのは本セミナーのおかげなので感謝しています</p>
+</div>
+</div>
+<div data-sourcepos="18:1-20:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="19:1-19:391">コミュニティに興味を持った場合、常連の方？のクセが強く、ハンズオンパートは説明を聞けないものと思った方がいいかもしれません。が、せっかくAIの勉強会なので、AIに解説してもらってある程度予習というか、インプットを入れてから本イベントに参加するべきなのかもしれません。</p>
+</div>
+</div>
+<h3 data-sourcepos="22:1-22:39">
+<span id="gensparkの検索じゃない版" class="fragment"></span><a href="#genspark%E3%81%AE%E6%A4%9C%E7%B4%A2%E3%81%98%E3%82%83%E3%81%AA%E3%81%84%E7%89%88"><i class="fa fa-link"></i></a>Gensparkの検索じゃない版？</h3>
+<p data-sourcepos="23:1-24:244">私の認識というか理解の仕方が合っているか微妙なところですが、複数のエージェントを立てて一つの目標に向かっていく、ということがやりたいことなんだろうなぁ、という印象を持ちました。<br>
+検索チックな使い方を想定するとGensparkが分かりやすいので例示したんですが、おそらく似たようなイメージで生成AIに何か生成結果を出させるという事なんだろうという理解です。</p>
+<h3 data-sourcepos="26:1-26:23">
+<span id="trpgをやらせる" class="fragment"></span><a href="#trpg%E3%82%92%E3%82%84%E3%82%89%E3%81%9B%E3%82%8B"><i class="fa fa-link"></i></a>TRPGをやらせる</h3>
+<p data-sourcepos="27:1-27:112">本格的なシステムを使うと学習がきついので、死亡フラグTRPGをやらせてみました。</p>
+<ul data-sourcepos="29:1-33:0">
+<li data-sourcepos="29:1-29:66">コード：プレイヤーエージェントを3人以上作る</li>
+<li data-sourcepos="30:1-30:89">システムメッセージ：全パターンの死亡フラグのセリフを覚える</li>
+<li data-sourcepos="31:1-31:56">システムメッセージ：（長いので後述）</li>
+<li data-sourcepos="32:1-33:0">ユーザーインプット：演目を決める</li>
+</ul>
+<p data-sourcepos="34:1-35:184">ルール説明がえぐい！<br>
+雑に「死亡フラグTRPGをやろう」ではルールもへったくれもないのでシステムメッセージで全部書き出したが、これでも精度がびみょい。</p>
+<p data-sourcepos="37:1-37:9">参考例</p>
+<p data-sourcepos="39:1-39:86"><iframe id="qiita-embed-content__ded3a81b9871a98433410b07ab52bec1" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__ded3a81b9871a98433410b07ab52bec1" data-content="https%3A%2F%2Fwww.perplexity.ai%2Fsearch%2Fsi-wang-hurakutrpgtohananika-r-ZpETbn.ASMSFpBtgnI_5NA" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="41:1-41:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F46100f65-a9b7-6adc-96d2-fe3885d24c80.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=2351b35d2be6af5e64225f60d2837dbc" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F46100f65-a9b7-6adc-96d2-fe3885d24c80.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=2351b35d2be6af5e64225f60d2837dbc" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F46100f65-a9b7-6adc-96d2-fe3885d24c80.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=4f0671786db0c74085ac680f886397bc 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/46100f65-a9b7-6adc-96d2-fe3885d24c80.png" loading="lazy"></a></p>
+<p data-sourcepos="43:1-43:102">こんなんじゃ何をすればいいかわかるはずもないので、頑張って言語化する</p>
+<div class="code-frame" data-lang="text" data-sourcepos="45:1-62:3"><div class="highlight"><pre><code>死亡フラグにセリフについて各自学習してもらう（期待としては、異なる題材から死亡フラグを学んで、それぞれの見解が異なっていて欲しい。シード値を変える？）
+
+- システムメッセージ：（読みやすいように改行しているが、実際は一行）
+
+これからあなたの死亡フラグとなるセリフを渡す。
+その後与えられたトークテーマに沿って議論をする。
+あなたの目的は渡された死亡フラグのセリフを会話に組み込んで、他のプレイヤーからの死亡判定の賛同を得る事である。
+死亡判定とは、物理的に命を落とす事を指すが、逮捕されるなど社会的に死ぬなど生存する上で致命的な障害が伴う事も含むことができる。各プレイヤーの倫理観が絶対であり、抗議は認めない。
+このとき、自分を除く過半数の合意が得られればあなたは勝利する。
+ただし、他のプレイヤーからの賛同が得られない場合、今使った死亡フラグのセリフを破棄し、新たに死亡フラグのセリフを決定する。
+その後同様に与えられたトークテーマに沿って議論をしていく。
+これを繰り返し、誰かが勝利となった時点でゲームを終了する。
+ここまでを１セットと呼ぶ。
+
+１セットが終了したら、人間の評価により死亡フラグの判定が正しかったかを判定し、承認されればあなたにゲームポイントが１点付与される。承認されなければ、今回のようなケースでは死亡フラグと判定されない事を学習する。
+人間がゲームを終了するまで繰り返し、最終的に多くのゲームポイントを持っているプレイヤーが勝者となる。
+</code></pre></div></div>
+<p data-sourcepos="64:1-64:150">説明だけではよくわからないと思うので、分かりやすいところだけを置いておきます。（私のお気に入りとも）</p>
+<p data-sourcepos="66:1-66:55"><iframe id="qiita-embed-content__a593dc10c9bf8be9a9d43251d8e55478" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__a593dc10c9bf8be9a9d43251d8e55478" data-content="https%3A%2F%2Fyoutu.be%2F8O233kpTxDE%3Fsi%3D4tmNGkuVTc54Wybp%26t%3D1000" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="68:1-68:42">こういうことをやってほしい。</p>
+<h3 data-sourcepos="70:1-70:49">
+<span id="結論からいうとうまくいかない" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96%E3%81%8B%E3%82%89%E3%81%84%E3%81%86%E3%81%A8%E3%81%86%E3%81%BE%E3%81%8F%E3%81%84%E3%81%8B%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>結論からいうと、うまくいかない</h3>
+<p data-sourcepos="71:1-73:234">反省点を書くと、そもそも死亡フラグTRPGがマイナーすぎたのかも<br>
+将棋や囲碁ではお互いに最善手を指し（打ち）続けた場合、先手必勝の手筋が割と研究され尽くしているので、ある程度ランダムの要素を入れて麻雀にする。<br>
+プレイヤー４人とゲームマスター１人を立て、ゲームマスターは各プレイヤーの持ち点や河や山、曲目などプレイヤーが操作する以外の全てを管理し、ゲームを進行させる。</p>
+<p data-sourcepos="75:1-77:429">このようにした上で、たとえば特定のプレイヤーは安手早上がりを狙ったり、大きな手作りを好んだりと特色を与える方法がよさそう<br>
+今日はもう心が折れたのでやらないが、こういったシミュレーションをさせるとAutogenの面白さに気付きやすいかもしれない、という提案だけ残しておきます。<br>
+ただし、ゲームの終了条件などに人間が介在する余地を残しておかないとどのタイミングで評価すればいいか、我々も分からないため「麻雀のルールやアガリ、待ち読みも符計算は知っているけどこの卓のレギュレーションは知らない一見の客か友人」を想定してメッセージを細かくルール説明的に書くのがよさそう。</p>
