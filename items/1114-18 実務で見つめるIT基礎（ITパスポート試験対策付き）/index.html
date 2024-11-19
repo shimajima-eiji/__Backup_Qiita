@@ -48,3 +48,95 @@ ER図とは、業務者ー開発者間で円滑なコミュニケーションを
 <p data-sourcepos="42:1-42:66"><iframe id="qiita-embed-content__d0dbf50af7efb117fcce59814650e20d" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__d0dbf50af7efb117fcce59814650e20d" data-content="https%3A%2F%2Fwww3.jitec.ipa.go.jp%2FJitesCbt%2Fhtml%2Fopeninfo%2Fquestions.html" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
 </iframe>
 </p>
+<hr data-sourcepos="44:1-45:0">
+<h2 data-sourcepos="46:1-46:61">
+<span id="1118-問題文を読んでフローチャートに直す" class="fragment"></span><a href="#1118-%E5%95%8F%E9%A1%8C%E6%96%87%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E3%81%AB%E7%9B%B4%E3%81%99"><i class="fa fa-link"></i></a>11/18: 問題文を読んでフローチャートに直す</h2>
+<div class="code-frame" data-lang="text" data-sourcepos="47:1-66:3">
+<div class="code-lang"><span class="bold">プログラム（擬似言語）にコメント追加.txt</span></div>
+<div class="highlight"><pre><code>関数名 checkdigit（整数型の配列: originalDigit）{
+    整数型 i, j, k
+    j = 0
+    
+    // ここから手順１
+    for(iを1からoriginalDigitの要素数まで１ずつ増やす）
+      j = j + originalDigit[i]
+    endfor
+    
+    // ここから手順２
+    while(jが9より大きい）
+      k = j /10の商
+      [ a ] 
+    endwhile
+
+    // 手順3
+    return j
+}
+</code></pre></div>
+</div>
+<iframe id="qiita-embed-content__794e77a4aca7169f8f0fb6d0c37b65e4" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__794e77a4aca7169f8f0fb6d0c37b65e4" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"flowchart TD\n A([START]) --&gt; B[j = 0]\n B --&gt; C[i = 1]\n C --&gt; D{i &lt;= originalDigitの&lt;br&gt;要素1-9の要素の合計}\n D --&gt;|YES| E[\"j = j + originalDigit[i]\"]\n E --&gt; F[i = i + 1]\n F --&gt; D\n D --&gt;|NO| G{j &gt; 9?}\n G --&gt;|YES| H[k = j / 10]\n H --&gt; I[\"[ a ]\"]\n I --&gt; G\n G --&gt;|NO| J[return j as checkdigit]\n J --&gt; K([END])","key":"d1693ef9ede5694b49ae371aafd82402"}'>
+</iframe>
+
+<h3 data-sourcepos="85:1-85:21">
+<span id="-a-の選択肢" class="fragment"></span><a href="#-a-%E3%81%AE%E9%81%B8%E6%8A%9E%E8%82%A2"><i class="fa fa-link"></i></a>[ a ]の選択肢</h3>
+<p data-sourcepos="86:1-86:68">まず、jとkが何かを特定しないと選択肢を読めない</p>
+<ul data-sourcepos="88:1-92:0">
+<li data-sourcepos="88:1-90:66">jが（変数宣言時を除き）初めて出てくるタイミングは手順1で、整数型であることがわかっている
+<ul data-sourcepos="89:3-90:66">
+<li data-sourcepos="89:3-89:87">jは手順1でoriginDigitの要素の十進9桁の整数の合計を持っている</li>
+<li data-sourcepos="90:3-90:66">jは手順2でも同じ役割を担っていると思われる</li>
+</ul>
+</li>
+<li data-sourcepos="91:1-92:0">kが（変数宣言時を除き）初めて出てくるタイミングは手順2で、整数型であることがわかっている</li>
+</ul>
+<p data-sourcepos="93:1-93:43">kを使わない言葉に変換してみる</p>
+<div class="code-frame" data-lang="math" data-sourcepos="95:1-101:3"><div class="highlight"><pre><code>\begin{array}{rcl}
+\ k &amp;=&amp; k = j /10の商 \\
+&amp;&amp; \text{jを10で割った答え} \\
+&amp;&amp; \text{jの10の位} \\
+\end{array}
+</code></pre></div></div>
+<p data-sourcepos="103:1-103:28">以下、kを読み替える</p>
+<ul data-sourcepos="105:1-120:0">
+<li data-sourcepos="105:1-107:55">j = j - 10 * k
+<ul data-sourcepos="106:3-107:55">
+<li data-sourcepos="106:3-107:55">jは(jの10の位)に10を掛けてから引いたもの
+<ul data-sourcepos="107:5-107:55">
+<li data-sourcepos="107:5-107:55">つまり、jは１の位だけが残っている</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="108:1-110:58">j = k + (j - 10 * k)
+<ul data-sourcepos="109:3-110:58">
+<li data-sourcepos="109:3-110:58">jは↑に(jの10の位)を足したもの
+<ul data-sourcepos="110:5-110:58">
+<li data-sourcepos="110:5-110:58">つまり、jは1の位と10の位を足した結果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="111:1-114:58">j = k + (j - 10) * k
+<ul data-sourcepos="112:3-114:58">
+<li data-sourcepos="112:3-114:58">jはjから10を引いたものに(jの10の位)を掛けて、<br>
+その上で(jの10の位)を足したもの
+<ul data-sourcepos="114:5-114:58">
+<li data-sourcepos="114:5-114:58">つまり、jは何がやりたいのだろうか？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="115:1-120:0">j=k+j
+<ul data-sourcepos="116:3-120:0">
+<li data-sourcepos="116:3-120:0">jは(jの10の位)を足したもの
+<ul data-sourcepos="117:5-120:0">
+<li data-sourcepos="117:5-120:0">つまり、jは（おそらく1の位だと思っていて）10の位と足し合わせたもの<br>
+これを実現したい場合、<code>j = j - k * 10</code>の結果を格納しなければならない</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="121:1-122:54">いったん、自分がかいた数式を日本語に直してみる<br>
+そして、計算式の目的を明確にしてみる</p>
+<p data-sourcepos="124:1-125:114">というのが理想だが、ここではそこまで難しく考えなくてよい。<br>
+なぜなら「フローチャートを読んで足りないものが何か」を探せば良いからである。</p>
