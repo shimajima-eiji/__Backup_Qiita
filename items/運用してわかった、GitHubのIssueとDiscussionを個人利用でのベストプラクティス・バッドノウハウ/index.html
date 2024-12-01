@@ -1,0 +1,217 @@
+<h2 data-sourcepos="1:1-1:33">
+<span id="本稿における留意事項" class="fragment"></span><a href="#%E6%9C%AC%E7%A8%BF%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E7%95%99%E6%84%8F%E4%BA%8B%E9%A0%85"><i class="fa fa-link"></i></a>本稿における留意事項</h2>
+<div data-sourcepos="2:1-5:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<ul data-sourcepos="3:1-4:83">
+<li data-sourcepos="3:1-3:157">個人の主観かつ個人利用での「IssuesとDiscussionsの使い分け」の話であり、目的によってベストプラクティスは異なる</li>
+<li data-sourcepos="4:1-4:83">開発目的ではないが、部分的に開発プロジェクトでも通じる</li>
+</ul>
+</div>
+</div>
+<div data-sourcepos="7:1-10:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<ul data-sourcepos="8:1-9:65">
+<li data-sourcepos="8:1-8:89">GitHubで完結したいので、GitHub以外のツールやサービスは使わない</li>
+<li data-sourcepos="9:1-9:65">個人運用以外なら本稿を参考にしてはならない</li>
+</ul>
+</div>
+</div>
+<h2 data-sourcepos="12:1-12:21">
+<span id="目的ゴール" class="fragment"></span><a href="#%E7%9B%AE%E7%9A%84%E3%82%B4%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>目的・ゴール</h2>
+<p data-sourcepos="13:1-13:54">GitHubのサービスにちょっと詳しくなろう</p>
+<h2 data-sourcepos="15:1-15:24">
+<span id="モチベーション" class="fragment"></span><a href="#%E3%83%A2%E3%83%81%E3%83%99%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"><i class="fa fa-link"></i></a>モチベーション</h2>
+<ul data-sourcepos="16:1-17:0">
+<li data-sourcepos="16:1-17:0">GitHubのコントリビューションを高めてコントリビューションをスコア化している外部サービス連携</li>
+</ul>
+<h2 data-sourcepos="18:1-18:9">
+<span id="比較" class="fragment"></span><a href="#%E6%AF%94%E8%BC%83"><i class="fa fa-link"></i></a>比較</h2>
+<p data-sourcepos="19:1-21:140">運用面やGitHubの仕様から分析する。<br>
+参考にProjectsやWikiも入れてある（Wikiについてはプライベートリポジトリは有料）<br>
+なお、PRは目的が異なるので項目としては入れていないが、本稿においてはIssuesと同じカテゴリとする。</p>
+<div data-sourcepos="23:1-25:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="24:1-24:132">用途が限定的な中での評価であるため、うまく活用すればもっと高い評価になる可能性はありうる</p>
+</div>
+</div>
+<table data-sourcepos="27:1-38:16">
+<thead>
+<tr data-sourcepos="27:1-27:126">
+<th data-sourcepos="27:2-27:42">比較項目（ユースケース例）</th>
+<th data-sourcepos="27:44-27:51">Issues</th>
+<th data-sourcepos="27:53-27:65">Discussions</th>
+<th data-sourcepos="27:67-27:76">Projects</th>
+<th data-sourcepos="27:78-27:83">Wiki</th>
+<th data-sourcepos="27:85-27:125">評価・備考・補足・コメント</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="29:1-29:407">
+<td data-sourcepos="29:2-29:39">脳内ブレインストーミング</td>
+<td data-sourcepos="29:41-29:45">△</td>
+<td data-sourcepos="29:47-29:51">◎</td>
+<td data-sourcepos="29:53-29:56">×</td>
+<td data-sourcepos="29:58-29:62">△</td>
+<td data-sourcepos="29:64-29:406">１つのテーマに対して様々な議題があり、意見交換をするというシチュエーションに対応できるのがDiscussionsのみ。Issueはツリー形式ではないので報告のみが良さそう。Wikiは決まったことを書く場所として運用すべきだろう。そうでなければWIPを忘れずに</td>
+</tr>
+<tr data-sourcepos="30:1-30:369">
+<td data-sourcepos="30:2-30:9">設計</td>
+<td data-sourcepos="30:11-30:18">⚪︎</td>
+<td data-sourcepos="30:20-30:27">⚪︎</td>
+<td data-sourcepos="30:29-30:32">×</td>
+<td data-sourcepos="30:34-30:38">△</td>
+<td data-sourcepos="30:40-30:368">利用シーンが難しい。かなり粒度の高いタスクIssueなら議論が発散することはないが、あれもこれも詰め込んでしまった場合が悲惨<sup><a href="#fn-%E7%B2%92%E5%BA%A6%E3%81%AE%E9%AB%98%E3%81%84Issue" id="fnref-%E7%B2%92%E5%BA%A6%E3%81%AE%E9%AB%98%E3%81%84Issue">1</a></sup><br>IssueにはDiscussionにはない便利な仕組みがあるので日常的に発生しがち<sup><a href="#fn-Issue%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE%E4%BE%BF%E5%88%A9%E3%81%AACI" id="fnref-Issue%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE%E4%BE%BF%E5%88%A9%E3%81%AACI">2</a></sup>
+</td>
+</tr>
+<tr data-sourcepos="31:1-31:528">
+<td data-sourcepos="31:2-31:9">実装</td>
+<td data-sourcepos="31:11-31:26">△<sup><a href="#fn-PR%E5%AE%9F%E8%A3%85" id="fnref-PR%E5%AE%9F%E8%A3%85">3</a></sup>
+</td>
+<td data-sourcepos="31:28-31:35">⚪︎</td>
+<td data-sourcepos="31:37-31:41">△</td>
+<td data-sourcepos="31:43-31:45">-</td>
+<td data-sourcepos="31:47-31:527">タスクIssueの粒度を高めても、必ず１つ以下の議題しかうまれないということはないため、Issueを使って実装を管理する方法は非推奨とした。Issueで議論したい場合、早々にDiscussionsを作ってリンクを貼り付けた方がいいかもしれない。Issue化するほどではない（管理の必要がない）タスクはIssueとは別にProjectsだけで起票を完結できるので案外悪くないとした</td>
+</tr>
+<tr data-sourcepos="32:1-32:429">
+<td data-sourcepos="32:2-32:12">一覧性</td>
+<td data-sourcepos="32:14-32:21">⚪︎</td>
+<td data-sourcepos="32:23-32:27">△</td>
+<td data-sourcepos="32:29-32:33">◎</td>
+<td data-sourcepos="32:35-32:42">⚪︎</td>
+<td data-sourcepos="32:44-32:428">Issueが25件以下になるようにすればある程度解決できるが、大規模になるとProjectを推奨。複数の目標やプロジェクトを１つのリポジトリで扱う運用は微妙な気もするが、１つのプロジェクトを複数のリポジトリで横断することはよくある。こういった時はタイムラインや看板が重宝する</td>
+</tr>
+<tr data-sourcepos="33:1-33:591">
+<td data-sourcepos="33:2-33:27">スケジューリング</td>
+<td data-sourcepos="33:29-33:32">×</td>
+<td data-sourcepos="33:34-33:36">-</td>
+<td data-sourcepos="33:38-33:42">△</td>
+<td data-sourcepos="33:44-33:46">-</td>
+<td data-sourcepos="33:48-33:590">GitHubはスケジュール管理をしようとするとUXの観点からは微妙すぎる。まずIssueでマイルストーンを作る場合、マイルストーン自体の管理コストが生じる。Projectsを活用するならマイルストーンは必須だが、（運用はともかく）マイルストーンを起きまくると煩雑化する。Issueテンプレートを使って納期など一覧したい情報をIssueタイトルに入れる運用もあったが、タイトルが圧迫されて視認性が悪くなる</td>
+</tr>
+<tr data-sourcepos="34:1-34:558">
+<td data-sourcepos="34:2-34:33">検索（ナレッジ管理）</td>
+<td data-sourcepos="34:35-34:39">△</td>
+<td data-sourcepos="34:41-34:44">×</td>
+<td data-sourcepos="34:46-34:50">△</td>
+<td data-sourcepos="34:52-34:56">△</td>
+<td data-sourcepos="34:58-34:557">ページ内検索でタイトルを探すのが一番である、という前提が付きまとう。そのためGitHubはWikiであったとしてもナレッジベースとして採用すべきではないし、運用もすべきではない。できなくはない程度。ただしPRに開発の経緯だけでなく運用の仕方（テストだと特に）を書いているケースが非常に多いので外部ツールを活用してでも吸い上げる仕組みは作った方がいい</td>
+</tr>
+<tr data-sourcepos="35:1-35:472">
+<td data-sourcepos="35:2-35:30">検索（保守・改修）</td>
+<td data-sourcepos="35:32-35:39">⚪︎</td>
+<td data-sourcepos="35:41-35:45">△</td>
+<td data-sourcepos="35:47-35:50">×</td>
+<td data-sourcepos="35:52-35:59">⚪︎</td>
+<td data-sourcepos="35:61-35:471">いったん検索性は考慮対象外にするが、その上で「どこでやってもメリット・デメリットがある」ため、目的に応じて使い分けるべし。共通する課題として「改修の場合、いずれもリリースバージョンは言及の必要がある」ため、起票時にはPRのIDを含めると良い。<code>- #PRのID</code>とすると見やすいのでおすすめ</td>
+</tr>
+<tr data-sourcepos="36:1-36:702">
+<td data-sourcepos="36:2-36:39">GitHubコントリビューション</td>
+<td data-sourcepos="36:41-36:48">⭐️</td>
+<td data-sourcepos="36:50-36:52">-</td>
+<td data-sourcepos="36:54-36:56">-</td>
+<td data-sourcepos="36:58-36:61">×</td>
+<td data-sourcepos="36:63-36:701">なぜGitHubでやっているか？というと「就活・転職においてGitHubのコントリビューションを評価される傾向があるため」だ。すべての行動はコントリビューションに反映される必要があるのだが、Issue以外対応していないので、もしDiscussionコメントやProjectsを使わないでIssueだけで管理したい場合は、そもそもDiscussionsリポジトリやProjectsリポジトリを作ってしまえば良い。なお、Wikiはよく見れば実態は.gitなので、CIを使ってコントリビューション化できる（ただし要force push）</td>
+</tr>
+<tr data-sourcepos="37:1-37:16">
+<td data-sourcepos="37:2-37:3"></td>
+<td data-sourcepos="37:5-37:6"></td>
+<td data-sourcepos="37:8-37:9"></td>
+<td data-sourcepos="37:11-37:12"></td>
+<td data-sourcepos="37:14-37:15"></td>
+<td data-sourcepos="37:0-37:0"></td>
+</tr>
+<tr data-sourcepos="38:1-38:16">
+<td data-sourcepos="38:2-38:3"></td>
+<td data-sourcepos="38:5-38:6"></td>
+<td data-sourcepos="38:8-38:9"></td>
+<td data-sourcepos="38:11-38:12"></td>
+<td data-sourcepos="38:14-38:15"></td>
+<td data-sourcepos="38:0-38:0"></td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="44:1-44:66">その他、気付いたら追記しているかもしれない。</p>
+<h4 data-sourcepos="46:1-46:11">
+<span id="凡例" class="fragment"></span><a href="#%E5%87%A1%E4%BE%8B"><i class="fa fa-link"></i></a>凡例</h4>
+<table data-sourcepos="47:1-53:50">
+<thead>
+<tr data-sourcepos="47:1-47:19">
+<th data-sourcepos="47:2-47:9">記号</th>
+<th data-sourcepos="47:11-47:18">解説</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="49:1-49:55">
+<td data-sourcepos="49:2-49:6">◎</td>
+<td data-sourcepos="49:8-49:54">他のツールと比較しても良さそう</td>
+</tr>
+<tr data-sourcepos="50:1-50:58">
+<td data-sourcepos="50:2-50:9">⚪︎</td>
+<td data-sourcepos="50:11-50:57">運用や仕様に気をつければ使える</td>
+</tr>
+<tr data-sourcepos="51:1-51:55">
+<td data-sourcepos="51:2-51:6">△</td>
+<td data-sourcepos="51:8-51:54">頑張ればできるがおすすめしない</td>
+</tr>
+<tr data-sourcepos="52:1-52:51">
+<td data-sourcepos="52:2-52:5">×</td>
+<td data-sourcepos="52:7-52:50">△というのもつらいものばかり</td>
+</tr>
+<tr data-sourcepos="53:1-53:50">
+<td data-sourcepos="53:2-53:4">-</td>
+<td data-sourcepos="53:6-53:49">その使い方は想定されていない</td>
+</tr>
+</tbody>
+</table>
+<h2 data-sourcepos="55:1-55:12">
+<span id="一部例" class="fragment"></span><a href="#%E4%B8%80%E9%83%A8%E4%BE%8B"><i class="fa fa-link"></i></a>一部例</h2>
+<p data-sourcepos="56:1-56:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Ff5cb7ca7-1b6b-a707-d477-db8258c24615.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=20168f349ef8b0cf15db6ac3e6fe767a" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Ff5cb7ca7-1b6b-a707-d477-db8258c24615.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=20168f349ef8b0cf15db6ac3e6fe767a" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Ff5cb7ca7-1b6b-a707-d477-db8258c24615.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=476831d0695d95b8ababf2463ce93c6e 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/f5cb7ca7-1b6b-a707-d477-db8258c24615.png"></a></p>
+<p data-sourcepos="58:1-59:134">ディスカッションをセッション・カテゴリーにスレッドを立てて運用している例。<br>
+Qiitaアドカレもかなり計画的に進めている。QiitaTシャツがほしい！というモチベーションしかない。</p>
+<p data-sourcepos="61:1-62:147">なお、2024アドカレが始まったばかりではあるが、2025年のエンジニアフェスタに向けて準備をしていることをチラ見せしておく。<br>
+（今年のエンジニアフェスタの予定がないのは、知ったのが直前過ぎて何も用意できていなかったことから）</p>
+<p data-sourcepos="64:1-64:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6a3305f1-d7c1-5848-4d3a-e80092e4d1a1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=992101d5508e3fa838d624dd20dae401" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6a3305f1-d7c1-5848-4d3a-e80092e4d1a1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=992101d5508e3fa838d624dd20dae401" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6a3305f1-d7c1-5848-4d3a-e80092e4d1a1.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=e159d177dbfd178c0cf6142e366fc199 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/6a3305f1-d7c1-5848-4d3a-e80092e4d1a1.png"></a></p>
+<p data-sourcepos="66:1-68:181">日報をIssueで書く形式にした。<br>
+日々の業務もあるが、Qiitaアドカレの投稿管理も必須課題であるため、テンプレートを用意しておく<br>
+<code>- [ ] </code>のように書くとチェック項目になるので、タスク(Fix)リストを書きやすいようにあらかじめテンプレート内にも埋め込んである。</p>
+<h2 data-sourcepos="70:1-70:9">
+<span id="所感" class="fragment"></span><a href="#%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>所感</h2>
+<p data-sourcepos="71:1-72:78">GitHubも様々なツールが出てきて使いやすくはなったが、運用ありきな側面を強く感じるので個人でサクッと使うにしても、それなりの規模になったら外部ツールを検討した方が良い。<br>
+その上でGitHubにこだわりたい（特にエンジニアであれば）</p>
+<p data-sourcepos="74:1-76:102">ただし、コントリビューションに囚われすぎると適正な評価を得られなくなるため、やりすぎはほどほどに。<br>
+個人的には1コントリビューションを毎日つけて、とりあえず白抜きを防ぎたいという気持ちはわかるし、そういった仕組みを使っているということ自体がCIスキルが０ではないことの証明になるので他アカウントとの差別化になるという意味でも悪くはないと思っている。<br>
+やること自体は悪くないのだが、やりすぎるのは良くないと言及しておく。</p>
+<h3 data-sourcepos="78:1-78:45">
+<span id="本日のつぶやきポストtweet" class="fragment"></span><a href="#%E6%9C%AC%E6%97%A5%E3%81%AE%E3%81%A4%E3%81%B6%E3%82%84%E3%81%8D%E3%83%9D%E3%82%B9%E3%83%88tweet"><i class="fa fa-link"></i></a>本日のつぶやき・ポスト・Tweet</h3>
+<p data-sourcepos="79:1-80:248">アイリッシュ・ケルティックBGMとStable diffusionの解説でよく出てくるアニメ調の女の子モデルイラストの親和性高くない？<br>
+本稿の大部分は11月時点で作成したものだが、静かな環境で落ち着いて集中したい時にゲームサントラを聴かない（懐かしいものや最近のタイトルなど不問）傾向があるな、と感じた。</p>
+<h2 data-sourcepos="82:1-82:9">
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+<p data-sourcepos="83:1-83:132">控えめに言っても、GitHubのサービス <strong>「だけで」</strong> プロジェクト管理をするのはおすすめしない。</p>
+<p data-sourcepos="85:1-87:408">が、気軽に見える化させるなら十分に使える。<br>
+「使いやすさ」は疑問だが「使える」かどうかでいうと十分可能だ。<br>
+私などはプロジェクト管理（特にナレッジ）の手法にクセが強い自覚があり、何とか試行錯誤を重ねてＵＸを改善できるよう気にしているのだが、昨今は「私の手法が広まればみんな慣れてきて、結果的に頑張らなくてよいのでは？」という良くない方向にシフトさせつつある。…ような気がしている。</p>
+<p data-sourcepos="89:1-89:443">今回のように、なんでもGitHubに解決させるモチベーションはあくまでコントリビューションに反映させたいので、Issue連携は強い方がいいよね！っていうぐらいでしかなかったのだが、結果的にあまり普及させる意味のないものの個人として活動アピールがしやすい手段を一つ発明した、という結果になったのではないかと思う。</p>
+<p data-sourcepos="91:1-92:147">とはいえ、本稿の目的は「GitHubのサービスにちょっと詳しくなろう」というもので、それ以上は想定していない。<br>
+本稿をきっかけにご自身でもGitHubのサービスを使い倒してみた所感が出てくればぜひ意見交換したいものだ。</p>
+<h3 data-sourcepos="94:1-94:34">
+<span id="注釈注釈の補足資料" class="fragment"></span><a href="#%E6%B3%A8%E9%87%88%E6%B3%A8%E9%87%88%E3%81%AE%E8%A3%9C%E8%B6%B3%E8%B3%87%E6%96%99"><i class="fa fa-link"></i></a>注釈＋注釈の補足資料</h3>
+<p data-sourcepos="95:1-95:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F508a3196-ca63-8917-3cf8-7afe21951940.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f6455585580885ed647b8bd81f22c2a7" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F508a3196-ca63-8917-3cf8-7afe21951940.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f6455585580885ed647b8bd81f22c2a7" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F508a3196-ca63-8917-3cf8-7afe21951940.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=23b2e8e1f7f28182b6146cab059dcf9a 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/508a3196-ca63-8917-3cf8-7afe21951940.png"></a></p>
+<p data-sourcepos="97:1-98:54">内容は作成当時のもの<br>
+最新版は直接カレンダーを参照されたい</p>
+<p data-sourcepos="100:1-100:53"><iframe id="qiita-embed-content__c9d897d27ac2c10278e787d36e5cb73a" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__c9d897d27ac2c10278e787d36e5cb73a" data-content="https%3A%2F%2Fqiita.com%2Fadvent-calendar%2F2024%2Fnomuraya_oreno" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<section class="footnotes">
+<ol>
+<li id="fn-%E7%B2%92%E5%BA%A6%E3%81%AE%E9%AB%98%E3%81%84Issue">
+<p data-sourcepos="40:26-40:354">【設計運用案】Issueにはキャプチャのように子タスクを一覧＋作成できる仕組みがあり、これが目的でIssueを作る事がある。そのため、粒度の高いIssueとそれらをまとめる（作成するためだけの粒度の低い）Issueが共存することになる。要運用対処 <a href="#fnref-%E7%B2%92%E5%BA%A6%E3%81%AE%E9%AB%98%E3%81%84Issue" class="">↩</a></p>
+</li>
+<li id="fn-Issue%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE%E4%BE%BF%E5%88%A9%E3%81%AACI">
+<p data-sourcepos="41:34-41:139">【粒度の低いIssueから粒度の高いIssueを作るのが捗る仕組み】後日記事にする。 <a href="#fnref-Issue%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE%E4%BE%BF%E5%88%A9%E3%81%AACI" class="">↩</a></p>
+</li>
+<li id="fn-PR%E5%AE%9F%E8%A3%85">
+<p data-sourcepos="42:14-42:27">PRに限り◎ <a href="#fnref-PR%E5%AE%9F%E8%A3%85" class="">↩</a></p>
+</li>
+</ol>
+</section>

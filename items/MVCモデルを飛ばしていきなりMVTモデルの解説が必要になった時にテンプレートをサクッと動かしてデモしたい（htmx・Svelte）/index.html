@@ -1,0 +1,96 @@
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:123">いわゆるやってみた系であり、どちらかを推奨するものでもないし、そのような意図もない</p>
+</div>
+</div>
+<h2 data-sourcepos="5:1-5:12">
+<span id="対象者" class="fragment"></span><a href="#%E5%AF%BE%E8%B1%A1%E8%80%85"><i class="fa fa-link"></i></a>対象者</h2>
+<ul data-sourcepos="6:1-10:0">
+<li data-sourcepos="6:1-7:91">プログラミングスクールなどを含むプログラミング独学中・レッスン中の方
+<ul data-sourcepos="7:3-7:91">
+<li data-sourcepos="7:3-7:91">エンジニアリング経験（例えば大学生の研究開発を含む）はない</li>
+</ul>
+</li>
+<li data-sourcepos="8:1-8:113">現在のスキル感として「とりあえず動く状態を作ろう」を目標値に設定している方</li>
+<li data-sourcepos="9:1-10:0">あるいは、上記についてよく分からない方</li>
+</ul>
+<h2 data-sourcepos="11:1-11:18">
+<span id="発端課題" class="fragment"></span><a href="#%E7%99%BA%E7%AB%AF%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>発端・課題</h2>
+<ul data-sourcepos="12:1-14:0">
+<li data-sourcepos="12:1-12:260">Webフレームワークの動作を解説している際に、テンプレートエンジンとサーバー（コントローラー）からの値の受け渡しについてハマった受講生の疑問を解消する方法がないか調査していた。</li>
+<li data-sourcepos="13:1-14:0">当該受講生には「困ったらとりあえずAIに聞いてみると何かしら情報が返ってくる。最初から正解は返ってこないが、AIを上司だと思って根気よく現状を伝え、解決アドバイスを引き出せるように質問を考えてみよう」と指導しているため、彼らにも達成可能な方法でかつ手取り早くテンプレートエンジンの強みを理解してもらえる教材を用意したい</li>
+</ul>
+<h2 data-sourcepos="15:1-15:25">
+<span id="なぜhtmxとsvelte" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Chtmx%E3%81%A8svelte"><i class="fa fa-link"></i></a>なぜhtmxとSvelte？</h2>
+<p data-sourcepos="16:1-17:225">大前提としてMVTモデルの解説で、特にTについての説明を行いたいものとする<br>
+リクエスト・レスポンスを使っているテイで変数処理や表記ルール・条件が従来のサーバーサイドスクリプトの書き方と違うよね、というのが伝わればゴールとする。</p>
+<ul data-sourcepos="19:1-24:0">
+<li data-sourcepos="19:1-21:49">
+<code>.html</code> １つで完結できる（擬似的なサーバーコントローラー的なスクリプトを書ける）
+<ul data-sourcepos="20:3-21:49">
+<li data-sourcepos="20:3-20:19">CDNで使える</li>
+<li data-sourcepos="21:3-21:49">変数をscriptタグの外で展開できる</li>
+</ul>
+</li>
+<li data-sourcepos="22:1-22:127">できればifやfor(forEach)も解説したいが、従来説明したい内容に沿わなくなりそうなので要件外</li>
+<li data-sourcepos="23:1-24:0">テンプレートエンジンの説明自体にあまり時間をかけたくないので、（今回の場合、htmxやsvelte自体の）コードが直感的であってほしい</li>
+</ul>
+<p data-sourcepos="25:1-26:26">コードが直感的というのはどう表現すればいいんだろう？<br>
+開発体験だからDX？</p>
+<h2 data-sourcepos="28:1-28:13">
+<span id="htmxとは" class="fragment"></span><a href="#htmx%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>htmxとは</h2>
+<ul data-sourcepos="29:1-36:0">
+<li data-sourcepos="29:1-32:0">
+<p data-sourcepos="29:3-29:8">公式</p>
+</li>
+<li data-sourcepos="33:1-36:0">
+<p data-sourcepos="33:3-33:8">GitHub</p>
+</li>
+</ul>
+<h2 data-sourcepos="37:1-37:15">
+<span id="svelteとは" class="fragment"></span><a href="#svelte%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>Svelteとは</h2>
+<ul data-sourcepos="38:1-45:0">
+<li data-sourcepos="38:1-41:0">
+<p data-sourcepos="38:3-38:8">公式</p>
+</li>
+<li data-sourcepos="42:1-45:0">
+<p data-sourcepos="42:3-42:8">GitHub</p>
+</li>
+</ul>
+<h2 data-sourcepos="46:1-46:50">
+<span id="hello-worldのコード実行環境で比較" class="fragment"></span><a href="#hello-world%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%89%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%81%A7%E6%AF%94%E8%BC%83"><i class="fa fa-link"></i></a>hello worldのコード・実行環境で比較</h2>
+<ul data-sourcepos="47:1-50:0">
+<li data-sourcepos="47:1-47:29">実行環境はGitHub Pages</li>
+<li data-sourcepos="48:1-50:0">CDNを使用しているため、実践開発の環境とは異なる
+<ul data-sourcepos="49:3-50:0">
+<li data-sourcepos="49:3-50:0">なるべく公式の書き方に準拠しているが、できる限りAIに丸投げして解決できればいいな、で書いている</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="51:1-51:8">
+<span id="htmx" class="fragment"></span><a href="#htmx"><i class="fa fa-link"></i></a>htmx</h3>
+<p data-sourcepos="52:1-52:52">1ファイルで完結できる、というかした</p>
+<div class="code-frame" data-lang="text" data-sourcepos="54:1-56:3"><div class="highlight"><pre><code>
+</code></pre></div></div>
+<p data-sourcepos="58:1-59:127">分業したい場合は、ファイル（画面）ごとに書くか、ビルドを前提にコードを書き直すべきなのだろう。<br>
+「変数が分かる程度のデザイナーならページを作りやすそう」という意味ではSCSS感があるな。</p>
+<h3 data-sourcepos="63:1-63:10">
+<span id="svelte" class="fragment"></span><a href="#svelte"><i class="fa fa-link"></i></a>svelte</h3>
+<div data-sourcepos="64:1-67:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<p data-sourcepos="65:1-66:145">結論としてCDNで動かせておらず、svelte単体を評価できない<br>
+本稿においてはコピペだけでhelloworldができない（環境構築を含む）＝学習コストが高いという考え方による</p>
+</div>
+</div>
+<h4 data-sourcepos="69:1-69:38">
+<span id="ちょっとだけ原因追及" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%A0%E3%81%91%E5%8E%9F%E5%9B%A0%E8%BF%BD%E5%8F%8A"><i class="fa fa-link"></i></a>ちょっとだけ・原因追及</h4>
+<p data-sourcepos="70:1-71:149">CDNで検証を試みたがうまく動かないらしい？<br>
+エラーメッセージを読むと<code>new Svelte</code>でnot definedと怒られるので、CDNの読み込み同期の問題か宣言の問題だろう。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="73:1-75:3"><div class="highlight"><pre><code>
+</code></pre></div></div>
+<h2 data-sourcepos="79:1-79:24">
+<span id="早すぎるが結論" class="fragment"></span><a href="#%E6%97%A9%E3%81%99%E3%81%8E%E3%82%8B%E3%81%8C%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>早すぎるが結論</h2>
+<p data-sourcepos="80:1-82:228">CDNで動く・動かないというだけでhtmxを使う事はあってもsvelteを使う事はないだろうな、という結論をつけてしまう。<br>
+あくまでも執筆時点というのと、そもそもSvelteはCDNの使用を想定していない（ビルドを前提に作っている）のでhtmxの比較対象としては違うのだが、初学者にとってはそんな事は考慮すらされない。<br>
+また、ペルソナへの説明という意味ではこのレベル以上に深掘りすると「ただ難しい話をされただけ」という印象を与えかねないため、まだ足りない＝やりすぎと置く。</p>
+<p data-sourcepos="84:1-84:238">シンプルにコードコピペ＋ホストサーバーにファイルを置いただけで動いたのがhtmxなので、テンプレートエンジンの強みを解説する時にはこちらを使う方が安全度が高そうだ。</p>

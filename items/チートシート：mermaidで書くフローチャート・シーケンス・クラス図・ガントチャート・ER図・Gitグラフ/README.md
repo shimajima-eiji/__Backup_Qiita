@@ -404,7 +404,7 @@ requirementDiagram
 
 ### 発端
 せっかくなのでアドベントカレンダー向けにやってみよう！という計画でしたので、タグも残しました。
-実際に書いてみた記事が以下（諸事情のため検索避け目的で限定公開にしていますが、SNSなどでの共有はOKです）
+実際に書いてみた記事が以下（諸事情のため検索避け目的で限定公開にしていますが、SNSなどでの共有はOKです。）
 
 https://qiita.com/nomurasan/private/4a40feb042bbb71cb650
 
@@ -416,7 +416,7 @@ https://qiita.com/nomurasan/private/ec01ba58ba295a4fa80f
 
 肝心のアドベントカレンダーはこちら
 
-
+https://qiita.com/advent-calendar/2024/nomuraya_oreno
 
 ### 書き方（心構え）
 いつものコードブロックに`mermaid`とか`plantuml`を入れて、それぞれの記法に対応する形で書くだけです。

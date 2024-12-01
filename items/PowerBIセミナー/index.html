@@ -1,0 +1,115 @@
+<h2 data-sourcepos="1:1-1:39">
+<span id="本日のセミナーイベント" class="fragment"></span><a href="#%E6%9C%AC%E6%97%A5%E3%81%AE%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>本日のセミナー・イベント</h2>
+<p data-sourcepos="2:1-2:105">デモデータだとは思うが、特定できる情報を書いているので非公開としたい。</p>
+<h3 data-sourcepos="4:1-4:10">
+<span id="凡例" class="fragment"></span><a href="#%E5%87%A1%E4%BE%8B"><i class="fa fa-link"></i></a>凡例</h3>
+<p data-sourcepos="5:1-5:18">筆者注による</p>
+<div data-sourcepos="7:1-9:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="8:1-8:54">講師から口頭による補足・ポイントなど</p>
+</div>
+</div>
+<div data-sourcepos="11:1-13:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="12:1-12:27">考察・理解したこと</p>
+</div>
+</div>
+<h2 data-sourcepos="15:1-15:18">
+<span id="ハンズオン" class="fragment"></span><a href="#%E3%83%8F%E3%83%B3%E3%82%BA%E3%82%AA%E3%83%B3"><i class="fa fa-link"></i></a>ハンズオン</h2>
+<p data-sourcepos="16:1-16:78">かなり丁寧にご説明いただいていたため、手順をまとめる</p>
+<h3 data-sourcepos="18:1-18:20">
+<span id="powerbiを起動" class="fragment"></span><a href="#powerbi%E3%82%92%E8%B5%B7%E5%8B%95"><i class="fa fa-link"></i></a>PowerBIを起動</h3>
+<p data-sourcepos="19:1-19:39">事前に配布された資料を開く</p>
+<h3 data-sourcepos="21:1-21:52">
+<span id="データが読み込めているか確認する" class="fragment"></span><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8C%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%82%81%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>データが読み込めているか確認する</h3>
+<p data-sourcepos="22:1-23:57">カラム：データ・画面右側<br>
+（このタイミングで保存作業もやってる）</p>
+<div data-sourcepos="25:1-27:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="26:1-26:73">PowerBIは自動保存機能がないため、こまめに保存しよう</p>
+</div>
+</div>
+<h3 data-sourcepos="29:1-29:28">
+<span id="データを閲覧する" class="fragment"></span><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E9%96%B2%E8%A6%A7%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>データを閲覧する</h3>
+<p data-sourcepos="30:1-30:48">ボタン：テーブルビュー・画面左側</p>
+<h3 data-sourcepos="32:1-32:34">
+<span id="データ項目を追加する" class="fragment"></span><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E9%A0%85%E7%9B%AE%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>データ項目を追加する</h3>
+<p data-sourcepos="33:1-33:66">リボン：「テーブルツール」より新しい列を追加</p>
+<h3 data-sourcepos="35:1-35:37">
+<span id="作成した列に関数を入力" class="fragment"></span><a href="#%E4%BD%9C%E6%88%90%E3%81%97%E3%81%9F%E5%88%97%E3%81%AB%E9%96%A2%E6%95%B0%E3%82%92%E5%85%A5%E5%8A%9B"><i class="fa fa-link"></i></a>作成した列に関数を入力</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="36:1-38:3"><div class="highlight"><pre><code>滞在時間 = MINUTE([退店時刻] - [入店時刻])
+</code></pre></div></div>
+<div data-sourcepos="40:1-42:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="41:1-41:57">凡例： <code>列名 = MINUTE([列名] - [列名])</code>かな？</p>
+</div>
+</div>
+<div data-sourcepos="44:1-46:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="45:1-45:230">Excelだとわざわざヘッダー列を作って列名を作り、以下関数を書いていくが、上記コードのように書くと列全体に対して適用できる。列名もこのタイミングで設定している</p>
+</div>
+</div>
+<h3 data-sourcepos="48:1-48:46">
+<span id="項目を追加上の手順を再度" class="fragment"></span><a href="#%E9%A0%85%E7%9B%AE%E3%82%92%E8%BF%BD%E5%8A%A0%E4%B8%8A%E3%81%AE%E6%89%8B%E9%A0%86%E3%82%92%E5%86%8D%E5%BA%A6"><i class="fa fa-link"></i></a>項目を追加（上の手順を再度）</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="49:1-51:3"><div class="highlight"><pre><code>利益 = [販売価格] - [仕入価格]
+</code></pre></div></div>
+<h3 data-sourcepos="53:1-53:34">
+<span id="新しいメジャーを作成" class="fragment"></span><a href="#%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90"><i class="fa fa-link"></i></a>新しいメジャーを作成</h3>
+<p data-sourcepos="54:1-55:27">リボン：「ホーム」より新しいメジャーをクリック<br>
+入力欄に以下を入力</p>
+<div class="code-frame" data-lang="text" data-sourcepos="57:1-59:3"><div class="highlight"><pre><code>平均滞在時間 = AVERAGE('売上データ管理'[滞在時間])
+</code></pre></div></div>
+<p data-sourcepos="61:1-61:57">列ではなく、メジャーとして作成される。</p>
+<div data-sourcepos="63:1-65:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="64:1-64:123">変数（列名）を指定する場合、<code>'テーブル名'[列名]</code>で別テーブルを参照できる。テーブルに</p>
+</div>
+</div>
+<h3 data-sourcepos="67:1-67:40">
+<span id="更に新しいメジャーを作成" class="fragment"></span><a href="#%E6%9B%B4%E3%81%AB%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%82%B8%E3%83%A3%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90"><i class="fa fa-link"></i></a>更に新しいメジャーを作成</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="68:1-70:3"><div class="highlight"><pre><code>売上利益 = SUM('売上データ管理'[利益])
+</code></pre></div></div>
+<h3 data-sourcepos="72:1-72:13">
+<span id="同じく" class="fragment"></span><a href="#%E5%90%8C%E3%81%98%E3%81%8F"><i class="fa fa-link"></i></a>同じく</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="73:1-75:3"><div class="highlight"><pre><code>COUNTROWS(FILTER('売上管理テーブル',[分類] == 'おにぎり'
+</code></pre></div></div>
+<div data-sourcepos="77:1-79:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="78:1-78:120">レポートビューで表示させるために、分析したいデータ列とメジャーを作成したのかな？</p>
+</div>
+</div>
+<h3 data-sourcepos="81:1-81:34">
+<span id="レポートビューに戻る" class="fragment"></span><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AB%E6%88%BB%E3%82%8B"><i class="fa fa-link"></i></a>レポートビューに戻る</h3>
+<p data-sourcepos="82:1-82:48">ボタン：レポートビュー・画面左側</p>
+<h2 data-sourcepos="84:1-84:51">
+<span id="ハンズオンダッシュボードを作る" class="fragment"></span><a href="#%E3%83%8F%E3%83%B3%E3%82%BA%E3%82%AA%E3%83%B3%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5%E3%83%9C%E3%83%BC%E3%83%89%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>ハンズオン・ダッシュボードを作る</h2>
+<p data-sourcepos="85:1-85:54">Webサイトを作るのと同じ要領でできそう</p>
+<div data-sourcepos="87:1-89:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="88:1-88:144">表示項目についてはあらかじめテーブルビューの項目名から表示できるように指定しておく必要がありそう</p>
+</div>
+</div>
+<h3 data-sourcepos="91:1-91:19">
+<span id="ページ設定" class="fragment"></span><a href="#%E3%83%9A%E3%83%BC%E3%82%B8%E8%A8%AD%E5%AE%9A"><i class="fa fa-link"></i></a>ページ設定</h3>
+<p data-sourcepos="92:1-93:112">レポートページの書式設定<br>
+キャンバスの背景から背景を変えてみよう。透過性は０％に（デフォルトで100%？）</p>
+<div data-sourcepos="95:1-98:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="96:1-97:39">Webサイトをノーコードで作成できるツール（ブロックエディタ）のような要領で作っていくのがいいかも<br>
+画面をみながらGUIでいじれる</p>
+</div>
+</div>
+<h3 data-sourcepos="100:1-100:46">
+<span id="画面にチェックボックスを作る" class="fragment"></span><a href="#%E7%94%BB%E9%9D%A2%E3%81%AB%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>画面にチェックボックスを作る</h3>
+<p data-sourcepos="101:1-101:66">視覚化カラム・ビジュアルのビルド→スライサー</p>
+<p data-sourcepos="103:1-103:30">ここでは年齢のみ指定</p>
+<h3 data-sourcepos="105:1-105:34">
+<span id="画面に表示項目を作る" class="fragment"></span><a href="#%E7%94%BB%E9%9D%A2%E3%81%AB%E8%A1%A8%E7%A4%BA%E9%A0%85%E7%9B%AE%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>画面に表示項目を作る</h3>
+<p data-sourcepos="106:1-106:60">視覚化カラム・ビジュアルのビルド→カード</p>
+<p data-sourcepos="108:1-108:36">ここでは売上利益のみ指定</p>
+<h3 data-sourcepos="110:1-110:4"></h3>
+<p data-sourcepos="111:1-111:63">視覚化カラム・ビジュアルのビルド→円グラフ</p>
+<p data-sourcepos="113:1-113:33">ここでは滞在時間を指定</p>
+<h3 data-sourcepos="115:1-115:4"></h3>
+<p data-sourcepos="116:1-116:69">視覚化カラム・ビジュアルのビルド→折れ線グラフ</p>
+<p data-sourcepos="118:1-118:72">ここではおにぎり・ホットスナック・弁当列名を指定</p>
