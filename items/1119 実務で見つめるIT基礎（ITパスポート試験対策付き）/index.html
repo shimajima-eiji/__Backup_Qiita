@@ -62,27 +62,74 @@
 </div>
 <p data-sourcepos="47:1-48:114">ソフトウェアライフサイクルプロセス・システムが使われる全期間。詳細は後述<br>
 共通フレーム（利用者と開発者のズレをなくす）を用いてコミュニケーションを図る</p>
-<ul data-sourcepos="50:1-59:2">
-<li data-sourcepos="50:1-51:67">企画
-<ul data-sourcepos="51:3-51:67">
-<li data-sourcepos="51:3-51:67">重要語句：ROI。100分率で求めるため100をかける</li>
+<h3 data-sourcepos="50:1-50:94">
+<span id="ウォーターフォールモデルで想定しておくべきシステム開発フロー" class="fragment"></span><a href="#%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A7%E6%83%B3%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%B9%E3%81%8D%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E9%96%8B%E7%99%BA%E3%83%95%E3%83%AD%E3%83%BC"><i class="fa fa-link"></i></a>ウォーターフォールモデルで想定しておくべきシステム開発フロー</h3>
+<iframe id="qiita-embed-content__c1b80d0c08278df46193adb44751d70e" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__c1b80d0c08278df46193adb44751d70e" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD;\n A[要件定義] --&gt; B[基本設計]\n B --&gt; C[詳細設計]\n C --&gt; D[実装]\n D --&gt; E[コンポーネントテスト]\n D --&gt; F[結合テスト]\n D --&gt; G[システム/受入テスト]\n\n E --&gt;|テスト| C\n F --&gt;|テスト| B\n G --&gt;|テスト| A","key":"f4bd7d95f9ee40b1675d0d8b08d22e15"}'>
+</iframe>
+
+<h3 data-sourcepos="65:1-65:31">
+<span id="開発フェーズの勘所" class="fragment"></span><a href="#%E9%96%8B%E7%99%BA%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA%E3%81%AE%E5%8B%98%E6%89%80"><i class="fa fa-link"></i></a>開発フェーズの勘所</h3>
+<ul data-sourcepos="66:1-88:0">
+<li data-sourcepos="66:1-67:67">企画
+<ul data-sourcepos="67:3-67:67">
+<li data-sourcepos="67:3-67:67">重要語句：ROI。100分率で求めるため100をかける</li>
 </ul>
 </li>
-<li data-sourcepos="52:1-58:21">要件定義（ここから開発プロセス）
-<ul data-sourcepos="53:3-58:21">
-<li data-sourcepos="53:3-55:21">システム
-<ul data-sourcepos="54:5-55:21">
-<li data-sourcepos="54:5-54:18">機能要件</li>
-<li data-sourcepos="55:5-55:21">非機能要件</li>
+<li data-sourcepos="68:1-74:21">要件定義（ここから開発プロセス）
+<ul data-sourcepos="69:3-74:21">
+<li data-sourcepos="69:3-71:21">システム
+<ul data-sourcepos="70:5-71:21">
+<li data-sourcepos="70:5-70:18">機能要件</li>
+<li data-sourcepos="71:5-71:21">非機能要件</li>
 </ul>
 </li>
-<li data-sourcepos="56:3-58:21">ソフトウェア
-<ul data-sourcepos="57:5-58:21">
-<li data-sourcepos="57:5-57:36">インターフェース定義</li>
-<li data-sourcepos="58:5-58:21">データ定義</li>
+<li data-sourcepos="72:3-74:21">ソフトウェア
+<ul data-sourcepos="73:5-74:21">
+<li data-sourcepos="73:5-73:36">インターフェース定義</li>
+<li data-sourcepos="74:5-74:21">データ定義</li>
 </ul>
 </li>
 </ul>
 </li>
-<li data-sourcepos="59:1-59:2">
+<li data-sourcepos="75:1-77:28">設計
+<ul data-sourcepos="76:3-77:28">
+<li data-sourcepos="76:3-76:46">システム設計（ハードを含む）</li>
+<li data-sourcepos="77:3-77:28">ソフトウェア設計</li>
 </ul>
+</li>
+<li data-sourcepos="78:1-79:37">実装
+<ul data-sourcepos="79:3-79:37">
+<li data-sourcepos="79:3-79:37">いわゆるプログラミング</li>
+</ul>
+</li>
+<li data-sourcepos="80:1-86:19">テスト：様々な表現をされるが、主に以下のフェーズに該当する
+<ul data-sourcepos="81:3-86:19">
+<li data-sourcepos="81:3-81:10">単体</li>
+<li data-sourcepos="82:3-82:10">結合</li>
+<li data-sourcepos="83:3-83:10">統合</li>
+<li data-sourcepos="84:3-84:25">システムテスト</li>
+<li data-sourcepos="85:3-85:19">運用テスト</li>
+<li data-sourcepos="86:3-86:19">受入テスト</li>
+</ul>
+</li>
+<li data-sourcepos="87:1-88:0">運用</li>
+</ul>
+<p data-sourcepos="89:1-91:81">ソフトウェア開発手法とみるとウォーターフォールを高速に回すのがアジャイル開発。<br>
+試験対策としてみるとアジャイル開発は良さが目立つが、予算の都合で打ち切られたり、ウォーターフォールのように終了時期が決まっていないので長期化したりする。<br>
+↑これを計算する仕組みとして「人月計算」が用いられる。</p>
+<h3 data-sourcepos="93:1-93:49">
+<span id="プロジェクトマネジメントの領域" class="fragment"></span><a href="#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E9%A0%98%E5%9F%9F"><i class="fa fa-link"></i></a>プロジェクトマネジメントの領域</h3>
+<p data-sourcepos="94:1-96:66">ステークホルダーが誰なのか（どういう役割なのか）とか、規模が大きくなるとベンダーマネジメントが成否に直結しやすい<br>
+特にスケジュール管理が難しく、WBSをしっかり引いても仕様変更（または、後から仕様漏れに気付いて追加）がある。<br>
+そのたびにガントチャートを書き直す事になる。</p>
+<p data-sourcepos="98:1-99:105">そのため、臨機応変なタイムマネジメントが求められる。<br>
+試験としてはクリティカルパスの計算（アローダイアグラムを使用）が頻出。</p>
+<h3 data-sourcepos="101:1-101:58">
+<span id="サービスマネジメントとサポートデスク" class="fragment"></span><a href="#%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A1%E3%83%B3%E3%83%88%E3%81%A8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%83%87%E3%82%B9%E3%82%AF"><i class="fa fa-link"></i></a>サービスマネジメントとサポートデスク</h3>
+<p data-sourcepos="102:1-103:68">インシデント管理がメインミッション。<br>
+ITサービスの品質（運用）維持のために行われる。</p>
+<ol data-sourcepos="105:1-107:156">
+<li data-sourcepos="105:1-105:96">システムが止まると業務も止まる。業務が止まっても給与は発生する</li>
+<li data-sourcepos="106:1-106:96">まずはシステムを動かす。原因究明できれば理想だが、優先度は低い</li>
+<li data-sourcepos="107:1-107:156">システムが動いたら原因究明に乗り出す。根本解決を目指すが、合わせて再発防止や手順化を検討することもある</li>
+</ol>

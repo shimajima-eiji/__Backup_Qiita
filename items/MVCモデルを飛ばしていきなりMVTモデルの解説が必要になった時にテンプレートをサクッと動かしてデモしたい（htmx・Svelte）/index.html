@@ -70,27 +70,106 @@
 <h3 data-sourcepos="51:1-51:8">
 <span id="htmx" class="fragment"></span><a href="#htmx"><i class="fa fa-link"></i></a>htmx</h3>
 <p data-sourcepos="52:1-52:52">1ファイルで完結できる、というかした</p>
-<div class="code-frame" data-lang="text" data-sourcepos="54:1-56:3"><div class="highlight"><pre><code>
+<p data-sourcepos="54:1-54:62"><iframe id="qiita-embed-content__016c3f64c67c640e8e29096fbba740b2" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__016c3f64c67c640e8e29096fbba740b2" data-content="https%3A%2F%2Fshimajima-eiji.github.io%2FHosting2%2Fhtmx%2Fhelloworld.html" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="56:1-56:57"><iframe id="qiita-embed-content__aaf522058e3723419edc6ccc1e4dc736" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__aaf522058e3723419edc6ccc1e4dc736" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2FHosting2%2Ftree%2Fmain%2Fhtmx" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<div class="code-frame" data-lang="text" data-sourcepos="58:1-91:3"><div class="highlight"><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;htmx Example on GitHub Pages&lt;/title&gt;
+    &lt;script src="https://unpkg.com/htmx.org@1.9.10"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;htmx Example(json)&lt;/h1&gt;
+    &lt;button hx-get="demo.json" hx-target="#json_preview" hx-trigger="click"&gt;
+        jsonからメッセージを取得
+    &lt;/button&gt;
+    &lt;div id="json_preview"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        document.body.addEventListener('htmx:afterOnLoad', function(event) {
+            if (event.detail.elt.id === 'json_preview') {
+                var response = JSON.parse(event.detail.xhr.responseText);
+                event.detail.elt.innerText = response.message;
+            }
+        });
+    &lt;/script&gt;
+
+    &lt;h1&gt;htmx Example(html)&lt;/h1&gt;
+    &lt;button hx-get="demo.html" hx-target="#html_preview" hx-trigger="click"&gt;
+        外部htmlを取得
+    &lt;/button&gt;
+    &lt;div id="html_preview"&gt;&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre></div></div>
-<p data-sourcepos="58:1-59:127">分業したい場合は、ファイル（画面）ごとに書くか、ビルドを前提にコードを書き直すべきなのだろう。<br>
+<p data-sourcepos="93:1-94:127">分業したい場合は、ファイル（画面）ごとに書くか、ビルドを前提にコードを書き直すべきなのだろう。<br>
 「変数が分かる程度のデザイナーならページを作りやすそう」という意味ではSCSS感があるな。</p>
-<h3 data-sourcepos="63:1-63:10">
+<h3 data-sourcepos="98:1-98:10">
 <span id="svelte" class="fragment"></span><a href="#svelte"><i class="fa fa-link"></i></a>svelte</h3>
-<div data-sourcepos="64:1-67:3" class="note alert">
+<div data-sourcepos="99:1-102:3" class="note alert">
 <span class="fa fa-fw fa-times-circle"></span><div>
-<p data-sourcepos="65:1-66:145">結論としてCDNで動かせておらず、svelte単体を評価できない<br>
+<p data-sourcepos="100:1-101:145">結論としてCDNで動かせておらず、svelte単体を評価できない<br>
 本稿においてはコピペだけでhelloworldができない（環境構築を含む）＝学習コストが高いという考え方による</p>
 </div>
 </div>
-<h4 data-sourcepos="69:1-69:38">
+<h4 data-sourcepos="104:1-104:38">
 <span id="ちょっとだけ原因追及" class="fragment"></span><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%A0%E3%81%91%E5%8E%9F%E5%9B%A0%E8%BF%BD%E5%8F%8A"><i class="fa fa-link"></i></a>ちょっとだけ・原因追及</h4>
-<p data-sourcepos="70:1-71:149">CDNで検証を試みたがうまく動かないらしい？<br>
+<p data-sourcepos="105:1-106:149">CDNで検証を試みたがうまく動かないらしい？<br>
 エラーメッセージを読むと<code>new Svelte</code>でnot definedと怒られるので、CDNの読み込み同期の問題か宣言の問題だろう。</p>
-<div class="code-frame" data-lang="text" data-sourcepos="73:1-75:3"><div class="highlight"><pre><code>
+<p data-sourcepos="108:1-108:64"><iframe id="qiita-embed-content__27694499bf83ea98eab303472acce872" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__27694499bf83ea98eab303472acce872" data-content="https%3A%2F%2Fshimajima-eiji.github.io%2FHosting2%2Fsvelte%2Fhelloworld.html" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<div class="code-frame" data-lang="text" data-sourcepos="110:1-149:3"><div class="highlight"><pre><code>&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Svelte CDN Example on GitHub Pages&lt;/title&gt;
+    &lt;script src="https://unpkg.com/svelte@3/dist/svelte.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
+
+    &lt;script id="template" type="text/svelte"&gt;
+        &lt;main&gt;
+            &lt;h1&gt;Hello {name}!&lt;/h1&gt;
+            &lt;input bind:value={name}&gt;
+        &lt;/main&gt;
+    &lt;/script&gt;
+
+    &lt;script&gt;
+        document.addEventListener('DOMContentLoaded', () =&gt; {
+            const data = {
+                name: 'world'
+            };
+
+            const template = document.getElementById('template').innerHTML;
+
+            if (typeof Svelte !== 'undefined') {
+                new Svelte({
+                    target: document.getElementById('app'),
+                    props: data,
+                    template: template
+                });
+            } else {
+                console.error('Svelteが読み込まれていません。');
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre></div></div>
-<h2 data-sourcepos="79:1-79:24">
-<span id="早すぎるが結論" class="fragment"></span><a href="#%E6%97%A9%E3%81%99%E3%81%8E%E3%82%8B%E3%81%8C%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>早すぎるが結論</h2>
-<p data-sourcepos="80:1-82:228">CDNで動く・動かないというだけでhtmxを使う事はあってもsvelteを使う事はないだろうな、という結論をつけてしまう。<br>
+<h2 data-sourcepos="153:1-153:15">
+<span id="結果考察" class="fragment"></span><a href="#%E7%B5%90%E6%9E%9C%E8%80%83%E5%AF%9F"><i class="fa fa-link"></i></a>結果考察</h2>
+<p data-sourcepos="154:1-156:228">CDNで動く・動かないというだけでhtmxを使う事はあってもsvelteを使う事はないだろうな、という結論をつけてしまう。<br>
 あくまでも執筆時点というのと、そもそもSvelteはCDNの使用を想定していない（ビルドを前提に作っている）のでhtmxの比較対象としては違うのだが、初学者にとってはそんな事は考慮すらされない。<br>
 また、ペルソナへの説明という意味ではこのレベル以上に深掘りすると「ただ難しい話をされただけ」という印象を与えかねないため、まだ足りない＝やりすぎと置く。</p>
-<p data-sourcepos="84:1-84:238">シンプルにコードコピペ＋ホストサーバーにファイルを置いただけで動いたのがhtmxなので、テンプレートエンジンの強みを解説する時にはこちらを使う方が安全度が高そうだ。</p>
+<p data-sourcepos="158:1-158:238">シンプルにコードコピペ＋ホストサーバーにファイルを置いただけで動いたのがhtmxなので、テンプレートエンジンの強みを解説する時にはこちらを使う方が安全度が高そうだ。</p>
+<p data-sourcepos="160:1-161:138">別解、というとちょっとニュアンスが異なるが、PythonでいえばStreamlitのようなものが使えるか？<br>
+これも要検証だが、本稿から外れそうなので対象外としているが、別記事で取り扱うことも検討する。</p>

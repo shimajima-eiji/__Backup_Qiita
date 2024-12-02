@@ -51,8 +51,43 @@
 ### htmx
 1ファイルで完結できる、というかした
 
-```
+https://shimajima-eiji.github.io/Hosting2/htmx/helloworld.html
 
+https://github.com/shimajima-eiji/Hosting2/tree/main/htmx
+
+```
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htmx Example on GitHub Pages</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>htmx Example(json)</h1>
+    <button hx-get="demo.json" hx-target="#json_preview" hx-trigger="click">
+        jsonからメッセージを取得
+    </button>
+    <div id="json_preview"></div>
+
+    <script>
+        document.body.addEventListener('htmx:afterOnLoad', function(event) {
+            if (event.detail.elt.id === 'json_preview') {
+                var response = JSON.parse(event.detail.xhr.responseText);
+                event.detail.elt.innerText = response.message;
+            }
+        });
+    </script>
+
+    <h1>htmx Example(html)</h1>
+    <button hx-get="demo.html" hx-target="#html_preview" hx-trigger="click">
+        外部htmlを取得
+    </button>
+    <div id="html_preview"></div>
+
+</body>
+</html>
 ```
 
 分業したい場合は、ファイル（画面）ごとに書くか、ビルドを前提にコードを書き直すべきなのだろう。
@@ -70,15 +105,57 @@
 CDNで検証を試みたがうまく動かないらしい？
 エラーメッセージを読むと`new Svelte`でnot definedと怒られるので、CDNの読み込み同期の問題か宣言の問題だろう。
 
-```
+https://shimajima-eiji.github.io/Hosting2/svelte/helloworld.html
 
 ```
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svelte CDN Example on GitHub Pages</title>
+    <script src="https://unpkg.com/svelte@3/dist/svelte.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script id="template" type="text/svelte">
+        <main>
+            <h1>Hello {name}!</h1>
+            <input bind:value={name}>
+        </main>
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = {
+                name: 'world'
+            };
+
+            const template = document.getElementById('template').innerHTML;
+
+            if (typeof Svelte !== 'undefined') {
+                new Svelte({
+                    target: document.getElementById('app'),
+                    props: data,
+                    template: template
+                });
+            } else {
+                console.error('Svelteが読み込まれていません。');
+            }
+        });
+    </script>
+</body>
+</html>
+```
 
 
 
-## 早すぎるが結論
+## 結果考察
 CDNで動く・動かないというだけでhtmxを使う事はあってもsvelteを使う事はないだろうな、という結論をつけてしまう。
 あくまでも執筆時点というのと、そもそもSvelteはCDNの使用を想定していない（ビルドを前提に作っている）のでhtmxの比較対象としては違うのだが、初学者にとってはそんな事は考慮すらされない。
 また、ペルソナへの説明という意味ではこのレベル以上に深掘りすると「ただ難しい話をされただけ」という印象を与えかねないため、まだ足りない＝やりすぎと置く。
 
 シンプルにコードコピペ＋ホストサーバーにファイルを置いただけで動いたのがhtmxなので、テンプレートエンジンの強みを解説する時にはこちらを使う方が安全度が高そうだ。
+
+別解、というとちょっとニュアンスが異なるが、PythonでいえばStreamlitのようなものが使えるか？
+これも要検証だが、本稿から外れそうなので対象外としているが、別記事で取り扱うことも検討する。
