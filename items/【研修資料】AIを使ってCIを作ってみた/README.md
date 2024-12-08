@@ -1,8 +1,3 @@
-## 後で消してね
-https://www.perplexity.ai/search/github-issuewozuo-rushi-ha-qin-AS7jAHzdTu6N1vLjJdLG7g
-
-これの要約をする。何を考えてコメントしたとか、部分的にキャプチャ取るとか
-
 :::note warn
 実際にノンプログラマー研修で使った資料をQiitaアドカレ用に編集したものである。
 本稿はハンズオンがメインであり、座学が少ないのは資料中の解説が多いためである。解説パートは思い出しながら書いているため、漏れ抜けが多く生じている。
