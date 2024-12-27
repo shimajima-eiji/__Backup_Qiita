@@ -1,7 +1,6 @@
 ## はじめに
 - 本スライドは公開されます
   - 5分しかないのに40枚近くも作ってしまったので、後で読み返せる前提で話します
-- 
 
 ---
 
@@ -14,12 +13,21 @@
 ---
 
 ### 自己紹介
-https://qiita.com/nomurasan
-
-https://qiita.com/advent-calendar/2024/nomuraya_oreno
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/034504c9-15c0-5ba9-7e5b-878c40203f5e.png)
 
 - 今日の内容的に、私のロールとかは何でも良さそうなので略
-  - 宣伝なども特にない
+  - イコール、誰でも読者として想定している
+
+- スライドモードの表示があやういのでスクショとってURLのみ
+  - https://qiita.com/nomurasan
+  - https://qiita.com/advent-calendar/2024/nomuraya_oreno
+
+---
+
+# 25記事達成！
+https://qiita.com/advent-calendar/2024/nomuraya_oreno
+
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/20649616-8ec8-6fb2-7b25-03e010e08ccc.png)
 
 ---
 
@@ -236,6 +244,14 @@ GitHubとQiitaCLIで投稿管理
 
 ---
 
+## やりたくなかったこと
+- AIを使う
+  - とはいえ「AIを使って記事を書くと楽だよ！」という話はするつもりでいた
+  - 今思えば、シリーズ２とかでAIを使った版を出してみるのもありだな、と途中で気づいた
+    - が、記事を書きながらAIにも書かせる気力はなかった…
+
+---
+
 ## アジェンダ
 - <font color="lightgray">自己紹介とか</font>
 - <font color="lightgray">アドベントカレンダーの完走賞を目指すモチベーション</font>
@@ -328,4 +344,4 @@ GitHubとQiitaCLIで投稿管理
 ---
 
 ## 参考資料
-
+https://qiita.com/nomurasan/items/4bf9367b5927b864d7c5
