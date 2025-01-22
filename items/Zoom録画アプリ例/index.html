@@ -1,0 +1,238 @@
+<div class="code-frame" data-lang="html" data-sourcepos="2:1-82:3">
+<div class="code-lang"><span class="bold">index.html</span></div>
+<div class="highlight"><pre><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ja"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>チャット形式メモアプリ<span class="nt">&lt;/title&gt;</span>
+    <span class="c">&lt;!-- QRCodeライブラリを先に読み込む --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nt">body</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+            <span class="nl">font-family</span><span class="p">:</span> <span class="n">Arial</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#chat-container</span> <span class="p">{</span>
+            <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+            <span class="nl">overflow-y</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+            <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.message</span> <span class="p">{</span>
+            <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.message</span> <span class="nc">.actions</span> <span class="p">{</span>
+            <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.8em</span><span class="p">;</span>
+            <span class="nl">color</span><span class="p">:</span> <span class="m">#888</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#input-container</span> <span class="p">{</span>
+            <span class="nl">margin-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#message-input</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">70%</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c">/* QRコード用の新しいスタイル */</span>
+        <span class="nc">.qr-codes</span> <span class="p">{</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-wrapper</span> <span class="p">{</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+            <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="m">#f5f5f5</span><span class="p">;</span>
+            <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.url-text</span> <span class="p">{</span>
+            <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+            <span class="nl">word-break</span><span class="p">:</span> <span class="n">break-all</span><span class="p">;</span>
+            <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.9em</span><span class="p">;</span>
+            <span class="nl">color</span><span class="p">:</span> <span class="m">#0066cc</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-code</span> <span class="p">{</span>
+            <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-code</span> <span class="nt">img</span> <span class="p">{</span>
+            <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"chat-container"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"input-container"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"message-input"</span> <span class="na">placeholder=</span><span class="s">"メッセージを入力"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"send-button"</span><span class="nt">&gt;</span>送信<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- script.jsを後で読み込む --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+</div>
+<div class="code-frame" data-lang="javascript" data-sourcepos="84:1-219:3">
+<div class="code-lang"><span class="bold">script.js</span></div>
+<div class="highlight"><pre><code><span class="nb">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">DOMContentLoaded</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">chatContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">chat-container</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">messageInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">message-input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">sendButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">send-button</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="kd">let</span> <span class="nx">messages</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="c1">// メッセージを読み込む</span>
+    <span class="nx">chrome</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">local</span><span class="p">.</span><span class="nf">get</span><span class="p">([</span><span class="dl">'</span><span class="s1">messages</span><span class="dl">'</span><span class="p">],</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">messages</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">messages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">messages</span><span class="p">;</span>
+            <span class="nf">renderMessages</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// メッセージを保存する関数</span>
+    <span class="kd">function</span> <span class="nf">saveMessages</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">chrome</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">local</span><span class="p">.</span><span class="nf">set</span><span class="p">({</span> <span class="na">messages</span><span class="p">:</span> <span class="nx">messages</span> <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">メッセージが保存されました</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// メッセージを表示する関数</span>
+    <span class="kd">function</span> <span class="nf">renderMessages</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="nx">messages</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">messageElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">;</span>
+
+            <span class="c1">// メッセージテキストの div</span>
+            <span class="kd">const</span> <span class="nx">textDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">textDiv</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+
+            <span class="c1">// URL を検出して QR コードを生成</span>
+            <span class="kd">const</span> <span class="nx">urls</span> <span class="o">=</span> <span class="nf">extractUrls</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+            <span class="kd">const</span> <span class="nx">qrContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">qrContainer</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-codes</span><span class="dl">'</span><span class="p">;</span>
+
+            <span class="k">if </span><span class="p">(</span><span class="nx">urls</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">urls</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">url</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">qrWrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-wrapper</span><span class="dl">'</span><span class="p">;</span>
+
+                    <span class="c1">// URL 表示</span>
+                    <span class="kd">const</span> <span class="nx">urlText</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">urlText</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">url-text</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="nx">urlText</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">urlText</span><span class="p">);</span>
+
+                    <span class="c1">// QR コード生成用の div</span>
+                    <span class="kd">const</span> <span class="nx">qrElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">qrElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-code</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrElement</span><span class="p">);</span>
+
+                    <span class="c1">// QR コード生成</span>
+                    <span class="k">new</span> <span class="nc">QRCode</span><span class="p">(</span><span class="nx">qrElement</span><span class="p">,</span> <span class="p">{</span>
+                        <span class="na">text</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
+                        <span class="na">width</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                        <span class="na">height</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                        <span class="na">colorDark</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#000000</span><span class="dl">"</span><span class="p">,</span>
+                        <span class="na">colorLight</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#ffffff</span><span class="dl">"</span><span class="p">,</span>
+                        <span class="na">correctLevel</span><span class="p">:</span> <span class="nx">QRCode</span><span class="p">.</span><span class="nx">CorrectLevel</span><span class="p">.</span><span class="nx">H</span>
+                    <span class="p">});</span>
+
+                    <span class="nx">qrContainer</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrWrapper</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+
+            <span class="c1">// アクション部分</span>
+            <span class="kd">const</span> <span class="nx">actionsDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">actionsDiv</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">actions</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">actionsDiv</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`
+            &lt;a href="#" class="edit" data-id="</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">"&gt;編集&lt;/a&gt; | 
+            &lt;a href="#" class="delete" data-id="</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">"&gt;削除&lt;/a&gt;
+        `</span><span class="p">;</span>
+
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">textDiv</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrContainer</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">actionsDiv</span><span class="p">);</span>
+
+            <span class="nx">chatContainer</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">messageElement</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// URL 抽出用の新しい関数を追加</span>
+    <span class="kd">function</span> <span class="nf">extractUrls</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">urlRegex</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(</span><span class="sr">https</span><span class="se">?</span><span class="sr">:</span><span class="se">\/\/[^\s]</span><span class="sr">+</span><span class="se">)</span><span class="sr">/g</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="nx">urlRegex</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// メッセージを追加する関数</span>
+    <span class="kd">function</span> <span class="nf">addMessage</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">messages</span><span class="p">.</span><span class="nf">push</span><span class="p">({</span> <span class="na">text</span><span class="p">:</span> <span class="nx">text</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">getTime</span><span class="p">()</span> <span class="p">});</span>
+        <span class="nf">saveMessages</span><span class="p">();</span>
+        <span class="nf">renderMessages</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 送信ボタンのクリックイベント</span>
+    <span class="nx">sendButton</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">messageInput</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nf">trim</span><span class="p">();</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">addMessage</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+            <span class="nx">messageInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Enterキーでの送信</span>
+    <span class="nx">messageInput</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keypress</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Enter</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">sendButton</span><span class="p">.</span><span class="nf">click</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// 編集と削除の機能</span>
+    <span class="nx">chatContainer</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-id</span><span class="dl">'</span><span class="p">);</span>
+            <span class="kd">const</span> <span class="nx">newText</span> <span class="o">=</span> <span class="nf">prompt</span><span class="p">(</span><span class="dl">'</span><span class="s1">メッセージを編集</span><span class="dl">'</span><span class="p">,</span> <span class="nx">messages</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">text</span><span class="p">);</span>
+            <span class="k">if </span><span class="p">(</span><span class="nx">newText</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">messages</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">newText</span><span class="p">;</span>
+                <span class="nf">saveMessages</span><span class="p">();</span>
+                <span class="nf">renderMessages</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-id</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">if </span><span class="p">(</span><span class="nf">confirm</span><span class="p">(</span><span class="dl">'</span><span class="s1">このメッセージを削除しますか？</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">messages</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="nf">saveMessages</span><span class="p">();</span>
+                <span class="nf">renderMessages</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+</div>
+<div class="code-frame" data-lang="json" data-sourcepos="221:1-235:3">
+<div class="code-lang"><span class="bold">manifest.json</span></div>
+<div class="highlight"><pre><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"manifest_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"メモアプリ"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zoomやライブ配信用のメモアプリ"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"storage"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"content_security_policy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"browser_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"default_popup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+</div>
