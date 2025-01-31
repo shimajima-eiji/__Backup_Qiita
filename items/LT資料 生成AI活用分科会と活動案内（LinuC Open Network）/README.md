@@ -34,6 +34,8 @@
 ---
 
 ## Simple Text Refineとは
+https://marketplace.visualstudio.com/items?itemName=yasuraok.simple-text-refine
+
 - VSCodeの拡張機能
 - ChatGPT(OpenAI API)やClaude(Anthropic)を活用して回答結果をテキストファイル文中またはVSCodeタブに反映する強力な公正支援ツール
 
@@ -41,7 +43,7 @@
 元々は教材作成や試験問題の作問を支援するツールだったそう。
 私が個人的に気に入って活用範囲を汎化できないか、ユーザーフィードバックを一方的に送っている
 
-https://github.com/yasuraok/SimpleTextRefine/issues
+https://github.com/yasuraok/SimpleTextRefine
 
 ---
 

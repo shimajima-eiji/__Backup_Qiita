@@ -51,87 +51,90 @@
 <hr data-sourcepos="34:1-35:0">
 <h2 data-sourcepos="36:1-36:27">
 <span id="simple-text-refineとは" class="fragment"></span><a href="#simple-text-refine%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>Simple Text Refineとは</h2>
-<ul data-sourcepos="37:1-39:0">
-<li data-sourcepos="37:1-37:23">VSCodeの拡張機能</li>
-<li data-sourcepos="38:1-39:0">ChatGPT(OpenAI API)やClaude(Anthropic)を活用して回答結果をテキストファイル文中またはVSCodeタブに反映する強力な公正支援ツール</li>
-</ul>
-<p data-sourcepos="40:1-42:135">作者はLPI Japanの安良岡さん。<br>
-元々は教材作成や試験問題の作問を支援するツールだったそう。<br>
-私が個人的に気に入って活用範囲を汎化できないか、ユーザーフィードバックを一方的に送っている</p>
-<p data-sourcepos="44:1-44:51"><iframe id="qiita-embed-content__7420797b84c66631e995bb6e29d5c9c7" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__7420797b84c66631e995bb6e29d5c9c7" data-content="https%3A%2F%2Fgithub.com%2Fyasuraok%2FSimpleTextRefine%2Fissues" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+<p data-sourcepos="37:1-37:79"><iframe id="qiita-embed-content__79e5205d16b1be5d3b646a629476ef44" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__79e5205d16b1be5d3b646a629476ef44" data-content="https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dyasuraok.simple-text-refine" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
 </iframe>
 </p>
-<hr data-sourcepos="46:1-47:0">
-<h1 data-sourcepos="48:1-48:32">
+<ul data-sourcepos="39:1-41:0">
+<li data-sourcepos="39:1-39:23">VSCodeの拡張機能</li>
+<li data-sourcepos="40:1-41:0">ChatGPT(OpenAI API)やClaude(Anthropic)を活用して回答結果をテキストファイル文中またはVSCodeタブに反映する強力な公正支援ツール</li>
+</ul>
+<p data-sourcepos="42:1-44:135">作者はLPI Japanの安良岡さん。<br>
+元々は教材作成や試験問題の作問を支援するツールだったそう。<br>
+私が個人的に気に入って活用範囲を汎化できないか、ユーザーフィードバックを一方的に送っている</p>
+<p data-sourcepos="46:1-46:44"><iframe id="qiita-embed-content__f06303a2c7de83f9809bf3a2fc7f7d58" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__f06303a2c7de83f9809bf3a2fc7f7d58" data-content="https%3A%2F%2Fgithub.com%2Fyasuraok%2FSimpleTextRefine" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<hr data-sourcepos="48:1-49:0">
+<h1 data-sourcepos="50:1-50:32">
 <span id="デモコード解説例" class="fragment"></span><a href="#%E3%83%87%E3%83%A2%E3%82%B3%E3%83%BC%E3%83%89%E8%A7%A3%E8%AA%AC%E4%BE%8B"><i class="fa fa-link"></i></a>デモ（コード解説例）</h1>
-<hr data-sourcepos="50:1-51:0">
-<h2 data-sourcepos="52:1-52:12">
+<hr data-sourcepos="52:1-53:0">
+<h2 data-sourcepos="54:1-54:12">
 <span id="設定例" class="fragment"></span><a href="#%E8%A8%AD%E5%AE%9A%E4%BE%8B"><i class="fa fa-link"></i></a>設定例</h2>
-<div class="code-frame" data-lang="text" data-sourcepos="53:1-60:3"><div class="highlight"><pre><code>{
+<div class="code-frame" data-lang="text" data-sourcepos="55:1-62:3"><div class="highlight"><pre><code>{
     "simple-text-refine.api_key_openai": "", // OpenAI APIキー
     "simple-text-refine.api_key_anthropic": "", // Anthropic APIキー
     "simple-text-refine.model": "openai/gpt-3.5-turbo",  // 使用するモデル。後述
     "simple-text-refine.prompt_path": "",  // プロンプトファイル
 }
 </code></pre></div></div>
-<p data-sourcepos="62:1-62:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=33b48887ed37bc4e598290316d46bfd3" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=33b48887ed37bc4e598290316d46bfd3" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=ebab1685c222fc76cb38c24840cc97b9 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png" loading="lazy"></a></p>
-<hr data-sourcepos="64:1-65:0">
-<h1 data-sourcepos="66:1-66:71">
+<p data-sourcepos="64:1-64:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=33b48887ed37bc4e598290316d46bfd3" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=33b48887ed37bc4e598290316d46bfd3" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=ebab1685c222fc76cb38c24840cc97b9 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/6c9ff56b-ea1c-8e1d-6604-0cd968c20f1d.png" loading="lazy"></a></p>
+<hr data-sourcepos="66:1-67:0">
+<h1 data-sourcepos="68:1-68:71">
 <span id="勉強会ハンズオンの機会を作って流行らせたい" class="fragment"></span><a href="#%E5%8B%89%E5%BC%B7%E4%BC%9A%E3%83%8F%E3%83%B3%E3%82%BA%E3%82%AA%E3%83%B3%E3%81%AE%E6%A9%9F%E4%BC%9A%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E6%B5%81%E8%A1%8C%E3%82%89%E3%81%9B%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>勉強会・ハンズオンの機会を作って流行らせたい…</h1>
-<hr data-sourcepos="68:1-69:0">
-<h1 data-sourcepos="70:1-70:8">
+<hr data-sourcepos="70:1-71:0">
+<h1 data-sourcepos="72:1-72:8">
 <span id="課題" class="fragment"></span><a href="#%E8%AA%B2%E9%A1%8C"><i class="fa fa-link"></i></a>課題</h1>
-<hr data-sourcepos="72:1-73:0">
-<h2 data-sourcepos="74:1-74:48">
+<hr data-sourcepos="74:1-75:0">
+<h2 data-sourcepos="76:1-76:48">
 <span id="simple-text-refineに期待していること" class="fragment"></span><a href="#simple-text-refine%E3%81%AB%E6%9C%9F%E5%BE%85%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>Simple Text Refineに期待していること</h2>
-<div data-sourcepos="75:1-77:3" class="note info">
+<div data-sourcepos="77:1-79:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="76:1-76:105"><font color="white">教材スライド（PDF）をマークダウンで書けるようにしたい</font></p>
+<p data-sourcepos="78:1-78:105"><font color="white">教材スライド（PDF）をマークダウンで書けるようにしたい</font></p>
 </div>
 </div>
-<ul data-sourcepos="79:1-82:0">
-<li data-sourcepos="79:1-79:32">資料をGitで管理したい</li>
-<li data-sourcepos="80:1-82:0">plantUMLとかmarmaidとかで作図しても良い
-<ul data-sourcepos="81:3-82:0">
-<li data-sourcepos="81:3-82:0">とはいえ、自力で書くのが面倒なので、diffが見れるので超助かる</li>
+<ul data-sourcepos="81:1-84:0">
+<li data-sourcepos="81:1-81:32">資料をGitで管理したい</li>
+<li data-sourcepos="82:1-84:0">plantUMLとかmarmaidとかで作図しても良い
+<ul data-sourcepos="83:3-84:0">
+<li data-sourcepos="83:3-84:0">とはいえ、自力で書くのが面倒なので、diffが見れるので超助かる</li>
 </ul>
 </li>
 </ul>
-<hr data-sourcepos="83:1-84:0">
-<h2 data-sourcepos="85:1-85:74">
+<hr data-sourcepos="85:1-86:0">
+<h2 data-sourcepos="87:1-87:74">
 <span id="生成ai活用分科会に期待していることやりたいこと" class="fragment"></span><a href="#%E7%94%9F%E6%88%90ai%E6%B4%BB%E7%94%A8%E5%88%86%E7%A7%91%E4%BC%9A%E3%81%AB%E6%9C%9F%E5%BE%85%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%93%E3%81%A8%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>生成AI活用分科会に期待していること、やりたいこと</h2>
-<div data-sourcepos="86:1-88:3" class="note info">
+<div data-sourcepos="88:1-90:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="87:1-87:75"><font color="white">脱・パワーポイント、Googleスライド</font></p>
+<p data-sourcepos="89:1-89:75"><font color="white">脱・パワーポイント、Googleスライド</font></p>
 </div>
 </div>
-<ul data-sourcepos="90:1-93:0">
-<li data-sourcepos="90:1-90:89">マークダウンで教材スライドのレイアウト調整に対応できる状態</li>
-<li data-sourcepos="91:1-91:83">GUI自体は悪くないので、編集した内容をコードにしてほしい</li>
-<li data-sourcepos="92:1-93:0">Text2Textにこだわらず、Text2X（教材資料作成の図表、イラスト、動画教材作成など）も検討したい</li>
+<ul data-sourcepos="92:1-95:0">
+<li data-sourcepos="92:1-92:89">マークダウンで教材スライドのレイアウト調整に対応できる状態</li>
+<li data-sourcepos="93:1-93:83">GUI自体は悪くないので、編集した内容をコードにしてほしい</li>
+<li data-sourcepos="94:1-95:0">Text2Textにこだわらず、Text2X（教材資料作成の図表、イラスト、動画教材作成など）も検討したい</li>
 </ul>
-<hr data-sourcepos="94:1-95:0">
-<h2 data-sourcepos="96:1-96:33">
+<hr data-sourcepos="96:1-97:0">
+<h2 data-sourcepos="98:1-98:33">
 <span id="将来的にやりたいこと" class="fragment"></span><a href="#%E5%B0%86%E6%9D%A5%E7%9A%84%E3%81%AB%E3%82%84%E3%82%8A%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8"><i class="fa fa-link"></i></a>将来的にやりたいこと</h2>
-<div data-sourcepos="97:1-99:3" class="note info">
+<div data-sourcepos="99:1-101:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="98:1-98:83"><font color="white">メタバースAIによる教育機会の創出、提供</font></p>
+<p data-sourcepos="100:1-100:83"><font color="white">メタバースAIによる教育機会の創出、提供</font></p>
 </div>
 </div>
-<ul data-sourcepos="101:1-103:0">
-<li data-sourcepos="101:1-101:95">既にメタバースプラットフォーム上での学生向け教育サービスはある</li>
-<li data-sourcepos="102:1-103:0">エンジニア教育の観点では、仮想空間上（物理空間では見えないもの）で仮想技術を可視化すると学習能率が上がるはず、という仮説を持っている</li>
+<ul data-sourcepos="103:1-105:0">
+<li data-sourcepos="103:1-103:95">既にメタバースプラットフォーム上での学生向け教育サービスはある</li>
+<li data-sourcepos="104:1-105:0">エンジニア教育の観点では、仮想空間上（物理空間では見えないもの）で仮想技術を可視化すると学習能率が上がるはず、という仮説を持っている</li>
 </ul>
-<div data-sourcepos="104:1-106:3" class="note info">
+<div data-sourcepos="106:1-108:3" class="note info">
 <span class="fa fa-fw fa-check-circle"></span><div>
-<p data-sourcepos="105:1-105:93"><font color="white">開発入門者の「やりたい」を実現する仕組み作り</font></p>
+<p data-sourcepos="107:1-107:93"><font color="white">開発入門者の「やりたい」を実現する仕組み作り</font></p>
 </div>
 </div>
-<ul data-sourcepos="108:1-110:70">
-<li data-sourcepos="108:1-110:70">（教育機会の都合で）Webアプリやインフラエンジニア以外の育成機会が提供されていない
-<ul data-sourcepos="109:3-110:70">
-<li data-sourcepos="109:3-109:94">入門するにしても技術的に難しい、講師の確保や教材作成が難しい</li>
-<li data-sourcepos="110:3-110:70">どうしても現場経験が前提・必要になってしまう</li>
+<ul data-sourcepos="110:1-112:70">
+<li data-sourcepos="110:1-112:70">（教育機会の都合で）Webアプリやインフラエンジニア以外の育成機会が提供されていない
+<ul data-sourcepos="111:3-112:70">
+<li data-sourcepos="111:3-111:94">入門するにしても技術的に難しい、講師の確保や教材作成が難しい</li>
+<li data-sourcepos="112:3-112:70">どうしても現場経験が前提・必要になってしまう</li>
 </ul>
 </li>
 </ul>
