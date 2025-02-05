@@ -1,0 +1,427 @@
+<h2 data-sourcepos="1:1-1:12">
+<span id="最新版" class="fragment"></span><a href="#%E6%9C%80%E6%96%B0%E7%89%88"><i class="fa fa-link"></i></a>最新版</h2>
+<p data-sourcepos="2:1-2:81"><iframe id="qiita-embed-content__58cbb211ffb28b5d2bc15df7c8764283" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__58cbb211ffb28b5d2bc15df7c8764283" data-content="https%3A%2F%2Fgithub.com%2Fshimajima-eiji%2FHosting2%2Ftree%2Fmain%2Fchrome%2520extensions%2Fchatmemo" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="4:1-4:9">
+<span id="謝辞" class="fragment"></span><a href="#%E8%AC%9D%E8%BE%9E"><i class="fa fa-link"></i></a>謝辞</h2>
+<p data-sourcepos="5:1-5:264">本当はAPIを使って自動でコメントを拾ってくる、という仕組みにしたかったんですが、そもそも環境を提供しているクライアントが自分のアカウントではなかったので物理的にできませんでした…</p>
+<p data-sourcepos="7:1-7:36">今回の運用は以下の通り。</p>
+<ol data-sourcepos="9:1-12:0">
+<li data-sourcepos="9:1-9:27">チャットを投げる</li>
+<li data-sourcepos="10:1-10:66">メッセージをコピーしてアプリにも貼り付ける</li>
+<li data-sourcepos="11:1-12:0">アプリを配信する</li>
+</ol>
+<h2 data-sourcepos="13:1-13:21">
+<span id="ユースケース" class="fragment"></span><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9"><i class="fa fa-link"></i></a>ユースケース</h2>
+<ul data-sourcepos="14:1-18:0">
+<li data-sourcepos="14:1-14:98">※チャット欄に書くものは大体参考用のURLか、質問への口頭回答＋解説</li>
+<li data-sourcepos="15:1-18:0">スライドを画面共有する場合は、スライド自体に上書きしたり、ペンツールなどを使って直接書き込む
+<ul data-sourcepos="16:3-18:0">
+<li data-sourcepos="16:3-16:82">最近はグラレコ（グラフィックレコーディング）にも挑戦</li>
+<li data-sourcepos="17:3-18:0">ホワイトボード（機能または物理）も使える</li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="19:1-19:234">配信に乗らないのは※だけなので、質疑応答部分は（あとで振り返り確認しやすいように）Q&amp;Aスライドを投影する形にすればよく、やはりスライド自体に書く事で解決できる</p>
+<h3 data-sourcepos="21:1-21:34">
+<span id="なぜchrome拡張なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cchrome%E6%8B%A1%E5%BC%B5%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜChrome拡張なのか？</h3>
+<p data-sourcepos="22:1-22:66">参考URLを貼り付けている瞬間が圧倒的に多いため</p>
+<p data-sourcepos="24:1-26:231">基本的に講義時に共有したいURLなどがあればスライドにも盛り込むが、質問対応時はそうもいかない。<br>
+たとえば、質問内容に対して分かりやすい解説があるサイトをその場で案内したい場合や、実際に触ってみてほしいサイトなどを紹介する場合があり、ブラウザを使っている時にチャット欄に転送する使い方をする事が多い。<br>
+また、スライドを使っている時もやはり質問対応が発生するとブラウザに切り替えるので、想定している以上にスライドに書けば良くね？という機会は少なかったりする。</p>
+<h2 data-sourcepos="28:1-28:33">
+<span id="どうやって作ったか" class="fragment"></span><a href="#%E3%81%A9%E3%81%86%E3%82%84%E3%81%A3%E3%81%A6%E4%BD%9C%E3%81%A3%E3%81%9F%E3%81%8B"><i class="fa fa-link"></i></a>どうやって作ったか？</h2>
+<p data-sourcepos="29:1-30:91">本題。<br>
+使っていたのはcursor + Claude-3.5-sonnet（無料枠。月額50回まで）のみ。</p>
+<div data-sourcepos="32:1-35:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="33:1-34:47">以下、非エンジニア向けに開発現場のシミュレーションを想定したもの。ただし、講師またはメンターの解説を前提にした内容であるため、一人で読み進めないように。<br>
+必要であればAIに解説させること。</p>
+</div>
+</div>
+<h3 data-sourcepos="37:1-37:55">
+<span id="まずは初期バージョン後述を作る" class="fragment"></span><a href="#%E3%81%BE%E3%81%9A%E3%81%AF%E5%88%9D%E6%9C%9F%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E5%BE%8C%E8%BF%B0%E3%82%92%E4%BD%9C%E3%82%8B"><i class="fa fa-link"></i></a>まずは初期バージョン（後述）を作る</h3>
+<p data-sourcepos="38:1-38:96">結論から言うと、初期バージョン以上の品質での出力ができなかった。</p>
+<p data-sourcepos="40:1-44:499">「（自分は）ノーコード」と言うからには、プロンプト側で解決すべき問題と言えばそうだが、いきなり完成図を見据えて実装するエンジニアが何人いるだろうか、というのが気になった。<br>
+おそらく、AIも同じだろう。精度が高まったとは言っても、結局のところは設計書が不十分であれば出力も曖昧にならざるを得ない。<br>
+たとえば「出力はindex.htmlとstyles.cssとscripts.js。manifest.jsonの4ファイルのみ、外部ファイルはqrcode.jsを使う」まではなんとなく決められても、<br>
+これらを組み合わせてどういう形式にしていけばいいかは実装レベルまでの設計書（DBは使わないがクラス設計書など）を書くか、設計書を書くよりは要件だけAIに投げて叩き台のコードを書かせてブラッシュアップした方が早いと感じるのではないだろうか。<br>
+動かない設計書より動くコードの方が良い、とは私は思わない（実装速度だけ評価するなら異論はない）のだが、実際問題動かない設計書を動くコードに一瞬で書き換えられて、精度も8割ぐらいできているならエンジニアリング経験がある人なら設計書側を見直せばコードにすぐに反映されるということもあり、自力でコーディングを頑張らなくても良いようになった。</p>
+<p data-sourcepos="46:1-47:201">いきなり100%を目指さず、必須機能だけが入ったスモールな設計にできるかどうかが肝だろうか。<br>
+あまり参考にならないが、１ファイルにすると500行あたりから出力が怪しくなったのでファイル分割をする事も考えていかなければならないだろう。</p>
+<p data-sourcepos="49:1-50:48">最初から設計や要件を難しく考えるのではなく、なんとなくPoCを作らせてみるぐらいで生成させるのが良いだろう。<br>
+その結果が初期バージョンだった。</p>
+<h3 data-sourcepos="52:1-52:13">
+<span id="テスト" class="fragment"></span><a href="#%E3%83%86%E3%82%B9%E3%83%88"><i class="fa fa-link"></i></a>テスト</h3>
+<p data-sourcepos="53:1-55:494">実装をしたらテストをする。<br>
+動けばOKという感覚になりがちだが、特にデグレテストはしっかりやる。<br>
+AIの挙動はところどころステートレスなのでは？と思いたくなるぐらい記憶がぽっかりと抜け落ちる（少なくとも、人間が必要性を認識した上で書いたコードであれば間違って消すようなことはしない）挙動をするので、リファクタリングがリファクタリングではなくエンバグでしかなかったりするので、プロンプト一発で生成できないコードは全部疑うべきである。</p>
+<h4 data-sourcepos="57:1-57:65">
+<span id="ノーコード開発したコードをテストした所感" class="fragment"></span><a href="#%E3%83%8E%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89%E9%96%8B%E7%99%BA%E3%81%97%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E3%83%86%E3%82%B9%E3%83%88%E3%81%97%E3%81%9F%E6%89%80%E6%84%9F"><i class="fa fa-link"></i></a>ノーコード開発したコードをテストした所感</h4>
+<p data-sourcepos="58:1-58:82">今回はcursorを使っているので生成結果とのdiffは取れているが</p>
+<ul data-sourcepos="60:1-65:0">
+<li data-sourcepos="60:1-60:56">要件を（ある程度）正しく認識している</li>
+<li data-sourcepos="61:1-61:50">システム設計イメージがわいている</li>
+<li data-sourcepos="62:1-62:23">開発経験がある</li>
+<li data-sourcepos="63:1-63:23">コードが読める</li>
+<li data-sourcepos="64:1-65:0">プロンプトを改善できる</li>
+</ul>
+<p data-sourcepos="66:1-70:268">という下地があったので、結果的にノーコードにできたというのが感覚値としては近い。<br>
+ぶっちゃけ、未経験ならAIにコードを書かせる（＝プロンプトエンジニアリングを頑張る）よりは、自力で理解できそうなフェーズまで来たなら軽微な修正を相談しながら自分で書くつもりでやった方が結果的に早いし、力もつくだろう<br>
+AIの精度が上がってくればこの問題も解決していくのだろうが、現時点（執筆・初投稿時点）ではまだまだAIによってプログラマーの仕事がなくなる、なんて事はなさそうだ。<br>
+ましてや、システムエンジニアレベルだと「具現化されていないシステムへのイメージを具体に落とし込み、実装または運用における問題点を察知する」というスキルが必要であるため、どうしても経験値が必要になる。<br>
+AIと壁打ちしながらある程度は解消する事ができたとしても、システム運用やトラブルシューティングにおける「経験知」はなかなかデータ化されにくいからか、AIが苦手とする分野のように感じる。</p>
+<div data-sourcepos="72:1-79:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<h4 data-sourcepos="73:1-73:14">
+<span id="コラム" class="fragment"></span><a href="#%E3%82%B3%E3%83%A9%E3%83%A0"><i class="fa fa-link"></i></a>コラム</h4>
+<p data-sourcepos="74:1-78:191">人間側も同じ理由で「AIに親しんでいないユーザーがプロンプトエンジニアリングを頑張る」というのはやはり時間もかかるし、精度も落ちてしまうので双方の歩み寄りが重要だなと感じている。<br>
+たとえ、将来的にAI側の精度が高まるとしても、AIの能力をより多く引き出すという職人レベルの仕事スキルは絶対必要になるのではなかろうか。<br>
+たとえば、車の運転は免許さえ取れれば誰でもできるが、早いタイムを出すために車を速く走らせる技術であったり、また車自体の性能を上げることでタイムを削っていくのは専門家でないと難しいのと同じように。<br>
+速さを求めないとしても、例えばバスやタクシー、電車などを自動運転にするか？というと法整備や異常ケースへのシステム側での対応が難しい部分もあるなど、完全性の担保が難しいという問題もある。<br>
+システムやAIを利活用するのが人間である以上「仕事がなくなる」とは、技術的な課題以外も含めてではないだろうか、と筆者は考えている。</p>
+</div>
+</div>
+<h3 data-sourcepos="81:1-81:52">
+<span id="gitを使ってソースコードを保存する" class="fragment"></span><a href="#git%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>gitを使ってソースコードを保存する</h3>
+<p data-sourcepos="82:1-86:63">タイミング的に挟めなかったのでここで言及するが、１機能を作るごとにgitを使ってプログラムのソースコード自体のバージョンを管理する。<br>
+とはいえ、個人開発だと最初のセーブ（first commitとも）はある程度まとまった状態でアップする事が多いだろうか。<br>
+プロジェクトなどで複数人メンバーで開発する場合は、プログラムを書く前に環境構築を行い、全員の開発環境を整えるという事をやる。<br>
+この時によく使われるのがDockerというコンテナを使った仕組みであり、またDocker自体がインフラ側のソースコードの塊（IaCとも）であるため、これ自体もgitで管理できる。<br>
+後述の初期版はこの時に作ったコードである。</p>
+<h3 data-sourcepos="88:1-88:16">
+<span id="機能追加" class="fragment"></span><a href="#%E6%A9%9F%E8%83%BD%E8%BF%BD%E5%8A%A0"><i class="fa fa-link"></i></a>機能追加</h3>
+<p data-sourcepos="89:1-91:60">初期バージョンでは、メッセージを送信して編集・削除をする機能があればとりあえずよかった。<br>
+ここに、運用していった時の不満や要望をキャッチアップしていく。研修でいう「二次開発」である。<br>
+これらも当然「自分は」ノーコードである。</p>
+<ul data-sourcepos="93:1-116:0">
+<li data-sourcepos="93:1-96:142">【機能】一部ブラウザの挙動により、編集・削除ボタンの挙動（ポップアップウィンドウの表示）が使えない問題を解消する
+<ul data-sourcepos="94:3-96:142">
+<li data-sourcepos="94:3-94:88">編集ボタンを押すと、投稿欄やボタンが更新機能に置き換わる</li>
+<li data-sourcepos="95:3-95:37">編集のキャンセルが必要</li>
+<li data-sourcepos="96:3-96:142">削除ボタンをミスタッチした時に消えるとまずいので、人間が意図的に押した事をある程度担保したい</li>
+</ul>
+</li>
+<li data-sourcepos="97:1-102:184">【機能】文字が小さくて見えないので拡大してほしい
+<ul data-sourcepos="98:3-102:184">
+<li data-sourcepos="98:3-98:76">ブラウザの標準機能の拡大は拡張機能に適用されない</li>
+<li data-sourcepos="99:3-99:112">いわゆる拡大縮小アプリを使うと、なんのための拡張機能かわからない→実装へ</li>
+<li data-sourcepos="100:3-100:139">文字の拡大自体はできたが、拡張機能の初期設定だとウィンドウサイズが狭いため、見切れてしまう</li>
+<li data-sourcepos="101:3-101:61">ウィンドウ枠の上限と下限は決まっている</li>
+<li data-sourcepos="102:3-102:184">運用対処：ウィンドウ枠の限界にあわせて配信環境側をいじったり、場合によってはコメントメッセージの書き方も変える必要がある</li>
+</ul>
+</li>
+<li data-sourcepos="103:1-107:87">【機能】新しいマニフェストのバージョン（３）に対応したい
+<ul data-sourcepos="104:3-107:87">
+<li data-sourcepos="104:3-104:130">これから作り始めるのに、将来的に使えなくなる前提だとライフサイクルが短すぎて勿体無い</li>
+<li data-sourcepos="105:3-105:187">とはいえ、新バージョンのサンプルや運用対処（制約があるのは分かったが、解決するためのソリューション）は自分で考えるしかない</li>
+<li data-sourcepos="106:3-107:87">特にCDNが使えない＝バージョン管理をこちらでする必要がある？という問題を抱え続けることになる
+<ul data-sourcepos="107:5-107:87">
+<li data-sourcepos="107:5-107:87">アップデートをしないで運用するよりはなんぼかマシだろう</li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="108:1-111:46">【機能・不採用】文字の拡大縮小ボタンを画面スクロールに追従させたい
+<ul data-sourcepos="109:3-111:46">
+<li data-sourcepos="109:3-109:88">文字の拡大縮小は最初にサイズ確認する時ぐらいしか使わない</li>
+<li data-sourcepos="110:3-110:88">画面が小さいのでこれ以上置くと見たいものが見れなくなった</li>
+<li data-sourcepos="111:3-111:46">頻繁に切り替える事はないはず</li>
+</ul>
+</li>
+<li data-sourcepos="112:1-116:0">【機能・不採用】一番上または下へスクロールするボタンがほしい
+<ul data-sourcepos="113:3-116:0">
+<li data-sourcepos="113:3-113:100">あると便利。それは分かる。一日で最後の講義のまとめとして使いたい</li>
+<li data-sourcepos="114:3-114:94">画面が小さいのでこれ以上置くと見たいものが見れなくなった・２</li>
+<li data-sourcepos="115:3-116:0">今後、画面に追従するボタン系の実装はやらないと決めた</li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="117:1-118:69">箇条書きにした内容を順次実装し、１機能作るたびにやはりテストをする。<br>
+テスト工程については１次開発と同じなので省略。</p>
+<h3 data-sourcepos="120:1-120:28">
+<span id="リファクタリング" class="fragment"></span><a href="#%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0"><i class="fa fa-link"></i></a>リファクタリング</h3>
+<p data-sourcepos="121:1-124:159">ここまでの内容を全部やってみると冗長なコードが多かったり、適切にクラス化すれば可読性や保守性を高められる書き方になっている事が多い。<br>
+とはいえ、意味がわからないと思うので、初期版のコードと最新版のコードを意味が分からなくて良いのでなんとなく眺めてみよう。<br>
+念のため、クラス自体やメソッドにコードコメントを添えておいたが、おそらく解説は必須だろう。<br>
+（テキスト化しようとしたのだが、書いている途中にアレコレと気になって差し替えたため、口頭解説＋デモにする）</p>
+<div data-sourcepos="126:1-134:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<h4 data-sourcepos="127:1-127:17">
+<span id="講義メモ" class="fragment"></span><a href="#%E8%AC%9B%E7%BE%A9%E3%83%A1%E3%83%A2"><i class="fa fa-link"></i></a>講義メモ</h4>
+<p data-sourcepos="128:1-129:141">あの機能も追加しよう、この機能も作ろう…とやっていると「あれとこれは同じ事をやってるから使いまわせるよね！」＝再利用性と保守性の観点から機能をまとめておいた方が便利な事がある。<br>
+また「この仕組みを応用して似たような機能を作ろう」といった点から拡張性にも富ませる事ができる。</p>
+<p data-sourcepos="131:1-131:135">裏を返すと、複雑性や依存性が高まってしまう事があるため、この辺りの匙加減が難しいところだ。</p>
+<p data-sourcepos="133:1-133:60">という話を、うまく噛み砕いて解説したい。</p>
+</div>
+</div>
+<h4 data-sourcepos="136:1-136:46">
+<span id="aiのリファクタリングは破壊的" class="fragment"></span><a href="#ai%E3%81%AE%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AF%E7%A0%B4%E5%A3%8A%E7%9A%84"><i class="fa fa-link"></i></a>AIのリファクタリングは破壊的</h4>
+<p data-sourcepos="137:1-139:225">敢えてpythonチックな表現を使うが、人間がリファクタリングをする場合はよほど深刻な問題を抱えた機能でもない限り大掛かりな修正はしない。<br>
+機能追加時にコピペしてきたコードをまとめたりとか、変数名や関数名の見直しとかマジックナンバーを撲滅する、型宣言や出入り口の監視・判定強化など。<br>
+機能追加のカテゴリにはなるがシステム例外（ネットワークに繋がらない、サーバーから応答がない、ディスク容量がない…）をtry-catchするのが大きな仕事だろうか。</p>
+<p data-sourcepos="141:1-144:209">AIにリファクタリングをさせると、既存のコードをいじりすぎないようにしよう、なんて発想はない。<br>
+プロンプト側で「関数の引数やreturnのデータ型を変えずにクラスまたは構造体を再設計しろ」と言ってもお構いなしに何かをやらかしたコードを持ってくる。<br>
+動けば御の字で、大体の場合何かを間違えて出力してくる。<br>
+新規開発で精度80%だと嬉しいが、変更で精度80%でデグレありはただのトラップでしかない。AIではなく人間だったなら「どんな嫌がらせだ」と怒るだろう。</p>
+<p data-sourcepos="146:1-148:281">逆に言うと、初期版を作る段階と違って要件が明確に固まっており、参考にできる動く状態のコードが手元にあるので、教師データが存在するのだから、AIが生成する精度も80%程度としても間違え方も意味のわかる失敗の仕方をしてくるだろう。<br>
+少なくとも、同じリファクタリングという目的で初期版の頃のプロンプトと最新版時点でのプロンプトは書き方が変わっているはずだ。<br>
+つまり、すべての要件を満たす状態のコードを使って人間が書くプロンプト自体が変わったため、AIの生成結果も変わったという事実に注目したい。どちらも精度が80%だったとしても、その意味合いは異なる。</p>
+<p data-sourcepos="150:1-153:107">その上で、敢えて80%程度の精度を肯定的に評価する。<br>
+つまり、人間ではできないリファクタリングのアプローチをAIにやらせて、良い書き方をベースに人間側がレビューをすれば良い。<br>
+この工程だけはノーコードでできないため、本稿執筆においてはピンポイントにコードの書き方について「コードを日本語コメントに直し、日本語コメントからコードを書き起こせ」という形でプロンプトを書いてリファクタリングを実施している。<br>
+クラスやメソッドの長いコメントは、そのままAIへのプロンプトになったのだ。</p>
+<h2 data-sourcepos="155:1-155:9">
+<span id="運用" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8"><i class="fa fa-link"></i></a>運用</h2>
+<p data-sourcepos="156:1-156:30">（次の講義後に追記）</p>
+<h2 data-sourcepos="158:1-158:32">
+<span id="参考-初期バージョン" class="fragment"></span><a href="#%E5%8F%82%E8%80%83-%E5%88%9D%E6%9C%9F%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3"><i class="fa fa-link"></i></a>参考: 初期バージョン</h2>
+<p data-sourcepos="159:1-159:45">最新版はGitHubリポジトリを参照。</p>
+<details>
+<summary>コード: index.html</summary>
+<div class="code-frame" data-lang="html" data-sourcepos="164:1-244:3">
+<div class="code-lang"><span class="bold">index.html</span></div>
+<div class="highlight"><pre><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ja"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>チャット形式メモアプリ<span class="nt">&lt;/title&gt;</span>
+    <span class="c">&lt;!-- QRCodeライブラリを先に読み込む --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+        <span class="nt">body</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+            <span class="nl">font-family</span><span class="p">:</span> <span class="n">Arial</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#chat-container</span> <span class="p">{</span>
+            <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+            <span class="nl">overflow-y</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+            <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.message</span> <span class="p">{</span>
+            <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.message</span> <span class="nc">.actions</span> <span class="p">{</span>
+            <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.8em</span><span class="p">;</span>
+            <span class="nl">color</span><span class="p">:</span> <span class="m">#888</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#input-container</span> <span class="p">{</span>
+            <span class="nl">margin-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nf">#message-input</span> <span class="p">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">70%</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c">/* QRコード用の新しいスタイル */</span>
+        <span class="nc">.qr-codes</span> <span class="p">{</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-wrapper</span> <span class="p">{</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+            <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="m">#f5f5f5</span><span class="p">;</span>
+            <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.url-text</span> <span class="p">{</span>
+            <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+            <span class="nl">word-break</span><span class="p">:</span> <span class="n">break-all</span><span class="p">;</span>
+            <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.9em</span><span class="p">;</span>
+            <span class="nl">color</span><span class="p">:</span> <span class="m">#0066cc</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-code</span> <span class="p">{</span>
+            <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nc">.qr-code</span> <span class="nt">img</span> <span class="p">{</span>
+            <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+            <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"chat-container"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"input-container"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"message-input"</span> <span class="na">placeholder=</span><span class="s">"メッセージを入力"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"send-button"</span><span class="nt">&gt;</span>送信<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- script.jsを後で読み込む --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+</div>
+</details>
+<details>
+<summary>コード: script.js</summary>
+<div class="code-frame" data-lang="javascript" data-sourcepos="251:1-386:3">
+<div class="code-lang"><span class="bold">script.js</span></div>
+<div class="highlight"><pre><code><span class="nb">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">DOMContentLoaded</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">chatContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">chat-container</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">messageInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">message-input</span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">sendButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">send-button</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="kd">let</span> <span class="nx">messages</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="c1">// メッセージを読み込む</span>
+    <span class="nx">chrome</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">local</span><span class="p">.</span><span class="nf">get</span><span class="p">([</span><span class="dl">'</span><span class="s1">messages</span><span class="dl">'</span><span class="p">],</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">messages</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">messages</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">messages</span><span class="p">;</span>
+            <span class="nf">renderMessages</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// メッセージを保存する関数</span>
+    <span class="kd">function</span> <span class="nf">saveMessages</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">chrome</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">local</span><span class="p">.</span><span class="nf">set</span><span class="p">({</span> <span class="na">messages</span><span class="p">:</span> <span class="nx">messages</span> <span class="p">},</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">メッセージが保存されました</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// メッセージを表示する関数</span>
+    <span class="kd">function</span> <span class="nf">renderMessages</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="nx">messages</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">messageElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">message</span><span class="dl">'</span><span class="p">;</span>
+
+            <span class="c1">// メッセージテキストの div</span>
+            <span class="kd">const</span> <span class="nx">textDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">textDiv</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+
+            <span class="c1">// URL を検出して QR コードを生成</span>
+            <span class="kd">const</span> <span class="nx">urls</span> <span class="o">=</span> <span class="nf">extractUrls</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">text</span><span class="p">);</span>
+            <span class="kd">const</span> <span class="nx">qrContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">qrContainer</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-codes</span><span class="dl">'</span><span class="p">;</span>
+
+            <span class="k">if </span><span class="p">(</span><span class="nx">urls</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">urls</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">url</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="kd">const</span> <span class="nx">qrWrapper</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-wrapper</span><span class="dl">'</span><span class="p">;</span>
+
+                    <span class="c1">// URL 表示</span>
+                    <span class="kd">const</span> <span class="nx">urlText</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">urlText</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">url-text</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="nx">urlText</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">urlText</span><span class="p">);</span>
+
+                    <span class="c1">// QR コード生成用の div</span>
+                    <span class="kd">const</span> <span class="nx">qrElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+                    <span class="nx">qrElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">qr-code</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="nx">qrWrapper</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrElement</span><span class="p">);</span>
+
+                    <span class="c1">// QR コード生成</span>
+                    <span class="k">new</span> <span class="nc">QRCode</span><span class="p">(</span><span class="nx">qrElement</span><span class="p">,</span> <span class="p">{</span>
+                        <span class="na">text</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
+                        <span class="na">width</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                        <span class="na">height</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                        <span class="na">colorDark</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#000000</span><span class="dl">"</span><span class="p">,</span>
+                        <span class="na">colorLight</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#ffffff</span><span class="dl">"</span><span class="p">,</span>
+                        <span class="na">correctLevel</span><span class="p">:</span> <span class="nx">QRCode</span><span class="p">.</span><span class="nx">CorrectLevel</span><span class="p">.</span><span class="nx">H</span>
+                    <span class="p">});</span>
+
+                    <span class="nx">qrContainer</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrWrapper</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+
+            <span class="c1">// アクション部分</span>
+            <span class="kd">const</span> <span class="nx">actionsDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">div</span><span class="dl">'</span><span class="p">);</span>
+            <span class="nx">actionsDiv</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">actions</span><span class="dl">'</span><span class="p">;</span>
+            <span class="nx">actionsDiv</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`
+            &lt;a href="#" class="edit" data-id="</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">"&gt;編集&lt;/a&gt; | 
+            &lt;a href="#" class="delete" data-id="</span><span class="p">${</span><span class="nx">index</span><span class="p">}</span><span class="s2">"&gt;削除&lt;/a&gt;
+        `</span><span class="p">;</span>
+
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">textDiv</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">qrContainer</span><span class="p">);</span>
+            <span class="nx">messageElement</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">actionsDiv</span><span class="p">);</span>
+
+            <span class="nx">chatContainer</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">messageElement</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">chatContainer</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// URL 抽出用の新しい関数を追加</span>
+    <span class="kd">function</span> <span class="nf">extractUrls</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">urlRegex</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(</span><span class="sr">https</span><span class="se">?</span><span class="sr">:</span><span class="se">\/\/[^\s]</span><span class="sr">+</span><span class="se">)</span><span class="sr">/g</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">text</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="nx">urlRegex</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// メッセージを追加する関数</span>
+    <span class="kd">function</span> <span class="nf">addMessage</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">messages</span><span class="p">.</span><span class="nf">push</span><span class="p">({</span> <span class="na">text</span><span class="p">:</span> <span class="nx">text</span><span class="p">,</span> <span class="na">timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">getTime</span><span class="p">()</span> <span class="p">});</span>
+        <span class="nf">saveMessages</span><span class="p">();</span>
+        <span class="nf">renderMessages</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 送信ボタンのクリックイベント</span>
+    <span class="nx">sendButton</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">messageInput</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nf">trim</span><span class="p">();</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nf">addMessage</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+            <span class="nx">messageInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Enterキーでの送信</span>
+    <span class="nx">messageInput</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">keypress</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">Enter</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">sendButton</span><span class="p">.</span><span class="nf">click</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="c1">// 編集と削除の機能</span>
+    <span class="nx">chatContainer</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-id</span><span class="dl">'</span><span class="p">);</span>
+            <span class="kd">const</span> <span class="nx">newText</span> <span class="o">=</span> <span class="nf">prompt</span><span class="p">(</span><span class="dl">'</span><span class="s1">メッセージを編集</span><span class="dl">'</span><span class="p">,</span> <span class="nx">messages</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">text</span><span class="p">);</span>
+            <span class="k">if </span><span class="p">(</span><span class="nx">newText</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">messages</span><span class="p">[</span><span class="nx">id</span><span class="p">].</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">newText</span><span class="p">;</span>
+                <span class="nf">saveMessages</span><span class="p">();</span>
+                <span class="nf">renderMessages</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">delete</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-id</span><span class="dl">'</span><span class="p">);</span>
+            <span class="k">if </span><span class="p">(</span><span class="nf">confirm</span><span class="p">(</span><span class="dl">'</span><span class="s1">このメッセージを削除しますか？</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">messages</span><span class="p">.</span><span class="nf">splice</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="nf">saveMessages</span><span class="p">();</span>
+                <span class="nf">renderMessages</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+</div>
+</details>
+<details>
+<summary>コード: manifest.json</summary>
+<div class="code-frame" data-lang="json" data-sourcepos="393:1-407:3">
+<div class="code-lang"><span class="bold">manifest.json</span></div>
+<div class="highlight"><pre><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"manifest_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"メモアプリ"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zoomやライブ配信用のメモアプリ"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"storage"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"content_security_policy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"browser_action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"default_popup"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.html"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+</div>
+</details>
