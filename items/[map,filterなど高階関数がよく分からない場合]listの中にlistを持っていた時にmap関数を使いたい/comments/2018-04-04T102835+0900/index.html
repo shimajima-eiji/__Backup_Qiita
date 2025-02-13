@@ -1,9 +1,8 @@
-<p>mapはデータを作り出すもので、printに対して使うのは良くないと思うのですがいかがでしょう？</p>
-
-<div class="code-frame" data-lang="py">
+<p data-sourcepos="1:1-1:128">mapはデータを作り出すもので、printに対して使うのは良くないと思うのですがいかがでしょう？</p>
+<div class="code-frame" data-lang="py" data-sourcepos="3:1-16:3">
 <div class="code-lang"><span class="bold">一番下が生成されたリスト</span></div>
-<div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'1A'</span><span class="p">,</span><span class="s">'1B'</span><span class="p">,</span><span class="s">'1C'</span><span class="p">],[</span><span class="s">'2A'</span><span class="p">,</span><span class="s">'2B'</span><span class="p">],[</span><span class="s">'3A'</span><span class="p">,</span><span class="s">'3B'</span><span class="p">,</span><span class="s">'3C'</span><span class="p">,</span><span class="s">'4D'</span><span class="p">]]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
+<div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="sh">'</span><span class="s">1A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1C</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">2A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">2B</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">3A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3C</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">4D</span><span class="sh">'</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
 <span class="mi">1</span><span class="n">A</span>
 <span class="mi">1</span><span class="n">B</span>
 <span class="mi">1</span><span class="n">C</span>
@@ -16,13 +15,11 @@
 <span class="p">[[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]]</span>
 </code></pre></div>
 </div>
-
-<p>sumを使ってフラット化したリストを作ってからprintする方がまだマシな気がします。</p>
-
-<div class="code-frame" data-lang="py">
+<p data-sourcepos="18:1-18:113">sumを使ってフラット化したリストを作ってからprintする方がまだマシな気がします。</p>
+<div class="code-frame" data-lang="py" data-sourcepos="20:1-32:3">
 <div class="code-lang"><span class="bold">フラット化したリストを作ってからprint</span></div>
-<div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'1A'</span><span class="p">,</span><span class="s">'1B'</span><span class="p">,</span><span class="s">'1C'</span><span class="p">],[</span><span class="s">'2A'</span><span class="p">,</span><span class="s">'2B'</span><span class="p">],[</span><span class="s">'3A'</span><span class="p">,</span><span class="s">'3B'</span><span class="p">,</span><span class="s">'3C'</span><span class="p">,</span><span class="s">'4D'</span><span class="p">]]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">list_in_list</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="sh">'</span><span class="s">1A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1C</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">2A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">2B</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">3A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3C</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">4D</span><span class="sh">'</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">print</span><span class="p">(</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="n">list_in_list</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
 <span class="mi">1</span><span class="n">A</span>
 <span class="mi">1</span><span class="n">B</span>
 <span class="mi">1</span><span class="n">C</span>
@@ -34,12 +31,10 @@
 <span class="mi">4</span><span class="n">D</span>
 </code></pre></div>
 </div>
-
-<p>itertools.chainを使う方がより良いと思います。</p>
-
-<div class="code-frame" data-lang="py"><div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'1A'</span><span class="p">,</span><span class="s">'1B'</span><span class="p">,</span><span class="s">'1C'</span><span class="p">],[</span><span class="s">'2A'</span><span class="p">,</span><span class="s">'2B'</span><span class="p">],[</span><span class="s">'3A'</span><span class="p">,</span><span class="s">'3B'</span><span class="p">,</span><span class="s">'3C'</span><span class="p">,</span><span class="s">'4D'</span><span class="p">]]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">list_in_list</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<p data-sourcepos="34:1-34:60">itertools.chainを使う方がより良いと思います。</p>
+<div class="code-frame" data-lang="py" data-sourcepos="36:1-49:3"><div class="highlight"><pre><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="n">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">list_in_list</span> <span class="o">=</span> <span class="p">[[</span><span class="sh">'</span><span class="s">1A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">1C</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">2A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">2B</span><span class="sh">'</span><span class="p">],[</span><span class="sh">'</span><span class="s">3A</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3B</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">3C</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">4D</span><span class="sh">'</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nf">print</span><span class="p">(</span><span class="o">*</span><span class="nf">chain</span><span class="p">(</span><span class="o">*</span><span class="n">list_in_list</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
 <span class="mi">1</span><span class="n">A</span>
 <span class="mi">1</span><span class="n">B</span>
 <span class="mi">1</span><span class="n">C</span>
@@ -50,6 +45,5 @@
 <span class="mi">3</span><span class="n">C</span>
 <span class="mi">4</span><span class="n">D</span>
 </code></pre></div></div>
-
-<p>多重リストのフラット化は こちらも参考にしてみてください。<br>
+<p data-sourcepos="51:1-52:83">多重リストのフラット化は こちらも参考にしてみてください。<br>
 <a href="https://qiita.com/shiracamus/items/fb85943ed34d5ec09c4f" id="reference-5fdb4a266090860ed045">pythonでflatten - Qiita</a></p>
