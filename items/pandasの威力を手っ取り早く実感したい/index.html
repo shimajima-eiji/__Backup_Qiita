@@ -28,17 +28,17 @@ import socket</p>
 <div class="code-lang"><span class="bold">準備.py</span></div>
 <div class="highlight"><pre><code><span class="kn">import</span> <span class="n">pandas</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">site.csv</span><span class="sh">'</span><span class="p">)</span>  <span class="c1">#たったこれだけでCSVが使えるようになるパンダさんすごい
-#site.csvにはsite,url,ip,host（サイト名、URL、IP、portなど）が入っているものを想定
+# site.csvにはsite,url,ip,host（サイト名、URL、IP、portなど）が入っているものを想定
 </span>
 
-<span class="c1">#良い例
+<span class="c1"># 良い例
 </span><span class="k">def</span> <span class="nf">good</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
   <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">.</span><span class="nf">itterrows</span><span class="p">():</span>
     <span class="n">df</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">test</span><span class="sh">'</span>
 
 <span class="c1"># rowの中にcsvヘッダを持っており、df.(head)[index]で簡単かつ高速に参照できる
 </span>
-<span class="c1">#よく分からない時にやっていた事
+<span class="c1"># よく分からない時にやっていた事
 </span><span class="k">def</span> <span class="nf">poor</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
   <span class="n">df</span><span class="p">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">test</span><span class="sh">'</span>
@@ -82,7 +82,7 @@ dataframeに代入する処理をgoodのように書き換えるだけでだい�
 </span>  <span class="k">return</span> <span class="n">df2</span>
 
 <span class="n">df2</span> <span class="o">=</span> <span class="nf">sql</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
-<span class="c1">#df2 = pd.concat([df1, df2,...], ignore_index=True)  #必要であれば列を追加するなり。ignore_index=Trueでdfx..の結果が0件の場合でもエラーとしない
+<span class="c1"># df2 = pd.concat([df1, df2,...], ignore_index=True)  #必要であれば列を追加するなり。ignore_index=Trueでdfx..の結果が0件の場合でもエラーとしない
 </span></code></pre></div>
 </div>
 <p data-sourcepos="92:1-92:114">ここでSQLについては触れないが、これで期待した結果と速度を得られるようになる。</p>
