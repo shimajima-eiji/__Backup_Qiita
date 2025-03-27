@@ -30,11 +30,11 @@
 <span class="nf">re_search</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">pattern3</span><span class="p">)</span>
 <span class="nf">re_search</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">pattern4</span><span class="p">)</span>
 
-<span class="c1">#出力
-#-&gt;pattern:  ()
-#-&gt;pattern:  ('',)
-#-&gt;pattern:  ('123.45.67.89',)
-#-&gt;pattern:  ('123.45.67.89','http://qiita.com 2017:12:20')
+<span class="c1"># 出力
+# -&gt;pattern:  ()
+# -&gt;pattern:  ('',)
+# -&gt;pattern:  ('123.45.67.89',)
+# -&gt;pattern:  ('123.45.67.89','http://qiita.com 2017:12:20')
 </span></code></pre></div>
 </div>
 <p data-sourcepos="42:1-44:174">まずはパターンの書き方について。<br>
@@ -45,11 +45,11 @@
 ちなみに、re.searchメソッドを説明しやすいfindallに変えると、</p>
 <div class="code-frame" data-lang="python" data-sourcepos="50:1-56:3">
 <div class="code-lang"><span class="bold">training1.py</span></div>
-<div class="highlight"><pre><code><span class="c1">#出力
-#-&gt;pattern:  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '']
-#-&gt;pattern:  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '']
-#-&gt;pattern:  ['123.45.67.89']
-#-&gt;pattern:  [('123.45.67.89', 'http://qiita.com 2017:12:20')]
+<div class="highlight"><pre><code><span class="c1"># 出力
+# -&gt;pattern:  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '']
+# -&gt;pattern:  ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '']
+# -&gt;pattern:  ['123.45.67.89']
+# -&gt;pattern:  [('123.45.67.89', 'http://qiita.com 2017:12:20')]
 </span></code></pre></div>
 </div>
 <p data-sourcepos="58:1-59:316">のように出力が得られる。<br>
@@ -59,8 +59,8 @@
 <div class="code-lang"><span class="bold">training1.py</span></div>
 <div class="highlight"><pre><code><span class="n">pattern_all</span> <span class="o">=</span> <span class="sa">r</span><span class="sh">'</span><span class="s">.*</span><span class="sh">'</span>
 
-<span class="c1">#出力
-#-&gt;pattern:  ['123.45.67.89', 'http://qiita.com 2017:12:20']
+<span class="c1"># 出力
+# -&gt;pattern:  ['123.45.67.89', 'http://qiita.com 2017:12:20']
 </span></code></pre></div>
 </div>
 <p data-sourcepos="70:1-71:129">とすると、logの内容を見ることが出来る。<br>
@@ -69,7 +69,7 @@
 <span id="文字列切り出し" class="fragment"></span><a href="#%E6%96%87%E5%AD%97%E5%88%97%E5%88%87%E3%82%8A%E5%87%BA%E3%81%97"><i class="fa fa-link"></i></a>文字列切り出し</h2>
 <p data-sourcepos="74:1-74:76">とりあえず何も考えずに先頭から4文字切り出してみる。</p>
 <div class="code-frame" data-lang="text" data-sourcepos="76:1-79:3"><div class="highlight"><pre><code>pattern_splitchar4 = r'(.{4}) +(.*$)'
-#-&gt;pattern:  ['123.','']
+# -&gt;pattern:  ['123.','']
 </code></pre></div></div>
 <p data-sourcepos="80:1-82:103">*が任意の数の文字・数字など。<br>
 これを4と指定すると、4文字切り取ることが出来る。<br>
@@ -77,7 +77,7 @@
 <h2 data-sourcepos="84:1-84:27">
 <span id="日付年を取る" class="fragment"></span><a href="#%E6%97%A5%E4%BB%98%E5%B9%B4%E3%82%92%E5%8F%96%E3%82%8B"><i class="fa fa-link"></i></a>日付（年）を取る</h2>
 <div class="code-frame" data-lang="text" data-sourcepos="86:1-89:3"><div class="highlight"><pre><code>pattern_yyyy = r'([\d]{4})'
-#-&gt;pattern:  ['2017','']
+# -&gt;pattern:  ['2017','']
 </code></pre></div></div>
 <p data-sourcepos="91:1-92:227">上記パターンに「数値である」という条件を[\d]とする事で指定したもので、<strong>厳密には日付を取るためのパターンではない</strong>。<br>
 このようなログの場合、[\d]=数字であること、{4}=４桁（YYYY:年）であることを指定すると、<strong>たまたま</strong>dateのYYYYが最初にヒットするので、そこが参照されただけである。</p>
@@ -85,7 +85,7 @@
 <h2 data-sourcepos="96:1-96:27">
 <span id="日付月を取る" class="fragment"></span><a href="#%E6%97%A5%E4%BB%98%E6%9C%88%E3%82%92%E5%8F%96%E3%82%8B"><i class="fa fa-link"></i></a>日付（月）を取る</h2>
 <div class="code-frame" data-lang="text" data-sourcepos="98:1-101:3"><div class="highlight"><pre><code>pattern_mm = r'[\d]{4}:([\d]{2})'
-#-&gt;pattern:  ['12','']
+# -&gt;pattern:  ['12','']
 </code></pre></div></div>
 <p data-sourcepos="103:1-105:90">日付（年）を取るパターンで場所を決めて、その後ろにある:(nn)に該当する場合はこれとする。<br>
 なお、日付（日）を取る場合はpatternに:([\d]{2})を増やしてやるとよい。<br>

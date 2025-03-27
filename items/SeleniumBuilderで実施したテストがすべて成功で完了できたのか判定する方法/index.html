@@ -48,8 +48,9 @@
 <span id="現行システムを改修する" class="fragment"></span><a href="#%E7%8F%BE%E8%A1%8C%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%92%E6%94%B9%E4%BF%AE%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>現行システムを改修する</h1>
 <p data-sourcepos="32:1-33:126">では、その上で動いているシステムをなるべく半自動化ぐらいには寄せよう、というのが今回の課題です。<br>
 やりたいことは「テストがすべて成功で完了できたのか判定する」という観点で解説します。</p>
-<p data-sourcepos="35:1-38:123">##対応 SeleniumBuilder側<br>
-それぞれのテストケースの正しい完了条件を設定して、画像に意味のないスクリーンキャプチャを取ります。<br>
+<h2 data-sourcepos="35:1-35:28">
+<span id="対応-seleniumbuilder側" class="fragment"></span><a href="#%E5%AF%BE%E5%BF%9C-seleniumbuilder%E5%81%B4"><i class="fa fa-link"></i></a>対応 SeleniumBuilder側</h2>
+<p data-sourcepos="36:1-38:123">それぞれのテストケースの正しい完了条件を設定して、画像に意味のないスクリーンキャプチャを取ります。<br>
 ここでやりたいのはファイルを置く事なので、要件さえ満たせればスクリーンキャプチャの必要はありません。<br>
 SeleniumBuilderが用意しているファイル出力の仕組みがこれしかなかったので代用しています。</p>
 <div class="code-frame" data-lang="json" data-sourcepos="40:1-54:3">
@@ -77,14 +78,14 @@ SeleniumBuilderが実施した内容が正常であることをsaveScreenshotの
 わりかし安全なのはSeleniumBuilderが呼べる変数ファイルにパスを書いておいて、サーバーで対応する場所に読み替える事です。</p>
 <div class="code-frame" data-lang="shell-session" data-sourcepos="62:1-71:3">
 <div class="code-lang"><span class="bold">checkComplate.sh</span></div>
-<div class="highlight"><pre><code><span class="gp">#</span>（中略）
+<div class="highlight"><pre><code><span class="gp">#</span><span class="w"> </span>（中略）
 <span class="gp">if [ ! -e "$</span><span class="o">{</span>saveScreenshot_path<span class="o">}</span><span class="s2">" ] then;
 </span><span class="go">  echo "no Complate"
   exit 1
 else
 </span><span class="gp">  exec("$</span><span class="o">{</span>next_step<span class="o">}</span><span class="s2">")
 </span><span class="go">fi
-</span><span class="gp">#</span>（中略）
+</span><span class="gp">#</span><span class="w"> </span>（中略）
 </code></pre></div>
 </div>
 <h2 data-sourcepos="73:1-73:18">

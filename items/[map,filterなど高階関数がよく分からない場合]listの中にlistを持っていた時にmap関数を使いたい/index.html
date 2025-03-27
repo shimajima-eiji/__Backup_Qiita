@@ -14,20 +14,20 @@
     <span class="k">print</span><span class="p">,</span> <span class="n">list_in_list</span>
   <span class="p">)</span>
 <span class="p">)</span>
-<span class="c1">#['1A','1B','1C']
-#['2A','2B']
-#['3A','3B','3C','4D']
+<span class="c1"># ['1A','1B','1C']
+# ['2A','2B']
+# ['3A','3B','3C','4D']
 </span>
 <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
-<span class="c1">#1A
-#1B
-#1C
-#2A
-#2B
-#3A
-#3B
-#3C
-#4D
+<span class="c1"># 1A
+# 1B
+# 1C
+# 2A
+# 2B
+# 3A
+# 3B
+# 3C
+# 4D
 </span></code></pre></div>
 </div>
 <p data-sourcepos="33:1-33:94">リストの外の括弧[]に対してlist(map())でループを回しているイメージ。</p>
@@ -40,45 +40,45 @@
 
 <span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
 
-<span class="c1">#first
-#['1A','1B','1C']
+<span class="c1"># first
+# ['1A','1B','1C']
 </span>
-<span class="c1">#second
-#['2A','2B']
+<span class="c1"># second
+# ['2A','2B']
 </span>
-<span class="c1">#third
-#['3A','3B','3C','4D']
+<span class="c1"># third
+# ['3A','3B','3C','4D']
 </span></code></pre></div>
 </div>
 <p data-sourcepos="54:1-54:72">のようなデータを扱うと、以下の場合おかしくなる。</p>
 <div class="code-frame" data-lang="python" data-sourcepos="56:1-83:3">
 <div class="code-lang"><span class="bold">list_in_list.py</span></div>
 <div class="highlight"><pre><code><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">list2</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">list2</span><span class="p">)),</span> <span class="n">lists</span><span class="p">))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
-<span class="c1">#f
-#i
-#r
-#s
-#t
-#1A
-#1B
-#1C
-#s
-#e
-#c
-#o
-#n
-#d
-#2A
-#2B
-#t
-#h
-#i
-#r
-#d
-#3A
-#3B
-#3C
-#4D
+<span class="c1"># f
+# i
+# r
+# s
+# t
+# 1A
+# 1B
+# 1C
+# s
+# e
+# c
+# o
+# n
+# d
+# 2A
+# 2B
+# t
+# h
+# i
+# r
+# d
+# 3A
+# 3B
+# 3C
+# 4D
 </span></code></pre></div>
 </div>
 <p data-sourcepos="85:1-86:78">これは、stringに'first'を入れてstring[0]、string[1]...のように取り出すような振る舞いがされている。<br>
@@ -89,15 +89,15 @@
 <div class="code-frame" data-lang="python" data-sourcepos="91:1-102:3">
 <div class="code-lang"><span class="bold">list_in_list.py</span></div>
 <div class="highlight"><pre><code><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">lists</span><span class="p">:</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">print</span><span class="p">,</span> <span class="n">lists</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">,</span> <span class="n">list_in_list</span><span class="p">))</span>
-<span class="c1">#1A
-#1B
-#1C
-#2A
-#2B
-#3A
-#3B
-#3C
-#4D
+<span class="c1"># 1A
+# 1B
+# 1C
+# 2A
+# 2B
+# 3A
+# 3B
+# 3C
+# 4D
 </span></code></pre></div>
 </div>
 <p data-sourcepos="104:1-104:58">lists[0]のfirst, second, thirdを取りたい場合は、</p>
@@ -105,9 +105,9 @@
 <div class="code-lang"><span class="bold">list_in_list.py</span></div>
 <div class="highlight"><pre><code><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span> <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">list_in_list</span><span class="p">))</span>
 
-<span class="c1">#first
-#second
-#third
+<span class="c1"># first
+# second
+# third
 </span></code></pre></div>
 </div>
 <p data-sourcepos="114:1-116:130">で取れる。<br>

@@ -7,7 +7,7 @@
 <span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h1>
 <div class="code-frame" data-lang="shell" data-sourcepos="8:1-13:3">
 <div class="code-lang"><span class="bold">test.sh</span></div>
-<div class="highlight"><pre><code><span class="c">#!/bin/sh</span>
+<div class="highlight"><pre><code><span class="c"># !/bin/sh</span>
 ps h <span class="nt">-p</span> <span class="nv">$$</span> <span class="nt">-o</span> <span class="nb">comm</span>  <span class="c"># 期待する結果を得られる</span>
 
 <span class="c"># echo ${SHELL##*/}   # 検証用：何をやってもbashが返ってくる</span>
