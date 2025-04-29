@@ -1,0 +1,144 @@
+<h1 data-sourcepos="1:1-1:123">
+<span id="qiitacliを使ってqiitaのwebエディタで書いた記事も丸ごとgithubでバックアップ管理する方法" class="fragment"></span><a href="#qiitacli%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6qiita%E3%81%AEweb%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%A7%E6%9B%B8%E3%81%84%E3%81%9F%E8%A8%98%E4%BA%8B%E3%82%82%E4%B8%B8%E3%81%94%E3%81%A8github%E3%81%A7%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>QiitaCLIを使ってQiitaのWebエディタで書いた記事も丸ごとGitHubでバックアップ・管理する方法</h1>
+<h2 data-sourcepos="3:1-3:9">
+<span id="結論" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96"><i class="fa fa-link"></i></a>結論</h2>
+<p data-sourcepos="4:1-4:107">Qiitaの記事をGitHubでバックアップ・管理するには以下のコマンドを実行します：</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="6:1-11:3"><div class="highlight"><pre><code>npx qiita pull
+git add <span class="nt">-A</span>
+git commit <span class="nt">-m</span> <span class="s2">"qiitaバックアップ"</span>
+git push
+</code></pre></div></div>
+<p data-sourcepos="13:1-13:95">GitHub Actionsで定期実行すれば、自動的にバックアップを取得できます。</p>
+<h2 data-sourcepos="15:1-15:15">
+<span id="詳細解説" class="fragment"></span><a href="#%E8%A9%B3%E7%B4%B0%E8%A7%A3%E8%AA%AC"><i class="fa fa-link"></i></a>詳細解説</h2>
+<h3 data-sourcepos="17:1-17:21">
+<span id="qiitacliとは" class="fragment"></span><a href="#qiitacli%E3%81%A8%E3%81%AF"><i class="fa fa-link"></i></a>QiitaCLIとは？</h3>
+<p data-sourcepos="19:1-19:297">QiitaCLIはQiitaが提供する公式のコマンドラインツールで、ローカル環境からQiitaの記事を作成・編集・管理することができます。Webエディタだけでなく、お気に入りのエディタやIDEを使った記事作成をサポートしています。</p>
+<h3 data-sourcepos="21:1-21:28">
+<span id="セットアップ手順" class="fragment"></span><a href="#%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>セットアップ手順</h3>
+<ol data-sourcepos="23:1-54:0">
+<li data-sourcepos="23:1-27:0">
+<p data-sourcepos="23:4-23:25"><strong>準備するもの</strong></p>
+<ul data-sourcepos="24:4-27:0">
+<li data-sourcepos="24:4-24:26">GitHubアカウント</li>
+<li data-sourcepos="25:4-25:60">Node.js環境（npxコマンドを使用するため）</li>
+<li data-sourcepos="26:4-27:0">Qiitaアカウントとアクセストークン</li>
+</ul>
+</li>
+<li data-sourcepos="28:1-46:0">
+<p data-sourcepos="28:4-28:19"><strong>初期設定</strong></p>
+<div class="code-frame" data-lang="bash" data-sourcepos="30:4-40:6"><div class="highlight"><pre><code><span class="c"># プロジェクトフォルダの作成</span>
+<span class="nb">mkdir </span>qiita-backup
+<span class="nb">cd </span>qiita-backup
+
+<span class="c"># Gitリポジトリの初期化</span>
+git init
+
+<span class="c"># QiitaCLIの初期設定</span>
+npx qiita init
+</code></pre></div></div>
+<p data-sourcepos="42:4-42:45"><code>qiita init</code>実行時に必要な情報：</p>
+<ul data-sourcepos="43:4-46:0">
+<li data-sourcepos="43:4-43:78">Qiitaのアクセストークン（Qiitaの設定ページから取得）</li>
+<li data-sourcepos="44:4-44:20">ユーザー名</li>
+<li data-sourcepos="45:4-46:0">その他の基本設定（プロンプトに従って入力）</li>
+</ul>
+</li>
+<li data-sourcepos="47:1-54:0">
+<p data-sourcepos="47:4-47:40"><strong>GitHubリポジトリとの連携</strong></p>
+<p data-sourcepos="49:4-49:99">GitHubで新しいリポジトリを作成し、ローカルリポジトリと連携します。</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="51:4-53:6"><div class="highlight"><pre><code>git remote add origin https://github.com/あなたのユーザー名/リポジトリ名.git
+</code></pre></div></div>
+</li>
+</ol>
+<h3 data-sourcepos="55:1-55:37">
+<span id="記事のバックアップ方法" class="fragment"></span><a href="#%E8%A8%98%E4%BA%8B%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>記事のバックアップ方法</h3>
+<ol data-sourcepos="57:1-114:0">
+<li data-sourcepos="57:1-70:0">
+<p data-sourcepos="57:4-57:46"><strong>手動でバックアップする場合</strong></p>
+<div class="code-frame" data-lang="bash" data-sourcepos="59:4-69:6"><div class="highlight"><pre><code><span class="c"># Qiitaから記事を取得</span>
+npx qiita pull
+
+<span class="c"># 変更をコミット</span>
+git add <span class="nt">-A</span>
+git commit <span class="nt">-m</span> <span class="s2">"qiitaバックアップ"</span>
+
+<span class="c"># GitHubにプッシュ</span>
+git push origin main
+</code></pre></div></div>
+</li>
+<li data-sourcepos="71:1-114:0">
+<p data-sourcepos="71:4-71:45"><strong>GitHub Actionsで自動化する場合</strong></p>
+<p data-sourcepos="73:4-73:98">リポジトリのルートに <code>.github/workflows/backup.yml</code> ファイルを作成します：</p>
+<div class="code-frame" data-lang="yaml" data-sourcepos="75:4-111:6"><div class="highlight"><pre><code><span class="na">name</span><span class="pi">:</span> <span class="s">Qiita Backup</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>  <span class="c1"># 毎日午前0時に実行</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>      <span class="c1"># 手動実行も可能</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">backup</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Setup Node.js</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-node@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">node-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">16'</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Fetch Qiita articles</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">npx qiita pull</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">QIITA_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.QIITA_TOKEN }}</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Commit changes</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">git config --global user.name 'GitHub Actions'</span>
+          <span class="s">git config --global user.email 'actions@github.com'</span>
+          <span class="s">git add -A</span>
+          <span class="s">git diff --quiet &amp;&amp; git diff --staged --quiet || git commit -m "Automatic backup of Qiita articles"</span>
+          
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Push changes</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">ad-m/github-push-action@master</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">github_token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
+          <span class="na">branch</span><span class="pi">:</span> <span class="s">${{ github.ref }}</span>
+</code></pre></div></div>
+<p data-sourcepos="113:4-113:299"><strong>注意事項：</strong> GitHub ActionsでQiitaのアクセストークンを使用するには、GitHubリポジトリの「Settings」→「Secrets and variables」→「Actions」でシークレット変数 <code>QIITA_TOKEN</code> を作成し、Qiitaのアクセストークンを設定してください。</p>
+</li>
+</ol>
+<h3 data-sourcepos="115:1-115:30">
+<span id="qiitacliの便利な機能" class="fragment"></span><a href="#qiitacli%E3%81%AE%E4%BE%BF%E5%88%A9%E3%81%AA%E6%A9%9F%E8%83%BD"><i class="fa fa-link"></i></a>QiitaCLIの便利な機能</h3>
+<ul data-sourcepos="117:1-121:0">
+<li data-sourcepos="117:1-117:45">
+<strong>記事の一覧取得</strong>: <code>npx qiita list</code>
+</li>
+<li data-sourcepos="118:1-118:69">
+<strong>新規記事の作成</strong>: <code>npx qiita new 記事のファイル名</code>
+</li>
+<li data-sourcepos="119:1-119:51">
+<strong>記事のプレビュー</strong>: <code>npx qiita preview</code>
+</li>
+<li data-sourcepos="120:1-121:0">
+<strong>記事の投稿</strong>: <code>npx qiita publish 記事のファイル名</code>
+</li>
+</ul>
+<h3 data-sourcepos="122:1-122:37">
+<span id="バックアップの活用方法" class="fragment"></span><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%AE%E6%B4%BB%E7%94%A8%E6%96%B9%E6%B3%95"><i class="fa fa-link"></i></a>バックアップの活用方法</h3>
+<p data-sourcepos="124:1-124:84">GitHub上でバックアップした記事は以下のように活用できます：</p>
+<ol data-sourcepos="126:1-130:0">
+<li data-sourcepos="126:1-126:72">
+<strong>バージョン管理</strong>: 記事の変更履歴を追跡できます</li>
+<li data-sourcepos="127:1-127:78">
+<strong>ブランチ機能</strong>: 実験的な内容を別ブランチで作成可能</li>
+<li data-sourcepos="128:1-128:69">
+<strong>コラボレーション</strong>: Pull Requestを使った共同編集</li>
+<li data-sourcepos="129:1-130:0">
+<strong>バックアップ</strong>: Qiitaのサービスに依存せず記事を保存</li>
+</ol>
+<h2 data-sourcepos="131:1-131:12">
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h2>
+<p data-sourcepos="133:1-133:357">QiitaCLIとGitHubを組み合わせることで、Webエディタで書いた記事も含めてQiitaの全記事を効率的にバックアップし管理できます。GitHub Actionsによる自動化で、定期的なバックアップも簡単に設定できるため、大切な技術記事を安全に保存しながら効率的に管理できます。</p>
+<p data-sourcepos="135:1-135:207">初期設定に少し手間はかかりますが、一度設定してしまえば自動的にバックアップが取得されるので、技術記事を書く方には非常におすすめの方法です。</p>
