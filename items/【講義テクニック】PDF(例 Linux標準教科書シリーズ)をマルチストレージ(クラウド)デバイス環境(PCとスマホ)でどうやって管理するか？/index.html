@@ -1,0 +1,110 @@
+<div data-sourcepos="1:1-4:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<h2 data-sourcepos="2:1-2:27">
+<span id="結論という前提" class="fragment"></span><a href="#%E7%B5%90%E8%AB%96%E3%81%A8%E3%81%84%E3%81%86%E5%89%8D%E6%8F%90"><i class="fa fa-link"></i></a>結論、という前提</h2>
+<p data-sourcepos="3:1-3:78">マルチデバイスで使いたいならクラウドストレージ使おう</p>
+</div>
+</div>
+<p data-sourcepos="6:1-6:381">というのは「それはそう」としか言えないのですが、ここでは「どこのストレージに入れたか分からん！」という状態、いわゆるマルチクラウドストレージでの運用も想定したいので「ただストレージに入れておけばよくね？」では管理上の問題から脱却できないものと仮定します。</p>
+<h2 data-sourcepos="8:1-8:15">
+<span id="運用要件" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E8%A6%81%E4%BB%B6"><i class="fa fa-link"></i></a>運用要件</h2>
+<p data-sourcepos="9:1-10:24">ストレージと聞くと「とりあえずファイルサーバーみたいなもんでしょ？」と思って何も考えずにファイルを突っ込んでおくと後悔するものが結構多い事に気付きます。<br>
+以下、一例です。</p>
+<div data-sourcepos="12:1-14:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="13:1-13:101">PCアカウントとスマホアカウントは同一のものを使用するという前提です。</p>
+</div>
+</div>
+<h3 data-sourcepos="16:1-16:15">
+<span id="googledrive" class="fragment"></span><a href="#googledrive"><i class="fa fa-link"></i></a>GoogleDrive</h3>
+<ul data-sourcepos="17:1-23:0">
+<li data-sourcepos="17:1-21:41">とりあえずGoogleサービスの恩恵をいっぱい受けたい。スプレッドシートやスライドは言わずもがなとして、Colabとか
+<ul data-sourcepos="18:3-21:41">
+<li data-sourcepos="18:3-18:44">ニッチだがSiteでの運用もある</li>
+<li data-sourcepos="19:3-19:40">WorkSpaceを使う余地も欲しい</li>
+<li data-sourcepos="20:3-21:41">最近はNoteBookLMも活用したい
+<ul data-sourcepos="21:5-21:41">
+<li data-sourcepos="21:5-21:41"><code>今回はここを採用。後述</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li data-sourcepos="22:1-23:0">当初は捨て垢的に使っていたGmailがバックアップアドレスから実質本垢みたいになりつつある</li>
+</ul>
+<h3 data-sourcepos="24:1-24:12">
+<span id="onedrive" class="fragment"></span><a href="#onedrive"><i class="fa fa-link"></i></a>OneDrive</h3>
+<ul data-sourcepos="25:1-29:0">
+<li data-sourcepos="25:1-25:190">Windowsのバックアップのために使いたいので、Windowsのアカウントごとに無料アカウントを作っておいた方がディスクサイズを気にせず使える</li>
+<li data-sourcepos="26:1-26:98">特にMicrosoftアカウントは色々なところで連携して使いたい事が多すぎる</li>
+<li data-sourcepos="27:1-29:0">Windows11の仕様かデフォルト設定か、OneDriveと連携されてしまうので常用アカウントとは絶対に分けたい
+<ul data-sourcepos="28:3-29:0">
+<li data-sourcepos="28:3-29:0">メールボックスと連携していると面倒</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="30:1-30:10">
+<span id="icloud" class="fragment"></span><a href="#icloud"><i class="fa fa-link"></i></a>iCloud</h3>
+<ul data-sourcepos="31:1-32:0">
+<li data-sourcepos="31:1-32:0">OneDriveと同じ理由。Mac版</li>
+</ul>
+<h3 data-sourcepos="33:1-33:24">
+<span id="tips-githubgitlfs" class="fragment"></span><a href="#tips-githubgitlfs"><i class="fa fa-link"></i></a>Tips: GitHub(GitLFS)</h3>
+<ul data-sourcepos="34:1-40:0">
+<li data-sourcepos="34:1-35:112">バイナリファイルも含むが、メガファイルをとりあえず置いておく場所として実は優秀
+<ul data-sourcepos="35:3-35:112">
+<li data-sourcepos="35:3-35:112">ただし、一時的に格納する場所として運用する前提にしておくことを留意しよう</li>
+</ul>
+</li>
+<li data-sourcepos="36:1-40:0">様々なアプリケーションやサービスとの連携に強い
+<ul data-sourcepos="37:3-40:0">
+<li data-sourcepos="37:3-37:149">ローカルノート（Obsidianなど）を使う場合、運用方法によって画像やmd以外のファイルを扱いたい場合もある</li>
+<li data-sourcepos="38:3-40:0">Claude Desktopを使う場合、リポジトリのファイルをソースにすることができる
+<ul data-sourcepos="39:5-40:0">
+<li data-sourcepos="39:5-40:0">PDFや画像ファイルも読み込むことができる（詳細不明。一部のみ確認）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="41:1-41:13">
+<span id="その他" class="fragment"></span><a href="#%E3%81%9D%E3%81%AE%E4%BB%96"><i class="fa fa-link"></i></a>その他</h3>
+<p data-sourcepos="42:1-44:192">いわゆる、何のしがらみもなく普通に使えるファイルストレージ。本来想定していたもの。<br>
+細かいですがDropboxなどちょっとしたシステム連携に強いものもありますが、基本的にここではそういった「何かと連携させる」という機能がない、使わない想定で考えていきます。<br>
+先述したものは「連携させて使う」という想定であり、ファイルストレージというよりはインターフェースとしての面が強いものになります。</p>
+<p data-sourcepos="46:1-46:56">今回はNotebookLM(GoogleDrive)を採用しました。</p>
+<hr data-sourcepos="48:1-49:0">
+<div data-sourcepos="50:1-55:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<h2 data-sourcepos="51:1-51:34">
+<span id="notebooklmを採用する理由" class="fragment"></span><a href="#notebooklm%E3%82%92%E6%8E%A1%E7%94%A8%E3%81%99%E3%82%8B%E7%90%86%E7%94%B1"><i class="fa fa-link"></i></a>NotebookLMを採用する理由</h2>
+<ul data-sourcepos="52:1-54:14">
+<li data-sourcepos="52:1-52:53">PDF内の検索が可能、または使いやすい</li>
+<li data-sourcepos="53:1-53:43">PDFの要約用のAI（Gemini）が優秀</li>
+<li data-sourcepos="54:1-54:14">完全無料</li>
+</ul>
+</div>
+</div>
+<div data-sourcepos="57:1-59:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="58:1-58:199">ただし、NotebookLM自体が扱えるファイルタイプ・拡張子がかなり限定的なので、状況により採用できないケースがあることは留意しておきましょう。</p>
+</div>
+</div>
+<p data-sourcepos="61:1-62:30">マルチデバイスで活用できるのも大きい！<br>
+（要モバイルアプリ）</p>
+<h3 data-sourcepos="64:1-64:61">
+<span id="運用面の恩恵と展望私にとっては本題" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E9%9D%A2%E3%81%AE%E6%81%A9%E6%81%B5%E3%81%A8%E5%B1%95%E6%9C%9B%E7%A7%81%E3%81%AB%E3%81%A8%E3%81%A3%E3%81%A6%E3%81%AF%E6%9C%AC%E9%A1%8C"><i class="fa fa-link"></i></a>運用面の恩恵と展望（私にとっては本題）</h3>
+<p data-sourcepos="65:1-65:43">NoteBookLMの活用・運用の話です。</p>
+<p data-sourcepos="67:1-69:309">「LinuCレベル1-101勉強会の参加者から質問・相談をいただく事がある」ため、回答の壁打ちのために情報ソースを正しく理解できるAIの存在はありがたすぎる！というのもありました。<br>
+また、質疑応答のために議論した結果すらも情報ソースとして保存できるため、なんちゃってカスタマーサポート風の運用もできます。<br>
+教材そのものを基点のデータとしつつ、たとえば質疑応答のメモや教材開発プロジェクトでの議論をこのプロジェクトの中に入れていくと「教材開発者としての意見」と「勉強会での運用」を兼ねて活用していくことができます。</p>
+<p data-sourcepos="71:1-72:236">AIと壁打ちした記録も、AIが出力した生成結果も、様々な場でやりとりした記録も、そしてこの記事自体もNotebookLMにソースとして集約することで、対応品質の向上を促していくという目的にはNotebookLMは便利すぎました。<br>
+後半はNotebookLMを採用すると決めた後に、NotebookLMを使って効果を最大化するための方法を後付けしていますが、Googleサービスと連携できると色々と都合が良い事が多いのです。</p>
+<p data-sourcepos="74:1-75:311">なお、普段はObsidian + GitHub + GitHub Pages + GitHub Actionsで勉強会で即レポ書いて、ついでにサイト作りにも対応させるフローを確立させています。<br>
+これとGoogle Driveをローカルで連携しているので、将来的には書いた記事（原稿）をローカルLLMを経由させてPodCastやらAITuberあたりに紹介・解説させる事も完全無料でできそうだな、とぼんやり考えています（が、手が回らない…！）</p>
+<p data-sourcepos="77:1-77:87">こういう運用はMCPサーバーを立ててやった方が良いのかしらン。</p>
+<h2 data-sourcepos="79:1-79:9">
+<span id="番外" class="fragment"></span><a href="#%E7%95%AA%E5%A4%96"><i class="fa fa-link"></i></a>番外</h2>
+<p data-sourcepos="80:1-80:78">リンク集とダウンロードの方法は別記事にまとめました。</p>
+<p data-sourcepos="82:1-82:54"><iframe id="qiita-embed-content__da4becc9c65bde85be163f1918acd7e1" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__da4becc9c65bde85be163f1918acd7e1" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F6b5895a1fe6c21397f59" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
