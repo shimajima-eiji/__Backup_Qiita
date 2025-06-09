@@ -1,0 +1,145 @@
+<h2 data-sourcepos="1:1-1:15">
+<span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>はじめに</h2>
+<p data-sourcepos="3:1-4:107">「ChatGPTにコードをリファクタリングしてもらったら、意図しない部分まで変更されて困った」<br>
+「半年前に書いたコードの制約を忘れて、AIに適当な修正を依頼してしまった」</p>
+<p data-sourcepos="6:1-6:39">そんな経験はありませんか？</p>
+<p data-sourcepos="8:1-8:256">AIとの協働開発が当たり前になった今、ソースコード自体にAI向けの「取扱説明書」を埋め込んでおくと、驚くほど安全で効率的になります。今回は実際に運用している手法をご紹介します。</p>
+<h2 data-sourcepos="10:1-10:38">
+<span id="問題aiは空気を読まない" class="fragment"></span><a href="#%E5%95%8F%E9%A1%8Cai%E3%81%AF%E7%A9%BA%E6%B0%97%E3%82%92%E8%AA%AD%E3%81%BE%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>問題：AIは空気を読まない</h2>
+<p data-sourcepos="12:1-12:116">AIにコードのリファクタリングを依頼するとき、私たちは暗黙の前提を持っています：</p>
+<ul data-sourcepos="14:1-17:0">
+<li data-sourcepos="14:1-14:62">「この関数は必ずユーザー確認を挟むべき」</li>
+<li data-sourcepos="15:1-15:79">「動画拡張子のリストに画像形式を混ぜてはいけない」</li>
+<li data-sourcepos="16:1-17:0">「このビジネスロジックは変更してはいけない」</li>
+</ul>
+<p data-sourcepos="18:1-18:77">しかし、AIにはこれらの文脈は見えません。結果として、</p>
+<div class="code-frame" data-lang="python" data-sourcepos="20:1-29:3"><div class="highlight"><pre><code><span class="c1"># Before: 必ずユーザー確認を取る関数
+</span><span class="k">def</span> <span class="nf">confirm_directory</span><span class="p">(</span><span class="n">src_dir</span><span class="p">):</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">このディレクトリでよろしいですか？ (y/n): </span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span> <span class="o">==</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span>
+
+<span class="c1"># After: AIが「効率化」してしまった結果
+</span><span class="k">def</span> <span class="nf">confirm_directory</span><span class="p">(</span><span class="n">src_dir</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># 自動承認に変更
+</span></code></pre></div></div>
+<p data-sourcepos="31:1-31:63">のような修正を加えてしまうかもしれません。</p>
+<p data-sourcepos="33:1-33:137">このような「善意の改悪」を防ぐには、ソースファイル内にAI向けの指示を埋め込むのが効果的です。</p>
+<h2 data-sourcepos="35:1-35:66">
+<span id="解決策ソースファイル埋め込み型プロンプト" class="fragment"></span><a href="#%E8%A7%A3%E6%B1%BA%E7%AD%96%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF%E5%9E%8B%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88"><i class="fa fa-link"></i></a>解決策：ソースファイル埋め込み型プロンプト</h2>
+<div data-sourcepos="37:1-40:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="38:1-39:90">ここからはAIの力も借りて記事を書いています。<br>
+特に検証のため様々なサービスを活用し、結果を確認しています。</p>
+</div>
+</div>
+<div data-sourcepos="42:1-45:3" class="note alert">
+<span class="fa fa-fw fa-times-circle"></span><div>
+<ul data-sourcepos="43:1-44:247">
+<li data-sourcepos="43:1-43:128">悪用するとプロンプトインジェクションになりえるため、軽い気持ちでやってはいけません。</li>
+<li data-sourcepos="44:1-44:247">私は本稿を執筆する前段階より、AIを経由して開発元へ実行結果と実行した目的と必要に応じて改善案をフィードバックを行っており、私の行動については開発元は把握しています。</li>
+</ul>
+</div>
+</div>
+<h3 data-sourcepos="47:1-47:37">
+<span id="基本形シンプルな保護" class="fragment"></span><a href="#%E5%9F%BA%E6%9C%AC%E5%BD%A2%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E4%BF%9D%E8%AD%B7"><i class="fa fa-link"></i></a>基本形：シンプルな保護</h3>
+<div class="code-frame" data-lang="python" data-sourcepos="49:1-59:3"><div class="highlight"><pre><code><span class="c1"># ⚠️ 【変更ルール】prompt.mdを先にAIに読み込ませること
+# 　 WebUI環境では後付けアップロードでOK
+#
+# [AI向け] REQUIRES_PROMPT_CONTEXT: 
+# 関連プロンプト未読み込み時は変更拒否→読み込み促進→作業開始
+</span>
+<span class="k">def</span> <span class="nf">important_function</span><span class="p">():</span>
+    <span class="c1"># 実際のコード
+</span>    <span class="k">pass</span>
+</code></pre></div></div>
+<h3 data-sourcepos="61:1-61:46">
+<span id="発展形ビジネスロジック保護" class="fragment"></span><a href="#%E7%99%BA%E5%B1%95%E5%BD%A2%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF%E4%BF%9D%E8%AD%B7"><i class="fa fa-link"></i></a>発展形：ビジネスロジック保護</h3>
+<div class="code-frame" data-lang="python" data-sourcepos="63:1-78:3"><div class="highlight"><pre><code><span class="c1"># ==================== リファクタリング保護領域 開始 ====================
+# REQUIRES_REFACTOR_PROMPT: ./prompt.md
+# 
+# 【AIへの指示】
+# - confirm_directory関数は必ずユーザー確認を挟むこと。自動化しないこと。
+# - movie_extsは動画拡張子のみを記載し、画像や音声拡張子を混入させないこと。
+# - ファイル移動時は同名ファイルの上書きを絶対に避けること（リネーム必須）。
+# 
+# ==================== リファクタリング保護領域 終了 ====================
+</span>
+<span class="k">def</span> <span class="nf">confirm_directory</span><span class="p">(</span><span class="n">src_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">この確認処理は必ず残すこと。自動化しないこと。</span><span class="sh">"""</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">このディレクトリでよろしいですか？ (y/n): </span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span> <span class="o">==</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span>
+</code></pre></div></div>
+<p data-sourcepos="80:1-80:86">prompt.mdの内容は省略（プロジェクト固有のAI運用ルールのため）</p>
+<h2 data-sourcepos="82:1-82:18">
+<span id="実際の効果" class="fragment"></span><a href="#%E5%AE%9F%E9%9A%9B%E3%81%AE%E5%8A%B9%E6%9E%9C"><i class="fa fa-link"></i></a>実際の効果</h2>
+<h3 data-sourcepos="84:1-84:43">
+<span id="beforeプロンプト埋め込み前" class="fragment"></span><a href="#before%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF%E5%89%8D"><i class="fa fa-link"></i></a>Before：プロンプト埋め込み前</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="85:1-89:3"><div class="highlight"><pre><code>人間：「このコードをリファクタリングして」
+AI：「効率化しました！確認処理を削除し、自動実行にしました」
+人間：「それは困る...元に戻して」
+</code></pre></div></div>
+<h3 data-sourcepos="91:1-91:42">
+<span id="afterプロンプト埋め込み後" class="fragment"></span><a href="#after%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF%E5%BE%8C"><i class="fa fa-link"></i></a>After：プロンプト埋め込み後</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="92:1-97:3"><div class="highlight"><pre><code>人間：「このコードをリファクタリングして」
+AI：「ファイル保護を検出しました。関連するprompt.mdを先に読み込んでください」
+人間：（prompt.mdアップロード）
+AI：「制約を理解しました。確認処理は維持したまま、他の部分を改善します」
+</code></pre></div></div>
+<h2 data-sourcepos="99:1-99:24">
+<span id="設計のポイント" class="fragment"></span><a href="#%E8%A8%AD%E8%A8%88%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>設計のポイント</h2>
+<h3 data-sourcepos="101:1-101:34">
+<span id="1-運用者に優しい設計" class="fragment"></span><a href="#1-%E9%81%8B%E7%94%A8%E8%80%85%E3%81%AB%E5%84%AA%E3%81%97%E3%81%84%E8%A8%AD%E8%A8%88"><i class="fa fa-link"></i></a>1. 運用者に優しい設計</h3>
+<p data-sourcepos="103:1-103:103">半年後の自分が見ても理解できるよう、<strong>なぜその制約があるのか</strong>を明記：</p>
+<div class="code-frame" data-lang="python" data-sourcepos="105:1-113:3"><div class="highlight"><pre><code><span class="c1"># [ビジネスロジック・プロンプト]
+# このスクリプトはクラウドストレージの容量圧迫を防ぐため、
+# 動画ファイルのみをクラウド同期対象外のディレクトリに移動・バックアップします。
+#
+# 【重要な制約】
+# - 保存先ディレクトリが存在しない場合は必ずエラーで停止すること。
+# - 本スクリプトの目的外の自動削除や圧縮処理は絶対に追加しないこと。
+</span></code></pre></div></div>
+<h3 data-sourcepos="115:1-115:33">
+<span id="2-ai固有の特性を考慮" class="fragment"></span><a href="#2-ai%E5%9B%BA%E6%9C%89%E3%81%AE%E7%89%B9%E6%80%A7%E3%82%92%E8%80%83%E6%85%AE"><i class="fa fa-link"></i></a>2. AI固有の特性を考慮</h3>
+<p data-sourcepos="117:1-118:93">AIモデルによって指示の理解度が異なるため、明示的に記載。<br>
+この内容に限ってはプロンプトというよりは人間に向けた注意喚起。</p>
+<div class="code-frame" data-lang="python" data-sourcepos="120:1-123:3"><div class="highlight"><pre><code><span class="c1"># ⚠️ 注意：この保護機能を無視する可能性があります
+# 　　　　 指定するAIモデルまたはサービスの使用を推奨
+</span></code></pre></div></div>
+<h3 data-sourcepos="125:1-125:33">
+<span id="3-webui環境での実用性" class="fragment"></span><a href="#3-webui%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AE%E5%AE%9F%E7%94%A8%E6%80%A7"><i class="fa fa-link"></i></a>3. WebUI環境での実用性</h3>
+<p data-sourcepos="127:1-127:102">実際の開発現場では、後からファイルをアップロードすることが多いため：</p>
+<div class="code-frame" data-lang="python" data-sourcepos="129:1-132:3"><div class="highlight"><pre><code><span class="c1"># WebUI環境（場合により社用GPTsなどではAPIが提供されていないケースを想定）では後付けアップロードでOK
+# [AI向け] 関連プロンプト未読み込み時は変更拒否→読み込み促進→作業開始
+</span></code></pre></div></div>
+<h2 data-sourcepos="134:1-134:21">
+<span id="運用上の工夫" class="fragment"></span><a href="#%E9%81%8B%E7%94%A8%E4%B8%8A%E3%81%AE%E5%B7%A5%E5%A4%AB"><i class="fa fa-link"></i></a>運用上の工夫</h2>
+<h3 data-sourcepos="136:1-136:22">
+<span id="レベル別保護" class="fragment"></span><a href="#%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E4%BF%9D%E8%AD%B7"><i class="fa fa-link"></i></a>レベル別保護</h3>
+<div data-sourcepos="138:1-140:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="139:1-139:60">モデルやバージョンによって違いがありそう</p>
+</div>
+</div>
+<div class="code-frame" data-lang="python" data-sourcepos="142:1-146:3"><div class="highlight"><pre><code><span class="c1"># PROTECTION_LEVEL: CRITICAL    # 絶対変更禁止
+# PROTECTION_LEVEL: STANDARD    # 確認必要  
+# PROTECTION_LEVEL: ADVISORY    # 警告のみ
+</span></code></pre></div></div>
+<h3 data-sourcepos="148:1-148:37">
+<span id="具体的な禁止事項を明記" class="fragment"></span><a href="#%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AA%E7%A6%81%E6%AD%A2%E4%BA%8B%E9%A0%85%E3%82%92%E6%98%8E%E8%A8%98"><i class="fa fa-link"></i></a>具体的な禁止事項を明記</h3>
+<div class="code-frame" data-lang="python" data-sourcepos="150:1-155:3"><div class="highlight"><pre><code><span class="c1"># 【絶対禁止】
+# - 確認処理の自動化
+# - 拡張子リストへの画像形式混入
+# - 同名ファイルの上書き処理
+</span></code></pre></div></div>
+<h2 data-sourcepos="157:1-157:12">
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h2>
+<p data-sourcepos="159:1-159:60">ソースファイルへのプロンプト埋め込みは：</p>
+<p data-sourcepos="161:1-164:43">✅ <strong>安全性向上</strong>: 意図しない変更を防ぐ<br>
+✅ <strong>効率化</strong>: 毎回制約を説明する手間が不要<br>
+✅ <strong>保守性</strong>: 半年後の自分にも優しい<br>
+✅ <strong>チーム開発</strong>: 暗黙知の共有</p>
+<p data-sourcepos="166:1-166:123">特に、ビジネスロジックが複雑なコードや、安全性が重要なスクリプトでは効果絶大です。</p>
+<p data-sourcepos="168:1-168:205">「AIは優秀だが、空気は読まない」という特性を理解し、適切な制約を事前に埋め込んでおく。これが、AIとの協働開発を成功させる秘訣だと思います。</p>
+<p data-sourcepos="170:1-170:51">皆さんも、ぜひ試してみてください！</p>
+<hr data-sourcepos="172:1-173:0">
+<p data-sourcepos="174:1-174:191"><em>この記事の内容は実際の運用経験に基づいています。より詳細な実装例や応用パターンについては、コメント欄でお気軽にご質問ください。</em></p>
