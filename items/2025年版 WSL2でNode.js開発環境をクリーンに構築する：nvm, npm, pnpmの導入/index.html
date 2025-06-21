@@ -1,0 +1,137 @@
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:138">筆者のかんきょうこうちメモであるため、現場目線では執筆時点で既に古い情報の可能性があります。</p>
+</div>
+</div>
+<h3 data-sourcepos="5:1-5:83">
+<span id="はじめにnodejs環境ぐちゃぐちゃになっていませんか" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%ABnodejs%E7%92%B0%E5%A2%83%E3%81%90%E3%81%A1%E3%82%83%E3%81%90%E3%81%A1%E3%82%83%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%E3%81%8B"><i class="fa fa-link"></i></a>はじめに：Node.js環境、ぐちゃぐちゃになっていませんか？</h3>
+<p data-sourcepos="7:1-8:176">Node.jsを使って開発していると、気づけば環境がカオスになっていた……そんな経験はありませんか？<br>
+特にWindowsユーザーにとって、WSL2は「快適なLinux開発環境への入り口」ですが、そこにNode.jsまで整えるとなると一手間かかります。</p>
+<p data-sourcepos="10:1-10:148">本記事では、<strong>WSL2 + nvm + pnpm</strong> を用いて「クリーンで管理しやすい開発環境」を構築する方法をご紹介します。</p>
+<hr data-sourcepos="12:1-13:0">
+<h3 data-sourcepos="14:1-14:19">
+<span id="1-nvmの導入" class="fragment"></span><a href="#1-nvm%E3%81%AE%E5%B0%8E%E5%85%A5"><i class="fa fa-link"></i></a>1. nvmの導入</h3>
+<p data-sourcepos="16:1-16:110">まずは、Node.jsのバージョンを柔軟に切り替えられる <code>nvm</code> をインストールします。</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="18:1-20:3"><div class="highlight"><pre><code>curl <span class="nt">-o-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+</code></pre></div></div>
+<p data-sourcepos="22:1-22:54">インストール後、設定を反映させます：</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="24:1-26:3"><div class="highlight"><pre><code><span class="nb">source</span> ~/.bashrc  <span class="c"># or ~/.zshrc</span>
+</code></pre></div></div>
+<p data-sourcepos="28:1-28:24">バージョン確認：</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="30:1-32:3"><div class="highlight"><pre><code>nvm <span class="nt">--version</span>
+</code></pre></div></div>
+<hr data-sourcepos="34:1-35:0">
+<h3 data-sourcepos="36:1-36:44">
+<span id="2-nodejsltsのインストール" class="fragment"></span><a href="#2-nodejslts%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>2. Node.js（LTS）のインストール</h3>
+<p data-sourcepos="38:1-38:149">LTS（Long-Term Support）版は、安定した機能を提供するバージョンです。以下のコマンドでインストールできます。</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="40:1-43:3"><div class="highlight"><pre><code>nvm <span class="nb">install</span> <span class="nt">--lts</span>
+nvm use <span class="nt">--lts</span>
+</code></pre></div></div>
+<p data-sourcepos="45:1-45:9">確認：</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="47:1-50:3"><div class="highlight"><pre><code>node <span class="nt">-v</span>
+npm <span class="nt">-v</span>
+</code></pre></div></div>
+<hr data-sourcepos="52:1-53:0">
+<h3 data-sourcepos="54:1-54:31">
+<span id="3-npmのアップデート" class="fragment"></span><a href="#3-npm%E3%81%AE%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88"><i class="fa fa-link"></i></a>3. npmのアップデート</h3>
+<p data-sourcepos="56:1-56:131">デフォルトでインストールされる<code>npm</code>はやや古い場合もあるため、最新に更新しておきましょう。</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="58:1-61:3"><div class="highlight"><pre><code>npm <span class="nb">install</span> <span class="nt">-g</span> npm@latest
+npm <span class="nt">-v</span>
+</code></pre></div></div>
+<hr data-sourcepos="63:1-64:0">
+<h3 data-sourcepos="65:1-65:29">
+<span id="4-pnpmの導入と活用" class="fragment"></span><a href="#4-pnpm%E3%81%AE%E5%B0%8E%E5%85%A5%E3%81%A8%E6%B4%BB%E7%94%A8"><i class="fa fa-link"></i></a>4. pnpmの導入と活用</h3>
+<p data-sourcepos="67:1-67:120"><code>pnpm</code>は、依存パッケージの保存方式に工夫を凝らした軽量パッケージマネージャーです。</p>
+<div class="code-frame" data-lang="bash" data-sourcepos="69:1-72:3"><div class="highlight"><pre><code>npm <span class="nb">install</span> <span class="nt">-g</span> pnpm
+pnpm <span class="nt">-v</span>
+</code></pre></div></div>
+<h4 data-sourcepos="74:1-74:25">
+<span id="pnpm-setup-の使用" class="fragment"></span><a href="#pnpm-setup-%E3%81%AE%E4%BD%BF%E7%94%A8"><i class="fa fa-link"></i></a>pnpm setup の使用</h4>
+<div class="code-frame" data-lang="bash" data-sourcepos="76:1-78:3"><div class="highlight"><pre><code>pnpm setup
+</code></pre></div></div>
+<div data-sourcepos="80:1-85:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="81:1-82:137"><code>pnpm setup</code> は、pnpmのバージョンやシステム環境によっては想定通りに動作しない場合があります。<br>
+例えば、すでに<code>.npmrc</code>や<code>.bashrc</code>に何らかの設定が入っていると、重複や競合が起きることがあります。</p>
+<p data-sourcepos="84:1-84:111">→ 安定を重視する場合は、<code>npm install -g pnpm@latest</code> にとどめておくのも選択肢です。</p>
+</div>
+</div>
+<h4 data-sourcepos="87:1-87:33">
+<span id="なぜpnpmを使うのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cpnpm%E3%82%92%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜpnpmを使うのか？</h4>
+<p data-sourcepos="89:1-89:162"><code>pnpm</code>は、複数プロジェクトで共通パッケージを効率的に使い回せるため、ディスク使用量を減らせる可能性があります。</p>
+<div data-sourcepos="91:1-96:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="92:1-93:149">「ディスク容量を大幅に節約できる」とされる理由は、パッケージを<strong>ハードリンク方式で共有</strong>する仕組みにあります。<br>
+ただし、どの程度削減できるかはプロジェクトの構成や使っているOSのファイルシステムによって変わります。</p>
+<p data-sourcepos="95:1-95:168">→ 体感としては、yarnやnpmに比べてインストールが早い・node_modulesが軽い「ような気がする」くらいが適切かもしれません。</p>
+</div>
+</div>
+<hr data-sourcepos="98:1-99:0">
+<h3 data-sourcepos="100:1-100:46">
+<span id="5-プロジェクト開始の基本手順" class="fragment"></span><a href="#5-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E9%96%8B%E5%A7%8B%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>5. プロジェクト開始の基本手順</h3>
+<div class="code-frame" data-lang="bash" data-sourcepos="102:1-107:3"><div class="highlight"><pre><code><span class="nb">mkdir </span>my-app <span class="o">&amp;&amp;</span> <span class="nb">cd </span>my-app
+pnpm init
+pnpm <span class="nb">install
+</span>pnpm dev  <span class="c"># 開発用スクリプトがある場合</span>
+</code></pre></div></div>
+<hr data-sourcepos="109:1-110:0">
+<h3 data-sourcepos="111:1-111:71">
+<span id="-運用保守の観点から見たベストプラクティス" class="fragment"></span><a href="#-%E9%81%8B%E7%94%A8%E4%BF%9D%E5%AE%88%E3%81%AE%E8%A6%B3%E7%82%B9%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%9F%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9"><i class="fa fa-link"></i></a>✅ 運用・保守の観点から見たベストプラクティス</h3>
+<p data-sourcepos="113:1-113:205">環境構築は一度で終わりではなく、<strong>継続的な運用・保守</strong>が求められます。以下のポイントを意識しておくと、将来的なトラブル回避につながります。</p>
+<ul data-sourcepos="115:1-126:0">
+<li data-sourcepos="115:1-117:0">
+<p data-sourcepos="115:3-116:154"><strong>Node.jsのバージョン固定</strong><br>
+<code>.nvmrc</code> ファイルを用意し、使用バージョンを明示しておくと、チームやCI環境での整合性が取りやすくなります。</p>
+</li>
+<li data-sourcepos="118:1-120:0">
+<p data-sourcepos="118:3-119:118"><strong>パッケージマネージャーの明示的な選定</strong><br>
+<code>npm</code>／<code>pnpm</code>のどちらを使うかをプロジェクトREADMEに記載し、誤混在を防止しましょう。</p>
+</li>
+<li data-sourcepos="121:1-123:0">
+<p data-sourcepos="121:3-122:121"><strong>定期的なアップデート確認</strong><br>
+<code>nvm ls-remote</code> や <code>npm outdated</code> などで、依存やツールの更新状況を定期チェックしましょう。</p>
+</li>
+<li data-sourcepos="124:1-126:0">
+<p data-sourcepos="124:3-125:123"><strong>キャッシュやnode_modulesのクリア運用</strong><br>
+<code>pnpm store prune</code> や <code>rm -rf node_modules</code> → <code>pnpm install</code> を活用して健全な依存解決を維持します。</p>
+</li>
+</ul>
+<hr data-sourcepos="127:1-128:0">
+<h3 data-sourcepos="129:1-129:13">
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h3>
+<table data-sourcepos="131:1-135:103">
+<thead>
+<tr data-sourcepos="131:1-131:59">
+<th data-sourcepos="131:2-131:15">ツール</th>
+<th data-sourcepos="131:17-131:38">役割</th>
+<th data-sourcepos="131:40-131:58">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="133:1-133:81">
+<td data-sourcepos="133:2-133:9"><code>nvm</code></td>
+<td data-sourcepos="133:11-133:42">Node.jsバージョン管理</td>
+<td data-sourcepos="133:44-133:80">グローバル汚染を防げる</td>
+</tr>
+<tr data-sourcepos="134:1-134:87">
+<td data-sourcepos="134:2-134:9"><code>npm</code></td>
+<td data-sourcepos="134:11-134:48">パッケージ管理の基礎</td>
+<td data-sourcepos="134:50-134:86">安定運用なら最新版推奨</td>
+</tr>
+<tr data-sourcepos="135:1-135:103">
+<td data-sourcepos="135:2-135:9"><code>pnpm</code></td>
+<td data-sourcepos="135:11-135:60">高速・省ディスクなパッケージ管理</td>
+<td data-sourcepos="135:62-135:102">環境によっては恩恵が大きい</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="137:1-138:0">
+<h3 data-sourcepos="139:1-139:70">
+<span id="おわりに環境構築は未来の自分へのギフト" class="fragment"></span><a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AF%E6%9C%AA%E6%9D%A5%E3%81%AE%E8%87%AA%E5%88%86%E3%81%B8%E3%81%AE%E3%82%AE%E3%83%95%E3%83%88"><i class="fa fa-link"></i></a>おわりに：環境構築は“未来の自分”へのギフト</h3>
+<p data-sourcepos="141:1-141:198">「環境構築に時間をかけたくない」という気持ちは自然ですが、最初にしっかり整えておくことで、将来のメンテナンスコストは劇的に減ります。</p>
+<p data-sourcepos="143:1-143:127">本記事が、あなたのNode.js開発ライフのスタートを少しでも快適にする助けとなれば幸いです。</p>
+<hr data-sourcepos="145:1-146:0">
+<h3 data-sourcepos="147:1-147:60">
+<span id="-補足本記事の技術的裏付けについて" class="fragment"></span><a href="#-%E8%A3%9C%E8%B6%B3%E6%9C%AC%E8%A8%98%E4%BA%8B%E3%81%AE%E6%8A%80%E8%A1%93%E7%9A%84%E8%A3%8F%E4%BB%98%E3%81%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-link"></i></a>📝 補足：本記事の技術的裏付けについて</h3>
+<p data-sourcepos="149:1-150:299">本稿の技術情報は、AIによる文献・ドキュメントの検索結果をもとに整理した内容を中心に構成し、筆者（アカウントユーザー）によるレビュー・監修を行っています。<br>
+ただし、筆者自身がNodeの専門家ではないことと、ツールの挙動やコマンド結果は<strong>各自の環境に依存</strong>する部分もあるため、実際の運用に際しては公式ドキュメントやプロジェクトのガイドラインを併せてご参照ください。</p>
