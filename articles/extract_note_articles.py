@@ -17,6 +17,21 @@ def sanitize_filename(text, max_length=100):
     # Truncate to max_length
     return sanitized[:max_length]
 
+def get_max_post_id_digits(xml_file_path: str) -> int:
+    try:
+        tree = ET.parse(xml_file_path)
+        root = tree.getroot()
+    except (FileNotFoundError, ET.ParseError):
+        return 0
+
+    namespaces = {'wp': 'http://wordpress.org/export/1.2/'}
+    max_id = 0
+    for item in root.findall('.//item'):
+        post_id_elem = item.find('wp:post_id', namespaces)
+        if post_id_elem is not None and post_id_elem.text.isdigit():
+            max_id = max(max_id, int(post_id_elem.text))
+    return len(str(max_id)) if max_id > 0 else 1
+
 def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
     Parses a Note.com XML backup file and extracts each article into a separate JSON file.
@@ -55,6 +70,16 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 
     print(f"Found {len(items)} articles to extract.")
     extracted_count = 0
+
+    # Calculate max post_id digits for padding
+    max_post_id_digits = get_max_post_id_digits(xml_file_path)
+    
+    # Target total filename length is around 30 characters
+    # post_id_padding + underscore + title_length = 30
+    # title_length = 30 - post_id_padding - 1
+    title_max_length = 30 - max_post_id_digits - 1
+    if title_max_length < 1: # Ensure title_max_length is at least 1
+        title_max_length = 1
 
     for i, item in enumerate(items):
         title = item.find('title').text or f"Untitled Article {i+1}"
@@ -99,13 +124,13 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 
         # Generate filename based on post_id and sanitized title
         filename_base = ""
-        if post_id:
-            # Zero-pad post_id to 6 digits
-            padded_post_id = str(post_id).zfill(6)
-            filename_base = f"{padded_post_id}_{sanitize_filename(title, max_length=100)}"
+        if post_id and post_id.isdigit():
+            # Zero-pad post_id dynamically
+            padded_post_id = str(post_id).zfill(max_post_id_digits)
+            filename_base = f"{padded_post_id}_{sanitize_filename(title, max_length=title_max_length)}"
         else:
-            # Fallback if post_id is not available
-            filename_base = sanitize_filename(title, max_length=150) # Longer title if no ID
+            # Fallback if post_id is not available or not a digit
+            filename_base = sanitize_filename(title, max_length=30) # Use 30 for title if no ID
             if not filename_base:
                 filename_base = f"article_{i}"
 
