@@ -1,9 +1,10 @@
 {
     "id": "n542f7d7b947f",
+    "post_id": "11",
     "title": "【手引】のむらの記事の読み方",
-    "link": "https://note.com/nomuragoro/n/n542f7d7b947f",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-18T21:59:37+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "# 最終更新：[2020/07/18] first commit",
         "気付き次第、書き足していきます。",
@@ -20,5 +21,13 @@
         "# ぼやき",
         "この記事の窓絵を記事一覧にしたのは、こういう画面がユーザーから見えればいいなぁ、と思ったからです。",
         "要望タグをいれておきます。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n542f7d7b947f_b93ced175e1ec7aa524c66211fd5bb8b.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

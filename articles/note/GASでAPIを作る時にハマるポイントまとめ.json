@@ -1,9 +1,10 @@
 {
     "id": "nbb5c4b92d2f6",
+    "post_id": "44",
     "title": "GASでAPIを作る時にハマるポイントまとめ",
-    "link": "https://note.com/nomuragoro/n/nbb5c4b92d2f6",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-12T20:16:14+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "この記事の読者は、",
         "https://www.bugbugnow.net/2019/06/gasweb.html",
@@ -93,5 +94,6 @@
         "その場合、ソースコードに問題がないことが分かります。",
         "# 元の記事に戻る",
         "https://note.com/nomuragoro/n/neff623b63145"
-    ]
+    ],
+    "images": []
 }

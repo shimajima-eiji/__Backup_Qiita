@@ -1,9 +1,10 @@
 {
     "id": "n8e24dfe9c8bf",
+    "post_id": "17",
     "title": "Gistのソースコードをうまく貼り付けて表示をキレイにしよう！",
-    "link": "https://note.com/nomuragoro/n/n8e24dfe9c8bf",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-20T14:17:47+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "# Gistの悩み",
         "ソースコードの一部を貼り付けたい場合があります。",
@@ -24,5 +25,13 @@
         "そこで、https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js のように「#file-」をつけてファイル名を指定すると、必要な部分だけが取り出せます。",
         "https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js",
         "非常に見やすくなりました。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n8e24dfe9c8bf_b5aac5f65353a41a6df288b733f28644.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

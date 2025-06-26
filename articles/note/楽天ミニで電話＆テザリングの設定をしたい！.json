@@ -1,9 +1,10 @@
 {
     "id": "nb04815970c3d",
+    "post_id": "21",
     "title": "楽天ミニで電話＆テザリングの設定をしたい！",
-    "link": "https://note.com/nomuragoro/n/nb04815970c3d",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-24T15:28:20+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "探さないと見つからないなんて…。",
         "電話アイコンはいっぱいあるのに、肝心の電話機能を使えないものばかりで辟易しますね。",
@@ -74,5 +75,67 @@
         "「デバイスを探す」アプリはとりあえず入れますが、ほとんど使い物にならないので節電アプリを入れるべきです。",
         "その上で、アンチウイルスアプリを入れたいですが、電池の消費量が高まってしまうので用途により入れるかどうかを判断したほうが良いかもしれません。",
         "（電話帳を使わない、SNSに電話番号で登録しない、googleアカウントは捨てアカウントを使うなど）"
+    ],
+    "images": [
+        {
+            "src": "/assets/nb04815970c3d_bde6c69a9e6d3011202e03fde4368bb3.jpg",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_e10a23bad53c1a65b87557837136ff99.jpg",
+            "alt": "楽天電話",
+            "width": "198",
+            "height": "198"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_11047a27d76415f724177e32a462b0c2.jpg",
+            "alt": "楽天ホーム",
+            "width": "304",
+            "height": "540"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_29089c7bf82a1d20be888fe7872b08f8.jpg",
+            "alt": "楽天google",
+            "width": "304",
+            "height": "540"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_b9cc18b116847add0989f119818dad45.jpg",
+            "alt": "楽天スタートガイド",
+            "width": "303",
+            "height": "540"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_f4669055cc455054daa3cbfe2b0394e8.png",
+            "alt": "楽天マイモバイル",
+            "width": "620",
+            "height": "412"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_28c129f7ade75cc43028f7353709d57e.jpg",
+            "alt": "画像6",
+            "width": "540",
+            "height": "449"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_9224f8bb6230c33f1b8353b7cba252e1.jpg",
+            "alt": "fastスマホ",
+            "width": "304",
+            "height": "540"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_538c1ea1697bfc7568097f601b3344e8.jpg",
+            "alt": "画像8",
+            "width": "304",
+            "height": "540"
+        },
+        {
+            "src": "/assets/nb04815970c3d_picture_pc_2e343f13889b0ac6c23919bb01f2f349.jpg",
+            "alt": "fast楽天",
+            "width": "304",
+            "height": "540"
+        }
     ]
 }

@@ -1,9 +1,10 @@
 {
     "id": "nf95dd700b80b",
+    "post_id": "35",
     "title": "windowsでcronを実施させて自動でgithubに毎日草を生やすまで（CHANGELOG.mdを自動更新）",
-    "link": "https://note.com/nomuragoro/n/nf95dd700b80b",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-04T12:46:57+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "全部",
         "ここ",
@@ -32,5 +33,6 @@
         "/usr/local/bin/github-changes",
         "なので、異なる場合はlink -sでシンボリックリンクを作るか、スクリプト自体をダウンロードしてパスを変える手が有効です。",
         "とりあえず使ってみるだけでも動くようにはなっていますが、初期値はshimajima-eiji/Chocolateyを指しているので、正しい内容を取得したい場合はご自身の環境に向けるようにしてください。"
-    ]
+    ],
+    "images": []
 }

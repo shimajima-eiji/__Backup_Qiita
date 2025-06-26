@@ -1,9 +1,10 @@
 {
     "id": "nf11cbbaf8f96",
+    "post_id": "43",
     "title": "簡易人月計算シミュレーターを作った！",
-    "link": "https://note.com/nomuragoro/n/nf11cbbaf8f96",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-12T20:18:23+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "https://note.com/nomuragoro/m/m2390343388db",
         "思った以上に規模が大きくなりました…",
@@ -29,5 +30,13 @@
         "リファクタリングも含めると実稼働だけでも40時間ぐらい？",
         "製作期間としては１ヶ月ぐらいです。",
         "あっちこっちに浮気してたのでChocolatey関連のcommitが多いですね^^;"
+    ],
+    "images": [
+        {
+            "src": "/assets/nf11cbbaf8f96_d8b81dcf1a7168822cecf5e9949d3e14.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

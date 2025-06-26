@@ -1,9 +1,10 @@
 {
     "id": "n10cfd4a75af8",
+    "post_id": "28",
     "title": "【感想】catan classicを遊び尽くす！全課金する価値はある？",
-    "link": "https://note.com/nomuragoro/n/n10cfd4a75af8",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-30T14:12:05+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "今回はQ&A式に。",
         "実際に私が買うまでの話と、買ってからの話です。",
@@ -76,5 +77,37 @@
         "とはいえ、リアルでカタンをやる時も似たような事は当然あるので、リアルっぽいと言えばリアルっぽいです。",
         "カスタムシナリオで歯応えがなくなったらキャンペーンを遊びましょう。",
         "リアルプレイの練習をするなら、キャンペーンでノーコンティーニュー制覇を目標にするのもアリです。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n10cfd4a75af8_46bacdadd6bb531dabb51e47a9b30b0e.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/n10cfd4a75af8_picture_pc_b851d1d1855a782c1b9976041a19b73f.png",
+            "alt": "カタン・魅惑の大地",
+            "width": "540",
+            "height": "304"
+        },
+        {
+            "src": "/assets/n10cfd4a75af8_picture_pc_29c1f88dbe1d4d00607de7eb63d98908.png",
+            "alt": "カタン・大運河",
+            "width": "540",
+            "height": "304"
+        },
+        {
+            "src": "/assets/n10cfd4a75af8_picture_pc_b74c36bd0303eaacb8f2b9526cbc7cec.png",
+            "alt": "カタン・魅惑の大地",
+            "width": "540",
+            "height": "304"
+        },
+        {
+            "src": "/assets/n10cfd4a75af8_picture_pc_bc05513504b649b35ac56fd4eb424ea7.png",
+            "alt": "カタン・大運河",
+            "width": "540",
+            "height": "304"
+        }
     ]
 }

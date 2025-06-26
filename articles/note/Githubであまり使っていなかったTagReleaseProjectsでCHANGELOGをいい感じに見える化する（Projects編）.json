@@ -1,9 +1,10 @@
 {
     "id": "n6b190e8f2f76",
+    "post_id": "49",
     "title": "Githubであまり使っていなかったTag/Release/ProjectsでCHANGELOGをいい感じに見える化する（Projects編）",
-    "link": "https://note.com/nomuragoro/n/n6b190e8f2f76",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-14T08:57:59+09:00",
+    "status": "draft",
+    "post_type": "post",
     "content": [
         "Github就活・転職を前向きにやっているので、こういった細かいところで",
         "普段はIssueとWiki、READMEぐらいしかやってなかったので、こういうのはどんどん使っていきたい。",
@@ -50,5 +51,25 @@
         "やることをプロジェクトにしたので、「やることリスト」みたいなラベルがなくなってスッキリしました。",
         "プロジェクトで細かく分けられるようになったので、Issueでラベルとして必要なのは、プロジェクトを横断するようなものです。",
         "たとえば、AプロジェクトでもBプロジェクトでもタスク（Issue）が「相談か実行か」「優先度・緊急度」は分かったほうが良い、とかそういうぐらいです。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n6b190e8f2f76_a9be9a0ba14093ef3c5ae006ec5363fc.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/n6b190e8f2f76_picture_pc_939841f32b7a9ce441342586bd2a305e.png",
+            "alt": "画像1",
+            "width": "448",
+            "height": "650"
+        },
+        {
+            "src": "/assets/n6b190e8f2f76_picture_pc_bc3e0390b755102fdec5fc6869979bbd.png",
+            "alt": "Github-Projects使ってみた",
+            "width": "620",
+            "height": "489"
+        }
     ]
 }

@@ -1,9 +1,10 @@
 {
     "id": "nb01731aa8cca",
+    "post_id": "9",
     "title": "noteのRSSフィードを取得してRSSリーダーで最新の情報を取得したい。",
-    "link": "https://note.com/nomuragoro/n/nb01731aa8cca",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-20T18:16:59+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "# RSSリーダーとは？",
         "Webサイトで更新された新着情報や更新情報を自動で取得できるツール・アプリです。",
@@ -35,5 +36,19 @@
         "情報発信をしたいなら最低限twitterに登録する必要がある、と考えていい時代です。",
         "twitterに依存するのは良くない、という考え方もありますが、若い世代はgoogleではなくtwitterの検索で完結する事も多いです。",
         "理由はどうあれ、「やらない」という選択肢はないだろうと思います。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nb01731aa8cca_1bea23cd03dc5a28cf38d0b32f4124f2.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nb01731aa8cca_picture_pc_079a13f91ee518909c51d7060d3755c7.png",
+            "alt": "rssリーダー",
+            "width": "561",
+            "height": "540"
+        }
     ]
 }

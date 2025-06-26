@@ -1,9 +1,10 @@
 {
     "id": "n7d54a6db9acd",
+    "post_id": "36",
     "title": "カスタムオーダーメイド3D2 GP-01Fb（大型アップデートパック）入れてみたのでレビューする",
-    "link": "https://note.com/nomuragoro/n/n7d54a6db9acd",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-10T04:00:25+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "https://youtu.be/fAQqYeklybM",
         "# とりあえず100日回す",
@@ -27,5 +28,19 @@
         "基本３キャラ＋前作引き継ぎ３キャラがメインなので、今後追加１０キャラ分にも適用されていくんじゃないでしょうか。",
         "# ぼやき",
         "これYoutubeでもBANされてないし、公式へのリンク（利用規約に抵触）貼ってないから大丈夫だよね...？"
+    ],
+    "images": [
+        {
+            "src": "/assets/n7d54a6db9acd_58471d7de6f7a8650ac1f75b21e4bafd.jpg",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/n7d54a6db9acd_picture_pc_3ba5a30fef610da7db36823b2ee78138.png",
+            "alt": "画像1",
+            "width": "620",
+            "height": "124"
+        }
     ]
 }

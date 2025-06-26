@@ -1,9 +1,10 @@
 {
     "id": "nab7510c2279d",
+    "post_id": "10",
     "title": "システム開発：お仕事のご依頼・ご提案について",
-    "link": "https://note.com/nomuragoro/n/nab7510c2279d",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-18T21:15:43+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "https://paiza.hatenablog.com/entry/2020/07/16/%E5%84%AA%E7%A7%80%E3%81%AA%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%82%92%E6%8E%A1%E7%94%A8%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84%E4%BA%BA%E4%BA%8B%E6%8B%85%E5%BD%93%E3%81%AB%E4%B8%8D%E8%B6%B3",
         "人事・スカウト向けのお話です。",
@@ -62,5 +63,13 @@
         "# ご依頼",
         "Facebookなど（本名名義）をご利用ください。",
         "ビズリーチやwantedlyなどをはじめ、大体の登録サービスを活用しておりますので、定額プランの方はそちらでも構いません。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nab7510c2279d_7e8f1950576850bddafa4b973b302e70.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

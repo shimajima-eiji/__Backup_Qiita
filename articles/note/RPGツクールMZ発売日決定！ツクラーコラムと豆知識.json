@@ -1,9 +1,10 @@
 {
     "id": "nbb357fa6a421",
+    "post_id": "6",
     "title": "RPGツクールMZ発売日決定！ツクラーコラムと豆知識",
-    "link": "https://note.com/nomuragoro/n/nbb357fa6a421",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-17T03:50:51+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "RPGツクールMZ",
         "が2020年8月20日に発売とのことで、今から期待が高まりますね！",
@@ -31,5 +32,19 @@
         "消費SP半減で本来一発しか使えないはずが、二発も使えてしまい、ラスボス戦感動のクライマックスはたった２ターンで終わってしまいました……。",
         "SPを２倍にすると、威力が上がりますが計算式次第では一撃で倒れる、という事は防げます。",
         "※マダンテ：現在のSPをすべて消費して、SP依存の高威力の魔法を発生させる。作品によってはHPを確実に一桁にする強力な魔法。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nbb357fa6a421_87bd399b06414a2e6587c6d46e4011fd.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nbb357fa6a421_picture_pc_e328fcacfa6db4de2f59bcb6b7b4717c.png",
+            "alt": "画像1",
+            "width": "620",
+            "height": "319"
+        }
     ]
 }

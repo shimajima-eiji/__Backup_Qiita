@@ -1,9 +1,10 @@
 {
     "id": "nc4374b8b4fc1",
+    "post_id": "18",
     "title": "noteでコードを書く時はCodePenやGistを使ってみよう（拡張機能あり）",
-    "link": "https://note.com/nomuragoro/n/nc4374b8b4fc1",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-20T13:58:10+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "予めお伝えしておきますが、プログラマー向けです。",
         "プログラマーじゃなくても使えますし、読めるように書いていますが、プログラマー以外には価値が薄いと思います。",
@@ -47,5 +48,13 @@
         "ローカルで使えるスタンドアローン版もダウンロードできますが、chrome拡張機能でやりたい事が完結できます。",
         "ブラウジングのメモリを軽くしたい時ぐらいでしょうか。",
         "https://chrome.google.com/webstore/detail/cacher/aiiaandmkmekfhembfoghdnfiiiedhhk"
+    ],
+    "images": [
+        {
+            "src": "/assets/nc4374b8b4fc1_9a075bc352f871ba1432212cd7ea7a4d.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

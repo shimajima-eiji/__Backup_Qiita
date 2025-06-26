@@ -1,9 +1,10 @@
 {
     "id": "n3a75bcb4ef8e",
+    "post_id": "2",
     "title": "microCMSを無料枠で効率的に使うために、サービスをいかに削れるか考える。",
-    "link": "https://note.com/nomuragoro/n/n3a75bcb4ef8e",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-15T14:32:43+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "※運用の話が強めです。",
         "Qiitaに公開しようかと思ったんですが、一般公開するとすぐに規制対象になりそうなので有料です。",
@@ -57,5 +58,37 @@
         "その他のサービスアプリで使用するAPIキーが共通なので、一つが漏洩すれば関係するサービスすべてが漏洩した事になるため、リスク管理の観点からはおすすめしません。",
         "私はあくまで開発を楽しみたい個人で活用しているので",
         "商用ラインで使っている場合はきちんとサービスを分けましょう。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n3a75bcb4ef8e_195b778209b3ce0218fedb61853ee3f9.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/n3a75bcb4ef8e_picture_pc_9cb1e93103bd56e9b518c37bfee1e691.png",
+            "alt": "許可設定",
+            "width": "620",
+            "height": "210"
+        },
+        {
+            "src": "/assets/n3a75bcb4ef8e_picture_pc_b673c61545bc83f675fe6eb53545e8cd.png",
+            "alt": "コンテンツ",
+            "width": "620",
+            "height": "228"
+        },
+        {
+            "src": "/assets/n3a75bcb4ef8e_picture_pc_aceb38ccc4b3b169d05841d99d42257e.png",
+            "alt": "許可設定",
+            "width": "620",
+            "height": "210"
+        },
+        {
+            "src": "/assets/n3a75bcb4ef8e_picture_pc_6e44735314d3564f7574ac4b403275a8.png",
+            "alt": "コンテンツ",
+            "width": "620",
+            "height": "228"
+        }
     ]
 }

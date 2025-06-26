@@ -1,9 +1,10 @@
 {
     "id": "nc3e15f772721",
+    "post_id": "26",
     "title": "noteでも毎日更新の指標を測れないか？",
-    "link": "https://note.com/nomuragoro/n/nc3e15f772721",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-29T14:36:59+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "GitHubとかだと、毎日頑張って草を生やす活動をしてみるとかが分かりやすいですね。",
         "https://grass-graph.moshimo.works/images/shimajima-eiji.png",
@@ -19,5 +20,13 @@
         "# コラム：Githubでの草の生やし方",
         "https://grass-graph.moshimo.works/",
         "で草が生える様子を他のブログなどで使えますが、imgタグを使うのでnoteではダメでした..."
+    ],
+    "images": [
+        {
+            "src": "/assets/nc3e15f772721_7484c02abd54476dbaac6758cf5eac1e.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

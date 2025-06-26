@@ -48,23 +48,42 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 
     for i, item in enumerate(items):
         title = item.find('title').text or f"Untitled Article {i+1}"
-        link = item.find('link').text or "#"
-        creator = item.find('dc:creator', namespaces).text or "Unknown Author"
         pub_date_str = item.find('pubDate').text or ""
         content_html = item.find('content:encoded', namespaces).text or ""
         post_name = item.find('wp:post_name', namespaces).text
         guid = item.find('guid').text or f"unknown_guid_{i}"
 
+        # Extract status, post_id, post_type
+        status_elem = item.find('wp:status', namespaces)
+        status = status_elem.text if status_elem is not None else "unknown"
+
+        post_id_elem = item.find('wp:post_id', namespaces)
+        post_id = post_id_elem.text if post_id_elem is not None else None
+
+        post_type_elem = item.find('wp:post_type', namespaces)
+        post_type = post_type_elem.text if post_type_elem is not None else "post"
+
         # Format publish date to ISO 8601
         formatted_pub_date = ""
         try:
-            # Example: Thu, 01 Jan 2020 00:00:00 +0900
             dt_object = datetime.strptime(pub_date_str, '%a, %d %b %Y %H:%M:%S %z')
             formatted_pub_date = dt_object.isoformat()
         except ValueError:
             formatted_pub_date = pub_date_str # Fallback to original if parsing fails
 
         soup = BeautifulSoup(content_html, 'html.parser')
+        
+        # Extract image information
+        images = []
+        for img_tag in soup.find_all('img'):
+            img_info = {
+                'src': img_tag.get('src'),
+                'alt': img_tag.get('alt', ''),
+                'width': img_tag.get('width'),
+                'height': img_tag.get('height')
+            }
+            images.append(img_info)
+
         content_text = soup.get_text(separator='\n', strip=True)
         content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
 
@@ -100,11 +119,13 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 
         article_data = {
             'id': guid, # Keep the original guid for reference
+            'post_id': post_id, # Added
             'title': title,
-            'link': link,
-            'author': creator,
             'publish_date': formatted_pub_date,
-            'content': content_lines
+            'status': status, # Added
+            'post_type': post_type, # Added
+            'content': content_lines,
+            'images': images # Added
         }
 
         try:

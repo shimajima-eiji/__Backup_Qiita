@@ -1,9 +1,10 @@
 {
     "id": "n12dbf073df04",
+    "post_id": "37",
     "title": "ねんがんの　Macbook pro 2020を　てにいれたぞ！",
-    "link": "https://note.com/nomuragoro/n/n12dbf073df04",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-05T23:01:17+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "な　なにをする　きさまらー！",
         "# ごあいさつ",
@@ -29,5 +30,13 @@
         "でインストールできます。",
         "Macと違うのはbrewでのGCCのインストールを手動でやる必要があるぐらいでしょうか。",
         "あとは環境によって異なる面はありますので、トラブルシューティングは公式サイトを参照して、とりあえずインストールできれば一段落です。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n12dbf073df04_445e402bebbf47e7993e4d6408664330.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

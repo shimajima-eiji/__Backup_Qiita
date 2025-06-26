@@ -1,9 +1,10 @@
 {
     "id": "n6d45bafe3e01",
+    "post_id": "50",
     "title": "noteのIPアドレス流出でコロナ禍の行動が筒抜けに？！",
-    "link": "https://note.com/nomuragoro/n/n6d45bafe3e01",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-14T16:39:32+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "えらい騒ぎになってしまったのと、私にも関係があるのでゴチャゴチャされる前に出しておこうと、そういう話です。",
         "# はじめに",
@@ -50,5 +51,13 @@
         "これはIPアドレスが発覚した＝個人情報の流出だと考えるセンシティブな方にこそ読んでほしいからです。",
         "# 次の記事",
         "https://note.com/nomuragoro/n/na92cf9585e6d"
+    ],
+    "images": [
+        {
+            "src": "/assets/n6d45bafe3e01_32c5f490697fc2af0368ed77fcb7c276.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

@@ -1,9 +1,10 @@
 {
     "id": "na14f0a8cc28e",
+    "post_id": "59",
     "title": "10/1 DX EXPO展(Bizcrew)レポート：クリスピー・クリーム・ドーナツの復活と再成長の裏側",
-    "link": "https://note.com/nomuragoro/n/na14f0a8cc28e",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2024-10-01T16:19:29+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "（Qiitaに書こうとしたんですが、どう考えてもエンジニア向けに結びつかないぞ？となって急遽こちらに移行しました）",
         "向こうには慣れている話なので省略してますが、この記事はセミナーを聞きながらリアルタイムで書いているため、無編集・無チェックです。誤字脱字誤変換などご容赦ください。",
@@ -51,5 +52,13 @@
         "Qiitaの方で記事を一本化することにします。",
         "ディズニーランド「本気のブランディング」安孫子 薫氏のセミナーレポートもそちらに載せてます。",
         "https://qiita.com/nomurasan/items/25606008f16deb5dbaf6"
+    ],
+    "images": [
+        {
+            "src": "/assets/na14f0a8cc28e_1727748620-5cXEoR7j0G9pszeNuvwlQI2C.png",
+            "alt": "",
+            "width": "620",
+            "height": "347"
+        }
     ]
 }

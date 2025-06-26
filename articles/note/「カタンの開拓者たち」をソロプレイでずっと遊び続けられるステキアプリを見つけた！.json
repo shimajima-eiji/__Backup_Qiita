@@ -1,9 +1,10 @@
 {
     "id": "nf7ef3bd4152a",
+    "post_id": "23",
     "title": "「カタンの開拓者たち」をソロプレイでずっと遊び続けられるステキアプリを見つけた！",
-    "link": "https://note.com/nomuragoro/n/nf7ef3bd4152a",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-24T21:51:51+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "https://www.youtube.com/watch?v=BAWr8J9LBmA",
         "この通り、本来は人数制限のあるテーブルゲーム（ボードゲーム）ですが、これが一人でも遊べるよ！というお話です。",
@@ -57,5 +58,25 @@
         "なので、無料だとかそういう話の前に「えっ？！　カタンって一人でも遊べるの？」という方が衝撃がすごいんです。",
         "この記事は、そういう方向けにしか書いていません。",
         "細かい話はカタンガチ勢や動画サイトをご覧ください。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nf7ef3bd4152a_0df262740fead516f7f7338c1dcde160.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nf7ef3bd4152a_picture_pc_8dbd8b1bd2bef65941e25ea66a1dd21c.png",
+            "alt": "カタンシナリオ",
+            "width": "620",
+            "height": "349"
+        },
+        {
+            "src": "/assets/nf7ef3bd4152a_picture_pc_313fa862a3e73151ea2c3f876aa4dc39.png",
+            "alt": "カタン拡張",
+            "width": "620",
+            "height": "349"
+        }
     ]
 }

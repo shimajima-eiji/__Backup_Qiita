@@ -1,9 +1,10 @@
 {
     "id": "nec5afcd36d2c",
+    "post_id": "3",
     "title": "デザイナーじゃないけど自作でカッコいいヘッダーやカバーイラストを作りたい！（フルセット）",
-    "link": "https://note.com/nomuragoro/n/nec5afcd36d2c",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-17T04:13:14+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "noteの扉絵みたいな画像です。",
         "新規記事を投稿する時に一番上の画像の部分をイメージしてください。",
@@ -29,5 +30,19 @@
         "そのまま使えるように、こちらのテンプレートのURLを共有します。",
         "https://www.canva.com/design/DAEBYNvMKHY/gYnGdqyeoxqm2X0UlI-I8Q/view?utm_content=DAEBYNvMKHY&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu",
         "編集して使ってみてください。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nec5afcd36d2c_5c4ed97805844533534b1a5dd0cd5eca.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nec5afcd36d2c_picture_pc_99a317b89f65a897b5323defd782294c.png",
+            "alt": "画像1",
+            "width": "620",
+            "height": "319"
+        }
     ]
 }

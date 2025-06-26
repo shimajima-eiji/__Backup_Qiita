@@ -1,9 +1,10 @@
 {
     "id": "ndc77430d723c",
+    "post_id": "5",
     "title": "Qiitaで記事を書くのはもうやめようと思う",
-    "link": "https://note.com/nomuragoro/n/ndc77430d723c",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-15T15:11:37+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "はじめにお伝えしますが、Qiitaには大変お世話になっています。",
         "私もQiitaは好きですし、恩返しをしたい思いはあるのです。",
@@ -49,5 +50,13 @@
         "私の評価については個々人の判断に委ねますが、こういったプログラミングに否定的な記事ではなく実際の成果物でご判断いただく方が良いかと思います。",
         "参考：",
         "GitHub"
+    ],
+    "images": [
+        {
+            "src": "/assets/ndc77430d723c_13305000894e5e7353843149c635bc27.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

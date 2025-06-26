@@ -1,9 +1,10 @@
 {
     "id": "n84c545bbbf3b",
+    "post_id": "53",
     "title": "#noteIP流出事件 note以外でもIPアドレス流出対策を考える",
-    "link": "https://note.com/nomuragoro/n/n84c545bbbf3b",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-09-13T02:56:06+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "ご無沙汰してます、野村です。",
         "IP流出の事件で「取られて困るものはない」とお話しました。それは今も変わらないつもりでした。",
@@ -32,5 +33,13 @@
         "# どのVPNサービスを使うか",
         "私も個人でVPNをまだ使い始めて一ヶ月も経っていないんでどこが良いか分からないんですが、とりあえず一ヶ月ないし三ヶ月ぐらいトライアルを試してみて追記します。",
         "WindowsでもMacbook(iMac)でもどちらも使えるようにする必要があるので、設定の仕方も異なります。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n84c545bbbf3b_b05f2a1d410012bc0e16d76eeaaa5b85.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

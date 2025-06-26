@@ -1,9 +1,10 @@
 {
     "id": "n818dd32c7fa0",
+    "post_id": "22",
     "title": "ボードゲームアリーナ（BGA）に参戦しました！",
-    "link": "https://note.com/nomuragoro/n/n818dd32c7fa0",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-24T18:06:39+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "私がやりたいゲームにフォーカスします。",
         "公式のおすすめなどを見ていると、どうもカタンがえらい人気みたいなので参入障壁の高さを感じています…。",
@@ -24,5 +25,13 @@
         "https://asobi556.com/intro/themind/",
         "https://boku-boardgame.net/haa-game#:~:text=%E3%81%AF%E3%81%81%E3%81%A3%E3%81%A6%E8%A8%80%E3%81%86%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AF%E3%80%81%E4%B8%8E%E3%81%88%E3%82%89%E3%82%8C%E3%81%9F%E3%81%8A,%E3%81%A8%E3%81%97%E3%81%A6%E3%83%AA%E3%83%A1%E3%82%A4%E3%82%AF%E3%81%95%E3%82%8C%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82",
         "権利関係もあるでしょうが、遊べるタイトルが多いので探してみてやりたいのがあれば登録、というのが良さそうですね。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n818dd32c7fa0_420aaa54e1975d3297766e473209f366.jpg",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }

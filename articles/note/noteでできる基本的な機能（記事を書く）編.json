@@ -1,9 +1,10 @@
 {
     "id": "ne4e23aa1b397",
+    "post_id": "12",
     "title": "noteでできる基本的な機能（記事を書く）編",
-    "link": "https://note.com/nomuragoro/n/ne4e23aa1b397",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-20T12:11:30+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "ここ数日でnoteでできる機能を色々さわってみたので、私なりにまとめと使い方を考えてみました。",
         "# 結論",
@@ -71,5 +72,31 @@
         "心当たりがあるとすれば、セキュリティアプリがアップロードをブロックしているとかでしょうが、原因エラーメッセージも上がらないので原因は分かりません……。",
         "/assets/ne4e23aa1b397_c10c96770b8bc73271c8cffeae39af4e.txt",
         "PC版だと安定しますね。"
+    ],
+    "images": [
+        {
+            "src": "/assets/ne4e23aa1b397_4cba39edd857df523d568da73690d1de.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/ne4e23aa1b397_picture_pc_5f06e8cdeb9e148fafe7e310c1b98596.png",
+            "alt": "コマンド",
+            "width": "319",
+            "height": "99"
+        },
+        {
+            "src": "/assets/ne4e23aa1b397_picture_pc_01cdd5fd2d138dd4da47045b764405c5.png",
+            "alt": "スマホnote",
+            "width": "270",
+            "height": "540"
+        },
+        {
+            "src": "/assets/ne4e23aa1b397_picture_pc_b60138d01e411c550da1243dc136ce5c.png",
+            "alt": "アプリnote",
+            "width": "270",
+            "height": "540"
+        }
     ]
 }

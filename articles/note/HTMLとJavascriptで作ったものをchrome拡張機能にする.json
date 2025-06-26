@@ -1,9 +1,10 @@
 {
     "id": "n0e41281de8eb",
+    "post_id": "46",
     "title": "HTMLとJavascriptで作ったものをchrome拡張機能にする",
-    "link": "https://note.com/nomuragoro/n/n0e41281de8eb",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-08-12T21:31:36+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "# 前の記事",
         "https://note.com/nomuragoro/n/nc6d62385e49a",
@@ -34,5 +35,6 @@
         "Webページとして利用していたものが、拡張機能として使用できるようになりました。",
         "# 次の記事",
         "https://note.com/notes/neff623b63145"
-    ]
+    ],
+    "images": []
 }

@@ -1,9 +1,10 @@
 {
     "id": "nd8020f9c4bb5",
+    "post_id": "30",
     "title": "カタンの遊び方考察：初期配置とダイスの期待値",
-    "link": "https://note.com/nomuragoro/n/nd8020f9c4bb5",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-30T18:36:02+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "https://www.youtube.com/watch?v=BAWr8J9LBmA",
         "基本ルールは動画にて。",
@@ -66,5 +67,127 @@
         "## コラム：TRPGにおけるダイスの重要性",
         "判定にクリティカル・ファンブルという概念があります。大体高めと低めのゾロ目を指す事が多いですが、ゲームによっては振れるダイスの数が多くなったり、特定の目の数で判定（ダブルクロスやクトゥルフTRPGなど）がありますので、クリティカル率やファンブル率も当然変わります。",
         "が、クリティカル率よりドラマの方が重要かもしれません。"
+    ],
+    "images": [
+        {
+            "src": "/assets/nd8020f9c4bb5_cf715382dac5e7e1753346dc506c4979.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_298b4c19f4421d64ae4df74e2fad34d5.png",
+            "alt": "カタン・街道か船か",
+            "width": "620",
+            "height": "349"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_af08e7fbde890daf83ff2e72364a6d9b.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_bbdfd6ed9005a322dfdad38c458b1c75.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_1bd169c0004a4ca113026e57818079f2.png",
+            "alt": "キレイなダイス6 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_800ce3e9e5184bf0ac51b643a97ff4ef.png",
+            "alt": "キレイなダイス6 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_76c8f9f9380c35d0743f994e767283a8.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_36eaaf73a9dfe4ed3c43b28fc762db43.png",
+            "alt": "キレイなダイス2 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_36eaaf73a9dfe4ed3c43b28fc762db43.png",
+            "alt": "キレイなダイス2 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_76c8f9f9380c35d0743f994e767283a8.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_76c8f9f9380c35d0743f994e767283a8.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_c972a9262ac9a0fc30e0f2e25292d5b7.png",
+            "alt": "キレイなダイス3 - コピー",
+            "width": "151",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_c972a9262ac9a0fc30e0f2e25292d5b7.png",
+            "alt": "キレイなダイス3 - コピー",
+            "width": "151",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_76c8f9f9380c35d0743f994e767283a8.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_36eaaf73a9dfe4ed3c43b28fc762db43.png",
+            "alt": "キレイなダイス2 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_36eaaf73a9dfe4ed3c43b28fc762db43.png",
+            "alt": "キレイなダイス2 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_76c8f9f9380c35d0743f994e767283a8.png",
+            "alt": "キレイなダイス1 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_8e3e7e1d5afcc832887f75c19beced60.png",
+            "alt": "キレイなダイス4 - コピー",
+            "width": "151",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_36eaaf73a9dfe4ed3c43b28fc762db43.png",
+            "alt": "キレイなダイス2 - コピー",
+            "width": "150",
+            "height": "150"
+        },
+        {
+            "src": "/assets/nd8020f9c4bb5_picture_pc_c972a9262ac9a0fc30e0f2e25292d5b7.png",
+            "alt": "キレイなダイス3 - コピー",
+            "width": "151",
+            "height": "150"
+        }
     ]
 }

@@ -1,9 +1,10 @@
 {
     "id": "n6c3128540083",
+    "post_id": "58",
     "title": "隠居軍師の救国ストラテジー「輝かしい勝利」獲得指南と攻略考察",
-    "link": "https://note.com/nomuragoro/n/n6c3128540083",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2024-09-22T14:42:25+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "もう二度とできる気がしない、と思ったけど終わってから振り返るに、勘所は分かったのでなんだかんだでできそう（深夜テンション）",
         "ストーリーモードではファルコネット砲のお世話になりっぱなし。木装備の兵が伸びているのは間違いなく実績解除の試行錯誤の痕跡",
@@ -102,5 +103,61 @@
         "体験版・前作紹介",
         "https://unityroom.com/games/simple-rts",
         "無料で遊べる前作？というか前身。システムは同じだがゲーム性が違うので注意。本作の無料体験版も遊べるので「隠居軍師の救国ストラテジー とま団 cien dlsite」あたりで検索してみよう。"
+    ],
+    "images": [
+        {
+            "src": "/assets/n6c3128540083_6ca1a7a8c5f6c6683fe3a148a3b914b7.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        },
+        {
+            "src": "/assets/n6c3128540083_1726954818-gXnHB4KFdPUiNp1of8CWc3z2.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726989621-ueymTQtAGncps2OESKWdCavM.png",
+            "alt": "",
+            "width": "620",
+            "height": "647"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726957694-bjQzXsUdm7PwIOav5DlYpHJT.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726954946-N5E7wpQVLFyhH0aRdB1zJvCj.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726956142-rozg2P4LmW7KCl6IQSXxqd0A.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726956809-2SFwG40iobnelIadsgOmtfCL.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726956697-9lrRYakQmCPBs0zDwfO1ApTH.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        },
+        {
+            "src": "/assets/n6c3128540083_1726957110-3rDE97vYUhjsnKkpdyJg2oQH.png",
+            "alt": "",
+            "width": "620",
+            "height": "388"
+        }
     ]
 }

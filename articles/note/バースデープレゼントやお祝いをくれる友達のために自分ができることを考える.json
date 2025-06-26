@@ -1,9 +1,10 @@
 {
     "id": "na92cf9585e6d",
+    "post_id": "24",
     "title": "バースデープレゼントやお祝いをくれる友達のために自分ができることを考える",
-    "link": "https://note.com/nomuragoro/n/na92cf9585e6d",
-    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
     "publish_date": "2020-07-28T12:28:37+09:00",
+    "status": "publish",
+    "post_type": "post",
     "content": [
         "記念日はいくつあったって、良い。",
         "# 作り方",
@@ -36,5 +37,13 @@
         "いわゆるネタグッズですね。",
         "それ以上はちょっと手が伸びませんね...。",
         "いや、足長おじさんだから足ですか。"
+    ],
+    "images": [
+        {
+            "src": "/assets/na92cf9585e6d_aedcfa6afd2aabc76ef27a2f10f8e93e.png",
+            "alt": "",
+            "width": null,
+            "height": null
+        }
     ]
 }
