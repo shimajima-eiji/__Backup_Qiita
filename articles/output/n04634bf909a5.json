@@ -8,5 +8,6 @@
   "post_id": 20,
   "content": null,
   "post_date": "2020-07-20 19:43:05",
-  "status": "publish"
+  "status": "publish",
+  "source": "xml"
 }

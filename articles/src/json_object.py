@@ -15,6 +15,7 @@ class Article:
     content: Optional[str] = None
     post_date: Optional[str] = None
     status: Optional[str] = None
+    source: Optional[str] = None # Added source field
 
 @dataclass
 class Articles:

@@ -29,7 +29,8 @@ def main():
             content=content_element.text if content_element is not None else None,
             post_date=post_date_element.text if post_date_element is not None else None,
             status=status_element.text if status_element is not None else None,
-            description=description_element.text if description_element is not None else None
+            description=description_element.text if description_element is not None else None,
+            source='xml' # Set source to 'xml'
         )
         
         # Save each article as a separate JSON file named by its GUID

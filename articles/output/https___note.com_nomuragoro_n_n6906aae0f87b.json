@@ -8,5 +8,6 @@
   "post_id": null,
   "content": null,
   "post_date": null,
-  "status": null
+  "status": null,
+  "source": "rss"
 }

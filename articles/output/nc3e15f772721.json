@@ -8,5 +8,6 @@
   "post_id": 26,
   "content": "<figure name=\"8bbd5bfb-adf1-4e87-86e9-8cc95712e115\"><img src=\"/assets/nc3e15f772721_7484c02abd54476dbaac6758cf5eac1e.png\"><figcaption></figcaption></figure><p name=\"SesEk\">GitHubとかだと、毎日頑張って草を生やす活動をしてみるとかが分かりやすいですね。</p><p name=\"U05wM\"><a href=\"https://grass-graph.moshimo.works/images/shimajima-eiji.png\" target=\"_blank\" rel=\"nofollow\">https://grass-graph.moshimo.works/images/shimajima-eiji.png</a></p><p name=\"Qw5Aa\">で見ることが出来ます。<br>（扉絵は今日の時点の草です）</p><h2 name=\"upNFx\"># twitterのpostを追いかける</h2><p name=\"IRfF3\">これが現実的な気がします。<br>noteからtwitterに自動連携で送信して、ユーザーアカウントが毎日ポストしていることを取得して一日ごとの記事件数をカレンダー形式で表示する、というイメージです。</p><p name=\"VetZZ\">具体的には、</p><p name=\"8f30bb5c-2586-43ea-9c77-f998f1695ddd\"><a href=\"https://twitter.com/nomuraya_note/status/1287689088334622722\">https://twitter.com/nomuraya_note/status/1287689088334622722</a></p><p name=\"UiXpZ\">といった表示ができるtwitterページから日付を取ってきて、同じ日付がいくつあるかを取得できればよいのです。<br>あとは煮るなり焼くなりやっちゃいます。</p><p name=\"g1NKF\"># コラム：Githubでの草の生やし方</p><p name=\"dfa90367-9ecb-4590-a064-4663cb1927fa\"><a href=\"https://grass-graph.moshimo.works/\">https://grass-graph.moshimo.works/</a></p><p name=\"zlRwC\">で草が生える様子を他のブログなどで使えますが、imgタグを使うのでnoteではダメでした...</p>",
   "post_date": "2020-07-29 14:36:59",
-  "status": "publish"
+  "status": "publish",
+  "source": "xml"
 }

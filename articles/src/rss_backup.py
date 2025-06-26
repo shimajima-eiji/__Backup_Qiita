@@ -14,6 +14,14 @@ def main():
     # Ensure output directory exists
     os.makedirs('output', exist_ok=True)
 
+    # Initialize a counter for post_id for RSS articles
+    # This assumes that post_ids from XML are already loaded or will be handled by merge_xml_rss.py
+    # For now, let's start from a high number to avoid collision with XML post_ids if they are small.
+    # A better approach would be to find the max post_id from existing articles.
+    # For this task, I will assume post_id generation is handled during the merge process if needed.
+    # The design doc says "rss では post_id が空欄のため自動採番したり" which implies it's handled during verification/merge.
+    # So, I will not generate post_id here, but rather in merge_xml_rss.py.
+
     for item_str in items:
         title_match = re.search(r'<title>(.*?)</title>', item_str, re.DOTALL)
         link_match = re.search(r'<link>(.*?)</link>', item_str, re.DOTALL)
@@ -35,7 +43,8 @@ def main():
             pub_date=pub_date,
             creator=creator,
             guid=guid,
-            description=description
+            description=description,
+            source='rss' # Set source to 'rss'
         )
         
         # Sanitize GUID for filename

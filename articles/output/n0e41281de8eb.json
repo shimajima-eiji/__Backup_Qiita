@@ -8,5 +8,6 @@
   "post_id": 46,
   "content": "<h2 name=\"FBqlb\"># 前の記事</h2><p name=\"193d807e-8433-4d18-a3ea-5248e6f48e3c\"><a href=\"https://note.com/nomuragoro/n/nc6d62385e49a\">https://note.com/nomuragoro/n/nc6d62385e49a</a></p><p name=\"wtiwl\">の続きです。</p><p name=\"W9NV8\">まずはフロント側で完結する処理を書いたので、せっかくだから拡張機能にしてどこでも持ち運べるようにしましょう。</p><p name=\"AOVRo\">ここでやることは、manifest.jsonを作ることです。</p><h2 name=\"kC0Yf\"># manifest.jsonの設定</h2><pre name=\"DhRpP\"><code>{\n \"name\": \"人月計算\",\n \"version\": \"1.0\",\n \"description\": \"求人サイトやスカウトの案件で給与と年収が一致しない時に比較するスクリプト\",\n \"manifest_version\": 2,\n \"browser_action\": {\n   \"default_popup\": \"index.html\"\n }\n}</code></pre><p name=\"0t5bE\">作ったページにこれを置くと、なんでも拡張機能として扱う事ができます。<br>各項目は自由にいじれますが、manifest_versionは2で固定してください。これがないと動かないですし、version:2でないとダメっぽいです。<br>（固定ならなぜ入力させるのでしょうか^^;）</p><p name=\"KONXf\">これを実際に入れてみます。</p><p name=\"VB5oX\">-&nbsp;<a href=\"https://github.com/shimajima-eiji/Hosting\" target=\"_blank\" rel=\"nofollow\">Github</a>からダウンロードしてきて、man-monthディレクトリ（将来的にはブランチ）を解凍します。<br>-&nbsp;<a target=\"_blank\" rel=\"nofollow\">chrome拡張機能のページ</a>にアクセスし、先程解凍したフォルダを選択します。<br>- 新しく拡張機能が追加され、先程見ていたページが拡張機能として実行できるようになっています。</p><p name=\"wOAJb\">Webページとして利用していたものが、拡張機能として使用できるようになりました。</p><h2 name=\"tkCEE\"># 次の記事</h2><p name=\"c416deef-66ec-4e98-9474-d7f6f1316292\"><a href=\"https://note.com/notes/neff623b63145\">https://note.com/notes/neff623b63145</a></p><p name=\"kGv1R\"><br></p>",
   "post_date": "2020-08-12 21:31:36",
-  "status": "publish"
+  "status": "publish",
+  "source": "xml"
 }
