@@ -1,0 +1,23 @@
+{
+    "id": "nc3e15f772721",
+    "title": "noteでも毎日更新の指標を測れないか？",
+    "link": "https://note.com/nomuragoro/n/nc3e15f772721",
+    "author": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+    "publish_date": "2020-07-29T14:36:59+09:00",
+    "content": [
+        "GitHubとかだと、毎日頑張って草を生やす活動をしてみるとかが分かりやすいですね。",
+        "https://grass-graph.moshimo.works/images/shimajima-eiji.png",
+        "で見ることが出来ます。",
+        "（扉絵は今日の時点の草です）",
+        "# twitterのpostを追いかける",
+        "これが現実的な気がします。",
+        "noteからtwitterに自動連携で送信して、ユーザーアカウントが毎日ポストしていることを取得して一日ごとの記事件数をカレンダー形式で表示する、というイメージです。",
+        "具体的には、",
+        "https://twitter.com/nomuraya_note/status/1287689088334622722",
+        "といった表示ができるtwitterページから日付を取ってきて、同じ日付がいくつあるかを取得できればよいのです。",
+        "あとは煮るなり焼くなりやっちゃいます。",
+        "# コラム：Githubでの草の生やし方",
+        "https://grass-graph.moshimo.works/",
+        "で草が生える様子を他のブログなどで使えますが、imgタグを使うのでnoteではダメでした..."
+    ]
+}

@@ -5,6 +5,7 @@ from urllib.parse import unquote
 import argparse
 import json
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
@@ -49,15 +50,36 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         title = item.find('title').text or f"Untitled Article {i+1}"
         link = item.find('link').text or "#"
         creator = item.find('dc:creator', namespaces).text or "Unknown Author"
-        pub_date = item.find('pubDate').text or "No Date"
+        pub_date_str = item.find('pubDate').text or ""
         content_html = item.find('content:encoded', namespaces).text or ""
         post_name = item.find('wp:post_name', namespaces).text
+        guid = item.find('guid').text or f"unknown_guid_{i}"
+
+        # Format publish date to ISO 8601
+        formatted_pub_date = ""
+        try:
+            # Example: Thu, 01 Jan 2020 00:00:00 +0900
+            dt_object = datetime.strptime(pub_date_str, '%a, %d %b %Y %H:%M:%S %z')
+            formatted_pub_date = dt_object.isoformat()
+        except ValueError:
+            formatted_pub_date = pub_date_str # Fallback to original if parsing fails
 
         soup = BeautifulSoup(content_html, 'html.parser')
         content_text = soup.get_text(separator='\n', strip=True)
+        content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
 
+        # Use guid for filename if available and valid, otherwise fallback to post_name or sanitized title
         filename_base = None
-        if post_name:
+        if guid and "note.com" in guid: # Check if guid looks like a valid note.com ID
+            # Extract the ID part from the guid URL (e.g., n085251d79907 from https://note.com/nomuragoro/n/n085251d79907)
+            match = re.search(r'/n/([a-zA-Z0-9]+)$', guid)
+            if match:
+                filename_base = match.group(1)
+            else:
+                # Fallback to full guid if ID extraction fails
+                filename_base = re.sub(r'[\\/:*?"<>|]', '', guid).strip()[:150]
+        
+        if not filename_base and post_name:
             decoded_post_name = unquote(post_name)
             filename_base = re.sub(r'[\\/:*?"<>|]', '', decoded_post_name).strip()
 
@@ -66,10 +88,9 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
             if sanitized_title:
                 filename_base = sanitized_title
             else:
-                guid = item.find('guid').text or f"unknown_guid_{i}"
-                filename_base = f"article_{guid}"
+                filename_base = f"article_{i}"
 
-        filename_base = filename_base[:150]
+        filename_base = filename_base[:150] # Ensure filename is not excessively long
         output_filename = os.path.join(output_directory, f"{filename_base}.json")
 
         counter = 1
@@ -78,11 +99,12 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
             counter += 1
 
         article_data = {
+            'id': guid, # Keep the original guid for reference
             'title': title,
             'link': link,
             'author': creator,
-            'publish_date': pub_date,
-            'content': content_text
+            'publish_date': formatted_pub_date,
+            'content': content_lines
         }
 
         try:
