@@ -28,13 +28,14 @@ def get_max_post_id_digits_from_existing_json(output_directory: str) -> int:
     if os.path.exists(output_directory):
         for filename in os.listdir(output_directory):
             if filename.endswith(".json"):
+                filepath = os.path.join(output_directory, filename)
                 try:
-                    # ファイル名からpost_idを抽出
-                    match = re.match(r'^(\d+)_.*\.json$', filename)
-                    if match:
-                        post_id = int(match.group(1))
-                        max_id = max(max_id, post_id)
-                except ValueError:
+                    with open(filepath, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        if 'post_id' in data and data['post_id'] is not None:
+                            # post_idが文字列の場合があるので、intに変換して比較
+                            max_id = max(max_id, int(data['post_id']))
+                except (json.JSONDecodeError, ValueError):
                     continue
     return len(str(max_id)) if max_id > 0 else 1
 
@@ -91,7 +92,7 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
         title_max_length = 1
 
     # 既存の記事IDをロードして、更新が必要か判断する
-    existing_article_ids = set()
+    existing_article_guids = set()
     existing_articles_data = {}
     if os.path.exists(output_directory):
         for filename in os.listdir(output_directory):
@@ -101,7 +102,7 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
                     with open(filepath, 'r', encoding='utf-8') as f:
                         data = json.load(f)
                         if 'id' in data:
-                            existing_article_ids.add(data['id'])
+                            existing_article_guids.add(data['id'])
                             existing_articles_data[data['id']] = data
                 except json.JSONDecodeError:
                     print(f"Warning: Could not decode JSON from {filename}. Skipping.")
@@ -117,14 +118,11 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
 
         # RSSフィードにはwp:status, wp:post_id, wp:post_typeがないため、Noneまたはデフォルト値を使用
         status = "publish" # RSSフィードは通常公開記事のみを含む
-        post_id = None # RSSフィードからは直接取得できない
         post_type = "post" # RSSフィードは通常投稿記事のみを含む
 
-        # 既存のpost_idを再利用するか、新しいpost_idを割り当てる
-        # Note: RSSフィードにはpost_idがないため、ここではguidをベースに一意性を判断
-        # 既存のファイル名からpost_idを抽出するロジックを考慮
+        # post_idの割り当てロジック
         current_post_id = None
-        if guid in existing_articles_data and 'post_id' in existing_articles_data[guid] and existing_articles_data[guid]['post_id'] is not None:
+        if guid in existing_articles_data and existing_articles_data[guid]['post_id'] is not None:
             current_post_id = existing_articles_data[guid]['post_id']
         else:
             # 新しい記事の場合、既存のpost_idの最大値+1を割り当てる
@@ -170,7 +168,7 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
             if not filename_base:
                 filename_base = f"article_{i}"
 
-        output_filepath = os.path.join(output_directory, f"{filename_base}.json")
+        output_filepath_base = os.path.join(output_directory, filename_base)
 
         article_data = {
             'id': guid,
@@ -184,13 +182,13 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
         }
 
         # 差分検出と更新/追加
-        is_new_article = guid not in existing_article_ids
+        is_new_article = guid not in existing_article_guids
         is_updated_article = False
 
         if not is_new_article:
             # 既存の記事がある場合、内容を比較して更新されたかチェック
-            # 簡易的な比較（JSON文字列化して比較）
             existing_data = existing_articles_data[guid]
+            
             # post_idは動的に割り当てられるため比較から除外
             temp_existing_data = existing_data.copy()
             temp_article_data = article_data.copy()
@@ -201,24 +199,27 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
                json.dumps(temp_article_data, ensure_ascii=False, sort_keys=True):
                 is_updated_article = True
                 # 古いファイルを削除して新しいファイルに置き換える
-                old_filename_match = re.match(r'^(\d+)_.*\.json$', existing_articles_data[guid]['filename'])
-                if old_filename_match:
-                    old_filepath = os.path.join(output_directory, existing_articles_data[guid]['filename'])
-                    if os.path.exists(old_filepath):
-                        os.remove(old_filepath)
-                        print(f"Removed old version of {existing_articles_data[guid]['title']}")
+                # ファイル名が変更されている可能性があるので、guidで既存ファイルを検索して削除
+                for existing_filename in os.listdir(output_directory):
+                    filepath_to_check = os.path.join(output_directory, existing_filename)
+                    try:
+                        with open(filepath_to_check, 'r', encoding='utf-8') as f_check:
+                            check_data = json.load(f_check)
+                            if 'id' in check_data and check_data['id'] == guid:
+                                os.remove(filepath_to_check)
+                                print(f"Removed old version of {existing_filename}")
+                                break
+                    except (json.JSONDecodeError, Exception):
+                        continue
 
         if is_new_article or is_updated_article:
             # ファイル名衝突時の処理（連番を追加）
-            final_output_filepath = output_filepath
+            final_output_filepath = f"{output_filepath_base}.json"
             counter = 1
             while os.path.exists(final_output_filepath):
-                final_output_filepath = os.path.join(output_directory, f"{filename_base}_{counter}.json")
+                final_output_filepath = f"{output_filepath_base}_{counter}.json"
                 counter += 1
             
-            # 記事データに最終的なファイル名を保存（差分検出のために必要）
-            article_data['filename'] = os.path.basename(final_output_filepath)
-
             try:
                 with open(final_output_filepath, 'w', encoding='utf-8') as f:
                     json.dump(article_data, f, ensure_ascii=False, indent=4)
