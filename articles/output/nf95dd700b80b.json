@@ -1,0 +1,12 @@
+{
+  "title": "windowsでcronを実施させて自動でgithubに毎日草を生やすまで（CHANGELOG.mdを自動更新）",
+  "link": "https://note.com/nomuragoro/n/nf95dd700b80b",
+  "pub_date": "Tue, 04 Aug 2020 12:46:57 +0900",
+  "creator": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+  "guid": "nf95dd700b80b",
+  "description": null,
+  "post_id": 35,
+  "content": "<p name=\"qnda8\">全部<a href=\"https://github.com/shimajima-eiji/Chocolatey/tree/master/wsl/ubuntu\" target=\"_blank\" rel=\"nofollow\">ここ</a>に書いてるのでわざわざ解説するようなものではないですが、一応。</p><h2 name=\"rRTae\"># WSLのディストリビューションを変えるたびに同じ設定をするのが面倒くさい</h2><p name=\"aGY8B\">です。</p><p name=\"eEyCE\">趣味と実益を兼ねてWSL(ver2)を使い倒しているんですが、開発環境を作り直すのでしょっちゅう初期化します。<br>そのため冪等性（べきとうせい：何度繰り返しても同じ結果になること）を担保する必要があります。<br>dockerを使えばこの辺りは気にしなくていいんですが、WSL他でも同じように運用したいので、何とか同じことが出来ないか考えていました。<br>で、せっかくならファイルの管理も同じところでやりたい！</p><p name=\"fdkAB\">これを解決すべく、githubに上げたソースをcurlで持ってくることで解決できるとして、crontabをいじるとシステムファイルにアクセスするのでsudo権限が必要になります。<br>個人（WSL）で運用するなら問題にならないでしょうが、念のためコメントアウトをしています。</p><p name=\"aCSYf\">ここまでで、</p><p name=\"KNfOx\">- WSLにcronを設定して動かす<br>- sshconfigやgitconfigを設定する</p><p name=\"uKSl0\">までが出来ます。つまり、自動で毎日Githubに草を生やす事ができます。<br>本記事で想定している範囲はここまでです。</p><h2 name=\"iSweg\"># 無駄なpushをするなら意味のあることをしたい</h2><p name=\"XhCXg\">cronで適当に編集してpushすればいいんですが、無意味にpushするのもなんだかなぁ、と思ったんで毎回更新するのが手間なCHANGELOG.mdを自動でアップデートさせることにします。</p><p name=\"p8bS5\">まずはCHANGELOG.mdを更新する方法です。<br>私はgithub-changesを採用していますので、まずはコマンドから使えるようにします。&nbsp;</p><pre name=\"DvVqS\"><code>npm install github-changes</code></pre><p name=\"sADoY\">で入りますが、cronから実行する場合はフルパスを指定しないと、github-changesなんて知らねーぞ！と怒られます。<br>which github-changesで場所を確認しておきましょう。<br>curlで引っ張ってくる場所が<b>/usr/local/bin/github-changes</b>&nbsp;なので、異なる場合はlink -sでシンボリックリンクを作るか、スクリプト自体をダウンロードしてパスを変える手が有効です。</p><p name=\"QaXoK\">とりあえず使ってみるだけでも動くようにはなっていますが、初期値はshimajima-eiji/Chocolateyを指しているので、正しい内容を取得したい場合はご自身の環境に向けるようにしてください。</p>",
+  "post_date": "2020-08-04 12:46:57",
+  "status": "publish"
+}

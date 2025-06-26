@@ -1,0 +1,12 @@
+{
+  "title": "ねんがんの　Macbook pro 2020を　てにいれたぞ！",
+  "link": "https://note.com/nomuragoro/n/n12dbf073df04",
+  "pub_date": "Wed, 05 Aug 2020 23:01:17 +0900",
+  "creator": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+  "guid": "n12dbf073df04",
+  "description": null,
+  "post_id": 37,
+  "content": "<figure name=\"544bd404-7f80-4d89-a84b-a6e6f58ba6a2\"><img src=\"/assets/n12dbf073df04_445e402bebbf47e7993e4d6408664330.png\"><figcaption></figcaption></figure><p name=\"azO8Q\"><b>な　なにをする　きさまらー！</b></p><h2 name=\"dUovg\"># ごあいさつ</h2><p name=\"9KAGq\">Mac Terminalってzshなんですね、初めて知った...</p><p name=\"uA8dr\">この度、Macbook Proデビューしたので嬉しくなって１記事書いてますが、たぶんシリーズ化します。<br>今日やっているのは「前から知っていたこと」ですが、実際にやるのは今日が初めてです。</p><p name=\"2Ay4l\">エンジニアがMacさわってみた感じの話ではなく、Macbookの初心者の話が多いです。</p><h2 name=\"m6pdq\"># 初期設定：Mac Touch IDは指が制限される</h2><p name=\"CB07e\">たとえば、人差し指で認証登録したとして、別の指をかざしてもログインできませんでした。<br>かなりしっかりしてます、恐れ入りました...！</p><p name=\"vVenz\"># アイコンをスッキリさせたい</p><p name=\"DaQqZ\">Windowsでいうところのプログラム一覧みたいなのはどうやって見るんでしょうかね？<br>デスクトップでゴチャゴチャしてるのが嫌なので、毎日起動しないものは全部ショートカットなりに送ってしまいたいんですが、どうやって呼び出せるか分からないのでそのままにしています。</p><p name=\"V3BtN\">FinderがいわゆるExplorer的なものだということは分かりました。</p><p name=\"l5i2M\"># Windows Update的なこと</p><p name=\"I5qlQ\">MacbookやiMacだとソフトウェアアップデートなんですかね？<br>Linux系も似たような感じだったので、この辺には特に違和感はなく。</p><h2 name=\"3jp2w\"># HomebrewはWSLでも使える！</h2><p name=\"bG0xv\"><a href=\"https://brew.sh/index_ja\" target=\"_blank\">Homebrew</a>&nbsp;はMac Terminal用のコマンドとばっかり思っていたために、Qiitaのインストール関連でだいぶ手こずりました。<br>コマンドはMacと同じで、</p><pre name=\"QVpA4\"><code>/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)\"</code></pre><p name=\"cgtUm\">でインストールできます。<br>Macと違うのはbrewでのGCCのインストールを手動でやる必要があるぐらいでしょうか。</p><p name=\"HoeL4\">あとは環境によって異なる面はありますので、トラブルシューティングは公式サイトを参照して、とりあえずインストールできれば一段落です。</p><p name=\"3JIQ5\"><br></p>",
+  "post_date": "2020-08-05 23:01:17",
+  "status": "publish"
+}

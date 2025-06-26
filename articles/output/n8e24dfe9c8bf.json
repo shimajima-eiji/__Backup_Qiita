@@ -1,0 +1,12 @@
+{
+  "title": "Gistのソースコードをうまく貼り付けて表示をキレイにしよう！",
+  "link": "https://note.com/nomuragoro/n/n8e24dfe9c8bf",
+  "pub_date": "Mon, 20 Jul 2020 14:17:47 +0900",
+  "creator": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+  "guid": "n8e24dfe9c8bf",
+  "description": null,
+  "post_id": 17,
+  "content": "<figure name=\"608ee618-fe0d-407a-8599-5a4b1505f58b\"><img src=\"/assets/n8e24dfe9c8bf_b5aac5f65353a41a6df288b733f28644.png\"><figcaption></figcaption></figure><h2 name=\"tizgC\"># Gistの悩み</h2><p name=\"tAPpk\">ソースコードの一部を貼り付けたい場合があります。<br>codeで書けば任意に取り出すことができますが、これをGistでやるためにはどうすればよいのか、を試行錯誤しました。</p><p name=\"9IUeP\">Gistの話なので、相変わらずエンジニア・プログラマー向けです。<br>ご容赦ください。</p><h2 name=\"kIN3I\"># サンプルコード</h2><p name=\"sofVK\"><a href=\"https://note.com/nomuragoro/n/nc4374b8b4fc1\" target=\"_blank\" rel=\"nofollow\">このページでは以下の記事のコードを使っています。</a></p><p name=\"58204acc-c792-45f8-b2af-56c3b066aece\"><a href=\"https://note.com/nomuragoro/n/nc4374b8b4fc1\">https://note.com/nomuragoro/n/nc4374b8b4fc1</a></p><p name=\"W48bo\">Gistの管理をしやすくする拡張機能などの紹介もしていますので、合わせて確認してもらえると少し便利になります。</p><h2 name=\"LTSLD\">## 普通に貼り付ける</h2><p name=\"bWGC6\">今回使用するコードは <a href=\"https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js\" target=\"_blank\" rel=\"nofollow\">https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf</a>&nbsp;にあるのですが、これを貼り付けると全部出てきてしまいます。</p><p name=\"c3c896fb-7cc5-4657-8f4a-e28e3febadbf\"><a href=\"https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf\">https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf</a></p><p name=\"ecfkC\">ここでほしいのは、script.jsだけです。</p><h2 name=\"uzz8Y\">## 取り出す</h2><p name=\"bEvl8\">そこで、https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js のように「#file-」をつけてファイル名を指定すると、必要な部分だけが取り出せます。</p><p name=\"958d8efa-7114-4e95-83e5-5d3e44cfcf07\"><a href=\"https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js\">https://gist.github.com/shimajima-eiji/a3077686179f1c298e6cc1d4845554bf#file-script-js</a></p><p name=\"eszZK\">非常に見やすくなりました。</p>",
+  "post_date": "2020-07-20 14:17:47",
+  "status": "publish"
+}

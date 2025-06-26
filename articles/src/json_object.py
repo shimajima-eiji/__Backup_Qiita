@@ -10,7 +10,7 @@ class Article:
     pub_date: str
     creator: str
     guid: str
-    description: str
+    description: Optional[str] = None
     post_id: Optional[int] = None
     content: Optional[str] = None
     post_date: Optional[str] = None

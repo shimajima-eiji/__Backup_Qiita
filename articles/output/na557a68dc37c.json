@@ -1,0 +1,12 @@
+{
+  "title": "(ifttt)noteで記事を書いたらtwitterにも転送する連携がしたい(RSS)",
+  "link": "https://note.com/nomuragoro/n/na557a68dc37c",
+  "pub_date": "Tue, 21 Jul 2020 00:05:19 +0900",
+  "creator": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+  "guid": "na557a68dc37c",
+  "description": null,
+  "post_id": 19,
+  "content": "<figure name=\"f805e187-a88d-4c91-a52d-30dd50959f01\"><img src=\"/assets/na557a68dc37c_84a5b11eed95394d1f66ee0a73809cc7.png\"><figcaption></figcaption></figure><p name=\"GSPt8\"><a href=\"https://note.com/nomuragoro/n/nb01731aa8cca\" target=\"_blank\" rel=\"nofollow\">先の記事</a>でRSSをディスった私ですが、rssでtwitterを連携する機能の設定をミスってたので、反省しつつ備忘録をまとめます。</p><h2 name=\"TbjNU\"># noteのtwitter連携と、noteで記事を書いたらtwitterに転送する連携は別物</h2><p name=\"dT2bV\">これです。ウッカリしてました。<br>公式でtwitter連携とあるので、気が利いてるな～、なんて感心してたら、twitterのアカウントリンクだけ貼って、投稿はしてくれてないんです。<br>騙された人も多いんじゃないでしょうか？</p><h2 name=\"3p6Ma\"># 読者ターゲット</h2><p name=\"TOclu\">- インターネット上級者<br>&nbsp; - プログラマーとかではないです<br>- 外部サービスという言葉を知っている、分かる人</p><p name=\"npOh0\">若干レベルが高めなのは、聞き慣れないサービスを使うからです。</p><h2 name=\"xOJlc\"># Q. iftttより分かりやすいツールないの？</h2><p name=\"hAazB\">A. あるんです。完全に日本語で無料で使えます。<br><a href=\"https://shimajima-eiji.github.io/redirect/socialdog/\" target=\"_blank\">SocialDog</a>というサービスです。</p><p name=\"kXz8o\">やる事は簡単。<br>サクッとユーザー登録をしたら、画像のとおりに押していってください。</p><p name=\"gnk2A\">1. 画面上「ツイート」タブ<br>2. 左メニュー「RSS自動投稿」<br>3. 右上の「＋追加」ボタン</p><p name=\"tXAX8\"><img src=\"/assets/na557a68dc37c_picture_pc_3b52caedccc3723b57523e2e429a431d.png\" alt=\"画像1\" width=\"620\" height=\"484\"></p><p name=\"sSHEK\">次の画面で、「フィードURL」に自身のRSS（たとえば、私の場合 <a href=\"https://note.com/nomuragoro/rss\" target=\"_blank\">https://note.com/nomuragoro/rss</a>&nbsp;）を入れれば自動的に最新記事が表示されます。</p><p name=\"r5YCS\">細かい設定は分かるようになってからでいいので、とりあえずこれで保存しましょう。<br>そうすると、ログインしたtwitterアカウントでどんどん記事が配信されていきます。</p>",
+  "post_date": "2020-07-21 00:05:19",
+  "status": "publish"
+}

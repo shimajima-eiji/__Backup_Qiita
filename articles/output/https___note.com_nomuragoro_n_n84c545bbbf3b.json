@@ -1,0 +1,12 @@
+{
+  "title": "#noteIP流出事件 note以外でもIPアドレス流出対策を考える",
+  "link": "https://note.com/nomuragoro/n/n84c545bbbf3b",
+  "pub_date": "Sun, 13 Sep 2020 02:56:06 +0900",
+  "creator": "中 翔（のむらごろう）| IT教育の効果的な受講方法の案内人",
+  "guid": "https://note.com/nomuragoro/n/n84c545bbbf3b",
+  "description": "\n<![CDATA[ <p name=\"0rGrW\">ご無沙汰してます、野村です。</p><p name=\"z4PgQ\">IP流出の事件で「取られて困るものはない」とお話しました。それは今も変わらないつもりでした。<br>が、よく考えたらWebサービスでクレジットカードの番号を入れたりしてるのでIPが流出したらクレジットカードなどヤバい情報が流出する可能性が一つでも出てしまう事になります。<br>そのため、noteの投稿ふくめAmazonや楽天など各社サービスの利用を著しく制限していました。<br>noteで投稿した事のあるネットワークは全て止めたので、今日まで非常に不便で仕方がなかったです。</p><br/><a href='https://note.com/nomuragoro/n/n84c545bbbf3b'>続きをみる</a> ]]>\n",
+  "post_id": null,
+  "content": null,
+  "post_date": null,
+  "status": null
+}
