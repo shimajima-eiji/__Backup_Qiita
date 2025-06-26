@@ -1,42 +1,69 @@
 import xml.etree.ElementTree as ET
-from json_object import Article, Articles
+from bs4 import BeautifulSoup
 import json
+import os
+from datetime import datetime
 
-def main():
-    tree = ET.parse('master/note-nomuragoro-1.xml')
+from json_object import Article
+
+def parse_xml_to_articles(xml_file_path):
+    tree = ET.parse(xml_file_path)
     root = tree.getroot()
 
+    articles = []
+
     for item in root.findall('.//item'):
-        # Safely get all fields, providing None for missing optional fields
-        post_id_element = item.find('{http://wordpress.org/export/1.2/}post_id')
-        title_element = item.find('title')
-        link_element = item.find('link')
-        pub_date_element = item.find('pubDate')
-        creator_element = item.find('{http://purl.org/dc/elements/1.1/}creator')
-        guid_element = item.find('guid')
-        content_element = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
-        post_date_element = item.find('{http://wordpress.org/export/1.2/}post_date')
-        status_element = item.find('{http://wordpress.org/export/1.2/}status')
-        description_element = item.find('description') # description might be missing in xml_backup
+        title = item.find('title').text if item.find('title') is not None else ''
+        pub_date_str = item.find('pubDate').text if item.find('pubDate') is not None else ''
+        guid = item.find('guid').text if item.find('guid') is not None else ''
+        status = item.find('{http://wordpress.org/export/1.2/}status').text if item.find('{http://wordpress.org/export/1.2/}status') is not None else 'publish'
+
+        content_encoded = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+        content_list = []
+        if content_encoded is not None and content_encoded.text:
+            soup = BeautifulSoup(content_encoded.text, 'html.parser')
+            for p_tag in soup.find_all('p'):
+                if p_tag.get_text(strip=True):
+                    content_list.append(p_tag.get_text(strip=True))
+            for img_tag in soup.find_all('img'):
+                if img_tag.get('src'):
+                    content_list.append(img_tag['src'])
+
+        # Format pub_date to 'yyyy-MM-dd HH:MM' or 'yyyy-MM-dd HH:MM:SS'
+        try:
+            # Attempt to parse with seconds first
+            dt_object = datetime.strptime(pub_date_str, '%a, %d %b %Y %H:%M:%S %z')
+            formatted_pub_date = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+        except ValueError:
+            try:
+                # If parsing with seconds fails, try without seconds
+                dt_object = datetime.strptime(pub_date_str, '%a, %d %b %Y %H:%M %z')
+                formatted_pub_date = dt_object.strftime('%Y-%m-%d %H:%M')
+            except ValueError:
+                formatted_pub_date = pub_date_str # Fallback if parsing fails
 
         article = Article(
-            post_id=int(post_id_element.text) if post_id_element is not None else None,
-            title=title_element.text if title_element is not None else None,
-            link=link_element.text if link_element is not None else None,
-            pub_date=pub_date_element.text if pub_date_element is not None else None,
-            creator=creator_element.text if creator_element is not None else None,
-            guid=guid_element.text if guid_element is not None else None,
-            content=content_element.text if content_element is not None else None,
-            post_date=post_date_element.text if post_date_element is not None else None,
-            status=status_element.text if status_element is not None else None,
-            description=description_element.text if description_element is not None else None,
-            source='xml' # Set source to 'xml'
+            title=title,
+            pub_date=formatted_pub_date,
+            guid=guid,
+            content=content_list,
+            status=status
         )
-        
-        # Save each article as a separate JSON file named by its GUID
-        filename = f"output/{article.guid}.json"
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(article.__dict__, indent=2, ensure_ascii=False))
+        articles.append(article)
+    return articles
+
+def save_articles_as_json(articles, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
+    for article in articles:
+        file_name = f"xml_{article.guid}.json"
+        file_path = os.path.join(output_dir, file_name)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(article.to_json(), f, ensure_ascii=False, indent=2)
 
 if __name__ == '__main__':
-    main()
+    xml_file = '/mnt/c/Users/shima/Desktop/学習アプリ開発_GeminiCLIデモ/articles/master/note-nomuragoro-1.xml'
+    output_directory = '/mnt/c/Users/shima/Desktop/学習アプリ開発_GeminiCLIデモ/articles/output'
+    
+    articles = parse_xml_to_articles(xml_file)
+    save_articles_as_json(articles, output_directory)
+    print(f"Processed {len(articles)} articles from {xml_file} and saved to {output_directory}")
