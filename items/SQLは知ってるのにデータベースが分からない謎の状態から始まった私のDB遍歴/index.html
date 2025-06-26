@@ -1,0 +1,161 @@
+<p data-sourcepos="1:1-1:122"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fe56d0e31-2ad6-4e88-9ea3-c19a439ad896.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=944e01a32295154bcee7444c32c3e37b" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fe56d0e31-2ad6-4e88-9ea3-c19a439ad896.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=944e01a32295154bcee7444c32c3e37b" alt="扉絵.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2Fe56d0e31-2ad6-4e88-9ea3-c19a439ad896.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=c2181c5b8ebeb7a36abc2b2d5a8e10a4 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/e56d0e31-2ad6-4e88-9ea3-c19a439ad896.png" loading="lazy"></a></p>
+<blockquote data-sourcepos="3:1-3:294">
+<p data-sourcepos="3:3-3:294">この記事は、Qiita主催「【あなたの】はじめてのMySQL」イベントへの参加記事です。SQL資格は持ってるのにデータベースが何かよく分からない、という謎の状態から始まった私のデータベース遍歴を振り返ってみます。</p>
+</blockquote>
+<h2 data-sourcepos="5:1-5:78">
+<span id="第一章はじめてのsqlでもデータベースは知らない" class="fragment"></span><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEsql%E3%81%A7%E3%82%82%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AF%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>第一章：はじめてのSQL（でもデータベースは知らない）</h2>
+<p data-sourcepos="7:1-8:66"><del>もういつだったか思い出せないぐらい昔の話です。</del><br>
+小学生の頃ですね、書きながら思い出しました。</p>
+<p data-sourcepos="10:1-10:172">当時はHTML/CSSですらHTMLビルダーかタグうち（手入力）みたいな時代。JavaScriptとはなんぞや？という人が多かったぐらいでした。</p>
+<p data-sourcepos="12:1-12:121"><strong>情報がとにかく少なくて、何をどう学べばいいのか全然分からない時代</strong>だったんです。</p>
+<h3 data-sourcepos="14:1-14:28">
+<span id="謎の資格取得体験" class="fragment"></span><a href="#%E8%AC%8E%E3%81%AE%E8%B3%87%E6%A0%BC%E5%8F%96%E5%BE%97%E4%BD%93%E9%A8%93"><i class="fa fa-link"></i></a>謎の資格取得体験</h3>
+<p data-sourcepos="16:1-16:162">高校生の時にSQLをさわったり、データベース言語という事は知っていて資格試験＝PC利用技術検定1級にも合格しました。</p>
+<p data-sourcepos="18:1-18:79">でも、<strong>データベースを知らないというトンデモな状態</strong>。</p>
+<p data-sourcepos="20:1-20:120"><iframe id="qiita-embed-content__02534c5c06ea1f7be182a381b80c2768" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__02534c5c06ea1f7be182a381b80c2768" data-content="https%3A%2F%2Fja.wikipedia.org%2Fwiki%2F%25E3%2583%2591%25E3%2582%25BD%25E3%2582%25B3%25E3%2583%25B3%25E5%2588%25A9%25E7%2594%25A8%25E6%258A%2580%25E8%25A1%2593%25E6%25A4%259C%25E5%25AE%259A" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="22:1-22:126">なんでこんなニッチな（失礼）資格を取ろうと思ったかというと、学校が推奨していたから。</p>
+<p data-sourcepos="24:1-24:147"><iframe id="qiita-embed-content__dff255c3ed6b95d1483522b97d58366b" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__dff255c3ed6b95d1483522b97d58366b" data-content="https%3A%2F%2Fja.wikipedia.org%2Fwiki%2F%25E3%2582%25B8%25E3%2583%25A5%25E3%2583%258B%25E3%2582%25A2%25E3%2583%259E%25E3%2582%25A4%25E3%2582%25B9%25E3%2582%25BF%25E3%2583%25BC%25E9%25A1%2595%25E5%25BD%25B0%25E5%2588%25B6%25E5%25BA%25A6" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<p data-sourcepos="26:1-26:60">これ、今思えばすごく変な話なんですよね。</p>
+<blockquote data-sourcepos="28:1-28:71">
+<p data-sourcepos="28:3-28:71">「英語の文法は完璧だけど英語圏の国を知らない」</p>
+</blockquote>
+<p data-sourcepos="30:1-30:112">みたいな感じです。でも当時は<strong>それがおかしいということすら分からなかった</strong>。</p>
+<h3 data-sourcepos="32:1-32:25">
+<span id="情報砂漠の時代" class="fragment"></span><a href="#%E6%83%85%E5%A0%B1%E7%A0%82%E6%BC%A0%E3%81%AE%E6%99%82%E4%BB%A3"><i class="fa fa-link"></i></a>情報砂漠の時代</h3>
+<p data-sourcepos="34:1-34:281">それぐらいIT技術が体系化されておらず、学習用のテキストもどれを読めばいいか分からない。プログラミング言語も（当時は数少ない）パソコンユーザーの中でもニッチ層にしか知られていない存在でした。</p>
+<p data-sourcepos="36:1-36:259">今でこそ未経験者でさえ様々なプログラミング言語の名前ぐらいは聞いたことがある状態ですが、<strong>経験者ですらプログラミング言語の情報がなかなか見つからない</strong>という時代だったんです。</p>
+<p data-sourcepos="38:1-38:57">体系的に学ぶなんて、夢のまた夢でした。</p>
+<hr data-sourcepos="40:1-41:0">
+<h2 data-sourcepos="42:1-42:102">
+<span id="第二章rpgツクールでデータベースを使いまくってるのに気づかない日々" class="fragment"></span><a href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0rpg%E3%83%84%E3%82%AF%E3%83%BC%E3%83%AB%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%82%92%E4%BD%BF%E3%81%84%E3%81%BE%E3%81%8F%E3%81%A3%E3%81%A6%E3%82%8B%E3%81%AE%E3%81%AB%E6%B0%97%E3%81%A5%E3%81%8B%E3%81%AA%E3%81%84%E6%97%A5%E3%80%85"><i class="fa fa-link"></i></a>第二章：RPGツクールでデータベースを使いまくってるのに気づかない日々</h2>
+<p data-sourcepos="44:1-44:81">学生時代はRPGツクールベースにゲーム作成をしていました。</p>
+<p data-sourcepos="46:1-46:67"><strong>実はデータベースをフル活用していた</strong>んです。</p>
+<ul data-sourcepos="48:1-52:0">
+<li data-sourcepos="48:1-48:44">キャラクターのステータス管理</li>
+<li data-sourcepos="49:1-49:25">アイテムデータ</li>
+<li data-sourcepos="50:1-50:17">マップ情報</li>
+<li data-sourcepos="51:1-52:0">イベントフラグ</li>
+</ul>
+<p data-sourcepos="53:1-53:201">全部データベース的な仕組みで動いてるんですよね。しかも複雑な条件分岐とかも組んでて、今思えば立派にリレーショナルな設計をしていました。</p>
+<h3 data-sourcepos="55:1-55:25">
+<span id="でも気づかない" class="fragment"></span><a href="#%E3%81%A7%E3%82%82%E6%B0%97%E3%81%A5%E3%81%8B%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>でも気づかない</h3>
+<p data-sourcepos="57:1-57:151">私はこれを<strong>データベースというよりは表計算ソフトをデータベース的に運用するイメージ</strong>で使っていました。</p>
+<p data-sourcepos="59:1-59:93">「これがデータベースだ！」という認識を全くしていませんでした。</p>
+<p data-sourcepos="61:1-61:130"><strong>「ゲーム作ってる」だけで「データベース設計してる」なんて微塵も思ってなかった</strong>んです。</p>
+<p data-sourcepos="63:1-63:204">そのため、データベースへの習熟度や運用ノウハウは独自で蓄積しておきながら「データベース」が何かを知らないまま過ごしていく事になりました。</p>
+<blockquote data-sourcepos="65:1-65:104">
+<p data-sourcepos="65:3-65:104">あの時「君、もうデータベース設計できてるよ」って誰か教えてくれれば...</p>
+</blockquote>
+<p data-sourcepos="67:1-67:63">本当にもったいなかったなあと今は思います。</p>
+<hr data-sourcepos="69:1-70:0">
+<h2 data-sourcepos="71:1-71:84">
+<span id="第三章実務でsql書いても試験で出てきたやつだ程度" class="fragment"></span><a href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%E5%AE%9F%E5%8B%99%E3%81%A7sql%E6%9B%B8%E3%81%84%E3%81%A6%E3%82%82%E8%A9%A6%E9%A8%93%E3%81%A7%E5%87%BA%E3%81%A6%E3%81%8D%E3%81%9F%E3%82%84%E3%81%A4%E3%81%A0%E7%A8%8B%E5%BA%A6"><i class="fa fa-link"></i></a>第三章：実務でSQL書いても「試験で出てきたやつだ！」程度</h2>
+<p data-sourcepos="73:1-73:130">実務でSQLを書く事があり「<strong>試験で出てきたやつだ！</strong>」ぐらいの感覚でしかありませんでした。</p>
+<p data-sourcepos="75:1-75:90">SQLは分かってもDBが何か（たしかPostgreSQL）まで意識していません。</p>
+<h3 data-sourcepos="77:1-77:46">
+<span id="プログラマーという名の雑用係" class="fragment"></span><a href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%BC%E3%81%A8%E3%81%84%E3%81%86%E5%90%8D%E3%81%AE%E9%9B%91%E7%94%A8%E4%BF%82"><i class="fa fa-link"></i></a>プログラマーという名の雑用係</h3>
+<p data-sourcepos="79:1-79:268">卒業後、ありがたいことにプログラミングの機会がありました。当時はプログラマーという仕事はプログラミングだけをするものではなく、<strong>会社の雑用係というポジション</strong>に落ち着いていました。</p>
+<p data-sourcepos="81:1-81:69">仕事が不明瞭なのに研修なんてあるわけないです。</p>
+<p data-sourcepos="83:1-83:24">敢えて言うなら：</p>
+<ul data-sourcepos="84:1-88:0">
+<li data-sourcepos="84:1-84:20">飛び込み営業</li>
+<li data-sourcepos="85:1-85:14">テレアポ</li>
+<li data-sourcepos="86:1-86:22">ポスティング</li>
+<li data-sourcepos="87:1-88:0">展覧会で名刺交換</li>
+</ul>
+<p data-sourcepos="89:1-89:130">など<strong>足を使った仕事</strong>をしていました。とてもプログラマーがやるような仕事ではないですね。</p>
+<h3 data-sourcepos="91:1-91:43">
+<span id="sqlは言語だと思っていた" class="fragment"></span><a href="#sql%E3%81%AF%E8%A8%80%E8%AA%9E%E3%81%A0%E3%81%A8%E6%80%9D%E3%81%A3%E3%81%A6%E3%81%84%E3%81%9F"><i class="fa fa-link"></i></a>SQLは「言語」だと思っていた</h3>
+<p data-sourcepos="93:1-93:142">そんな中でコードを書く機会があって、<strong>「SQL言語」というプログラミング言語</strong>だと認識していました。</p>
+<p data-sourcepos="95:1-95:99">「色々なプログラミング言語を覚えないとダメなんだな」ぐらいの認識。</p>
+<p data-sourcepos="97:1-98:193">ちょっとオチのない話をしたいので唐突にぶっこむんですが、当時はエンベデッドシステム開発をしていました。奇しくも<strong>官公庁系かつ教育業界</strong>。今なら大喜びしている案件のタイプです。<br>
+今はフリーランスの立場から官公庁系かつ教育業界を目指すようになったので<strong>ちょっと悔しい</strong>ですね。もうちょっと頑張ればよかったです。</p>
+<hr data-sourcepos="100:1-101:0">
+<h2 data-sourcepos="102:1-102:88">
+<span id="第四章phpmyadminwordpressとの初邂逅そして大いなる勘違い" class="fragment"></span><a href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0phpmyadminwordpress%E3%81%A8%E3%81%AE%E5%88%9D%E9%82%82%E9%80%85%E3%81%9D%E3%81%97%E3%81%A6%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%8B%98%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>第四章：PHPMyAdmin（WordPress）との初邂逅、そして大いなる勘違い</h2>
+<p data-sourcepos="104:1-104:121">SQLは知っていて資格も取った。でも<strong>データベース＝Accessの使い方は分かっていません</strong>。</p>
+<p data-sourcepos="106:1-106:211">当時はクラウドもなかった時代。個人で無料ブログっぽいサイトを作れる仕組み＝WordPressという認識でしかなく、**でぇたべぇす？**のような理解度でした。</p>
+<h3 data-sourcepos="108:1-108:22">
+<span id="無謀なphp挑戦" class="fragment"></span><a href="#%E7%84%A1%E8%AC%80%E3%81%AAphp%E6%8C%91%E6%88%A6"><i class="fa fa-link"></i></a>無謀なPHP挑戦</h3>
+<p data-sourcepos="110:1-110:144">学校でもプログラミング（アセンブリ）はやっていてもデータベースなんて高度なことはやっていません。</p>
+<p data-sourcepos="112:1-112:327">データベースへの認識も**「Excelをプログラミング言語で扱えるようにしたもの」程度**だった私ですが、当時業務でさわれなかったPHPという未知の言語に憧れて独学で学び、いきなり実践投入を推進するという無茶なことをやりはじめました。</p>
+<h3 data-sourcepos="114:1-114:29">
+<span id="wordpress-との出会い" class="fragment"></span><a href="#wordpress-%E3%81%A8%E3%81%AE%E5%87%BA%E4%BC%9A%E3%81%84"><i class="fa fa-link"></i></a>WordPress との出会い</h3>
+<p data-sourcepos="116:1-116:228">その時にCMSと出会いました。ここではまだWordPressではありませんが、企業のサポートを得ながら自由な開発ができるポジションということで非常にやりやすかったです。</p>
+<p data-sourcepos="118:1-118:148">これに並行して、**個人でもCMSを使えれば便利そう！**というモチベーションだけで触り始める事になります。</p>
+<p data-sourcepos="120:1-120:141">個人で使えるCMSを探してみると、当時から上がっているものがWordPressしかなかった、という状況でした。</p>
+<h3 data-sourcepos="122:1-122:25">
+<span id="大いなる勘違い" class="fragment"></span><a href="#%E5%A4%A7%E3%81%84%E3%81%AA%E3%82%8B%E5%8B%98%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>大いなる勘違い</h3>
+<p data-sourcepos="124:1-124:220">インフラも知らない、バックエンドも気にせずに**とりあえず画面側でガチャガチャやる時にPHPを使えるなら楽だね！**ぐらいしか考えずにWordPressを入れることに。</p>
+<p data-sourcepos="126:1-126:98">なお、ここでも「MySQL」というものを認識していたわけではありません。</p>
+<p data-sourcepos="128:1-128:149"><strong>WordPressを使うために必要なツールぐらいの認識</strong>で、なんなら<strong>PHPMyAdminをMySQLだと思っていた</strong>ぐらいでした。</p>
+<p data-sourcepos="130:1-130:94">（そして、これが私のPostgreSQL嫌いを加速させることになりました…）</p>
+<p data-sourcepos="132:1-132:262">当時はPhpPgAdminなんてなかったので、選択肢にも上がらなかったのです。実務経験はあったので実はこちらの方が得意なぐらいですが、当時は<strong>SQL=PostgreSQLという認識がそもそもなかった</strong>のです。</p>
+<hr data-sourcepos="134:1-135:0">
+<h2 data-sourcepos="136:1-136:69">
+<span id="終章今振り返るとすべてが繋がってなかった" class="fragment"></span><a href="#%E7%B5%82%E7%AB%A0%E4%BB%8A%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8B%E3%81%A8%E3%81%99%E3%81%B9%E3%81%A6%E3%81%8C%E7%B9%8B%E3%81%8C%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F"><i class="fa fa-link"></i></a>終章：今振り返ると、すべてが繋がってなかった</h2>
+<p data-sourcepos="138:1-138:142">この体験記を書いていて改めて思うのは、<strong>当時の私は点と点が全然繋がってなかった</strong>ということです。</p>
+<table data-sourcepos="140:1-145:91">
+<thead>
+<tr data-sourcepos="140:1-140:22">
+<th data-sourcepos="140:2-140:9">状況</th>
+<th data-sourcepos="140:11-140:12"></th>
+<th data-sourcepos="140:14-140:21">認識</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="142:1-142:85">
+<td data-sourcepos="142:2-142:27">SQL資格は持ってる</td>
+<td data-sourcepos="142:29-142:33">→</td>
+<td data-sourcepos="142:35-142:84">でもデータベースが何かは知らない</td>
+</tr>
+<tr data-sourcepos="143:1-143:86">
+<td data-sourcepos="143:2-143:38">RPGツクールでDB運用してる</td>
+<td data-sourcepos="143:40-143:44">→</td>
+<td data-sourcepos="143:46-143:85">でもそれがDBだと気づかない</td>
+</tr>
+<tr data-sourcepos="144:1-144:84">
+<td data-sourcepos="144:2-144:34">実務でPostgreSQL使ってる</td>
+<td data-sourcepos="144:36-144:40">→</td>
+<td data-sourcepos="144:42-144:83">でもそれがDBMSだと分からない</td>
+</tr>
+<tr data-sourcepos="145:1-145:91">
+<td data-sourcepos="145:2-145:25">PHPMyAdmin使ってる</td>
+<td data-sourcepos="145:27-145:31">→</td>
+<td data-sourcepos="145:33-145:90">でもそれがMySQLの管理ツールだと知らない</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="147:1-147:109"><strong>体系的に学べない環境</strong>って、こういう「知識の断片化」を生むんだなあ、と。</p>
+<h3 data-sourcepos="149:1-149:31">
+<span id="今の学習者への羨望" class="fragment"></span><a href="#%E4%BB%8A%E3%81%AE%E5%AD%A6%E7%BF%92%E8%80%85%E3%81%B8%E3%81%AE%E7%BE%A8%E6%9C%9B"><i class="fa fa-link"></i></a>今の学習者への羨望</h3>
+<p data-sourcepos="151:1-151:197">今の学習者の方々が羨ましいです。ちゃんと整理された情報があって、「データベースとは」から「MySQLとは」まで順序立てて学べるんですから。</p>
+<p data-sourcepos="153:1-153:39">当時の私に教えてあげたい...</p>
+<blockquote data-sourcepos="155:1-155:74">
+<p data-sourcepos="155:3-155:74">「君が使ってるのは全部データベース関連技術だよ」</p>
+</blockquote>
+<p data-sourcepos="157:1-157:9">って。</p>
+<hr data-sourcepos="159:1-160:0">
+<h2 data-sourcepos="161:1-161:15">
+<span id="おわりに" class="fragment"></span><a href="#%E3%81%8A%E3%82%8F%E3%82%8A%E3%81%AB"><i class="fa fa-link"></i></a>おわりに</h2>
+<p data-sourcepos="163:1-163:188">そんなこんなで、私の「はじめてのMySQL」は実は「はじめてのデータベース理解」でもあったという、なんとも回り道の多い体験記でした。</p>
+<h3 data-sourcepos="165:1-165:31">
+<span id="資格の賞味期限問題" class="fragment"></span><a href="#%E8%B3%87%E6%A0%BC%E3%81%AE%E8%B3%9E%E5%91%B3%E6%9C%9F%E9%99%90%E5%95%8F%E9%A1%8C"><i class="fa fa-link"></i></a>資格の賞味期限問題</h3>
+<p data-sourcepos="167:1-167:122">ちょっとMySQLの話からは外れるんですが、資格試験にもこれはあると最近痛感しています。</p>
+<p data-sourcepos="169:1-169:228">「昔に取得した資格」について受講生に試験対策を指導していたりしますが、昔すぎて最近の試験傾向とは別物というか通用しないのでは？と思うところが増えました。</p>
+<p data-sourcepos="171:1-171:420">それでも講師として指導しているので最新の情報をキャッチアップできていますが、講師にならなければ昔の試験のイメージのままアップデートできず「それぐらい出来るでしょう」みたいな話をしたり「いやー、大変だったね！」と、易化した試験で言う事になっていたり、という事があるなぁと思いました。</p>
+<h3 data-sourcepos="173:1-173:34">
+<span id="振り返ることの大切さ" class="fragment"></span><a href="#%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AE%E5%A4%A7%E5%88%87%E3%81%95"><i class="fa fa-link"></i></a>振り返ることの大切さ</h3>
+<p data-sourcepos="175:1-175:192">AI/AGIの話を頑張って追いかけている立場で言うのもなんですが、自分が過去にやってきたことも見直す機会を持った方がいいかもしれません。</p>
+<p data-sourcepos="177:1-177:153">そういった意味でも、今回は筆を執りながら自身のルーツや講義時での意識を強められる良い機会にできました。</p>
+<hr data-sourcepos="179:1-180:0">
+<div data-sourcepos="181:1-184:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="182:1-183:137">書き上げた際に読みにくかったんでAIにリテイクしてもらったんですが、なんかどっこいどっこいな気がします。<br>
+答えがない課題でAIを活用するなら、時短で使うより時間を掛けて品質向上に充てた方が良いですね。</p>
+</div>
+</div>

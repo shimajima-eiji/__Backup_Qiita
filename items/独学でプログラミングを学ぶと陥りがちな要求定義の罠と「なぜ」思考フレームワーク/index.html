@@ -1,0 +1,285 @@
+<h1 data-sourcepos="1:1-1:101">
+<span id="独学エンジニアが陥りがちな要求定義の罠となぜ思考フレームワーク" class="fragment"></span><a href="#%E7%8B%AC%E5%AD%A6%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%8C%E9%99%A5%E3%82%8A%E3%81%8C%E3%81%A1%E3%81%AA%E8%A6%81%E6%B1%82%E5%AE%9A%E7%BE%A9%E3%81%AE%E7%BD%A0%E3%81%A8%E3%81%AA%E3%81%9C%E6%80%9D%E8%80%83%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF"><i class="fa fa-link"></i></a>独学エンジニアが陥りがちな要求定義の罠と「なぜ」思考フレームワーク</h1>
+<div data-sourcepos="3:1-6:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<ul data-sourcepos="4:1-5:59">
+<li data-sourcepos="4:1-4:173">この記事は、勉強会で学んだフレームワークを個人開発や実務（このケースは新人研修）で実践した経験をまとめたものです。</li>
+<li data-sourcepos="5:1-5:59">「なぜ思考フレームワーク」は造語です。</li>
+</ul>
+</div>
+</div>
+<h2 data-sourcepos="8:1-8:78">
+<span id="初学者エンジニアあるある機能ベースで考えてしまう" class="fragment"></span><a href="#%E5%88%9D%E5%AD%A6%E8%80%85%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%82%E3%82%8B%E3%81%82%E3%82%8B%E6%A9%9F%E8%83%BD%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E8%80%83%E3%81%88%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86"><i class="fa fa-link"></i></a>初学者エンジニアあるある：機能ベースで考えてしまう</h2>
+<p data-sourcepos="10:1-10:63">新人研修では、こんな状況によく遭遇します：</p>
+<blockquote data-sourcepos="12:1-16:13">
+<p data-sourcepos="12:2-16:13">「ToDoアプリを作ろうと思います」<br>
+「いいですね！どんな課題を解決するアプリですか？」<br>
+「...えーと、ToDoを管理する...アプリです」<br>
+「具体的には、誰のどんな困りごとを？」<br>
+「...🤔」</p>
+</blockquote>
+<p data-sourcepos="18:1-18:108">これ、決して技術力不足の問題じゃないんです。むしろ実装力は高い方が多い。</p>
+<p data-sourcepos="20:1-21:70">ただ、<strong>学習の過程で「機能を作ること」が目的になってしまい、「誰の何を解決するか」の視点が抜けがち</strong>なんですよね。<br>
+（これは研修のカリキュラム側の問題でもある💦）</p>
+<div data-sourcepos="23:1-28:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="24:1-24:37"><strong>なぜこれが問題なのか？</strong></p>
+<ul data-sourcepos="25:1-27:74">
+<li data-sourcepos="25:1-25:62">実装中に仕様で迷ったとき、判断基準がない</li>
+<li data-sourcepos="26:1-26:68">本当に必要な機能と不要な機能の区別がつかない</li>
+<li data-sourcepos="27:1-27:74">結果的に「作ったけど使われない」状態になりやすい</li>
+</ul>
+</div>
+</div>
+<h2 data-sourcepos="30:1-30:42">
+<span id="なぜ思考フレームワーク" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E6%80%9D%E8%80%83%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF"><i class="fa fa-link"></i></a>「なぜ」思考フレームワーク</h2>
+<p data-sourcepos="32:1-33:216">以前に参加した勉強会で、顧客価値を明確にするためのフレームワークのお話に感銘を受けたので、これを意識的に取り組むよう促したところ、短期間でも効果を実感できたので共有します。<br>
+本研修では、新人が顧客側としてシステムを発注する体験と、ベンダーとして受託開発をする体験をそれぞれに実施するという方針で開発演習を行っています。</p>
+<details><summary>フレームワーク詳細（クリックで展開）</summary>
+<table data-sourcepos="37:1-45:100">
+<thead>
+<tr data-sourcepos="37:1-37:70">
+<th style="text-align: center" data-sourcepos="37:2-37:9">項目</th>
+<th style="text-align: left" data-sourcepos="37:11-37:33">考えるべき内容</th>
+<th style="text-align: left" data-sourcepos="37:35-37:69">開発時の判断基準として</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="39:1-39:82">
+<td style="text-align: center" data-sourcepos="39:2-39:18">🎯 <strong>顧客</strong>
+</td>
+<td style="text-align: left" data-sourcepos="39:20-39:36">顧客は誰か</td>
+<td style="text-align: left" data-sourcepos="39:38-39:81">機能の使いやすさを判断する軸</td>
+</tr>
+<tr data-sourcepos="40:1-40:88">
+<td style="text-align: center" data-sourcepos="40:2-40:18">😰 <strong>課題</strong>
+</td>
+<td style="text-align: left" data-sourcepos="40:20-40:45">顧客の課題は何か</td>
+<td style="text-align: left" data-sourcepos="40:47-40:87">実装すべき機能の優先度決定</td>
+</tr>
+<tr data-sourcepos="41:1-41:100">
+<td style="text-align: center" data-sourcepos="41:2-41:18">🤔 <strong>理由</strong>
+</td>
+<td style="text-align: left" data-sourcepos="41:20-41:60">なぜその課題は未解決なのか</td>
+<td style="text-align: left" data-sourcepos="41:62-41:99">技術選定や設計方針の指針</td>
+</tr>
+<tr data-sourcepos="42:1-42:109">
+<td style="text-align: center" data-sourcepos="42:2-42:27">🛠️ <strong>解決手法</strong>
+</td>
+<td style="text-align: left" data-sourcepos="42:29-42:72">どうやって課題を解決するのか</td>
+<td style="text-align: left" data-sourcepos="42:74-42:108">実装アプローチの明確化</td>
+</tr>
+<tr data-sourcepos="43:1-43:117">
+<td style="text-align: center" data-sourcepos="43:2-43:17">✨ <strong>価値</strong>
+</td>
+<td style="text-align: left" data-sourcepos="43:19-43:74">解決によってどんなメリットがあるのか</td>
+<td style="text-align: left" data-sourcepos="43:76-43:116">成功指標とテスト観点の設定</td>
+</tr>
+<tr data-sourcepos="44:1-44:88">
+<td style="text-align: center" data-sourcepos="44:2-44:21">🚀 <strong>優位性</strong>
+</td>
+<td style="text-align: left" data-sourcepos="44:23-44:63">その解決手法の優位性は何か</td>
+<td style="text-align: left" data-sourcepos="44:65-44:87">技術選定の根拠</td>
+</tr>
+<tr data-sourcepos="45:1-45:100">
+<td style="text-align: center" data-sourcepos="45:2-45:21">💪 <strong>実現性</strong>
+</td>
+<td style="text-align: left" data-sourcepos="45:23-45:54">自分たちで実現可能か</td>
+<td style="text-align: left" data-sourcepos="45:56-45:99">スコープとスケジュールの調整</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 data-sourcepos="49:1-49:60">
+<span id="実践例チーム管理システムの開発体験" class="fragment"></span><a href="#%E5%AE%9F%E8%B7%B5%E4%BE%8B%E3%83%81%E3%83%BC%E3%83%A0%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E9%96%8B%E7%99%BA%E4%BD%93%E9%A8%93"><i class="fa fa-link"></i></a>【実践例】チーム管理システムの開発体験</h2>
+<h3 data-sourcepos="51:1-51:43">
+<span id="従来の進め方機能ドリブン" class="fragment"></span><a href="#%E5%BE%93%E6%9D%A5%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9%E6%A9%9F%E8%83%BD%E3%83%89%E3%83%AA%E3%83%96%E3%83%B3"><i class="fa fa-link"></i></a>従来の進め方：機能ドリブン</h3>
+<p data-sourcepos="53:1-53:99">新人研修のチーム開発演習の一場面の例です（ほぼ実話のフィクション）</p>
+<p data-sourcepos="55:1-55:21">当初の進め方：</p>
+<blockquote data-sourcepos="57:1-61:42">
+<p data-sourcepos="57:2-61:42">「チーム管理システムを作ります」<br>
+「どんな機能を実装予定ですか？」<br>
+「メンバー登録、タスク割り当て、進捗管理、通知機能です」<br>
+「なるほど。で、どんな課題を解決するんでしたっけ？」<br>
+「...チーム管理の...効率化？」</p>
+</blockquote>
+<p data-sourcepos="63:1-63:183">このまま進めると、開発後半で「時間が足りない、何を削ろう？」となり、適当に機能を削って中途半端なものが出来上がりがちです。</p>
+<h3 data-sourcepos="65:1-65:55">
+<span id="フレームワーク適用後価値ドリブン" class="fragment"></span><a href="#%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E9%81%A9%E7%94%A8%E5%BE%8C%E4%BE%A1%E5%80%A4%E3%83%89%E3%83%AA%E3%83%96%E3%83%B3"><i class="fa fa-link"></i></a>フレームワーク適用後：価値ドリブン</h3>
+<p data-sourcepos="67:1-67:72">フレームワークを使って要件を再整理してみました：</p>
+<p data-sourcepos="69:1-69:95">🎯 顧客：リモートワーク中心の5人チーム（営業2名、エンジニア3名）</p>
+<ul data-sourcepos="71:1-94:0">
+<li data-sourcepos="71:1-74:73">😰 課題：
+<ul data-sourcepos="72:3-74:73">
+<li data-sourcepos="72:3-72:76">営業メンバーがエンジニアの作業状況を把握できない</li>
+<li data-sourcepos="73:3-73:79">急な顧客対応で優先度が変わっても、情報共有が遅れる</li>
+<li data-sourcepos="74:3-74:73">週次MTGでしか進捗を知れないため、問題発見が遅い</li>
+</ul>
+</li>
+<li data-sourcepos="75:1-78:58">🤔 理由：
+<ul data-sourcepos="76:3-78:58">
+<li data-sourcepos="76:3-76:72">SlackやGitHubの通知が多すぎて重要な情報が埋もれる</li>
+<li data-sourcepos="77:3-77:82">エンジニアは技術的な詳細を話すが、営業には伝わらない</li>
+<li data-sourcepos="78:3-78:58">リアルタイムでの状況共有ツールがない</li>
+</ul>
+</li>
+<li data-sourcepos="79:1-82:49">🛠️ 解決手法：
+<ul data-sourcepos="80:3-82:49">
+<li data-sourcepos="80:3-80:70">営業向けの「顧客影響度」を軸にしたタスク表示</li>
+<li data-sourcepos="81:3-81:45">1日1回の自動進捗サマリー通知</li>
+<li data-sourcepos="82:3-82:49">緊急度変更時のリアルタイム通知</li>
+</ul>
+</li>
+<li data-sourcepos="83:1-86:70">✨ 価値：
+<ul data-sourcepos="84:3-86:70">
+<li data-sourcepos="84:3-84:68">営業が顧客への回答スピードを2日→半日に短縮</li>
+<li data-sourcepos="85:3-85:73">問題の早期発見により、炎上プロジェクトを50%削減</li>
+<li data-sourcepos="86:3-86:70">チーム全体の情報共有時間を週2時間→30分に短縮</li>
+</ul>
+</li>
+<li data-sourcepos="87:1-89:79">🚀 優位性：
+<ul data-sourcepos="88:3-89:79">
+<li data-sourcepos="88:3-88:79">営業視点での情報整理（技術詳細ではなく顧客影響度）</li>
+<li data-sourcepos="89:3-89:79">既存ツール（Slack/GitHub）との連携による導入コスト削減</li>
+</ul>
+</li>
+<li data-sourcepos="90:1-94:0">💪 実現性：
+<ul data-sourcepos="91:3-94:0">
+<li data-sourcepos="91:3-91:69">GitHub API、Slack API を使用（学習コスト数日程度）</li>
+<li data-sourcepos="92:3-92:51">段階的リリースで MVP から開始可能</li>
+<li data-sourcepos="93:3-94:0">データベース設計は既存の知識で対応可能</li>
+</ul>
+</li>
+</ul>
+<h3 data-sourcepos="95:1-95:28">
+<span id="結果劇的な変化" class="fragment"></span><a href="#%E7%B5%90%E6%9E%9C%E5%8A%87%E7%9A%84%E3%81%AA%E5%A4%89%E5%8C%96"><i class="fa fa-link"></i></a>結果：劇的な変化</h3>
+<p data-sourcepos="97:1-97:31"><strong>実装判断の速度向上</strong></p>
+<ul data-sourcepos="98:1-100:0">
+<li data-sourcepos="98:1-98:75">「この機能、本当に必要？」→ 顧客価値で即座に判断</li>
+<li data-sourcepos="99:1-100:0">「時間がない、何を削る？」→ 価値の優先度で明確に選択</li>
+</ul>
+<p data-sourcepos="101:1-101:28"><strong>成果報告の説得力</strong></p>
+<ul data-sourcepos="102:1-104:0">
+<li data-sourcepos="102:1-102:50">Before：「〇〇機能を実装しました」</li>
+<li data-sourcepos="103:1-104:0">After：「営業の顧客対応速度を2日→半日に短縮するシステムを作りました」</li>
+</ul>
+<h2 data-sourcepos="105:1-105:66">
+<span id="個人開発実務での効果短期間で見えた変化" class="fragment"></span><a href="#%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA%E5%AE%9F%E5%8B%99%E3%81%A7%E3%81%AE%E5%8A%B9%E6%9E%9C%E7%9F%AD%E6%9C%9F%E9%96%93%E3%81%A7%E8%A6%8B%E3%81%88%E3%81%9F%E5%A4%89%E5%8C%96"><i class="fa fa-link"></i></a>個人開発・実務での効果：短期間で見えた変化</h2>
+<h3 data-sourcepos="107:1-107:51">
+<span id="-フレームワーク導入前後の変化" class="fragment"></span><a href="#-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E5%B0%8E%E5%85%A5%E5%89%8D%E5%BE%8C%E3%81%AE%E5%A4%89%E5%8C%96"><i class="fa fa-link"></i></a>📊 フレームワーク導入前後の変化</h3>
+<table data-sourcepos="109:1-113:106">
+<thead>
+<tr data-sourcepos="109:1-109:70">
+<th style="text-align: left" data-sourcepos="109:2-109:9">指標</th>
+<th style="text-align: left" data-sourcepos="109:11-109:39">フレームワーク無し</th>
+<th style="text-align: left" data-sourcepos="109:41-109:69">フレームワーク有り</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="111:1-111:81">
+<td style="text-align: left" data-sourcepos="111:2-111:30">機能削減の判断時間</td>
+<td style="text-align: left" data-sourcepos="111:32-111:51">悩んで数時間</td>
+<td style="text-align: left" data-sourcepos="111:53-111:80">価値基準で15分程度</td>
+</tr>
+<tr data-sourcepos="112:1-112:65">
+<td style="text-align: left" data-sourcepos="112:2-112:30">仕様確認の往復回数</td>
+<td style="text-align: left" data-sourcepos="112:32-112:49">平均5回以上</td>
+<td style="text-align: left" data-sourcepos="112:51-112:64">平均2-3回</td>
+</tr>
+<tr data-sourcepos="113:1-113:106">
+<td style="text-align: left" data-sourcepos="113:2-113:24">技術選定の迷い</td>
+<td style="text-align: left" data-sourcepos="113:26-113:63">新しい技術を試したくなる</td>
+<td style="text-align: left" data-sourcepos="113:65-113:105">課題解決に最適な技術を選択</td>
+</tr>
+</tbody>
+</table>
+<h3 data-sourcepos="115:1-115:27">
+<span id="-定性的な変化" class="fragment"></span><a href="#-%E5%AE%9A%E6%80%A7%E7%9A%84%E3%81%AA%E5%A4%89%E5%8C%96"><i class="fa fa-link"></i></a>🎯 定性的な変化</h3>
+<p data-sourcepos="117:1-117:31"><strong>実装時の迷いが激減</strong></p>
+<div class="code-frame" data-lang="diff" data-sourcepos="118:1-124:3"><div class="highlight"><pre><code><span class="gd">- 「この画面項目、どう表示しよう...」
+</span><span class="gi">+ 「営業が見るなら、顧客名を大きく表示しよう」
+</span><span class="err">
+</span><span class="gd">- 「エラーハンドリング、どこまでやろう...」
+</span><span class="gi">+ 「営業の業務が止まると顧客対応が遅れるから、しっかり作ろう」
+</span></code></pre></div></div>
+<p data-sourcepos="126:1-126:43"><strong>プレゼンテーション力の向上</strong></p>
+<ul data-sourcepos="127:1-130:0">
+<li data-sourcepos="127:1-127:44">機能説明→課題解決ストーリー</li>
+<li data-sourcepos="128:1-128:62">技術的なアピール→ビジネス価値のアピール</li>
+<li data-sourcepos="129:1-130:0">「作りました」→「〇〇を解決しました」</li>
+</ul>
+<div data-sourcepos="131:1-134:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="132:1-133:336">特に<strong>クライアントへの提案や社内発表での変化</strong>が顕著でした。<br>
+作ったシステムについて「自分だったらどう使うか」をイメージしやすくなり、フィードバックの内容も「お客様なら～」という質問を交えていただく中で、現場未経験ながら間違っていても想像をしながら回答を出そうとする努力が見られました。</p>
+</div>
+</div>
+<h2 data-sourcepos="136:1-136:60">
+<span id="独学エンジニアが実践するときのポイント" class="fragment"></span><a href="#%E7%8B%AC%E5%AD%A6%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%8C%E5%AE%9F%E8%B7%B5%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>独学エンジニアが実践するときのポイント</h2>
+<h3 data-sourcepos="138:1-138:59">
+<span id="1--架空の設定でもokただしリアルに" class="fragment"></span><a href="#1--%E6%9E%B6%E7%A9%BA%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%A7%E3%82%82ok%E3%81%9F%E3%81%A0%E3%81%97%E3%83%AA%E3%82%A2%E3%83%AB%E3%81%AB"><i class="fa fa-link"></i></a>1. 💭 架空の設定でもOK、ただしリアルに</h3>
+<div class="code-frame" data-lang="diff" data-sourcepos="140:1-144:3"><div class="highlight"><pre><code><span class="gd">- 「ユーザーが便利になるTodoアプリ」
+</span><span class="gi">+ 「在宅勤務で家事と仕事を両立している30代会社員向けの、
+</span>  一日の予定を家族と共有できるTodoアプリ」
+</code></pre></div></div>
+<p data-sourcepos="146:1-146:93">具体的な人物像を設定することで、機能の必要性が明確になります。</p>
+<h3 data-sourcepos="148:1-148:39">
+<span id="2--数値目標を設定する" class="fragment"></span><a href="#2--%E6%95%B0%E5%80%A4%E7%9B%AE%E6%A8%99%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>2. 🔢 数値目標を設定する</h3>
+<div class="code-frame" data-lang="diff" data-sourcepos="150:1-154:3"><div class="highlight"><pre><code><span class="gd">- 「効率的になる」
+</span><span class="gi">+ 「朝の予定確認時間を10分→3分に短縮」
++ 「家族との予定調整の連絡回数を1日5回→1回に削減」
+</span></code></pre></div></div>
+<p data-sourcepos="156:1-156:72">抽象的な表現を避け、測定可能な目標を設定します。</p>
+<h3 data-sourcepos="158:1-158:54">
+<span id="3--実装できる範囲で価値を最大化" class="fragment"></span><a href="#3--%E5%AE%9F%E8%A3%85%E3%81%A7%E3%81%8D%E3%82%8B%E7%AF%84%E5%9B%B2%E3%81%A7%E4%BE%A1%E5%80%A4%E3%82%92%E6%9C%80%E5%A4%A7%E5%8C%96"><i class="fa fa-link"></i></a>3. 🚀 実装できる範囲で価値を最大化</h3>
+<p data-sourcepos="160:1-160:102">限られた時間・リソースでも価値を実現できるよう、機能を絞り込みます：</p>
+<div class="code-frame" data-lang="text" data-sourcepos="162:1-166:3"><div class="highlight"><pre><code>MVP（最小価値実現）の考え方：
+× 「全機能を70%の完成度で」
+○ 「コア機能を100%の完成度で」
+</code></pre></div></div>
+<h2 data-sourcepos="168:1-168:54">
+<span id="ポートフォリオ転職活動での活用法" class="fragment"></span><a href="#%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA%E8%BB%A2%E8%81%B7%E6%B4%BB%E5%8B%95%E3%81%A7%E3%81%AE%E6%B4%BB%E7%94%A8%E6%B3%95"><i class="fa fa-link"></i></a>ポートフォリオ・転職活動での活用法</h2>
+<p data-sourcepos="170:1-170:108">このフレームワークは、ポートフォリオ作成や転職面接でも威力を発揮します：</p>
+<h3 data-sourcepos="172:1-172:39">
+<span id="-従来のポートフォリオ" class="fragment"></span><a href="#-%E5%BE%93%E6%9D%A5%E3%81%AE%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA"><i class="fa fa-link"></i></a>🎨 従来のポートフォリオ</h3>
+<div data-sourcepos="173:1-177:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="174:1-176:48">「React + TypeScript で作った家計簿アプリです」<br>
+「CRUD機能とグラフ表示機能があります」<br>
+「レスポンシブ対応もしています」</p>
+</div>
+</div>
+<h3 data-sourcepos="179:1-179:38">
+<span id="-フレームワーク活用後" class="fragment"></span><a href="#-%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E6%B4%BB%E7%94%A8%E5%BE%8C"><i class="fa fa-link"></i></a>✨ フレームワーク活用後</h3>
+<div data-sourcepos="180:1-189:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="181:1-182:51">「共働き夫婦の家計管理における『相手の支出が見えない』問題を解決する<br>
+リアルタイム共有家計簿アプリです」</p>
+<p data-sourcepos="184:1-185:101">「月末の家計確認時間を2時間→15分に短縮し、<br>
+家計についての夫婦喧嘩を月3回→0回に削減することを目標にしています」</p>
+<p data-sourcepos="187:1-188:64">「技術的には React + TypeScript で実装し、<br>
+リアルタイム同期に Firebase を使用しています」</p>
+</div>
+</div>
+<p data-sourcepos="191:1-191:78">面接官にとって、どちらが記憶に残りやすいでしょうか？</p>
+<h2 data-sourcepos="193:1-193:33">
+<span id="実務でのさらなる応用" class="fragment"></span><a href="#%E5%AE%9F%E5%8B%99%E3%81%A7%E3%81%AE%E3%81%95%E3%82%89%E3%81%AA%E3%82%8B%E5%BF%9C%E7%94%A8"><i class="fa fa-link"></i></a>実務でのさらなる応用</h2>
+<p data-sourcepos="195:1-195:93">このフレームワークは個人開発だけでなく、実務でも活用できます：</p>
+<h3 data-sourcepos="197:1-197:39">
+<span id="-要件定義仕様確認時" class="fragment"></span><a href="#-%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9%E4%BB%95%E6%A7%98%E7%A2%BA%E8%AA%8D%E6%99%82"><i class="fa fa-link"></i></a>📝 要件定義・仕様確認時</h3>
+<ul data-sourcepos="198:1-201:0">
+<li data-sourcepos="198:1-198:59">クライアントとの認識合わせがスムーズに</li>
+<li data-sourcepos="199:1-199:44">仕様変更時の影響範囲が明確に</li>
+<li data-sourcepos="200:1-201:0">優先度判断の根拠が共有しやすい</li>
+</ul>
+<h3 data-sourcepos="202:1-202:24">
+<span id="-技術提案時" class="fragment"></span><a href="#-%E6%8A%80%E8%A1%93%E6%8F%90%E6%A1%88%E6%99%82"><i class="fa fa-link"></i></a>💡 技術提案時</h3>
+<ul data-sourcepos="203:1-206:0">
+<li data-sourcepos="203:1-203:38">新技術導入の説得力が向上</li>
+<li data-sourcepos="204:1-204:44">コストと効果の説明が具体的に</li>
+<li data-sourcepos="205:1-206:0">リスクとメリットの整理が明確に</li>
+</ul>
+<hr data-sourcepos="207:1-208:0">
+<p data-sourcepos="209:1-211:177">プログラミングを学ぶ過程では、どうしても「技術習得」に意識が向きがちです。しかし実際の開発現場では、「<strong>誰の何を解決するか</strong>」を明確にする力こそが求められます。<br>
+このフレームワークは、その思考力を短期間で身につけるための実践的なツールです。<br>
+現場に入る前に、ポートフォリオを作る前後にも「これって結局誰のためなんだっけ？」を振り返ってみるとぐっと良くなります！</p>
