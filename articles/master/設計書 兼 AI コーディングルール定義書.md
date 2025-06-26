@@ -69,8 +69,8 @@ $ tree
 - master
   - ファイルの読み込み
 - git コマンド
-  - config.name: `shimajima-eiji`
-  - config.email: `shimajima-eiji@live.jp`
+  - config user.name: `shimajima-eiji`
+  - config user.email: `shimajima-eiji@live.jp`
   - add: 以下に指定するディレクトリ（サブディレクトリを含む）に限定する
     - /src
     - /output

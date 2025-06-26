@@ -1,28 +1,29 @@
-from dataclasses import dataclass, asdict, field
-from datetime import datetime
-import json
-from typing import List, Dict, Any, Optional
+from dataclasses import dataclass, field
+from typing import List, Optional
 
 @dataclass
 class Article:
     title: str
-    link: str
     pub_date: str
-    creator: str
     guid: str
-    description: Optional[str] = None
-    post_id: Optional[int] = None
-    content: Optional[str] = None
-    post_date: Optional[str] = None
-    status: Optional[str] = None
-    source: Optional[str] = None # Added source field
-
-@dataclass
-class Articles:
-    articles: List[Article] = field(default_factory=list)
+    content: List[str] = field(default_factory=list)
+    status: str
 
     def to_json(self):
-        return json.dumps(asdict(self), indent=2, ensure_ascii=False)
+        return {
+            "title": self.title,
+            "pub_date": self.pub_date,
+            "guid": self.guid,
+            "content": self.content,
+            "status": self.status,
+        }
 
-    def add_article(self, article: Article):
-        self.articles.append(article)
+    @classmethod
+    def from_json(cls, data):
+        return cls(
+            title=data["title"],
+            pub_date=data["pub_date"],
+            guid=data["guid"],
+            content=data.get("content", []),
+            status=data["status"],
+        )
