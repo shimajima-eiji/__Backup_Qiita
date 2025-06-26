@@ -3,71 +3,74 @@ import os
 from datetime import datetime
 from json_object import Article
 
-def main():
-    output_dir = 'output'
-    merged_articles = {}
+def merge_articles(output_dir):
+    articles_map = {}
 
-    # Define source priorities for tie-breaking
-    source_priority = {
-        'fix': 3,
-        'xml': 2,
-        'rss': 1
-    }
-
+    # Load existing articles (fix, xml, rss)
     for filename in os.listdir(output_dir):
         if filename.endswith('.json'):
-            filepath = os.path.join(output_dir, filename)
-            with open(filepath, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                # Determine source: if not present, assume 'fix'
-                if 'source' not in data or data['source'] is None:
-                    data['source'] = 'fix'
-                article = Article(**data)
+            file_path = os.path.join(output_dir, filename)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                try:
+                    data = json.load(f)
+                    article = Article.from_json(data)
 
-                if article.guid not in merged_articles:
-                    merged_articles[article.guid] = article
-                else:
-                    existing_article = merged_articles[article.guid]
+                    prefix, guid = filename.split('_', 1)
+                    guid = guid.replace('.json', '')
 
-                    # Convert pub_date to datetime objects for comparison
-                    try:
-                        existing_pub_date = datetime.strptime(existing_article.pub_date, '%a, %d %b %Y %H:%M:%S %z')
-                    except ValueError:
-                        existing_pub_date = datetime.min # Fallback for unparseable dates
+                    if guid not in articles_map:
+                        articles_map[guid] = {'fix': None, 'xml': None, 'rss': None}
 
-                    try:
-                        new_pub_date = datetime.strptime(article.pub_date, '%a, %d %b %Y %H:%M:%S %z')
-                    except ValueError:
-                        new_pub_date = datetime.min # Fallback for unparseable dates
+                    if prefix == 'fix':
+                        articles_map[guid]['fix'] = article
+                    elif prefix == 'xml':
+                        articles_map[guid]['xml'] = article
+                    elif prefix == 'rss':
+                        articles_map[guid]['rss'] = article
+                except json.JSONDecodeError:
+                    print(f"Error decoding JSON from {filename}. Skipping.")
+                    continue
 
-                    if new_pub_date > existing_pub_date:
-                        merged_articles[article.guid] = article
-                    elif new_pub_date == existing_pub_date:
-                        # Apply tie-breaking rule based on source priority
-                        existing_priority = source_priority.get(existing_article.source, 0)
-                        new_priority = source_priority.get(article.source, 0)
+    # Process and merge articles
+    for guid, versions in articles_map.items():
+        best_article = None
+        best_pub_date = None
 
-                        if new_priority > existing_priority:
-                            merged_articles[article.guid] = article
+        # Determine the best article based on pub_date and priority
+        for source in ['fix', 'xml', 'rss']:
+            article = versions[source]
+            if article:
+                try:
+                    current_pub_date = datetime.strptime(article.pub_date, '%Y-%m-%d %H:%M:%S')
+                except ValueError:
+                    current_pub_date = datetime.strptime(article.pub_date, '%Y-%m-%d %H:%M')
 
-    # Assign post_ids to articles that don't have them
-    max_post_id = 0
-    for article in merged_articles.values():
-        if article.post_id is not None:
-            max_post_id = max(max_post_id, article.post_id)
+                if best_article is None or current_pub_date > best_pub_date:
+                    best_article = article
+                    best_pub_date = current_pub_date
+                elif current_pub_date == best_pub_date:
+                    # Apply priority if pub_date is the same
+                    if source == 'fix' and versions['fix']:
+                        best_article = versions['fix']
+                    elif source == 'xml' and versions['xml'] and best_article != versions['fix']:
+                        best_article = versions['xml']
+                    elif source == 'rss' and versions['rss'] and best_article not in [versions['fix'], versions['xml']]:
+                        best_article = versions['rss']
 
-    for article in merged_articles.values():
-        if article.post_id is None or article.post_id == 0:
-            max_post_id += 1
-            article.post_id = max_post_id
+        if best_article:
+            # Save the best article as fix_GUID.json
+            output_file_path = os.path.join(output_dir, f"fix_{best_article.guid}.json")
+            with open(output_file_path, 'w', encoding='utf-8') as f:
+                json.dump(best_article.to_json(), f, ensure_ascii=False, indent=2)
 
-    # Write merged articles back to output directory
-    for guid, article in merged_articles.items():
-        # Sanitize GUID for filename (already done in xml_backup and rss_backup, but good to be safe)
-        sanitized_guid = guid.replace('https://note.com/nomuragoro/n/', '').replace('/', '_').replace('.', '_')
-        filename = f"output/{sanitized_guid}.json"
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(article.__dict__, indent=2, ensure_ascii=False))
+            # Delete xml_ and rss_ versions
+            for source_prefix in ['xml_', 'rss_']:
+                file_to_delete = os.path.join(output_dir, f"{source_prefix}{guid}.json")
+                if os.path.exists(file_to_delete):
+                    os.remove(file_to_delete)
+                    print(f"Deleted {file_to_delete}")
 
 if __name__ == '__main__':
-    main()
+    output_directory = '/mnt/c/Users/shima/Desktop/学習アプリ開発_GeminiCLIデモ/articles/output'
+    merge_articles(output_directory)
+    print(f"Merge process completed for articles in {output_directory}")
