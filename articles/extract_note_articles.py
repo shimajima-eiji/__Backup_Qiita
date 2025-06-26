@@ -30,32 +30,6 @@ from datetime import datetime
 
 from article_model import ArticleData, sanitize_filename, save_article_to_json
 
-def get_max_post_id_digits(xml_file_path: str) -> int:
-    """
-    XMLファイル内のすべての記事のpost_idの最大値から、その桁数を計算します。
-
-    これにより、ファイル名のゼロパディングを動的に調整し、ソート順の問題を解決します。
-
-    :param xml_file_path: 入力XMLファイルのパス。
-    :type xml_file_path: str
-    :returns: post_idの最大桁数。post_idが見つからない場合やエラー時は1を返します。
-    :rtype: int
-    """
-    try:
-        tree = ET.parse(xml_file_path)
-        root = tree.getroot()
-    except (FileNotFoundError, ET.ParseError) as e:
-        print(f"Error reading or parsing XML for max post ID digits: {e}")
-        return 1
-
-    namespaces = {'wp': 'http://wordpress.org/export/1.2/'}
-    max_id = 0
-    for item in root.findall('.//item'):
-        post_id_elem = item.find('wp:post_id', namespaces)
-        if post_id_elem is not None and post_id_elem.text and post_id_elem.text.isdigit():
-            max_id = max(max_id, int(post_id_elem.text))
-    return len(str(max_id)) if max_id > 0 else 1
-
 def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
     Note.com の XML バックアップファイルを解析し、各記事を個別の JSON ファイルとして抽出します。
@@ -110,17 +84,6 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
     print(f"Found {len(items)} articles to extract.")
     extracted_count = 0
 
-    # ファイル名のゼロパディング桁数を動的に計算
-    max_post_id_digits = get_max_post_id_digits(xml_file_path)
-    
-    # ファイル名全体の目標長（例: 30文字）から、タイトル部分の最大長を計算
-    # post_idのパディング長 + アンダースコア1文字 + タイトル長 = 目標長
-    # タイトル長 = 目標長 - post_idのパディング長 - 1
-    target_filename_total_length = 30
-    title_max_length = target_filename_total_length - max_post_id_digits - 1
-    if title_max_length < 1:
-        title_max_length = 1
-
     for i, item in enumerate(items):
         # 記事の基本情報を抽出
         # 欠損時のフォールバックも考慮
@@ -128,20 +91,23 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         pub_date_str = item.find('pubDate').text or ""
         content_html = item.find('content:encoded', namespaces).text or ""
         
-        # 記事のステータス、post_id、post_typeを抽出
+        # 記事のステータス、post_typeを抽出
         # これらの情報は、記事の管理やフィルタリングに役立ちます。
         status_elem = item.find('wp:status', namespaces)
         status = status_elem.text if status_elem is not None else "unknown"
-
-        post_id_elem = item.find('wp:post_id', namespaces)
-        post_id = post_id_elem.text if post_id_elem is not None else None
 
         post_type_elem = item.find('wp:post_type', namespaces)
         post_type = post_type_elem.text if post_type_elem is not None else "post"
 
         # 記事のユニークな識別子 (guid)
         # ファイル名生成のフォールバックとしても使用
-        guid = item.find('guid').text or f"unknown_guid_{i}"
+        guid_full = item.find('guid').text or f"unknown_guid_{i}"
+        # guidからID部分を抽出してnxxxx形式にする
+        match = re.search(r'/n/([a-zA-Z0-9]+)$', guid_full)
+        if match:
+            guid = match.group(1)
+        else:
+            guid = sanitize_filename(guid_full, max_length=10) # guidがURLでない場合のフォールバック
 
         # 公開日をISO 8601形式にフォーマット
         # プログラムでの日付処理を容易にするため
@@ -176,7 +142,6 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         # 記事データをJSON形式で構造化
         article_data = ArticleData(
             id=guid,
-            post_id=post_id,
             title=title,
             publish_date=formatted_pub_date,
             status=status,
@@ -185,13 +150,7 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
             images=images
         )
 
-        # ファイル名を post_id とサニタイズされたタイトルに基づいて生成
-        # 人間が読みやすく、ソートしやすいファイル名を提供します。
-        filename_prefix = ""
-        if post_id and str(post_id).isdigit():
-            filename_prefix = str(post_id).zfill(max_post_id_digits)
-
-        saved_filepath = save_article_to_json(article_data, output_directory, filename_prefix)
+        saved_filepath = save_article_to_json(article_data, output_directory)
         if saved_filepath:
             print(f"Successfully extracted: '{title}' to '{saved_filepath}'")
             extracted_count += 1

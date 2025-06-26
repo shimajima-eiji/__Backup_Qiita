@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 import json
 import os
 import re
+from datetime import datetime # datetimeをインポート
 
 @dataclass
 class ArticleData:
@@ -12,7 +13,6 @@ class ArticleData:
     post_type: str
     content: list[str]
     images: list[dict]
-    post_id: str | None = None # post_idをオプションとして追加
 
 def sanitize_filename(text: str, max_length: int = 100) -> str:
     """
@@ -23,7 +23,7 @@ def sanitize_filename(text: str, max_length: int = 100) -> str:
     sanitized = sanitized.strip()
     return sanitized[:max_length]
 
-def save_article_to_json(article: ArticleData, output_directory: str, filename_prefix: str = "") -> str:
+def save_article_to_json(article: ArticleData, output_directory: str) -> str:
     """
     記事データをJSONファイルとして保存します。
     ファイル名の衝突を解決し、適切なファイル名を生成します。
@@ -32,24 +32,19 @@ def save_article_to_json(article: ArticleData, output_directory: str, filename_p
     :type article: ArticleData
     :param output_directory: ファイルを保存するディレクトリ。
     :type output_directory: str
-    :param filename_prefix: ファイル名に付加するプレフィックス（例: post_id）。
-    :type filename_prefix: str
     :returns: 保存されたファイルのフルパス。
     :rtype: str
     """
-    # ファイル名生成
-    sanitized_title = sanitize_filename(article.title, max_length=30) # ファイル名タイトル部分の最大長を30に固定
-    
-    if filename_prefix:
-        base_filename = f"{filename_prefix}_{sanitized_title}"
-    else:
-        # guidからID部分を抽出してファイル名に利用
-        match = re.search(r'/n/([a-zA-Z0-9]+)$', article.id)
-        if match:
-            guid_part = match.group(1)
-        else:
-            guid_part = sanitize_filename(article.id, max_length=10) # guidがURLでない場合のフォールバック
-        base_filename = f"{guid_part}_{sanitized_title}"
+    # ファイル名生成: (publish_date=yyyymmdd-HHMM)_(id).json
+    # publish_dateをdatetimeオブジェクトに変換してフォーマット
+    try:
+        dt_object = datetime.fromisoformat(article.publish_date)
+        date_part = dt_object.strftime("%Y%m%d-%H%M")
+    except ValueError:
+        date_part = "unknown_date"
+
+    # idはnxxxx形式であることを想定
+    base_filename = f"{date_part}_{article.id}"
 
     output_filepath = os.path.join(output_directory, f"{base_filename}.json")
 

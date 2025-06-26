@@ -13,33 +13,6 @@ from article_model import ArticleData, sanitize_filename, save_article_to_json
 # RSSフィードのURL
 RSS_FEED_URL = "https://note.com/nomuragoro/rss"
 
-def get_max_post_id_from_existing_json(output_directory: str) -> int:
-    """
-    既存のJSONファイルからpost_idの最大値を取得します。
-    """
-    max_id = 0
-    if os.path.exists(output_directory):
-        for filename in os.listdir(output_directory):
-            if filename.endswith(".json"):
-                filepath = os.path.join(output_directory, filename)
-                try:
-                    with open(filepath, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                        if 'post_id' in data and data['post_id'] is not None:
-                            try:
-                                max_id = max(max_id, int(data['post_id']))
-                            except ValueError:
-                                pass # post_idが数字でない場合は無視
-                except (json.JSONDecodeError, Exception) as e:
-                    print(f"Warning: Error reading {filename}: {e}. Skipping.")
-    return max_id
-
-def get_max_post_id_digits(max_post_id: int) -> int:
-    """
-    post_idの最大値から、その桁数を計算します。
-    """
-    return len(str(max_post_id)) if max_post_id > 0 else 1
-
 def extract_and_update_articles_from_rss(output_directory: str = "note") -> None:
     """
     RSSフィードから記事を抽出し、既存のJSONファイルと比較して更新または追加します。
@@ -82,8 +55,8 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
     updated_count = 0
     added_count = 0
 
-    # 既存の記事データをロード (guidをキーとして)
-    existing_articles_by_guid = {}
+    # 既存の記事データをロード (id (guid) をキーとして)
+    existing_articles_by_id = {}
     if os.path.exists(output_directory):
         for filename in os.listdir(output_directory):
             if filename.endswith(".json"):
@@ -92,20 +65,9 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
                     with open(filepath, 'r', encoding='utf-8') as f:
                         data = json.load(f)
                         if 'id' in data: # 'id'はguid
-                            existing_articles_by_guid[data['id']] = data
+                            existing_articles_by_id[data['id']] = data
                 except (json.JSONDecodeError, Exception) as e:
                     print(f"Warning: Error reading {filename}: {e}. Skipping.")
-
-    # post_idの最大値と桁数を取得
-    max_existing_post_id = get_max_post_id_from_existing_json(output_directory)
-    max_post_id_digits = get_max_post_id_digits(max_existing_post_id + len(items)) # RSSで追加される可能性のある記事数も考慮
-    
-    # ファイル名全体の目標長（例: 30文字）
-    target_filename_total_length = 30
-    # post_idのパディング長 + アンダースコア1文字 + タイトル長 = 30
-    title_max_length = target_filename_total_length - max_post_id_digits - 1
-    if title_max_length < 1:
-        title_max_length = 1
 
     for i, item in enumerate(items):
         title = item.find('title').text or f"Untitled Article {i+1}"
@@ -124,16 +86,6 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
         # RSSフィードにはwp:status, wp:post_id, wp:post_typeがないため、デフォルト値を使用
         status = "publish" 
         post_type = "post" 
-
-        # post_idの割り当てロジック
-        current_post_id = None
-        if guid in existing_articles_by_guid: # 既存の記事の場合、既存のpost_idを再利用
-            current_post_id = existing_articles_by_guid[guid].get('post_id') # .get()でKeyErrorを回避
-        
-        # 新しい記事、または既存記事だがpost_idがNoneの場合に新しいpost_idを割り当てる
-        if current_post_id is None:
-            max_existing_post_id += 1 # 新しい記事ごとにインクリメント
-            current_post_id = str(max_existing_post_id)
 
         # 公開日をISO 8601形式にフォーマット
         formatted_pub_date = ""
@@ -159,12 +111,16 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
         content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
 
         # RSSフィードのcontentが空の場合、既存のcontentを保持
-        if not content_lines and guid in existing_articles_by_guid:
-            content_lines = existing_articles_by_guid[guid]['content']
+        # 既存のファイルから対応する記事を探し、そのcontentを再利用する
+        existing_content_to_use = None
+        if guid in existing_articles_by_id:
+            existing_content_to_use = existing_articles_by_id[guid].get('content')
+        
+        if not content_lines and existing_content_to_use:
+            content_lines = existing_content_to_use
 
         article_data = ArticleData(
             id=guid,
-            post_id=current_post_id, # post_idをdataclassに含める
             title=title,
             publish_date=formatted_pub_date,
             status=status,
@@ -174,19 +130,14 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
         )
 
         # 差分検出と更新/追加
-        is_new_article = guid not in existing_articles_by_guid
+        is_new_article = guid not in existing_articles_by_id
         is_updated_article = False
 
         if not is_new_article:
-            existing_data = existing_articles_by_guid[guid]
+            existing_data = existing_articles_by_id[guid]
             
-            # post_idは動的に割り当てられるため比較から除外
-            temp_existing_data = existing_data.copy()
-            temp_article_data = article_data.__dict__.copy() # dataclassのdict表現
-            temp_existing_data.pop('post_id', None)
-            temp_article_data.pop('post_id', None)
-
-            if json.dumps(temp_existing_data, ensure_ascii=False, sort_keys=True) != json.dumps(temp_article_data, ensure_ascii=False, sort_keys=True):
+            # post_idは存在しないため比較から除外する必要なし
+            if json.dumps(existing_data, ensure_ascii=False, sort_keys=True) != json.dumps(article_data.__dict__, ensure_ascii=False, sort_keys=True):
                 is_updated_article = True
                 # 古いファイルを削除
                 # 既存のファイル名を特定し、削除
@@ -203,11 +154,7 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
                         continue
 
         if is_new_article or is_updated_article:
-            # ファイル名生成
-            padded_post_id = str(current_post_id).zfill(max_post_id_digits)
-            filename_prefix = padded_post_id
-
-            saved_filepath = save_article_to_json(article_data, output_directory, filename_prefix)
+            saved_filepath = save_article_to_json(article_data, output_directory)
             if saved_filepath:
                 if is_new_article:
                     added_count += 1
