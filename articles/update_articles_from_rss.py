@@ -69,7 +69,7 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
     try:
         root = ET.fromstring(rss_content)
     except ET.ParseError as e:
-        print(f"Error parsing RSS feed: {e}\n"
+        print(f"Error parsing RSS feed: {e}\n" \
               "Please ensure the RSS feed is well-formed XML.")
         return
 
@@ -157,6 +157,10 @@ def extract_and_update_articles_from_rss(output_directory: str = "note") -> None
 
         content_text = soup.get_text(separator='\n', strip=True)
         content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
+
+        # RSSフィードのcontentが空の場合、既存のcontentを保持
+        if not content_lines and guid in existing_articles_by_guid:
+            content_lines = existing_articles_by_guid[guid]['content']
 
         article_data = ArticleData(
             id=guid,
