@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "articles"
+version = "0.1.0"
+description = ""
+authors = ["shimajima-eiji <shimajima-eiji@live.jp>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+beautifulsoup4 = "^4.13.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

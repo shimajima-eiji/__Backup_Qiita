@@ -1,0 +1,5 @@
+# Generated files
+extracted_note_articles/
+
+# Poetry virtualenv
+.venv/
