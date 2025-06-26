@@ -1,6 +1,5 @@
 {
     "id": "ne4e23aa1b397",
-    "post_id": "12",
     "title": "noteでできる基本的な機能（記事を書く）編",
     "publish_date": "2020-07-20T12:11:30+09:00",
     "status": "publish",
@@ -98,5 +97,6 @@
             "width": "270",
             "height": "540"
         }
-    ]
+    ],
+    "post_id": "12"
 }

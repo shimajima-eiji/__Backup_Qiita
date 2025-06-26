@@ -1,6 +1,5 @@
 {
     "id": "n3587a6aa7bc4",
-    "post_id": "8",
     "title": "のむらは何者？プロフィール！",
     "publish_date": "2020-07-18T17:42:02+09:00",
     "status": "publish",
@@ -59,5 +58,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "8"
 }

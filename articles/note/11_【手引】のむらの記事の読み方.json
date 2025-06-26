@@ -1,6 +1,5 @@
 {
     "id": "n542f7d7b947f",
-    "post_id": "11",
     "title": "【手引】のむらの記事の読み方",
     "publish_date": "2020-07-18T21:59:37+09:00",
     "status": "publish",
@@ -29,5 +28,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "11"
 }

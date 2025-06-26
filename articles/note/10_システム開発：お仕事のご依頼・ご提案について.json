@@ -1,6 +1,5 @@
 {
     "id": "nab7510c2279d",
-    "post_id": "10",
     "title": "システム開発：お仕事のご依頼・ご提案について",
     "publish_date": "2020-07-18T21:15:43+09:00",
     "status": "publish",
@@ -71,5 +70,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "10"
 }

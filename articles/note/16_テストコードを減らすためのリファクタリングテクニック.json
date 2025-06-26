@@ -1,6 +1,5 @@
 {
     "id": "nd7a107a495d3",
-    "post_id": "16",
     "title": "テストコードを減らすためのリファクタリングテクニック",
     "publish_date": "2020-07-20T17:29:03+09:00",
     "status": "publish",
@@ -109,5 +108,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "16"
 }

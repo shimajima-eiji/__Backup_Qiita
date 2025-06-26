@@ -1,6 +1,5 @@
 {
     "id": "n818dd32c7fa0",
-    "post_id": "22",
     "title": "ボードゲームアリーナ（BGA）に参戦しました！",
     "publish_date": "2020-07-24T18:06:39+09:00",
     "status": "publish",
@@ -33,5 +32,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "22"
 }

@@ -1,6 +1,5 @@
 {
     "id": "nc3e15f772721",
-    "post_id": "26",
     "title": "noteでも毎日更新の指標を測れないか？",
     "publish_date": "2020-07-29T14:36:59+09:00",
     "status": "publish",
@@ -28,5 +27,6 @@
             "width": null,
             "height": null
         }
-    ]
+    ],
+    "post_id": "26"
 }

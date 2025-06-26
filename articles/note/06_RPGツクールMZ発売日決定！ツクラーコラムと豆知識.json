@@ -1,6 +1,5 @@
 {
     "id": "nbb357fa6a421",
-    "post_id": "6",
     "title": "RPGツクールMZ発売日決定！ツクラーコラムと豆知識",
     "publish_date": "2020-07-17T03:50:51+09:00",
     "status": "publish",
@@ -46,5 +45,6 @@
             "width": "620",
             "height": "319"
         }
-    ]
+    ],
+    "post_id": "6"
 }

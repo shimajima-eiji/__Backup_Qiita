@@ -1,6 +1,5 @@
 {
     "id": "n68b4ddb152a5",
-    "post_id": "13",
     "title": "noteをこれから始める人へ",
     "publish_date": "2020-07-18T23:24:20+09:00",
     "status": "publish",
@@ -94,5 +93,6 @@
             "width": "620",
             "height": "361"
         }
-    ]
+    ],
+    "post_id": "13"
 }
