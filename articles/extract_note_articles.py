@@ -6,7 +6,7 @@ import argparse
 import json
 from bs4 import BeautifulSoup
 
-def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "extracted_note_articles") -> None:
+def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
     Parses a Note.com XML backup file and extracts each article into a separate JSON file.
 
@@ -98,7 +98,7 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract articles from a Note.com XML export file.")
     parser.add_argument("xml_file", nargs='?', default="note-nomuragoro-1.xml", help="Path to the input XML file (default: note-nomuragoro-1.xml)")
-    parser.add_argument("-o", "--output", default="extracted_note_articles", help="Directory to save extracted articles (default: extracted_note_articles)")
+    parser.add_argument("-o", "--output", default="note", help="Directory to save extracted articles (default: note)")
     args = parser.parse_args()
 
     extract_articles_from_note_xml(args.xml_file, args.output)
