@@ -1,93 +1,63 @@
 import json
-from json_object import Article, Articles
+import os
 from datetime import datetime
+from json_object import Article
 
-def main():
-    xml_articles = Articles()
-    rss_articles = Articles()
+def verify_and_filter_articles(new_articles, existing_articles_dir):
+    existing_articles = {}
+    for filename in os.listdir(existing_articles_dir):
+        if filename.endswith('.json'):
+            file_path = os.path.join(existing_articles_dir, filename)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                article = Article.from_json(data)
+                existing_articles[article.guid] = article
 
-    try:
-        with open('output/xml_backup.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            for item in data.get('articles', []):
-                # Safely get all fields, providing None for missing optional fields
-                article = Article(
-                    post_id=item.get('post_id'),
-                    title=item.get('title'),
-                    link=item.get('link'),
-                    pub_date=item.get('pub_date'),
-                    creator=item.get('creator'),
-                    guid=item.get('guid'),
-                    content=item.get('content'),
-                    post_date=item.get('post_date'),
-                    status=item.get('status'),
-                    description=item.get('description') # description might be missing in xml_backup
-                )
-                xml_articles.add_article(article)
-    except FileNotFoundError:
-        print("xml_backup.json not found. Skipping XML data loading.")
+    filtered_articles = []
+    for new_article in new_articles:
+        if new_article.guid in existing_articles:
+            existing_article = existing_articles[new_article.guid]
+            # Compare pub_date. If new article is older or same, skip.
+            # Assuming pub_date is in 'yyyy-MM-dd HH:MM:SS' or 'yyyy-MM-dd HH:MM' format
+            try:
+                new_pub_date = datetime.strptime(new_article.pub_date, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                new_pub_date = datetime.strptime(new_article.pub_date, '%Y-%m-%d %H:%M')
+            
+            try:
+                existing_pub_date = datetime.strptime(existing_article.pub_date, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                existing_pub_date = datetime.strptime(existing_article.pub_date, '%Y-%m-%d %H:%M')
 
-    try:
-        with open('output/rss_backup.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            for item in data.get('articles', []):
-                # Safely get all fields, providing None for missing optional fields
-                article = Article(
-                    post_id=item.get('post_id'),
-                    title=item.get('title'),
-                    link=item.get('link'),
-                    pub_date=item.get('pub_date'),
-                    creator=item.get('creator'),
-                    guid=item.get('guid'),
-                    content=item.get('content'),
-                    post_date=item.get('post_date'),
-                    status=item.get('status'),
-                    description=item.get('description')
-                )
-                rss_articles.add_article(article)
-    except FileNotFoundError:
-        print("rss_backup.json not found. Skipping RSS data loading.")
-
-    verified_articles = Articles()
-    post_id_counter = 1
-
-    # Process XML articles first
-    for article in xml_articles.articles:
-        verified_articles.add_article(article)
-
-    # Process RSS articles
-    for rss_article in rss_articles.articles:
-        # Auto-generate post_id if empty or None
-        if rss_article.post_id is None or rss_article.post_id == 0:
-            rss_article.post_id = post_id_counter
-            post_id_counter += 1
-
-        # Check for existing article with same guid
-        found = False
-        for existing_article in verified_articles.articles:
-            if existing_article.guid == rss_article.guid:
-                found = True
-                # Compare publish_date and update if newer
-                # Ensure pub_date is not None before parsing
-                if rss_article.pub_date and existing_article.pub_date:
-                    try:
-                        rss_pub_date = datetime.strptime(rss_article.pub_date, '%a, %d %b %Y %H:%M:%S %z')
-                        existing_pub_date = datetime.strptime(existing_article.pub_date, '%a, %d %b %Y %H:%M:%S %z')
-                        if rss_pub_date > existing_pub_date:
-                            # Update existing article with RSS data
-                            existing_article.title = rss_article.title
-                            existing_article.link = rss_article.link
-                            existing_article.pub_date = rss_article.pub_date
-                            existing_article.creator = rss_article.creator
-                            existing_article.description = rss_article.description
-                    except ValueError as e:
-                        print(f"Error parsing date for GUID {rss_article.guid}: {e}")
-                break
-        if not found:
-            verified_articles.add_article(rss_article)
-
-    with open('output/verified_articles.json', 'w', encoding='utf-8') as f:
-        f.write(verified_articles.to_json())
+            if new_pub_date <= existing_pub_date:
+                print(f"Skipping {new_article.guid}: New article is older or same as existing.")
+                continue
+        filtered_articles.append(new_article)
+    return filtered_articles
 
 if __name__ == '__main__':
-    main()
+    # This is a placeholder for testing. In a real scenario, new_articles would come from rss_backup.py or xml_backup.py
+    # And existing_articles_dir would be the output directory.
+    # For demonstration, let's create some dummy articles.
+    dummy_new_articles = [
+        Article(title="New Article 1", pub_date="2025-06-26 10:00:00", guid="n_new_1", content=["Content 1"], status="publish"),
+        Article(title="New Article 2", pub_date="2025-06-26 11:00:00", guid="n_existing_1", content=["Content 2"], status="publish"), # This one should update existing_1
+        Article(title="New Article 3", pub_date="2025-06-26 09:00:00", guid="n_existing_2", content=["Content 3"], status="publish"), # This one should be skipped
+    ]
+
+    # Create dummy existing files in output directory for testing
+    output_dir = '/mnt/c/Users/shima/Desktop/学習アプリ開発_GeminiCLIデモ/articles/output'
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Existing article 1 (will be updated)
+    with open(os.path.join(output_dir, 'xml_n_existing_1.json'), 'w', encoding='utf-8') as f:
+        json.dump(Article(title="Existing Article 1", pub_date="2025-06-26 09:30:00", guid="n_existing_1", content=["Old Content 1"], status="publish").to_json(), f, ensure_ascii=False, indent=2)
+    
+    # Existing article 2 (will be skipped)
+    with open(os.path.join(output_dir, 'xml_n_existing_2.json'), 'w', encoding='utf-8') as f:
+        json.dump(Article(title="Existing Article 2", pub_date="2025-06-26 10:00:00", guid="n_existing_2", content=["Old Content 2"], status="publish").to_json(), f, ensure_ascii=False, indent=2)
+
+    print("--- Running verification ---")
+    filtered = verify_and_filter_articles(dummy_new_articles, output_dir)
+    print("Filtered articles GUIDs:", [a.guid for a in filtered])
+    print("--- Verification complete ---")
