@@ -51,6 +51,14 @@ $ tree
   - ファイルの書き込みと削除
 - master
   - ファイルの読み込み
+- git コマンド
+  - config.name: `shimajima-eiji`
+  - config.email: `shimajima-eiji@live.jp`
+  - add: 以下に指定するディレクトリ（サブディレクトリを含む）に限定する
+    - /src
+    - /output
+  - commit
+  - push
 
 ### 構築手順の留意点
 
