@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+extract_note_articles.py
+
+このスクリプトは、Note.com からエクスポートされた XML ファイルを解析し、
+各記事を構造化された JSON 形式で抽出します。
+AI との協調開発を念頭に置き、以下の設計原則に基づいています。
+
+- **明確な目的と機能分離**: 各関数は単一の明確な目的を持ち、理解しやすいように設計されています。
+- **データ構造の最適化**: 抽出される JSON データは、機械処理と人間による管理の両方に適した形式です。
+  - 記事IDに基づくファイル命名規則により、ファイル管理とソートが容易になります。
+  - 日付はISO 8601形式で統一され、プログラムでの扱いやすさを向上させます。
+  - 本文は行ごとに分割され、テキスト処理の柔軟性を高めます。
+  - 画像情報は別途抽出され、コンテンツの欠損を防ぎます。
+- **堅牢性とエラーハンドリング**: ファイルの読み込みやディレクトリ作成時のエラーを適切に処理します。
+- **自己文書化**: コード内のコメントは、処理の「なぜ」と「どのように」を説明し、
+  将来のメンテナンスやAIによる解析を容易にします。
+  （参考: https://qiita.com/nomurasan/items/e450cb0135e250022aaf.md）
+"""
+
 import xml.etree.ElementTree as ET
 import os
 import re
@@ -7,45 +27,72 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-def sanitize_filename(text, max_length=100):
-    # Remove invalid characters for filenames
-    sanitized = re.sub(r'[\\/:*?"<>|]', '', text)
-    # Replace spaces with underscores (optional, but good for consistency)
+def sanitize_filename(text: str, max_length: int = 100) -> str:
+    """
+    ファイル名として安全な文字列に変換します。
+    AIがファイル名を解釈する際の一貫性を保ち、ファイルシステム上の問題を避けるため、
+    無効な文字を除去し、スペースをアンダースコアに変換し、指定された長さに切り詰めます。
+
+    Args:
+        text (str): サニタイズする元の文字列。
+        max_length (int): ファイル名の最大長。
+
+    Returns:
+        str: サニタイズされたファイル名。
+    """
+    # ファイル名として無効な文字を除去
+    sanitized = re.sub(r'[\/:*?"<>|]', '', text)
+    # スペースをアンダースコアに変換（一貫性のため）
     sanitized = sanitized.replace(' ', '_')
-    # Remove leading/trailing whitespace
+    # 先頭/末尾の空白を除去
     sanitized = sanitized.strip()
-    # Truncate to max_length
+    # 指定された長さに切り詰める
     return sanitized[:max_length]
 
 def get_max_post_id_digits(xml_file_path: str) -> int:
+    """
+    XMLファイル内のすべての記事のpost_idの最大値から、その桁数を計算します。
+    これにより、ファイル名のゼロパディングを動的に調整し、ソート順の問題を解決します。
+
+    Args:
+        xml_file_path (str): 入力XMLファイルのパス。
+
+    Returns:
+        int: post_idの最大桁数。post_idが見つからない場合は1を返します。
+    """
     try:
         tree = ET.parse(xml_file_path)
         root = tree.getroot()
-    except (FileNotFoundError, ET.ParseError):
-        return 0
+    except (FileNotFoundError, ET.ParseError) as e:
+        print(f"Error reading or parsing XML for max post ID digits: {e}")
+        return 1 # エラー時はデフォルトのパディング長を返す
 
     namespaces = {'wp': 'http://wordpress.org/export/1.2/'}
     max_id = 0
     for item in root.findall('.//item'):
         post_id_elem = item.find('wp:post_id', namespaces)
-        if post_id_elem is not None and post_id_elem.text.isdigit():
+        if post_id_elem is not None and post_id_elem.text and post_id_elem.text.isdigit():
             max_id = max(max_id, int(post_id_elem.text))
     return len(str(max_id)) if max_id > 0 else 1
 
 def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
-    Parses a Note.com XML backup file and extracts each article into a separate JSON file.
+    Note.com の XML バックアップファイルを解析し、各記事を個別の JSON ファイルとして抽出します。
+    抽出されるデータ構造は、後続の処理（例: AIによる分析、ウェブサイト生成）に適しています。
 
     Args:
-        xml_file_path (str): The full path to the input XML file.
-        output_directory (str): The directory where extracted articles will be saved.
+        xml_file_path (str): 入力XMLファイルのフルパス。
+        output_directory (str): 抽出された記事を保存するディレクトリ。
     """
+    # XML名前空間の定義
+    # Note.com のエクスポートファイルで使用される主要な名前空間
     namespaces = {
         'content': 'http://purl.org/rss/1.0/modules/content/',
         'dc': 'http://purl.org/dc/elements/1.1/',
         'wp': 'http://wordpress.org/export/1.2/',
     }
 
+    # 出力ディレクトリが存在しない場合は作成
     try:
         os.makedirs(output_directory, exist_ok=True)
         print(f"Output directory '{output_directory}' ensured.")
@@ -53,6 +100,7 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         print(f"Error creating output directory '{output_directory}': {e}")
         return
 
+    # XMLファイルの解析
     try:
         tree = ET.parse(xml_file_path)
         root = tree.getroot()
@@ -60,33 +108,39 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         print(f"Error: XML file not found at '{xml_file_path}'")
         return
     except ET.ParseError as e:
-        print(f"Error parsing XML file '{xml_file_path}': {e}")
+        print(f"Error parsing XML file '{xml_file_path}': {e}\n" # Corrected: Removed extra backslash before 'n'
+              "Please ensure the XML file is well-formed.")
         return
 
+    # すべての 'item' 要素（個々の記事を表す）を検索
     items = root.findall('.//item')
     if not items:
-        print("No <item> elements found in the XML file.")
+        print("No <item> elements found in the XML file. Check the XML structure.")
         return
 
     print(f"Found {len(items)} articles to extract.")
     extracted_count = 0
 
-    # Calculate max post_id digits for padding
+    # ファイル名のゼロパディング桁数を動的に計算
     max_post_id_digits = get_max_post_id_digits(xml_file_path)
     
-    # Target total filename length is around 30 characters
-    # post_id_padding + underscore + title_length = 30
-    # title_length = 30 - post_id_padding - 1
-    title_max_length = 30 - max_post_id_digits - 1
-    if title_max_length < 1: # Ensure title_max_length is at least 1
+    # ファイル名全体の目標長（例: 30文字）から、タイトル部分の最大長を計算
+    # post_idのパディング長 + アンダースコア1文字 + タイトル長 = 目標長
+    # タイトル長 = 目標長 - post_idのパディング長 - 1
+    target_filename_total_length = 30
+    title_max_length = target_filename_total_length - max_post_id_digits - 1
+    if title_max_length < 1: # タイトル長が1文字未満にならないように保証
         title_max_length = 1
 
     for i, item in enumerate(items):
+        # 記事の基本情報を抽出
+        # 欠損時のフォールバックも考慮
         title = item.find('title').text or f"Untitled Article {i+1}"
         pub_date_str = item.find('pubDate').text or ""
         content_html = item.find('content:encoded', namespaces).text or ""
         
-        # Extract status, post_id, post_type
+        # 記事のステータス、post_id、post_typeを抽出
+        # これらの情報は、記事の管理やフィルタリングに役立ちます。
         status_elem = item.find('wp:status', namespaces)
         status = status_elem.text if status_elem is not None else "unknown"
 
@@ -96,19 +150,25 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         post_type_elem = item.find('wp:post_type', namespaces)
         post_type = post_type_elem.text if post_type_elem is not None else "post"
 
+        # 記事のユニークな識別子 (guid)
+        # ファイル名生成のフォールバックとしても使用
         guid = item.find('guid').text or f"unknown_guid_{i}"
 
-        # Format publish date to ISO 8601
+        # 公開日をISO 8601形式にフォーマット
+        # プログラムでの日付処理を容易にするため
         formatted_pub_date = ""
         try:
+            # 例: Thu, 01 Jan 2020 00:00:00 +0900
             dt_object = datetime.strptime(pub_date_str, '%a, %d %b %Y %H:%M:%S %z')
             formatted_pub_date = dt_object.isoformat()
         except ValueError:
-            formatted_pub_date = pub_date_str # Fallback to original if parsing fails
+            formatted_pub_date = pub_date_str # パース失敗時は元の文字列をフォールバック
 
+        # BeautifulSoup を使用してHTMLコンテンツを解析
         soup = BeautifulSoup(content_html, 'html.parser')
         
-        # Extract image information
+        # 画像情報を抽出
+        # 記事内の画像への参照を構造化して保存することで、画像管理を容易にします。
         images = []
         for img_tag in soup.find_all('img'):
             img_info = {
@@ -119,39 +179,46 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
             }
             images.append(img_info)
 
+        # HTMLコンテンツからプレーンテキストを抽出し、行ごとに分割
+        # コンテンツの行ごとの処理や、トークン化などの前処理を容易にするため
         content_text = soup.get_text(separator='\n', strip=True)
         content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
 
-        # Generate filename based on post_id and sanitized title
+        # ファイル名を post_id とサニタイズされたタイトルに基づいて生成
+        # 人間が読みやすく、ソートしやすいファイル名を提供します。
         filename_base = ""
         if post_id and post_id.isdigit():
-            # Zero-pad post_id dynamically
+            # post_idを動的にゼロパディング
             padded_post_id = str(post_id).zfill(max_post_id_digits)
             filename_base = f"{padded_post_id}_{sanitize_filename(title, max_length=title_max_length)}"
         else:
-            # Fallback if post_id is not available or not a digit
-            filename_base = sanitize_filename(title, max_length=30) # Use 30 for title if no ID
+            # post_idが利用できない場合や数字でない場合のフォールバック
+            # タイトルのみでファイル名を生成し、長さを調整
+            filename_base = sanitize_filename(title, max_length=target_filename_total_length)
             if not filename_base:
-                filename_base = f"article_{i}"
+                filename_base = f"article_{i}" # 最終フォールバック
 
         output_filename = os.path.join(output_directory, f"{filename_base}.json")
 
+        # ファイル名衝突時の処理（連番を追加）
         counter = 1
         while os.path.exists(output_filename):
             output_filename = os.path.join(output_directory, f"{filename_base}_{counter}.json")
             counter += 1
 
+        # 記事データをJSON形式で構造化
         article_data = {
-            'id': guid, # Keep the original guid for reference
-            'post_id': post_id, # Added
+            'id': guid, # 元のguidを識別子として保持
+            'post_id': post_id, # Note.com 内部の投稿ID
             'title': title,
             'publish_date': formatted_pub_date,
-            'status': status, # Added
-            'post_type': post_type, # Added
-            'content': content_lines,
-            'images': images # Added
+            'status': status, # 記事の公開ステータス (publish, draftなど)
+            'post_type': post_type, # 記事のタイプ (post, pageなど)
+            'content': content_lines, # プレーンテキストのコンテンツを行ごとに配列化
+            'images': images # 抽出された画像情報
         }
 
+        # JSONデータをファイルに書き込み
         try:
             with open(output_filename, 'w', encoding='utf-8') as f:
                 json.dump(article_data, f, ensure_ascii=False, indent=4)
@@ -163,9 +230,14 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
     print(f"\nExtraction complete. Total {extracted_count} articles extracted to '{output_directory}'.")
 
 if __name__ == "__main__":
+    # コマンドライン引数のパーサー設定
+    # スクリプトの柔軟性を高め、異なるXMLファイルや出力ディレクトリに対応
     parser = argparse.ArgumentParser(description="Extract articles from a Note.com XML export file.")
-    parser.add_argument("xml_file", nargs='?', default="note-nomuragoro-1.xml", help="Path to the input XML file (default: note-nomuragoro-1.xml)")
-    parser.add_argument("-o", "--output", default="note", help="Directory to save extracted articles (default: note)")
+    parser.add_argument("xml_file", nargs='?', default="note-nomuragoro-1.xml", 
+                        help="Path to the input XML file (default: note-nomuragoro-1.xml)")
+    parser.add_argument("-o", "--output", default="note", 
+                        help="Directory to save extracted articles (default: note)")
     args = parser.parse_args()
 
+    # 記事抽出関数の実行
     extract_articles_from_note_xml(args.xml_file, args.output)
