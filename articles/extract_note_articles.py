@@ -7,6 +7,16 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+def sanitize_filename(text, max_length=100):
+    # Remove invalid characters for filenames
+    sanitized = re.sub(r'[\\/:*?"<>|]', '', text)
+    # Replace spaces with underscores (optional, but good for consistency)
+    sanitized = sanitized.replace(' ', '_')
+    # Remove leading/trailing whitespace
+    sanitized = sanitized.strip()
+    # Truncate to max_length
+    return sanitized[:max_length]
+
 def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "note") -> None:
     """
     Parses a Note.com XML backup file and extracts each article into a separate JSON file.
@@ -50,9 +60,7 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         title = item.find('title').text or f"Untitled Article {i+1}"
         pub_date_str = item.find('pubDate').text or ""
         content_html = item.find('content:encoded', namespaces).text or ""
-        post_name = item.find('wp:post_name', namespaces).text
-        guid = item.find('guid').text or f"unknown_guid_{i}"
-
+        
         # Extract status, post_id, post_type
         status_elem = item.find('wp:status', namespaces)
         status = status_elem.text if status_elem is not None else "unknown"
@@ -62,6 +70,8 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
 
         post_type_elem = item.find('wp:post_type', namespaces)
         post_type = post_type_elem.text if post_type_elem is not None else "post"
+
+        guid = item.find('guid').text or f"unknown_guid_{i}"
 
         # Format publish date to ISO 8601
         formatted_pub_date = ""
@@ -87,29 +97,18 @@ def extract_articles_from_note_xml(xml_file_path: str, output_directory: str = "
         content_text = soup.get_text(separator='\n', strip=True)
         content_lines = [line.strip() for line in content_text.splitlines() if line.strip()]
 
-        # Use guid for filename if available and valid, otherwise fallback to post_name or sanitized title
-        filename_base = None
-        if guid and "note.com" in guid: # Check if guid looks like a valid note.com ID
-            # Extract the ID part from the guid URL (e.g., n085251d79907 from https://note.com/nomuragoro/n/n085251d79907)
-            match = re.search(r'/n/([a-zA-Z0-9]+)$', guid)
-            if match:
-                filename_base = match.group(1)
-            else:
-                # Fallback to full guid if ID extraction fails
-                filename_base = re.sub(r'[\\/:*?"<>|]', '', guid).strip()[:150]
-        
-        if not filename_base and post_name:
-            decoded_post_name = unquote(post_name)
-            filename_base = re.sub(r'[\\/:*?"<>|]', '', decoded_post_name).strip()
-
-        if not filename_base:
-            sanitized_title = re.sub(r'[\\/:*?"<>|]', '', title).strip()
-            if sanitized_title:
-                filename_base = sanitized_title
-            else:
+        # Generate filename based on post_id and sanitized title
+        filename_base = ""
+        if post_id:
+            # Zero-pad post_id to 6 digits
+            padded_post_id = str(post_id).zfill(6)
+            filename_base = f"{padded_post_id}_{sanitize_filename(title, max_length=100)}"
+        else:
+            # Fallback if post_id is not available
+            filename_base = sanitize_filename(title, max_length=150) # Longer title if no ID
+            if not filename_base:
                 filename_base = f"article_{i}"
 
-        filename_base = filename_base[:150] # Ensure filename is not excessively long
         output_filename = os.path.join(output_directory, f"{filename_base}.json")
 
         counter = 1
