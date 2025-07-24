@@ -1,0 +1,392 @@
+<h1 data-sourcepos="1:1-1:72">
+<span id="htmlコードレビューの観点---基礎から実務レベルまで" class="fragment"></span><a href="#html%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E8%A6%B3%E7%82%B9---%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E5%AE%9F%E5%8B%99%E3%83%AC%E3%83%99%E3%83%AB%E3%81%BE%E3%81%A7"><i class="fa fa-link"></i></a>HTMLコードレビューの観点 - 基礎から実務レベルまで</h1>
+<h2 data-sourcepos="3:1-3:15">
+<span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>はじめに</h2>
+<p data-sourcepos="5:1-5:316">HTML研修やコードレビューを担当していると、「何をどこまでチェックすればいいの？」という質問をよく受けます。初学者向けの基礎的なチェックポイントから、実務レベルで求められる高度な観点まで、段階的にまとめてみました。</p>
+<p data-sourcepos="7:1-7:120">実際の課題ファイルを例にして、「基礎版」と「プロ版」の違いを具体的に解説します。</p>
+<h2 data-sourcepos="9:1-9:45">
+<span id="-アウトラインで見るhtml構造" class="fragment"></span><a href="#-%E3%82%A2%E3%82%A6%E3%83%88%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%A7%E8%A6%8B%E3%82%8Bhtml%E6%A7%8B%E9%80%A0"><i class="fa fa-link"></i></a>📝 アウトラインで見るHTML構造</h2>
+<p data-sourcepos="11:1-11:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7eeab784-176c-4456-85cb-10edcda2e7f7.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d254959330b12250e34ed7109ade8a24" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7eeab784-176c-4456-85cb-10edcda2e7f7.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d254959330b12250e34ed7109ade8a24" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7eeab784-176c-4456-85cb-10edcda2e7f7.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=9c476afc6d0ace736c32f9fc8d76f814 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/7eeab784-176c-4456-85cb-10edcda2e7f7.png"></a></p>
+<h3 data-sourcepos="13:1-13:24">
+<span id="-模範解答版" class="fragment"></span><a href="#-%E6%A8%A1%E7%AF%84%E8%A7%A3%E7%AD%94%E7%89%88"><i class="fa fa-link"></i></a>🎯 模範解答版</h3>
+<p data-sourcepos="15:1-15:85">基本的なHTMLタグの使い方を習得する段階での目標レベルです。</p>
+<div class="code-frame" data-lang="html" data-sourcepos="17:1-60:3"><div class="highlight"><pre><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ja"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>犬の一生<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>犬の一生<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;</span>犬は古くから人類と共存し、単なるペットではなく家族の一員として、かけがえのない存在です。その一生は、喜びと成長、そして人間との深い絆の中で築かれます。<span class="nt">&lt;br&gt;</span>
+        このレポートでは、犬のライフステージとその特徴、人間との関わりについて掘り下げます。犬の一生を理解することは、彼らが健康で幸せに過ごすための第一歩となるでしょう。<span class="nt">&lt;/p&gt;</span>
+    
+    <span class="nt">&lt;figure&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"images/dog.jpg"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;figcaption&gt;</span>犬と人間は古くから共存してきた<span class="nt">&lt;/figcaption&gt;</span>
+    <span class="nt">&lt;/figure&gt;</span>
+    
+    <span class="nt">&lt;hr&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>成長の段階<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p&gt;</span>犬の成長はいくつかの段階を経て進み、それぞれ必要なケアやしつけが異なります。ここでは、犬の一生を特徴的な4つのフェーズに分けて解説します。各時期の特性を理解し、愛犬が健やかに成長できるようサポートしましょう。<span class="nt">&lt;/p&gt;</span>
+    
+    <span class="nt">&lt;ol&gt;</span>
+        <span class="nt">&lt;li&gt;</span>子犬期（0〜6ヶ月）：誕生、離乳、社会化の重要性、しつけの基礎<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>青年期（6ヶ月〜2歳）：体の成長、性成熟、精神的な発達、問題行動への対処<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>成犬期（2歳〜7歳）：安定した時期、健康管理、適度な運動と遊び<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;</span>老犬期（7歳〜）：体の変化、介護の必要性、終末期のケア<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ol&gt;</span>
+    
+    <span class="nt">&lt;h3&gt;</span>子犬期（0〜6ヶ月）<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>心身の基礎が形成される重要な時期。社会性や基本的なしつけを身につけ、信頼関係を築くことが大切です。ワクチン接種や健康チェックも欠かせません。<span class="nt">&lt;/p&gt;</span>
+    
+    <span class="c">&lt;!-- 他の成長段階も同様 --&gt;</span>
+    
+    <span class="nt">&lt;hr&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>健康と病気<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p&gt;</span>犬の健康維持には、日頃の観察と適切なケアが不可欠です。食欲や元気さなど、常に状態を確認しましょう。定期的な予防接種や寄生虫予防は、病気から犬を守るために重要です。年齢や犬種に合わせた食事、運動、そして定期健診も欠かせません。異変を感じたら、すぐに獣医師に相談しましょう。<span class="nt">&lt;/p&gt;</span>
+    
+    <span class="nt">&lt;p&gt;</span>犬の病気について詳しくは<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.fpc-pet.co.jp/dog/disease"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>こちら<span class="nt">&lt;/a&gt;</span>をご覧ください。<span class="nt">&lt;/p&gt;</span>
+    
+    <span class="c">&lt;!-- 残りのセクションも同様 --&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h3 data-sourcepos="62:1-62:33">
+<span id="-実務ではこう書く" class="fragment"></span><a href="#-%E5%AE%9F%E5%8B%99%E3%81%A7%E3%81%AF%E3%81%93%E3%81%86%E6%9B%B8%E3%81%8F"><i class="fa fa-link"></i></a>🚀 実務ではこう書く</h3>
+<p data-sourcepos="64:1-64:69">実際のWebサイト制作で求められるクオリティです。</p>
+<div class="code-frame" data-lang="html" data-sourcepos="66:1-166:3"><div class="highlight"><pre><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ja"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">content=</span><span class="s">"犬のライフステージと特徴、人間との関わりについて詳しく解説したレポート。子犬期から老犬期まで、各成長段階での適切なケア方法をご紹介します。"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"keywords"</span> <span class="na">content=</span><span class="s">"犬, ペット, ライフステージ, 成長段階, 健康管理, しつけ"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"author"</span> <span class="na">content=</span><span class="s">"ペット情報センター"</span><span class="nt">&gt;</span>
+    
+    <span class="c">&lt;!-- Open Graph / Facebook --&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:type"</span> <span class="na">content=</span><span class="s">"article"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:title"</span> <span class="na">content=</span><span class="s">"犬の一生 - ライフステージ別ケアガイド"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:description"</span> <span class="na">content=</span><span class="s">"犬のライフステージと特徴、人間との関わりについて詳しく解説したレポート"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">"og:image"</span> <span class="na">content=</span><span class="s">"images/dog.jpg"</span><span class="nt">&gt;</span>
+    
+    <span class="c">&lt;!-- Twitter --&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:card"</span> <span class="na">content=</span><span class="s">"summary_large_image"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:title"</span> <span class="na">content=</span><span class="s">"犬の一生 - ライフステージ別ケアガイド"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"twitter:description"</span> <span class="na">content=</span><span class="s">"犬のライフステージと特徴、人間との関わりについて詳しく解説したレポート"</span><span class="nt">&gt;</span>
+    
+    <span class="nt">&lt;title&gt;</span>犬の一生 - ライフステージ別ケアガイド | ペット情報センター<span class="nt">&lt;/title&gt;</span>
+    
+    <span class="c">&lt;!-- 構造化データ --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/ld+json"</span><span class="nt">&gt;</span>
+    <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">@context</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://schema.org</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">@type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Article</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">headline</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">犬の一生 - ライフステージ別ケアガイド</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">犬のライフステージと特徴、人間との関わりについて詳しく解説したレポート</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">image</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">images/dog.jpg</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">@type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Organization</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ペット情報センター</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="dl">"</span><span class="s2">publisher</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">"</span><span class="s2">@type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Organization</span><span class="dl">"</span><span class="p">,</span>
+            <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ペット情報センター</span><span class="dl">"</span>
+        <span class="p">},</span>
+        <span class="dl">"</span><span class="s2">datePublished</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-07-24</span><span class="dl">"</span>
+    <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;header</span> <span class="na">role=</span><span class="s">"banner"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;nav</span> <span class="na">aria-label=</span><span class="s">"メインナビゲーション"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ナビゲーションは実装時に追加 --&gt;</span>
+        <span class="nt">&lt;/nav&gt;</span>
+    <span class="nt">&lt;/header&gt;</span>
+
+    <span class="nt">&lt;main</span> <span class="na">role=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;article&gt;</span>
+            <span class="nt">&lt;header&gt;</span>
+                <span class="nt">&lt;h1&gt;</span>犬の一生<span class="nt">&lt;/h1&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"lead"</span><span class="nt">&gt;</span>犬は古くから人類と共存し、単なるペットではなく家族の一員として、かけがえのない存在です。その一生は、喜びと成長、そして人間との深い絆の中で築かれます。<span class="nt">&lt;br&gt;</span>
+                    このレポートでは、犬のライフステージとその特徴、人間との関わりについて掘り下げます。犬の一生を理解することは、彼らが健康で幸せに過ごすための第一歩となるでしょう。<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/header&gt;</span>
+
+            <span class="nt">&lt;figure</span> <span class="na">role=</span><span class="s">"img"</span> <span class="na">aria-labelledby=</span><span class="s">"hero-caption"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"images/dog.jpg"</span> <span class="na">alt=</span><span class="s">"人間の家族と一緒に過ごす犬の写真。リビングルームで子供たちと遊んでいる様子"</span> <span class="na">loading=</span><span class="s">"lazy"</span> <span class="na">width=</span><span class="s">"800"</span> <span class="na">height=</span><span class="s">"400"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;figcaption</span> <span class="na">id=</span><span class="s">"hero-caption"</span><span class="nt">&gt;</span>犬と人間は古くから共存してきた<span class="nt">&lt;/figcaption&gt;</span>
+            <span class="nt">&lt;/figure&gt;</span>
+
+            <span class="nt">&lt;section</span> <span class="na">aria-labelledby=</span><span class="s">"growth-stages"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h2</span> <span class="na">id=</span><span class="s">"growth-stages"</span><span class="nt">&gt;</span>成長の段階<span class="nt">&lt;/h2&gt;</span>
+                <span class="nt">&lt;p&gt;</span>犬の成長はいくつかの段階を経て進み、それぞれ必要なケアやしつけが異なります。ここでは、犬の一生を特徴的な4つのフェーズに分けて解説します。各時期の特性を理解し、愛犬が健やかに成長できるようサポートしましょう。<span class="nt">&lt;/p&gt;</span>
+                
+                <span class="nt">&lt;ol</span> <span class="na">role=</span><span class="s">"list"</span> <span class="na">aria-label=</span><span class="s">"犬の成長段階"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>子犬期（0〜6ヶ月）：誕生、離乳、社会化の重要性、しつけの基礎<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>青年期（6ヶ月〜2歳）：体の成長、性成熟、精神的な発達、問題行動への対処<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>成犬期（2歳〜7歳）：安定した時期、健康管理、適度な運動と遊び<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>老犬期（7歳〜）：体の変化、介護の必要性、終末期のケア<span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;/ol&gt;</span>
+
+                <span class="nt">&lt;article</span> <span class="na">aria-labelledby=</span><span class="s">"puppy-stage"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;h3</span> <span class="na">id=</span><span class="s">"puppy-stage"</span><span class="nt">&gt;</span>子犬期（0〜6ヶ月）<span class="nt">&lt;/h3&gt;</span>
+                    <span class="nt">&lt;p&gt;</span>心身の基礎が形成される重要な時期。社会性や基本的なしつけを身につけ、信頼関係を築くことが大切です。ワクチン接種や健康チェックも欠かせません。<span class="nt">&lt;/p&gt;</span>
+                <span class="nt">&lt;/article&gt;</span>
+
+                <span class="c">&lt;!-- 他の成長段階も同様の構造 --&gt;</span>
+            <span class="nt">&lt;/section&gt;</span>
+
+            <span class="nt">&lt;section</span> <span class="na">aria-labelledby=</span><span class="s">"health-disease"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;h2</span> <span class="na">id=</span><span class="s">"health-disease"</span><span class="nt">&gt;</span>健康と病気<span class="nt">&lt;/h2&gt;</span>
+                <span class="nt">&lt;p&gt;</span>犬の健康維持には、日頃の観察と適切なケアが不可欠です。食欲や元気さなど、常に状態を確認しましょう。定期的な予防接種や寄生虫予防は、病気から犬を守るために重要です。年齢や犬種に合わせた食事、運動、そして定期健診も欠かせません。異変を感じたら、すぐに獣医師に相談しましょう。<span class="nt">&lt;/p&gt;</span>
+                
+                <span class="nt">&lt;p&gt;</span>犬の病気について詳しくは<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.fpc-pet.co.jp/dog/disease"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">rel=</span><span class="s">"noopener noreferrer"</span> <span class="na">aria-describedby=</span><span class="s">"external-link-desc"</span><span class="nt">&gt;</span>アニコム損保の犬の病気ガイド<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>（外部サイト）<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>をご覧ください。<span class="nt">&lt;/p&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"external-link-desc"</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>このリンクは外部サイトに移動します<span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/section&gt;</span>
+
+            <span class="c">&lt;!-- 他のセクションも同様の構造 --&gt;</span>
+        <span class="nt">&lt;/article&gt;</span>
+    <span class="nt">&lt;/main&gt;</span>
+
+    <span class="nt">&lt;footer</span> <span class="na">role=</span><span class="s">"contentinfo"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;&lt;small&gt;</span><span class="ni">&amp;copy;</span> 2024 ペット情報センター. All rights reserved.<span class="nt">&lt;/small&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;/footer&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h2 data-sourcepos="168:1-168:44">
+<span id="-レベル別チェックポイント" class="fragment"></span><a href="#-%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>📋 レベル別チェックポイント</h2>
+<h3 data-sourcepos="170:1-170:48">
+<span id="-基礎レベル今日のゴール" class="fragment"></span><a href="#-%E5%9F%BA%E7%A4%8E%E3%83%AC%E3%83%99%E3%83%AB%E4%BB%8A%E6%97%A5%E3%81%AE%E3%82%B4%E3%83%BC%E3%83%AB"><i class="fa fa-link"></i></a>🎯 基礎レベル（今日のゴール）</h3>
+<h4 data-sourcepos="172:1-172:29">
+<span id="1-基本構造の確認" class="fragment"></span><a href="#1-%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0%E3%81%AE%E7%A2%BA%E8%AA%8D"><i class="fa fa-link"></i></a>1. 基本構造の確認</h4>
+<ul data-sourcepos="173:1-177:0">
+<li data-sourcepos="173:1-173:31" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>DOCTYPE宣言があるか</li>
+<li data-sourcepos="174:1-174:56" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>html要素にlang属性が設定されているか</li>
+<li data-sourcepos="175:1-175:79" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>head内に必要最低限のmeta要素があるか（charset, viewport）</li>
+<li data-sourcepos="176:1-177:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>title要素が空でないか</li>
+</ul>
+<h4 data-sourcepos="178:1-178:32">
+<span id="2-見出し構造の確認" class="fragment"></span><a href="#2-%E8%A6%8B%E5%87%BA%E3%81%97%E6%A7%8B%E9%80%A0%E3%81%AE%E7%A2%BA%E8%AA%8D"><i class="fa fa-link"></i></a>2. 見出し構造の確認</h4>
+<ul data-sourcepos="179:1-182:0">
+<li data-sourcepos="179:1-179:48" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>h1タグが1つだけ使われているか</li>
+<li data-sourcepos="180:1-180:66" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>見出しの階層が論理的か（h1→h2→h3の順序）</li>
+<li data-sourcepos="181:1-182:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>見出しレベルを飛ばしていないか</li>
+</ul>
+<h4 data-sourcepos="183:1-183:35">
+<span id="3-コンテンツの構造化" class="fragment"></span><a href="#3-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E6%A7%8B%E9%80%A0%E5%8C%96"><i class="fa fa-link"></i></a>3. コンテンツの構造化</h4>
+<ul data-sourcepos="184:1-188:0">
+<li data-sourcepos="184:1-184:46" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>段落はp要素で囲まれているか</li>
+<li data-sourcepos="185:1-185:62" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>リストが適切に使われているか（ol vs ul）</li>
+<li data-sourcepos="186:1-186:54" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>画像にalt属性があるか（空でも可）</li>
+<li data-sourcepos="187:1-188:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>外部リンクにtarget="_blank"が設定されているか</li>
+</ul>
+<h4 data-sourcepos="189:1-189:30">
+<span id="4-html記法の正確性" class="fragment"></span><a href="#4-html%E8%A8%98%E6%B3%95%E3%81%AE%E6%AD%A3%E7%A2%BA%E6%80%A7"><i class="fa fa-link"></i></a>4. HTML記法の正確性</h4>
+<ul data-sourcepos="190:1-193:0">
+<li data-sourcepos="190:1-190:48" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>タグが正しく閉じられているか</li>
+<li data-sourcepos="191:1-191:36" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>入れ子構造が正しいか</li>
+<li data-sourcepos="192:1-193:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>必須属性が抜けていないか</li>
+</ul>
+<p data-sourcepos="194:1-194:43"><strong>このレベルでの指導ポイント</strong></p>
+<div class="code-frame" data-lang="text" data-sourcepos="195:1-204:3"><div class="highlight"><pre><code>❌ 避けるべきフィードバック
+「セマンティックHTMLを意識して」（まだ早い）
+「アクセシビリティを考慮して」（概念が理解できない）
+
+✅ 効果的なフィードバック
+「見出しは大きい順に使いましょう」
+「この部分はリストにできそうですね」
+「alt属性を追加してみましょう」
+</code></pre></div></div>
+<h3 data-sourcepos="206:1-206:24">
+<span id="-実務レベル" class="fragment"></span><a href="#-%E5%AE%9F%E5%8B%99%E3%83%AC%E3%83%99%E3%83%AB"><i class="fa fa-link"></i></a>🚀 実務レベル</h3>
+<h4 data-sourcepos="208:1-208:41">
+<span id="1-seoメタデータの最適化" class="fragment"></span><a href="#1-seo%E3%83%A1%E3%82%BF%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%9C%80%E9%81%A9%E5%8C%96"><i class="fa fa-link"></i></a>1. SEO・メタデータの最適化</h4>
+<ul data-sourcepos="209:1-213:0">
+<li data-sourcepos="209:1-209:78" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>meta description が適切に設定されているか（120-160文字）</li>
+<li data-sourcepos="210:1-210:65" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>title要素がSEOを意識した内容になっているか</li>
+<li data-sourcepos="211:1-211:59" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Open Graph / Twitter Card が設定されているか</li>
+<li data-sourcepos="212:1-213:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>構造化データ（JSON-LD）が実装されているか</li>
+</ul>
+<h4 data-sourcepos="214:1-214:33">
+<span id="2-セマンティックhtml" class="fragment"></span><a href="#2-%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AFhtml"><i class="fa fa-link"></i></a>2. セマンティックHTML</h4>
+<ul data-sourcepos="215:1-219:0">
+<li data-sourcepos="215:1-216:71" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>HTML5のセマンティック要素が適切に使われているか
+<ul data-sourcepos="216:3-216:71">
+<li data-sourcepos="216:3-216:71">
+<code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code>
+</li>
+</ul>
+</li>
+<li data-sourcepos="217:1-217:72" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>コンテンツの意味に適した要素が選ばれているか</li>
+<li data-sourcepos="218:1-219:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>文書のアウトライン構造が論理的か</li>
+</ul>
+<h4 data-sourcepos="220:1-220:48">
+<span id="3-アクセシビリティwcag準拠" class="fragment"></span><a href="#3-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3wcag%E6%BA%96%E6%8B%A0"><i class="fa fa-link"></i></a>3. アクセシビリティ（WCAG準拠）</h4>
+<ul data-sourcepos="221:1-226:0">
+<li data-sourcepos="221:1-222:63" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>WAI-ARIA属性が適切に使われているか
+<ul data-sourcepos="222:3-222:63">
+<li data-sourcepos="222:3-222:63">
+<code>role</code>, <code>aria-labelledby</code>, <code>aria-describedby</code>, <code>aria-label</code>
+</li>
+</ul>
+</li>
+<li data-sourcepos="223:1-223:69" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>キーボードナビゲーションが考慮されているか</li>
+<li data-sourcepos="224:1-224:60" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>スクリーンリーダー向けの配慮があるか</li>
+<li data-sourcepos="225:1-226:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>色だけに依存しない情報提供ができているか</li>
+</ul>
+<h4 data-sourcepos="227:1-227:34">
+<span id="4-パフォーマンスux" class="fragment"></span><a href="#4-%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9ux"><i class="fa fa-link"></i></a>4. パフォーマンス・UX</h4>
+<ul data-sourcepos="228:1-232:0">
+<li data-sourcepos="228:1-228:64" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>画像の最適化（loading="lazy", width/height属性）</li>
+<li data-sourcepos="229:1-229:73" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>外部リンクのセキュリティ（rel="noopener noreferrer"）</li>
+<li data-sourcepos="230:1-230:48" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>レスポンシブデザインへの配慮</li>
+<li data-sourcepos="231:1-232:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Core Web Vitalsを意識した実装</li>
+</ul>
+<h4 data-sourcepos="233:1-233:35">
+<span id="5-保守性チーム開発" class="fragment"></span><a href="#5-%E4%BF%9D%E5%AE%88%E6%80%A7%E3%83%81%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA"><i class="fa fa-link"></i></a>5. 保守性・チーム開発</h4>
+<ul data-sourcepos="234:1-238:0">
+<li data-sourcepos="234:1-234:54" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>一貫した命名規則が使われているか</li>
+<li data-sourcepos="235:1-235:51" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>コメントが適切に書かれているか</li>
+<li data-sourcepos="236:1-236:51" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>再利用可能な構造になっているか</li>
+<li data-sourcepos="237:1-238:0" class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>HTMLバリデーションが通るか</li>
+</ul>
+<h2 data-sourcepos="239:1-239:44">
+<span id="-具体的なレビューの進め方" class="fragment"></span><a href="#-%E5%85%B7%E4%BD%93%E7%9A%84%E3%81%AA%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9"><i class="fa fa-link"></i></a>🔍 具体的なレビューの進め方</h2>
+<h3 data-sourcepos="241:1-241:28">
+<span id="段階的アプローチ" class="fragment"></span><a href="#%E6%AE%B5%E9%9A%8E%E7%9A%84%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81"><i class="fa fa-link"></i></a>段階的アプローチ</h3>
+<ol data-sourcepos="243:1-247:0">
+<li data-sourcepos="243:1-243:55">
+<strong>基礎チェック</strong> → HTML文法、基本構造</li>
+<li data-sourcepos="244:1-244:75">
+<strong>意味チェック</strong> → セマンティック、コンテンツ構造</li>
+<li data-sourcepos="245:1-245:59">
+<strong>体験チェック</strong> → アクセシビリティ、UX</li>
+<li data-sourcepos="246:1-247:0">
+<strong>技術チェック</strong> → SEO、パフォーマンス</li>
+</ol>
+<h3 data-sourcepos="248:1-248:34">
+<span id="レビューコメントの例" class="fragment"></span><a href="#%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E4%BE%8B"><i class="fa fa-link"></i></a>レビューコメントの例</h3>
+<h4 data-sourcepos="250:1-250:45">
+<span id="-改善の余地があるコメント" class="fragment"></span><a href="#-%E6%94%B9%E5%96%84%E3%81%AE%E4%BD%99%E5%9C%B0%E3%81%8C%E3%81%82%E3%82%8B%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>❌ 改善の余地があるコメント</h4>
+<div class="code-frame" data-lang="text" data-sourcepos="251:1-255:3"><div class="highlight"><pre><code>「アクセシビリティがダメです」
+「セマンティックHTMLを使ってください」
+「SEOを考慮してください」
+</code></pre></div></div>
+<h4 data-sourcepos="257:1-257:33">
+<span id="-建設的なコメント" class="fragment"></span><a href="#-%E5%BB%BA%E8%A8%AD%E7%9A%84%E3%81%AA%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"><i class="fa fa-link"></i></a>✅ 建設的なコメント</h4>
+<div class="code-frame" data-lang="text" data-sourcepos="258:1-262:3"><div class="highlight"><pre><code>「h2の後にh4が来ています。h3を使いましょう」
+「この画像のalt属性で、どんな写真かを具体的に説明してみてください」
+「このリンクは外部サイトなので、target="_blank"とrel="noopener"を追加することをお勧めします」
+</code></pre></div></div>
+<h2 data-sourcepos="264:1-264:32">
+<span id="-レベル判定の目安" class="fragment"></span><a href="#-%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A4%E5%AE%9A%E3%81%AE%E7%9B%AE%E5%AE%89"><i class="fa fa-link"></i></a>💡 レベル判定の目安</h2>
+<table data-sourcepos="266:1-271:95">
+<thead>
+<tr data-sourcepos="266:1-266:58">
+<th data-sourcepos="266:2-266:12">レベル</th>
+<th data-sourcepos="266:14-266:33">チェック内容</th>
+<th data-sourcepos="266:35-266:57">期待する成果物</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="268:1-268:82">
+<td data-sourcepos="268:2-268:13"><strong>基礎</strong></td>
+<td data-sourcepos="268:15-268:41">HTML文法、基本タグ</td>
+<td data-sourcepos="268:43-268:81">構造化された読みやすいHTML</td>
+</tr>
+<tr data-sourcepos="269:1-269:105">
+<td data-sourcepos="269:2-269:13"><strong>中級</strong></td>
+<td data-sourcepos="269:15-269:55">セマンティック要素、SEO基礎</td>
+<td data-sourcepos="269:57-269:104">検索エンジンに理解されやすいHTML</td>
+</tr>
+<tr data-sourcepos="270:1-270:108">
+<td data-sourcepos="270:2-270:13"><strong>上級</strong></td>
+<td data-sourcepos="270:15-270:64">アクセシビリティ、パフォーマンス</td>
+<td data-sourcepos="270:66-270:107">誰でも使いやすい高品質なHTML</td>
+</tr>
+<tr data-sourcepos="271:1-271:95">
+<td data-sourcepos="271:2-271:13"><strong>プロ</strong></td>
+<td data-sourcepos="271:15-271:58">チーム開発、保守性、最新仕様</td>
+<td data-sourcepos="271:60-271:94">本格的なWebサイトレベル</td>
+</tr>
+</tbody>
+</table>
+<h2 data-sourcepos="273:1-273:32">
+<span id="-指導する際のコツ" class="fragment"></span><a href="#-%E6%8C%87%E5%B0%8E%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E3%82%B3%E3%83%84"><i class="fa fa-link"></i></a>🎓 指導する際のコツ</h2>
+<h3 data-sourcepos="275:1-275:31">
+<span id="段階的な成長を促す" class="fragment"></span><a href="#%E6%AE%B5%E9%9A%8E%E7%9A%84%E3%81%AA%E6%88%90%E9%95%B7%E3%82%92%E4%BF%83%E3%81%99"><i class="fa fa-link"></i></a>段階的な成長を促す</h3>
+<ol data-sourcepos="277:1-281:0">
+<li data-sourcepos="277:1-277:79">
+<strong>基礎固め期</strong>：完璧を求めすぎない、基本の定着を重視</li>
+<li data-sourcepos="278:1-278:82">
+<strong>応用発展期</strong>：なぜそのタグを選ぶかの理由を考えさせる</li>
+<li data-sourcepos="279:1-279:64">
+<strong>実践活用期</strong>：実際のWebサイトと比較させる</li>
+<li data-sourcepos="280:1-281:0">
+<strong>プロ志向期</strong>：チーム開発や保守性まで考慮させる</li>
+</ol>
+<h3 data-sourcepos="282:1-282:40">
+<span id="よくある間違いとその対処" class="fragment"></span><a href="#%E3%82%88%E3%81%8F%E3%81%82%E3%82%8B%E9%96%93%E9%81%95%E3%81%84%E3%81%A8%E3%81%9D%E3%81%AE%E5%AF%BE%E5%87%A6"><i class="fa fa-link"></i></a>よくある間違いとその対処</h3>
+<div class="code-frame" data-lang="html" data-sourcepos="284:1-292:3"><div class="highlight"><pre><code><span class="c">&lt;!-- ❌ よくある間違い --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>メインタイトル<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h3&gt;</span>サブタイトル<span class="nt">&lt;/h3&gt;</span>  <span class="c">&lt;!-- h2を飛ばしている --&gt;</span>
+
+<span class="c">&lt;!-- ✅ 正しい構造 --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>メインタイトル<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>サブタイトル<span class="nt">&lt;/h2&gt;</span>
+</code></pre></div></div>
+<div class="code-frame" data-lang="html" data-sourcepos="294:1-300:3"><div class="highlight"><pre><code><span class="c">&lt;!-- ❌ 装飾目的での使用 --&gt;</span>
+<span class="nt">&lt;h1&gt;</span>小さく見せたいけど重要なタイトル<span class="nt">&lt;/h1&gt;</span>
+
+<span class="c">&lt;!-- ✅ 意味に基づいた使用 --&gt;</span>
+<span class="nt">&lt;h2&gt;</span>適切なレベルのタイトル<span class="nt">&lt;/h2&gt;</span>
+</code></pre></div></div>
+<h2 data-sourcepos="302:1-302:12">
+<span id="まとめ" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81"><i class="fa fa-link"></i></a>まとめ</h2>
+<p data-sourcepos="304:1-304:217">HTMLのコードレビューは、単なる文法チェックではありません。学習者のレベルに応じて適切な観点でレビューし、段階的に成長をサポートすることが重要です。</p>
+<p data-sourcepos="306:1-306:300">基礎段階では「正しく動くHTML」を、実務レベルでは「ユーザーにとって価値のあるHTML」を目指しましょう。そして何より、<strong>なぜその書き方をするのか</strong>という理由を理解してもらうことが、長期的な成長につながります。</p>
+<hr data-sourcepos="308:1-309:0">
+<h3 data-sourcepos="310:1-310:16">
+<span id="参考資料" class="fragment"></span><a href="#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99"><i class="fa fa-link"></i></a>参考資料</h3>
+<ul data-sourcepos="312:1-315:86">
+<li data-sourcepos="312:1-312:55"><a href="https://html.spec.whatwg.org/" rel="nofollow noopener" target="_blank">HTML Living Standard</a></li>
+<li data-sourcepos="313:1-313:64"><a href="https://www.w3.org/WAI/WCAG21/quickref/" rel="nofollow noopener" target="_blank">WCAG 2.1 Guidelines</a></li>
+<li data-sourcepos="314:1-314:64"><a href="https://developer.mozilla.org/ja/docs/Web/HTML" rel="nofollow noopener" target="_blank">MDN Web Docs</a></li>
+<li data-sourcepos="315:1-315:86"><a href="https://google.github.io/styleguide/htmlcssguide.html" rel="nofollow noopener" target="_blank">Google HTML/CSS Style Guide</a></li>
+</ul>
