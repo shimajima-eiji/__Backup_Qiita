@@ -32,7 +32,7 @@ https://claude.ai/public/artifacts/0f2b25f9-a4d5-4af8-afda-61dca1a5d976
 
 ---
 
-# ☕５限目再開：14:00
+# ☕５限目再開：14:01
 
 ---
 
@@ -40,5 +40,5 @@ https://claude.ai/public/artifacts/0f2b25f9-a4d5-4af8-afda-61dca1a5d976
 
 ---
 
-# 📖6限目：15:30 / 15:40（IT基礎１）
+# 📖6限目 ～15:30 / 以降、HR
 
