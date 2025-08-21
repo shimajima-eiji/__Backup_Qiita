@@ -15,8 +15,12 @@
 
 ---
 
-# 👀前回分の資料（対応中…）
-- https://claude.ai/public/artifacts/0f2b25f9-a4d5-4af8-afda-61dca1a5d976
+# 👀前回分の資料
+- 赤本テキストの内容は、様々な分厚いテキストの要約
+
+https://www.sikaku.gr.jp/nm/
+
+https://www.sikaku.gr.jp/sns/
 
 ---
 
