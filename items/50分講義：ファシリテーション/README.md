@@ -52,7 +52,7 @@ https://www.oh-benri-tools.com/tools/time/pomodoro
 
 ---
 
-# ☕昼休憩中(再開：13:05)
+# ☕昼休憩中(再開：13:06)
 
 ---
 
