@@ -1,0 +1,421 @@
+<h1 data-sourcepos="1:1-1:17">
+<span id="今日話す事" class="fragment"></span><a href="#%E4%BB%8A%E6%97%A5%E8%A9%B1%E3%81%99%E4%BA%8B"><i class="fa fa-link"></i></a>今日話す事</h1>
+<ul data-sourcepos="2:1-5:0">
+<li data-sourcepos="2:1-2:23">ロードマップ例</li>
+<li data-sourcepos="3:1-3:23">使ったサービス</li>
+<li data-sourcepos="4:1-5:0">AIで執筆する時の人間の役割</li>
+</ul>
+<hr data-sourcepos="6:1-7:0">
+<h1 data-sourcepos="8:1-8:29">
+<span id="今回取り上げない話" class="fragment"></span><a href="#%E4%BB%8A%E5%9B%9E%E5%8F%96%E3%82%8A%E4%B8%8A%E3%81%92%E3%81%AA%E3%81%84%E8%A9%B1"><i class="fa fa-link"></i></a>今回取り上げない話</h1>
+<ul data-sourcepos="9:1-15:0">
+<li data-sourcepos="9:1-9:8">出版</li>
+<li data-sourcepos="10:1-10:17">プロンプト</li>
+<li data-sourcepos="11:1-11:17">テクニック</li>
+<li data-sourcepos="12:1-12:8">デモ</li>
+<li data-sourcepos="13:1-13:8">考察</li>
+<li data-sourcepos="14:1-15:0">デビュー</li>
+</ul>
+<hr data-sourcepos="16:1-17:0">
+<h2 data-sourcepos="18:1-18:42">
+<span id="話者紹介必要な情報のみ" class="fragment"></span><a href="#%E8%A9%B1%E8%80%85%E7%B4%B9%E4%BB%8B%E5%BF%85%E8%A6%81%E3%81%AA%E6%83%85%E5%A0%B1%E3%81%AE%E3%81%BF"><i class="fa fa-link"></i></a>話者紹介（必要な情報のみ）</h2>
+<p data-sourcepos="19:1-19:41"><iframe id="qiita-embed-content__c0d07d0816918ef6bbe6821adc2cad32" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__c0d07d0816918ef6bbe6821adc2cad32" data-content="https%3A%2F%2Fnote.com%2Fnomuraya%2Fn%2Fnbbb9524e51b0" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<ul data-sourcepos="21:1-26:0">
+<li data-sourcepos="21:1-22:82">同人誌出版経験あり
+<ul data-sourcepos="22:3-22:82">
+<li data-sourcepos="22:3-22:82">よろずサークル（ノベル・マンガ・ゲーム・アメニティ）</li>
+</ul>
+</li>
+<li data-sourcepos="23:1-23:303">ChatGPT部では「AIエージェントを使って何とかしたい！」とか「AIの精度がすげー！やべー！」という話より「素人は成長スピードが速いAIとどうやって向き合っていけばいいのか？」という観点で話を聞かせていただいてます</li>
+<li data-sourcepos="24:1-26:0">プロンプトエンジニアリング？few-shot exsamples？ コンテキスト？という理解度
+<ul data-sourcepos="25:3-26:0">
+<li data-sourcepos="25:3-26:0">初心者向けを想定しているとはいえ、これらの用語が出てくる事があります</li>
+</ul>
+</li>
+</ul>
+<hr data-sourcepos="27:1-28:0">
+<h1 data-sourcepos="29:1-29:211">
+<span id="-注意この手法をそのまま真似すると各サービスで学習データにされる恐れがあるため業務用データは使わないでください" class="fragment"></span><a href="#-%E6%B3%A8%E6%84%8F%E3%81%93%E3%81%AE%E6%89%8B%E6%B3%95%E3%82%92%E3%81%9D%E3%81%AE%E3%81%BE%E3%81%BE%E7%9C%9F%E4%BC%BC%E3%81%99%E3%82%8B%E3%81%A8%E5%90%84%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E5%AD%A6%E7%BF%92%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AB%E3%81%95%E3%82%8C%E3%82%8B%E6%81%90%E3%82%8C%E3%81%8C%E3%81%82%E3%82%8B%E3%81%9F%E3%82%81%E6%A5%AD%E5%8B%99%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AF%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84%E3%81%A7%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84"><i class="fa fa-link"></i></a><font color="red">☠ 【注意】☠この手法をそのまま真似すると、各サービスで学習データにされる恐れがあるため、業務用データは使わないでください☠</font>
+</h1>
+<hr data-sourcepos="31:1-32:0">
+<h1 data-sourcepos="33:1-33:8">
+<span id="手順" class="fragment"></span><a href="#%E6%89%8B%E9%A0%86"><i class="fa fa-link"></i></a>手順</h1>
+<ol data-sourcepos="34:1-39:0">
+<li data-sourcepos="34:1-34:48">まずは己の中の厨二病を解き放つ</li>
+<li data-sourcepos="35:1-35:93">モチベーションを上げる（下げない）ものを用意する（ざっくり）</li>
+<li data-sourcepos="36:3-36:103">表紙、音楽、立ち絵、使うかどうかも分からない設定を20％ぐらい考える</li>
+<li data-sourcepos="37:1-37:48">完璧を目指さないメンタルを養う</li>
+<li data-sourcepos="38:1-39:0">外注先を決める</li>
+</ol>
+<hr data-sourcepos="40:1-41:0">
+<h1 data-sourcepos="42:1-42:38">
+<span id="パートナー例テキスト" class="fragment"></span><a href="#%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E4%BE%8B%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88"><i class="fa fa-link"></i></a>パートナー例（テキスト）</h1>
+<hr data-sourcepos="44:1-45:0">
+<h2 data-sourcepos="46:1-46:30">
+<span id="凡例個人の感想" class="fragment"></span><a href="#%E5%87%A1%E4%BE%8B%E5%80%8B%E4%BA%BA%E3%81%AE%E6%84%9F%E6%83%B3"><i class="fa fa-link"></i></a>凡例（個人の感想）</h2>
+<table data-sourcepos="47:1-52:46">
+<thead>
+<tr data-sourcepos="47:1-47:28">
+<th data-sourcepos="47:2-47:9">項目</th>
+<th data-sourcepos="47:11-47:18">評価</th>
+<th data-sourcepos="47:20-47:27">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="49:1-49:76">
+<td data-sourcepos="49:2-49:12">新規性</td>
+<td data-sourcepos="49:14-49:24">☆☆☆</td>
+<td data-sourcepos="49:26-49:75">設定集だけインプットした時の出力</td>
+</tr>
+<tr data-sourcepos="50:1-50:81">
+<td data-sourcepos="50:2-50:12">修正力</td>
+<td data-sourcepos="50:14-50:24">☆☆☆</td>
+<td data-sourcepos="50:26-50:80">いわゆるリライト。few-shot examplesを含む</td>
+</tr>
+<tr data-sourcepos="51:1-51:91">
+<td data-sourcepos="51:2-51:12">継続性</td>
+<td data-sourcepos="51:14-51:24">☆☆☆</td>
+<td data-sourcepos="51:26-51:90">設定集をインプット後、ステートフルに続くか</td>
+</tr>
+<tr data-sourcepos="52:1-52:46">
+<td data-sourcepos="52:2-52:9">制限</td>
+<td data-sourcepos="52:11-52:21">☆☆☆</td>
+<td data-sourcepos="52:23-52:45">気分はソシャゲ</td>
+</tr>
+</tbody>
+</table>
+<table data-sourcepos="54:1-59:67">
+<thead>
+<tr data-sourcepos="54:1-54:19">
+<th data-sourcepos="54:2-54:9">項目</th>
+<th data-sourcepos="54:11-54:18">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="56:1-56:52">
+<td data-sourcepos="56:2-56:9">用途</td>
+<td data-sourcepos="56:11-56:51">あくまでおすすめレベルの話</td>
+</tr>
+<tr data-sourcepos="57:1-57:55">
+<td data-sourcepos="57:2-57:9">注意</td>
+<td data-sourcepos="57:11-57:54">あくまで主観的なポイントの話</td>
+</tr>
+<tr data-sourcepos="58:1-58:19">
+<td data-sourcepos="58:2-58:9">評価</td>
+<td data-sourcepos="58:11-58:18">感想</td>
+</tr>
+<tr data-sourcepos="59:1-59:67">
+<td data-sourcepos="59:2-59:9">コツ</td>
+<td data-sourcepos="59:11-59:66">こうするとうまく行った、というケース</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="61:1-62:0">
+<h2 data-sourcepos="63:1-63:16">
+<span id="chatgptplus" class="fragment"></span><a href="#chatgptplus"><i class="fa fa-link"></i></a>ChatGPT(Plus)</h2>
+<table data-sourcepos="64:1-69:106">
+<thead>
+<tr data-sourcepos="64:1-64:28">
+<th data-sourcepos="64:2-64:9">項目</th>
+<th data-sourcepos="64:11-64:18">評価</th>
+<th data-sourcepos="64:20-64:27">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="66:1-66:181">
+<td data-sourcepos="66:2-66:12">新規性</td>
+<td data-sourcepos="66:14-66:24">★★☆</td>
+<td data-sourcepos="66:26-66:180">インプットなしの状態から読み物としてレベルの高いものを出してくる。執筆未経験なら勉強させてもらうのも〇</td>
+</tr>
+<tr data-sourcepos="67:1-67:175">
+<td data-sourcepos="67:2-67:12">修正力</td>
+<td data-sourcepos="67:14-67:24">★★☆</td>
+<td data-sourcepos="67:26-67:174">「既存シーンにとらわれず、書き直して」で大幅に書き換わる。内部的にシード値のようなものがありそう？</td>
+</tr>
+<tr data-sourcepos="68:1-68:181">
+<td data-sourcepos="68:2-68:12">継続性</td>
+<td data-sourcepos="68:14-68:24">★☆☆</td>
+<td data-sourcepos="68:26-68:180">過信は禁物。結構物忘れが激しいため、根気強く設定をインストールしていくのがよさそう。前後の話を忘れがち</td>
+</tr>
+<tr data-sourcepos="69:1-69:106">
+<td data-sourcepos="69:2-69:9">制限</td>
+<td data-sourcepos="69:11-69:21">★☆☆</td>
+<td data-sourcepos="69:23-69:105">正直、連続的に作業をするのは諦めた方が良いぐらいきつい</td>
+</tr>
+</tbody>
+</table>
+<table data-sourcepos="71:1-76:175">
+<thead>
+<tr data-sourcepos="71:1-71:19">
+<th data-sourcepos="71:2-71:9">項目</th>
+<th data-sourcepos="71:11-71:18">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="73:1-73:98">
+<td data-sourcepos="73:2-73:9">用途</td>
+<td data-sourcepos="73:11-73:97">GPT5アップデートで積極的な提案あり。行き詰った時は頼もしい</td>
+</tr>
+<tr data-sourcepos="74:1-74:185">
+<td data-sourcepos="74:2-74:9">注意</td>
+<td data-sourcepos="74:11-74:184">ただしGPT5の提案をそのまま受け入れ続けると品質が微妙になったり、訳の分からない設定を生やされるので騙されてはいけない</td>
+</tr>
+<tr data-sourcepos="75:1-75:167">
+<td data-sourcepos="75:2-75:9">評価</td>
+<td data-sourcepos="75:11-75:166">GPT5が出てから、鋼のメンタルを見せてくるようになった。指摘をすると言い訳を並べてくる。プライドの高い部下</td>
+</tr>
+<tr data-sourcepos="76:1-76:175">
+<td data-sourcepos="76:2-76:9">コツ</td>
+<td data-sourcepos="76:11-76:174">「あなたの作品ではなく、別の人の作品（私が書きなおした）」という事にすると、精度はともかく素直にやってくれる</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="78:1-79:0">
+<h2 data-sourcepos="80:1-80:14">
+<span id="claudepro" class="fragment"></span><a href="#claudepro"><i class="fa fa-link"></i></a>Claude(Pro)</h2>
+<table data-sourcepos="81:1-86:170">
+<thead>
+<tr data-sourcepos="81:1-81:28">
+<th data-sourcepos="81:2-81:9">項目</th>
+<th data-sourcepos="81:11-81:18">評価</th>
+<th data-sourcepos="81:20-81:27">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="83:1-83:214">
+<td data-sourcepos="83:2-83:12">新規性</td>
+<td data-sourcepos="83:14-83:24">★★☆</td>
+<td data-sourcepos="83:26-83:213">文章表現は苦手なのか、議事録のように事実を並べる傾向が強い「情緒的」「叙述的」を入れたり「五感」を意識させると多少マシになる</td>
+</tr>
+<tr data-sourcepos="84:1-84:242">
+<td data-sourcepos="84:2-84:12">修正力</td>
+<td data-sourcepos="84:14-84:24">★★☆</td>
+<td data-sourcepos="84:26-84:241">「書き変えて」だけだと原文をほぼ踏襲するため変化がでない。「プロットを書き直して」からコミュニケーションを始めると変わる。chatGPTに輸出するのも○</td>
+</tr>
+<tr data-sourcepos="85:1-85:130">
+<td data-sourcepos="85:2-85:12">継続性</td>
+<td data-sourcepos="85:14-85:24">★☆☆</td>
+<td data-sourcepos="85:26-85:129">設定を結構忘れるし読み飛ばすので、怪しくなったら再度インプットが必要</td>
+</tr>
+<tr data-sourcepos="86:1-86:170">
+<td data-sourcepos="86:2-86:9">制限</td>
+<td data-sourcepos="86:11-86:21">★☆☆</td>
+<td data-sourcepos="86:23-86:169">8月の制限変更によりこわくて使えない。心なしか無料プランの時並みに制限が掛かりやすくなった気もする</td>
+</tr>
+</tbody>
+</table>
+<table data-sourcepos="88:1-93:118">
+<thead>
+<tr data-sourcepos="88:1-88:19">
+<th data-sourcepos="88:2-88:9">項目</th>
+<th data-sourcepos="88:11-88:18">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="90:1-90:108">
+<td data-sourcepos="90:2-90:9">用途</td>
+<td data-sourcepos="90:11-90:107">執筆より設定集の粗さやAI設計の相談に活用した方がいいかもしれない</td>
+</tr>
+<tr data-sourcepos="91:1-91:100">
+<td data-sourcepos="91:2-91:9">注意</td>
+<td data-sourcepos="91:11-91:99">制限がきつすぎる。制限に引っかかった時のリスクもきつすぎる</td>
+</tr>
+<tr data-sourcepos="92:1-92:130">
+<td data-sourcepos="92:2-92:9">評価</td>
+<td data-sourcepos="92:11-92:129">プロジェクト機能は多用・過信しない方がよさそう。ビジネスライクで一番扱いやすい</td>
+</tr>
+<tr data-sourcepos="93:1-93:118">
+<td data-sourcepos="93:2-93:9">コツ</td>
+<td data-sourcepos="93:11-93:117">理屈っぽいので、先にプロジェクト憲章的な話をしておいた方が精度が上がる</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="95:1-96:0">
+<h2 data-sourcepos="97:1-97:21">
+<span id="gemini無料" class="fragment"></span><a href="#gemini%E7%84%A1%E6%96%99"><i class="fa fa-link"></i></a>Gemini【無料】</h2>
+<table data-sourcepos="98:1-103:277">
+<thead>
+<tr data-sourcepos="98:1-98:28">
+<th data-sourcepos="98:2-98:9">項目</th>
+<th data-sourcepos="98:11-98:18">評価</th>
+<th data-sourcepos="98:20-98:27">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="100:1-100:97">
+<td data-sourcepos="100:2-100:12">新規性</td>
+<td data-sourcepos="100:14-100:24">★☆☆</td>
+<td data-sourcepos="100:26-100:96">悪くはないものの、よくもない。インプットは必須</td>
+</tr>
+<tr data-sourcepos="101:1-101:178">
+<td data-sourcepos="101:2-101:12">修正力</td>
+<td data-sourcepos="101:14-101:24">★☆☆</td>
+<td data-sourcepos="101:26-101:177">自力ではほぼできない。何も変わっていないのに変わったと言い張るなど。修正は無理と割り切るのがよさそう</td>
+</tr>
+<tr data-sourcepos="102:1-102:116">
+<td data-sourcepos="102:2-102:12">継続性</td>
+<td data-sourcepos="102:14-102:24">★☆☆</td>
+<td data-sourcepos="102:26-102:115">必要な情報はSystem Introductionに入れておく。が、普通に無視される</td>
+</tr>
+<tr data-sourcepos="103:1-103:277">
+<td data-sourcepos="103:2-103:9">制限</td>
+<td data-sourcepos="103:11-103:21">★★★</td>
+<td data-sourcepos="103:23-103:276">エラーは多いものの、制限に引っかかった事はない。100万トークンが強すぎる。酷使するとブラウザのタブ１つだけで5GB持っていく事もあるので、どちらかというとハードウェアとの相談</td>
+</tr>
+</tbody>
+</table>
+<table data-sourcepos="105:1-110:193">
+<thead>
+<tr data-sourcepos="105:1-105:19">
+<th data-sourcepos="105:2-105:9">項目</th>
+<th data-sourcepos="105:11-105:18">補足</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="107:1-107:34">
+<td data-sourcepos="107:2-107:9">用途</td>
+<td data-sourcepos="107:11-107:33">メイン執筆担当</td>
+</tr>
+<tr data-sourcepos="108:1-108:112">
+<td data-sourcepos="108:2-108:9">注意</td>
+<td data-sourcepos="108:11-108:111">一度生成した文章や情報に強く固執するため、修正は微調整しかできない</td>
+</tr>
+<tr data-sourcepos="109:1-109:145">
+<td data-sourcepos="109:2-109:9">評価</td>
+<td data-sourcepos="109:11-109:144">要領の悪さを感じる。出来の悪い部下または新人？メンタルは弱いが根気強さ（トークン）はある</td>
+</tr>
+<tr data-sourcepos="110:1-110:193">
+<td data-sourcepos="110:2-110:9">コツ</td>
+<td data-sourcepos="110:11-110:192">褒めすぎると調子に乗る、指摘されるとすねる <strong>（なんなら神格化してくる）</strong> ので、モチベーションマネジメントはしっかりやろう</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="112:1-113:0">
+<h2 data-sourcepos="114:1-114:12">
+<span id="その他" class="fragment"></span><a href="#%E3%81%9D%E3%81%AE%E4%BB%96"><i class="fa fa-link"></i></a>その他</h2>
+<ul data-sourcepos="115:1-121:0">
+<li data-sourcepos="115:1-115:37">AIのべりすと：制限きつい</li>
+<li data-sourcepos="116:1-116:27">NovelAI：制限きつい</li>
+<li data-sourcepos="117:1-117:111">Ollama(7B)：精度が壊滅的なのと、応答速度の問題。ハードウェアスペックとも相談</li>
+<li data-sourcepos="118:1-118:24">GPT OSS：未検証…</li>
+<li data-sourcepos="119:1-121:0">Grokは未検証だが良さそうとのこと
+<ul data-sourcepos="120:3-121:0">
+<li data-sourcepos="120:3-121:0">Qwen3も候補に</li>
+</ul>
+</li>
+</ul>
+<hr data-sourcepos="122:1-123:0">
+<h1 data-sourcepos="124:1-124:85">
+<span id="a-aiは世界観構築と新規執筆でのみ使う丸投げはできない" class="fragment"></span><a href="#a-ai%E3%81%AF%E4%B8%96%E7%95%8C%E8%A6%B3%E6%A7%8B%E7%AF%89%E3%81%A8%E6%96%B0%E8%A6%8F%E5%9F%B7%E7%AD%86%E3%81%A7%E3%81%AE%E3%81%BF%E4%BD%BF%E3%81%86%E4%B8%B8%E6%8A%95%E3%81%92%E3%81%AF%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>A. AIは世界観構築と新規執筆でのみ使う（丸投げはできない）</h1>
+<hr data-sourcepos="126:1-127:0">
+<h2 data-sourcepos="128:1-128:30">
+<span id="段階的移行のすゝめ" class="fragment"></span><a href="#%E6%AE%B5%E9%9A%8E%E7%9A%84%E7%A7%BB%E8%A1%8C%E3%81%AE%E3%81%99%E3%82%9D%E3%82%81"><i class="fa fa-link"></i></a>段階的移行のすゝめ</h2>
+<div data-sourcepos="129:1-131:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="130:1-130:177">最初から最高の環境を整えて進めようとすると手間がかかるし沼るので、ノウハウがあったとしても以下手順で進める方が安定する</p>
+</div>
+</div>
+<ol data-sourcepos="133:1-144:0">
+<li data-sourcepos="133:1-134:112">ClaudeなりChatGPTなり普段使いしているものを使って、制限がある中でじっくりと構想を固める
+<ol data-sourcepos="134:5-134:112">
+<li data-sourcepos="134:5-134:112">すぐに進めたい場合は、制限を食らった場合は別サービスも併用する案はあり</li>
+</ol>
+</li>
+<li data-sourcepos="135:1-136:196">5000文字ぐらい書けたら、geminiに執筆環境を移行していく。引継ぎやドキュメント化をして環境整備
+<ol data-sourcepos="136:5-136:196">
+<li data-sourcepos="136:5-136:196">AIに文字数チェックをさせるとバイトで計算してくるっぽいので、AI基準では4万文字ぐらい（改行は3文字扱いされる？）にしておくと良さげ</li>
+</ol>
+</li>
+<li data-sourcepos="137:1-138:141">コンテキストが長大になったらメイン執筆をgeminiに移行して、お使いのAIはgeminiが執筆しやすい環境づくりに役割を切り替える
+<ol data-sourcepos="138:5-138:141">
+<li data-sourcepos="138:5-138:141">人間はAIエージェントの役割を担う。メイン執筆のgeminiのご機嫌取りをしたり、コントロールをする</li>
+</ol>
+</li>
+<li data-sourcepos="139:1-141:168">geminiのセルフチェック用プロンプトを導入する
+<ol data-sourcepos="140:5-141:168">
+<li data-sourcepos="140:5-140:219">ポチョムキン理解ではないが、近いような挙動が多々出てくる。geminiは妙な奴隷根性が染みついているので「ここを修正してください、変えてください」はNG</li>
+<li data-sourcepos="141:5-141:168">どうしても修正させたい（自分で修正したくない）場合は、修正依頼のプロンプト自体をAIに作らせてから渡す方が良い</li>
+</ol>
+</li>
+<li data-sourcepos="142:1-144:0">セルフチェックの精度が落ちてきたら、執筆用とチェック用のスレッドまたはモデルを変える
+<ol data-sourcepos="143:5-144:0">
+<li data-sourcepos="143:5-144:0">System Introductionは抽象的である方が精度が上がる？</li>
+</ol>
+</li>
+</ol>
+<hr data-sourcepos="145:1-146:0">
+<h1 data-sourcepos="147:1-147:43">
+<span id="どうしてもaiだけで作りたい" class="fragment"></span><a href="#%E3%81%A9%E3%81%86%E3%81%97%E3%81%A6%E3%82%82ai%E3%81%A0%E3%81%91%E3%81%A7%E4%BD%9C%E3%82%8A%E3%81%9F%E3%81%84"><i class="fa fa-link"></i></a>どうしてもAIだけで作りたい！</h1>
+<p data-sourcepos="148:1-148:14">(geminiの例)</p>
+<ul data-sourcepos="150:1-154:0">
+<li data-sourcepos="150:1-151:61">結局のところ、AIに「精度の高い」修正はできない
+<ul data-sourcepos="151:3-151:61">
+<li data-sourcepos="151:3-151:61">人間作家の意図を読み取ることができない</li>
+</ul>
+</li>
+<li data-sourcepos="152:1-154:0">ファインチューニングやRAGも「継続性」の観点から限度がある
+<ul data-sourcepos="153:3-154:0">
+<li data-sourcepos="153:3-154:0">最初にインプットした設定と、修正した設定の両方を保持するため、新規追加はできても変更ができない</li>
+</ul>
+</li>
+</ul>
+<hr data-sourcepos="155:1-156:0">
+<h1 data-sourcepos="157:1-157:26">
+<span id="精度を上げるなら" class="fragment"></span><a href="#%E7%B2%BE%E5%BA%A6%E3%82%92%E4%B8%8A%E3%81%92%E3%82%8B%E3%81%AA%E3%82%89"><i class="fa fa-link"></i></a>精度を上げるなら</h1>
+<h2 data-sourcepos="158:1-158:99">
+<span id="コンテキストリセット引き継ぎを書いて新しいスレッドプロセスへ" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%AA%E3%82%BB%E3%83%83%E3%83%88%E5%BC%95%E3%81%8D%E7%B6%99%E3%81%8E%E3%82%92%E6%9B%B8%E3%81%84%E3%81%A6%E6%96%B0%E3%81%97%E3%81%84%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%B8"><i class="fa fa-link"></i></a>コンテキストリセット（引き継ぎを書いて新しいスレッド、プロセスへ</h2>
+<ul data-sourcepos="159:1-162:0">
+<li data-sourcepos="159:1-162:0">都度、膨大な設定資料のインプットが必要
+<ul data-sourcepos="160:3-162:0">
+<li data-sourcepos="160:3-160:82">プロジェクト機能はあるが、インプット精度の問題はある</li>
+<li data-sourcepos="161:3-162:0">プロジェクトの機能では、どの資料のバージョンをインプットしているか管理が大変</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="163:1-163:36">
+<span id="執筆用と検査用で分ける" class="fragment"></span><a href="#%E5%9F%B7%E7%AD%86%E7%94%A8%E3%81%A8%E6%A4%9C%E6%9F%BB%E7%94%A8%E3%81%A7%E5%88%86%E3%81%91%E3%82%8B"><i class="fa fa-link"></i></a>執筆用と検査用で分ける</h2>
+<ul data-sourcepos="164:1-169:0">
+<li data-sourcepos="164:1-169:0">執筆用と検査用の初回学習データを統一する必要がある
+<ul data-sourcepos="165:3-169:0">
+<li data-sourcepos="165:3-165:136">設定が変わると両方に等しく適用する必要があるため、整合性を取るため常にスレッドを作り直す</li>
+<li data-sourcepos="166:3-166:121">そのままスレッドプロセスを継続するか、新しく作り直した方が良いかの判断が難しい</li>
+<li data-sourcepos="167:3-167:208">執筆用をChatGPT、検査用をClaudeなどのようにモデルを変えると、検査用のAIの好みに引き寄せられるので、人間がエージェント的な役割を担う必要がある</li>
+<li data-sourcepos="168:3-169:0">修正というより個人の好みでは？という思いたくなる議論に発展する事も</li>
+</ul>
+</li>
+</ul>
+<hr data-sourcepos="170:1-171:0">
+<h1 data-sourcepos="172:1-172:35">
+<span id="人間に求められるスキル" class="fragment"></span><a href="#%E4%BA%BA%E9%96%93%E3%81%AB%E6%B1%82%E3%82%81%E3%82%89%E3%82%8C%E3%82%8B%E3%82%B9%E3%82%AD%E3%83%AB"><i class="fa fa-link"></i></a>人間に求められるスキル</h1>
+<h2 data-sourcepos="173:1-173:25">
+<span id="-aiとの調整力" class="fragment"></span><a href="#-ai%E3%81%A8%E3%81%AE%E8%AA%BF%E6%95%B4%E5%8A%9B"><i class="fa fa-link"></i></a>💻 AIとの調整力</h2>
+<ul data-sourcepos="174:1-176:0">
+<li data-sourcepos="174:1-174:143">単一であっても執筆用と検査用で分けたとしても、最後の方針決めや程度をコントロールする必要はある</li>
+<li data-sourcepos="175:1-176:0">プロンプトエンジニアリング（＝特にスタートダッシュを想定）を凝ったところで、作業を続けていくと目に見えて精度が悪くなるのであまり頑張ってもしょうがない</li>
+</ul>
+<h2 data-sourcepos="177:1-177:74">
+<span id="-表現力構想力ライティングスキルではない" class="fragment"></span><a href="#-%E8%A1%A8%E7%8F%BE%E5%8A%9B%E6%A7%8B%E6%83%B3%E5%8A%9B%E3%83%A9%E3%82%A4%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%B9%E3%82%AD%E3%83%AB%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>📝 表現力・構想力（ライティングスキルではない）</h2>
+<ul data-sourcepos="178:1-182:0">
+<li data-sourcepos="178:1-178:32">良い文章を書けるか？</li>
+<li data-sourcepos="179:1-179:56">良い文章とは何か、を言語化できるか？</li>
+<li data-sourcepos="180:1-180:67">（AIとはいえ）書いた文章を俯瞰的に見れるか？</li>
+<li data-sourcepos="181:1-182:0">良い文章をAIに理解させることができるか？</li>
+</ul>
+<p data-sourcepos="183:1-183:121">AIの教師データとなりうる、良いプロンプトを書くための知見（出力自体はAIにやらせる）</p>
+<h1 data-sourcepos="185:1-185:35">
+<span id="小説における表現力の例" class="fragment"></span><a href="#%E5%B0%8F%E8%AA%AC%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E8%A1%A8%E7%8F%BE%E5%8A%9B%E3%81%AE%E4%BE%8B"><i class="fa fa-link"></i></a>小説における表現力の例</h1>
+<ul data-sourcepos="186:1-189:0">
+<li data-sourcepos="186:1-186:6">6W2H</li>
+<li data-sourcepos="187:1-189:0">描写の美しさと、描写の美しさ自体の定義
+<ul data-sourcepos="188:3-189:0">
+<li data-sourcepos="188:3-189:0">躍動感、臨場感、叙述的、文学的</li>
+</ul>
+</li>
+</ul>
+<div data-sourcepos="190:1-192:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="191:1-191:120">良い文章のパターンはあるが、執筆経験がないなら書きたい文章をいっぱい探してみよう</p>
+</div>
+</div>
