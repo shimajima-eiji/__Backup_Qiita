@@ -19,7 +19,7 @@
 <details><summary>変数とは</summary>
 
 <p class="codepen" data-height="300" data-default-tab="result" data-slug-hash="JoYVMJm" data-pen-title="🏷️ 変数とは何か？" data-preview="true" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/JoYVMJm">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/JoYVMJm">
   🏷️ 変数とは何か？</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -32,7 +32,7 @@
 <details><summary>変数理解度チェック　</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="pvjBpWw" data-pen-title="Untitled" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/pvjBpWw">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/pvjBpWw">
   Untitled</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -45,7 +45,7 @@
 <details><summary>変数のフローチャート（読む）</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="gbayoKa" data-pen-title="フローチャートを読む問題（変数・順次構造のみ）" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/gbayoKa">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/gbayoKa">
   フローチャートを読む問題（変数・順次構造のみ）</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -58,7 +58,7 @@
 <details><summary>変数のフローチャート（書く）</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="empoyKM" data-pen-title="Untitled" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/empoyKM">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/empoyKM">
   Untitled</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -71,7 +71,7 @@
 <details><summary>変数の擬似言語（読む）</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="NPGmXBd" data-pen-title="Untitled" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/NPGmXBd">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/NPGmXBd">
   Untitled</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -84,7 +84,7 @@
 <details><summary>変数の擬似言語（書く）</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="pvjBpOd" data-pen-title="✏️ 擬似言語を書く問題" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/pvjBpOd">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/pvjBpOd">
   ✏️ 擬似言語を書く問題</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -97,7 +97,7 @@
 <details><summary>配列とは何か？</summary>
 
 <p class="codepen" data-height="300" data-slug-hash="NPGmXOp" data-pen-title="配列とは何か？" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/NPGmXOp">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/NPGmXOp">
   配列とは何か？</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
@@ -502,7 +502,7 @@ graph LR
 ### 総復習
 
 <p class="codepen" data-height="300" data-default-tab="result" data-slug-hash="MYaRrJv" data-pen-title="プログラミング概念体験" data-user="nomuraya" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/nomuraya/pen/MYaRrJv">
+  <span>See the Pen <a href="https://codepen.io/nomuraya/full/MYaRrJv">
   プログラミング概念体験</a> by nomura (<a href="https://codepen.io/nomuraya">@nomuraya</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
