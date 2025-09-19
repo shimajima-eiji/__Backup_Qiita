@@ -1,3 +1,10 @@
+<!--
+
+https://cri-co-jp.zoom.us/meeting#/upcoming
+https://forms.office.com/r/6NKddt2RYk	出欠
+
+-->
+
 # 開始　9:30〜
 ## 受講準備の案内
 - 名前の表示を`出席番号（半角数字2桁）＋漢字フルネーム`
@@ -19,6 +26,15 @@
   - ポモドーロタイマーで集中と小休止のメリハリをつけるのがおすすめ！
 
 https://www.oh-benri-tools.com/tools/time/pomodoro
+
+---
+
+## 事務連絡
+- 9/16の日誌：信濃さん
+- 今日の日誌：重野さん
+- 次回の日誌：高村さん
+
+以上、お願いします
 
 ---
 
