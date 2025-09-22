@@ -1,0 +1,384 @@
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:98">昔使っていた資料を公開用にAIベースでブラッシュアップしたものです。</p>
+</div>
+</div>
+<h2 data-sourcepos="5:1-5:60">
+<span id="はじめに---なぜ覚えない努力なのか" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB---%E3%81%AA%E3%81%9C%E8%A6%9A%E3%81%88%E3%81%AA%E3%81%84%E5%8A%AA%E5%8A%9B%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>はじめに - なぜ「覚えない努力」なのか？</h2>
+<p data-sourcepos="7:1-7:221">IT業界では技術の移り変わりが激しく、暗記に頼った学習では追いつけません。大切なのは「必要な時に調べられること」と「基本原理を理解していること」です。</p>
+<p data-sourcepos="9:1-9:194">この記事では、ITパスポート試験の基礎知識・ハードウェア分野を、実務の現場感を交えながら「効率的に理解する」アプローチで解説します。</p>
+<hr data-sourcepos="11:1-12:0">
+<h2 data-sourcepos="13:1-13:33">
+<span id="覚えておくと良いもの" class="fragment"></span><a href="#%E8%A6%9A%E3%81%88%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%A8%E8%89%AF%E3%81%84%E3%82%82%E3%81%AE"><i class="fa fa-link"></i></a>覚えておくと良いもの</h2>
+<div data-sourcepos="15:1-18:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<h2 data-sourcepos="16:1-16:15">
+<span id="努力目標" class="fragment"></span><a href="#%E5%8A%AA%E5%8A%9B%E7%9B%AE%E6%A8%99"><i class="fa fa-link"></i></a>努力目標</h2>
+<p data-sourcepos="17:1-17:105">なるべく覚えない（＝脳みそを疲れさせない）、覚える量を減らす努力をする</p>
+</div>
+</div>
+<p data-sourcepos="20:1-20:114">脳のキャパシティ（＝学習疲れ）をなるべく回避するための道標として使って欲しい</p>
+<h3 data-sourcepos="22:1-22:48">
+<span id="2進数10進数16進数の対応関係" class="fragment"></span><a href="#2%E9%80%B2%E6%95%B010%E9%80%B2%E6%95%B016%E9%80%B2%E6%95%B0%E3%81%AE%E5%AF%BE%E5%BF%9C%E9%96%A2%E4%BF%82"><i class="fa fa-link"></i></a>2進数・10進数・16進数の対応関係</h3>
+<p data-sourcepos="24:1-24:19"><strong>なぜ重要？</strong></p>
+<ul data-sourcepos="25:1-28:0">
+<li data-sourcepos="25:1-25:47">システム開発の現場では毎日使用</li>
+<li data-sourcepos="26:1-26:62">エラーコードやメモリアドレスの理解に必須</li>
+<li data-sourcepos="27:1-28:0">デバッグ時の必須スキル</li>
+</ul>
+<p data-sourcepos="29:1-29:101">変換計算は大変なので、<strong>0~15までの対応表だけ覚えておく</strong>のがコツです。</p>
+<table data-sourcepos="31:1-48:67">
+<thead>
+<tr data-sourcepos="31:1-31:51">
+<th data-sourcepos="31:2-31:10">2進数</th>
+<th data-sourcepos="31:12-31:21">10進数</th>
+<th data-sourcepos="31:23-31:32">16進数</th>
+<th data-sourcepos="31:34-31:50">実務での例</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="33:1-33:39">
+<td data-sourcepos="33:2-33:8">0000</td>
+<td data-sourcepos="33:10-33:17">0</td>
+<td data-sourcepos="33:19-33:26">0</td>
+<td data-sourcepos="33:28-33:38">初期値</td>
+</tr>
+<tr data-sourcepos="34:1-34:41">
+<td data-sourcepos="34:2-34:8">0001</td>
+<td data-sourcepos="34:10-34:17">1</td>
+<td data-sourcepos="34:19-34:26">1</td>
+<td data-sourcepos="34:28-34:40">フラグON</td>
+</tr>
+<tr data-sourcepos="35:1-35:30">
+<td data-sourcepos="35:2-35:8">0010</td>
+<td data-sourcepos="35:10-35:17">2</td>
+<td data-sourcepos="35:19-35:26">2</td>
+<td data-sourcepos="35:28-35:29"></td>
+</tr>
+<tr data-sourcepos="36:1-36:30">
+<td data-sourcepos="36:2-36:8">0011</td>
+<td data-sourcepos="36:10-36:17">3</td>
+<td data-sourcepos="36:19-36:26">3</td>
+<td data-sourcepos="36:28-36:29"></td>
+</tr>
+<tr data-sourcepos="37:1-37:30">
+<td data-sourcepos="37:2-37:8">0100</td>
+<td data-sourcepos="37:10-37:17">4</td>
+<td data-sourcepos="37:19-37:26">4</td>
+<td data-sourcepos="37:28-37:29"></td>
+</tr>
+<tr data-sourcepos="38:1-38:30">
+<td data-sourcepos="38:2-38:8">0101</td>
+<td data-sourcepos="38:10-38:17">5</td>
+<td data-sourcepos="38:19-38:26">5</td>
+<td data-sourcepos="38:28-38:29"></td>
+</tr>
+<tr data-sourcepos="39:1-39:30">
+<td data-sourcepos="39:2-39:8">0110</td>
+<td data-sourcepos="39:10-39:17">6</td>
+<td data-sourcepos="39:19-39:26">6</td>
+<td data-sourcepos="39:28-39:29"></td>
+</tr>
+<tr data-sourcepos="40:1-40:30">
+<td data-sourcepos="40:2-40:8">0111</td>
+<td data-sourcepos="40:10-40:17">7</td>
+<td data-sourcepos="40:19-40:26">7</td>
+<td data-sourcepos="40:28-40:29"></td>
+</tr>
+<tr data-sourcepos="41:1-41:30">
+<td data-sourcepos="41:2-41:8">1000</td>
+<td data-sourcepos="41:10-41:17">8</td>
+<td data-sourcepos="41:19-41:26">8</td>
+<td data-sourcepos="41:28-41:29"></td>
+</tr>
+<tr data-sourcepos="42:1-42:30">
+<td data-sourcepos="42:2-42:8">1001</td>
+<td data-sourcepos="42:10-42:17">9</td>
+<td data-sourcepos="42:19-42:26">9</td>
+<td data-sourcepos="42:28-42:29"></td>
+</tr>
+<tr data-sourcepos="43:1-43:52">
+<td data-sourcepos="43:2-43:8">1010</td>
+<td data-sourcepos="43:10-43:17">10</td>
+<td data-sourcepos="43:19-43:26">A</td>
+<td data-sourcepos="43:28-43:51">HTMLカラーコード</td>
+</tr>
+<tr data-sourcepos="44:1-44:52">
+<td data-sourcepos="44:2-44:8">1011</td>
+<td data-sourcepos="44:10-44:17">11</td>
+<td data-sourcepos="44:19-44:26">B</td>
+<td data-sourcepos="44:28-44:51">HTMLカラーコード</td>
+</tr>
+<tr data-sourcepos="45:1-45:52">
+<td data-sourcepos="45:2-45:8">1100</td>
+<td data-sourcepos="45:10-45:17">12</td>
+<td data-sourcepos="45:19-45:26">C</td>
+<td data-sourcepos="45:28-45:51">HTMLカラーコード</td>
+</tr>
+<tr data-sourcepos="46:1-46:52">
+<td data-sourcepos="46:2-46:8">1101</td>
+<td data-sourcepos="46:10-46:17">13</td>
+<td data-sourcepos="46:19-46:26">D</td>
+<td data-sourcepos="46:28-46:51">HTMLカラーコード</td>
+</tr>
+<tr data-sourcepos="47:1-47:52">
+<td data-sourcepos="47:2-47:8">1110</td>
+<td data-sourcepos="47:10-47:17">14</td>
+<td data-sourcepos="47:19-47:26">E</td>
+<td data-sourcepos="47:28-47:51">HTMLカラーコード</td>
+</tr>
+<tr data-sourcepos="48:1-48:67">
+<td data-sourcepos="48:2-48:8">1111</td>
+<td data-sourcepos="48:10-48:17">15</td>
+<td data-sourcepos="48:19-48:26">F</td>
+<td data-sourcepos="48:28-48:66">HTMLカラーコード（最大値）</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="50:1-50:31"><strong>実務でよく見る例：</strong></p>
+<ul data-sourcepos="51:1-53:0">
+<li data-sourcepos="51:1-51:104">
+<code>#FF0000<span class="inline-code-color" style="background-color: #FF0000;"></span></code>（赤色）= <code>11111111 00000000 00000000</code>（赤成分が最大、緑・青成分が最小）</li>
+<li data-sourcepos="52:1-53:0">IPアドレスのサブネットマスク：<code>255.255.255.0</code> = <code>0xFF.FF.FF.00</code>
+</li>
+</ul>
+<p data-sourcepos="54:1-54:25"><strong>覚え方のコツ：</strong></p>
+<ul data-sourcepos="55:1-58:0">
+<li data-sourcepos="55:1-55:58">16進数は2進数4桁を1桁で表現（圧縮表記）</li>
+<li data-sourcepos="56:1-56:35">A～Fは「10～15」の省略形</li>
+<li data-sourcepos="57:1-58:0">現場では「A～Fの順番で大きくなる」ことが分かれば雰囲気トークは可能</li>
+</ul>
+<hr data-sourcepos="59:1-60:0">
+<h2 data-sourcepos="61:1-61:33">
+<span id="理解しておきたいもの" class="fragment"></span><a href="#%E7%90%86%E8%A7%A3%E3%81%97%E3%81%A6%E3%81%8A%E3%81%8D%E3%81%9F%E3%81%84%E3%82%82%E3%81%AE"><i class="fa fa-link"></i></a>理解しておきたいもの</h2>
+<div data-sourcepos="63:1-66:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="64:1-65:54">めちゃくちゃ多いので、読んですぐ理解できなければ聞いてしまおう<br>
+今日学んで明日までに忘れることが目標</p>
+</div>
+</div>
+<p data-sourcepos="68:1-68:114">脳のキャパシティ（＝学習疲れ）をなるべく回避するための道標として使って欲しい</p>
+<h3 data-sourcepos="70:1-70:70">
+<span id="デジタルとアナログの違いをイメージで理解する" class="fragment"></span><a href="#%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E3%81%A8%E3%82%A2%E3%83%8A%E3%83%AD%E3%82%B0%E3%81%AE%E9%81%95%E3%81%84%E3%82%92%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%A7%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>デジタルとアナログの違いをイメージで理解する</h3>
+<p data-sourcepos="72:1-73:81"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F54bb6ff1-faf4-1255-aa48-33d27e3fd6d5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=89fca4bde06cb74c6986d491680aee6d" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F54bb6ff1-faf4-1255-aa48-33d27e3fd6d5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=89fca4bde06cb74c6986d491680aee6d" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F54bb6ff1-faf4-1255-aa48-33d27e3fd6d5.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=de4bba8c8287ccdd1097aa6d01499d80 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/54bb6ff1-faf4-1255-aa48-33d27e3fd6d5.png" loading="lazy"></a><br>
+引用元: <a href="https://www.matsusada.co.jp/column/column-iot1-digital-resolution.html" class="autolink" rel="nofollow noopener" target="_blank">https://www.matsusada.co.jp/column/column-iot1-digital-resolution.html</a></p>
+<p data-sourcepos="75:1-75:28"><strong>理解のポイント：</strong></p>
+<ul data-sourcepos="76:1-78:0">
+<li data-sourcepos="76:1-76:98">データを細かく取れば（容量を増やせば）より滑らかな図になっていく</li>
+<li data-sourcepos="77:1-78:0">視覚的にするために高さ（値）を表記しているが、<strong>デジタルデータの実態は0/1の組み合わせである</strong>
+</li>
+</ul>
+<p data-sourcepos="79:1-79:33"><strong>なぜ0と1だけなのか？</strong></p>
+<ul data-sourcepos="80:1-83:0">
+<li data-sourcepos="80:1-80:68">電気的には「電圧が高い（1）/低い（0）」で判断</li>
+<li data-sourcepos="81:1-81:72">2つの状態だけなら、ノイズに強く確実に判別できる</li>
+<li data-sourcepos="82:1-83:0">複雑な計算も、0と1の組み合わせで表現可能</li>
+</ul>
+<p data-sourcepos="84:1-84:25"><strong>実務での応用：</strong></p>
+<ul data-sourcepos="85:1-88:0">
+<li data-sourcepos="85:1-85:50">音楽CD：1秒間に44,100回サンプリング</li>
+<li data-sourcepos="86:1-86:65">動画：1秒間に30フレーム（静止画）を連続表示</li>
+<li data-sourcepos="87:1-88:0">デジタル写真：画素数が多いほど高画質</li>
+</ul>
+<h3 data-sourcepos="89:1-89:69">
+<span id="データの単位と大きさitパスポート試験対応" class="fragment"></span><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8D%98%E4%BD%8D%E3%81%A8%E5%A4%A7%E3%81%8D%E3%81%95it%E3%83%91%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E8%A9%A6%E9%A8%93%E5%AF%BE%E5%BF%9C"><i class="fa fa-link"></i></a>データの単位と大きさ（ITパスポート試験対応）</h3>
+<p data-sourcepos="91:1-91:19"><strong>基本単位：</strong></p>
+<ul data-sourcepos="92:1-94:0">
+<li data-sourcepos="92:1-92:55">
+<strong>ビット（bit）</strong>：0/1で表記できる1単位</li>
+<li data-sourcepos="93:1-94:0">
+<strong>バイト（byte）</strong>：ビットを8桁集めた単位</li>
+</ul>
+<p data-sourcepos="95:1-95:35"><strong>なぜバイトが8ビット？</strong></p>
+<ul data-sourcepos="96:1-98:0">
+<li data-sourcepos="96:1-96:73">英数字1文字を表現するのに8ビットが丁度良いサイズ</li>
+<li data-sourcepos="97:1-98:0">16進数なら2桁（FF = 255）で1バイトを表現</li>
+</ul>
+<p data-sourcepos="99:1-99:28"><strong>実務での感覚値：</strong></p>
+<ul data-sourcepos="100:1-103:0">
+<li data-sourcepos="100:1-100:36">テキスト1文字 ≈ 1バイト</li>
+<li data-sourcepos="101:1-101:22">写真1枚 ≈ 数MB</li>
+<li data-sourcepos="102:1-103:0">映画1本 ≈ 数GB</li>
+</ul>
+<h3 data-sourcepos="104:1-104:37">
+<span id="コンピュータの構成とcpu" class="fragment"></span><a href="#%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AE%E6%A7%8B%E6%88%90%E3%81%A8cpu"><i class="fa fa-link"></i></a>コンピュータの構成とCPU</h3>
+<p data-sourcepos="106:1-106:40"><strong>パソコン本体の基本構成：</strong></p>
+<iframe id="qiita-embed-content__492be5c7b6e04a7a3b21866ab08e4b43" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__492be5c7b6e04a7a3b21866ab08e4b43" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n CPU[\"🧠 CPU&lt;br/&gt;頭脳・司令塔&lt;br/&gt;クロック周波数で性能UP!\"]\n Memory[\"⚡ メモリ&lt;br/&gt;作業机&lt;br/&gt;高速だけど忘れっぽい&lt;br/&gt;電源OFF = 記憶消失\"]\n Storage[\"💾 ストレージ&lt;br/&gt;本棚・倉庫&lt;br/&gt;大容量で記憶力抜群&lt;br/&gt;HDD/SSD\"]\n \n CPU &lt;==&gt; Memory\n Memory &lt;==&gt; Storage\n \n style CPU fill:#ff9999\n style Memory fill:#99ccff\n style Storage fill:#99ff99","key":"0d38dab2f426b0beb085bcc77f50d601"}'>
+</iframe>
+
+<p data-sourcepos="122:1-122:28"><strong>実務での選び方：</strong></p>
+<ul data-sourcepos="123:1-126:0">
+<li data-sourcepos="123:1-123:92">
+<strong>🧠 CPU</strong>：クロック周波数（GHz）が高いほど高速。頭の回転速度！</li>
+<li data-sourcepos="124:1-124:87">
+<strong>⚡ メモリ</strong>：容量（GB）が多いほど同時作業可能。机の広さ！</li>
+<li data-sourcepos="125:1-126:0">
+<strong>💾 ストレージ</strong>：SSD &gt; HDD（速度重視ならSSD）。本棚の検索速度！</li>
+</ul>
+<p data-sourcepos="127:1-127:40"><strong>書き込み可能性での分類：</strong></p>
+<ul data-sourcepos="128:1-130:0">
+<li data-sourcepos="128:1-128:61">
+<strong>RAM</strong>（Random Access Memory）：読み書き自由 📝</li>
+<li data-sourcepos="129:1-130:0">
+<strong>ROM</strong>（Read Only Memory）：読み込み専用 📖</li>
+</ul>
+<h3 data-sourcepos="131:1-131:48">
+<span id="ai技術の歴史と実務での位置づけ" class="fragment"></span><a href="#ai%E6%8A%80%E8%A1%93%E3%81%AE%E6%AD%B4%E5%8F%B2%E3%81%A8%E5%AE%9F%E5%8B%99%E3%81%A7%E3%81%AE%E4%BD%8D%E7%BD%AE%E3%81%A5%E3%81%91"><i class="fa fa-link"></i></a>AI技術の歴史と実務での位置づけ</h3>
+<p data-sourcepos="133:1-133:40"><strong>なぜ歴史を学ぶのが重要？</strong></p>
+<ul data-sourcepos="134:1-137:0">
+<li data-sourcepos="134:1-134:31">AI技術は急速に進化中</li>
+<li data-sourcepos="135:1-135:65">過去の問題点が現在解決されている場合がある</li>
+<li data-sourcepos="136:1-137:0">試験では最新情報も出題される</li>
+</ul>
+<p data-sourcepos="138:1-138:28"><strong>重要な発展段階：</strong></p>
+<iframe id="qiita-embed-content__e3f4ca6d373a499d58dfcd9cd194652a" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__e3f4ca6d373a499d58dfcd9cd194652a" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"timeline\n title AI技術の歴史 🚀\n \n 1950年代 : チューリングテスト 🤖\n : \"機械は考えることができるか？\"\n : アラン・チューリングが提案\n \n 1980年代 : エキスパートシステム 👨‍🔬\n : 専門家の知識をルール化\n : でも融通が利かない...\n \n 2012年 : ディープラーニング革命 ⚡\n : 画像認識で人間を超える！\n : AlexNetが画像認識コンテストで圧勝\n \n 2022年 : ChatGPT登場 🎉\n : 生成AI時代の幕開け\n : みんながAIと会話する時代に\n \n 現在 : マルチモーダルAI 🌟\n : 文字・画像・音声を統合\n : AIが人間により近づく","key":"42bf91d8eb9031e99687e9b0f0c057d4"}'>
+</iframe>
+
+<p data-sourcepos="165:1-165:30"><strong>実務でのAI活用例：</strong></p>
+<iframe id="qiita-embed-content__840cd6d51f5ca691c366fdc1ecbdf068" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__840cd6d51f5ca691c366fdc1ecbdf068" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n AI[AI活用]\n ML[機械学習]\n GEN[生成AI]\n AUTO[自動化]\n \n AI --&gt; ML\n AI --&gt; GEN\n AI --&gt; AUTO\n \n ML --&gt; ML1[データ分析]\n ML --&gt; ML2[予測モデル]\n ML --&gt; ML3[異常検知]\n \n GEN --&gt; GEN1[文書作成]\n GEN --&gt; GEN2[コード生成]\n GEN --&gt; GEN3[画像作成]\n GEN --&gt; GEN4[翻訳]\n \n AUTO --&gt; AUTO1[チャットボット]\n AUTO --&gt; AUTO2[音声認識]\n AUTO --&gt; AUTO3[OCR文字認識]\n \n style ML fill:#ff9999\n style GEN fill:#99ccff\n style AUTO fill:#99ff99","key":"6aecc96284479c5b62f6881f8defd9e7"}'>
+</iframe>
+
+<p data-sourcepos="195:1-195:37"><strong>現在の課題（改善中）：</strong></p>
+<iframe id="qiita-embed-content__5169a2064f3906570d44439663573dc8" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__5169a2064f3906570d44439663573dc8" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n A[\"😵 ハルシネーション&lt;br/&gt;嘘をついちゃう\"] --&gt; B[\"🔍 ファクトチェック&lt;br/&gt;技術で改善中\"]\n C[\"😔 学習データの偏り&lt;br/&gt;偏見を持っちゃう\"] --&gt; D[\"📚 多様なデータ&lt;br/&gt;収集で改善中\"]\n E[\"💸 計算リソース大量消費&lt;br/&gt;電気代がすごい\"] --&gt; F[\"⚡ 効率化技術&lt;br/&gt;開発で改善中\"]\n \n style A fill:#ffcccc\n style C fill:#ffcccc\n style E fill:#ffcccc\n style B fill:#ccffcc\n style D fill:#ccffcc\n style F fill:#ccffcc","key":"9e43ece2d309828e11a902e2eabbf56e"}'>
+</iframe>
+
+<hr data-sourcepos="210:1-211:0">
+<h2 data-sourcepos="212:1-212:33">
+<span id="知っておくとよいもの" class="fragment"></span><a href="#%E7%9F%A5%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%8F%E3%81%A8%E3%82%88%E3%81%84%E3%82%82%E3%81%AE"><i class="fa fa-link"></i></a>知っておくとよいもの</h2>
+<div data-sourcepos="214:1-216:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="215:1-215:81">試験前には必要となるが、今は分からなくても問題ないもの</p>
+</div>
+</div>
+<h3 data-sourcepos="218:1-218:56">
+<span id="si単位表itパスポート試験範囲対応" class="fragment"></span><a href="#si%E5%8D%98%E4%BD%8D%E8%A1%A8it%E3%83%91%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E8%A9%A6%E9%A8%93%E7%AF%84%E5%9B%B2%E5%AF%BE%E5%BF%9C"><i class="fa fa-link"></i></a>SI単位表（ITパスポート試験範囲対応）</h3>
+<p data-sourcepos="220:1-220:30"><strong>なぜSI単位が重要？</strong></p>
+<ul data-sourcepos="221:1-224:0">
+<li data-sourcepos="221:1-221:47">システム性能を語る時の共通言語</li>
+<li data-sourcepos="222:1-222:35">見積もりや設計書で必須</li>
+<li data-sourcepos="223:1-224:0">国際標準なので世界中で通用</li>
+</ul>
+<table data-sourcepos="225:1-236:53">
+<thead>
+<tr data-sourcepos="225:1-225:58">
+<th data-sourcepos="225:2-225:12">書き方</th>
+<th data-sourcepos="225:14-225:21">読み</th>
+<th data-sourcepos="225:23-225:33">大きさ</th>
+<th data-sourcepos="225:35-225:57">実務での用途例</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="227:1-227:73">
+<td data-sourcepos="227:2-227:4">P</td>
+<td data-sourcepos="227:6-227:13">ペタ</td>
+<td data-sourcepos="227:15-227:21">10^15</td>
+<td data-sourcepos="227:23-227:72">大手クラウドサービスのストレージ</td>
+</tr>
+<tr data-sourcepos="228:1-228:59">
+<td data-sourcepos="228:2-228:4">T</td>
+<td data-sourcepos="228:6-228:13">テラ</td>
+<td data-sourcepos="228:15-228:21">10^12</td>
+<td data-sourcepos="228:23-228:58">現在のHDD/SSDの主流サイズ</td>
+</tr>
+<tr data-sourcepos="229:1-229:56">
+<td data-sourcepos="229:2-229:4">G</td>
+<td data-sourcepos="229:6-229:13">ギガ</td>
+<td data-sourcepos="229:15-229:20">10^9</td>
+<td data-sourcepos="229:22-229:55">SDカード、CPUクロック数</td>
+</tr>
+<tr data-sourcepos="230:1-230:63">
+<td data-sourcepos="230:2-230:4">M</td>
+<td data-sourcepos="230:6-230:13">メガ</td>
+<td data-sourcepos="230:15-230:20">10^6</td>
+<td data-sourcepos="230:22-230:62">写真データ、中規模ファイル</td>
+</tr>
+<tr data-sourcepos="231:1-231:63">
+<td data-sourcepos="231:2-231:4">k</td>
+<td data-sourcepos="231:6-231:13">キロ</td>
+<td data-sourcepos="231:15-231:20">10^3</td>
+<td data-sourcepos="231:22-231:62">一般的なドキュメントサイズ</td>
+</tr>
+<tr data-sourcepos="232:1-232:36">
+<td data-sourcepos="232:2-232:4">-</td>
+<td data-sourcepos="232:6-232:13">なし</td>
+<td data-sourcepos="232:15-232:20">10^0</td>
+<td data-sourcepos="232:22-232:35">基準単位</td>
+</tr>
+<tr data-sourcepos="233:1-233:61">
+<td data-sourcepos="233:2-233:4">m</td>
+<td data-sourcepos="233:6-233:13">ミリ</td>
+<td data-sourcepos="233:15-233:21">10^-3</td>
+<td data-sourcepos="233:23-233:60">プログラムの応答時間目標</td>
+</tr>
+<tr data-sourcepos="234:1-234:78">
+<td data-sourcepos="234:2-234:5">μ</td>
+<td data-sourcepos="234:7-234:20">マイクロ</td>
+<td data-sourcepos="234:22-234:28">10^-6</td>
+<td data-sourcepos="234:30-234:77">システムの1処理あたりの実行時間</td>
+</tr>
+<tr data-sourcepos="235:1-235:59">
+<td data-sourcepos="235:2-235:4">n</td>
+<td data-sourcepos="235:6-235:13">ナノ</td>
+<td data-sourcepos="235:15-235:21">10^-9</td>
+<td data-sourcepos="235:23-235:58">CPUが1命令を処理する時間</td>
+</tr>
+<tr data-sourcepos="236:1-236:53">
+<td data-sourcepos="236:2-236:4">p</td>
+<td data-sourcepos="236:6-236:13">ピコ</td>
+<td data-sourcepos="236:15-236:22">10^-12</td>
+<td data-sourcepos="236:24-236:52">最先端の研究レベル</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="238:1-238:25"><strong>覚え方のコツ：</strong></p>
+<ul data-sourcepos="239:1-242:0">
+<li data-sourcepos="239:1-239:57">10^3（1000倍）または10^-3（1/1000）ずつ変化</li>
+<li data-sourcepos="240:1-240:68">T（テラ）、G（ギガ）、M（メガ）は日常的に使用</li>
+<li data-sourcepos="241:1-242:0">μ（マイクロ）は性能測定で頻出</li>
+</ul>
+<p data-sourcepos="243:1-243:28"><strong>実務での会話例：</strong></p>
+<ul data-sourcepos="244:1-247:0">
+<li data-sourcepos="244:1-244:67">「このAPIの応答時間は200ms以下を目標にしよう」</li>
+<li data-sourcepos="245:1-245:87">「データベースのサイズが50GBを超えたら、アーカイブを検討」</li>
+<li data-sourcepos="246:1-247:0">「CPUは3.2GHzのものを選定」</li>
+</ul>
+<hr data-sourcepos="248:1-249:0">
+<h2 data-sourcepos="250:1-250:45">
+<span id="まとめ効率的な学習のために" class="fragment"></span><a href="#%E3%81%BE%E3%81%A8%E3%82%81%E5%8A%B9%E7%8E%87%E7%9A%84%E3%81%AA%E5%AD%A6%E7%BF%92%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB"><i class="fa fa-link"></i></a>まとめ：効率的な学習のために</h2>
+<h3 data-sourcepos="252:1-252:25">
+<span id="学習の優先順位" class="fragment"></span><a href="#%E5%AD%A6%E7%BF%92%E3%81%AE%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D"><i class="fa fa-link"></i></a>学習の優先順位</h3>
+<ol data-sourcepos="253:1-256:0">
+<li data-sourcepos="253:1-253:100">
+<strong>まず理解</strong>：なぜその技術が生まれたのか、どんな問題を解決するのか</li>
+<li data-sourcepos="254:1-254:67">
+<strong>次に体感</strong>：実際に触ったり使ったりしてみる</li>
+<li data-sourcepos="255:1-256:0">
+<strong>最後に暗記</strong>：試験直前に必要最小限だけ</li>
+</ol>
+<h3 data-sourcepos="257:1-257:31">
+<span id="実務で役立つ心構え" class="fragment"></span><a href="#%E5%AE%9F%E5%8B%99%E3%81%A7%E5%BD%B9%E7%AB%8B%E3%81%A4%E5%BF%83%E6%A7%8B%E3%81%88"><i class="fa fa-link"></i></a>実務で役立つ心構え</h3>
+<ul data-sourcepos="258:1-261:0">
+<li data-sourcepos="258:1-258:64">
+<strong>完璧を求めすぎない</strong>：8割理解できれば十分</li>
+<li data-sourcepos="259:1-259:90">
+<strong>調べる力を重視</strong>：正確な情報をすぐに見つけられることが大切</li>
+<li data-sourcepos="260:1-261:0">
+<strong>人に聞く勇気</strong>：分からないことは素直に質問する</li>
+</ul>
+<h3 data-sourcepos="262:1-262:25">
+<span id="継続学習のコツ" class="fragment"></span><a href="#%E7%B6%99%E7%B6%9A%E5%AD%A6%E7%BF%92%E3%81%AE%E3%82%B3%E3%83%84"><i class="fa fa-link"></i></a>継続学習のコツ</h3>
+<ul data-sourcepos="263:1-266:0">
+<li data-sourcepos="263:1-263:76">
+<strong>技術ニュースを定期チェック</strong>：ITmedia、Qiita、Zennなど</li>
+<li data-sourcepos="264:1-264:72">
+<strong>実際のプロジェクトで実践</strong>：知識を実体験に変換</li>
+<li data-sourcepos="265:1-266:0">
+<strong>コミュニティ参加</strong>：勉強会やオンラインイベントで情報交換</li>
+</ul>
+<hr data-sourcepos="267:1-268:0">
+<h3 data-sourcepos="269:1-269:16">
+<span id="参考資料" class="fragment"></span><a href="#%E5%8F%82%E8%80%83%E8%B3%87%E6%96%99"><i class="fa fa-link"></i></a>参考資料</h3>
+<ul data-sourcepos="270:1-271:118">
+<li data-sourcepos="270:1-270:82"><a href="https://www.hakko.co.jp/library/qa/qakit/html/h06010.htm" rel="nofollow noopener" target="_blank">SI単位詳細資料</a></li>
+<li data-sourcepos="271:1-271:118"><a href="https://www.matsusada.co.jp/column/column-iot1-digital-resolution.html" rel="nofollow noopener" target="_blank">デジタル・アナログ変換の詳細</a></li>
+</ul>

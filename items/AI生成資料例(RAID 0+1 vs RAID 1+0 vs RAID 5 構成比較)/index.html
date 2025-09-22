@@ -1,0 +1,416 @@
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:24">Claude.AIでの作成例</p>
+</div>
+</div>
+<h2 data-sourcepos="5:1-5:52">
+<span id="はじめに---なぜraidで混乱するのか" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB---%E3%81%AA%E3%81%9Craid%E3%81%A7%E6%B7%B7%E4%B9%B1%E3%81%99%E3%82%8B%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>はじめに - なぜRAIDで混乱するのか？</h2>
+<p data-sourcepos="7:1-8:39">「RAID 0+1とRAID 1+0って何が違うの？」<br>
+「RAID 5って結局どうなの？」</p>
+<p data-sourcepos="10:1-10:150">こんな疑問、エンジニア研修でよく聞きます。名前が似てるし、容量効率も同じだし、混乱するのも当然です。</p>
+<p data-sourcepos="12:1-12:190">でも<strong>構成の順番が違うだけで、障害時の挙動がまったく変わる</strong>んです。この記事では、図解とストーリーでスッキリ理解してもらいます！</p>
+<hr data-sourcepos="14:1-15:0">
+<h2 data-sourcepos="16:1-16:33">
+<span id="raid構成の基本思想-" class="fragment"></span><a href="#raid%E6%A7%8B%E6%88%90%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3-"><i class="fa fa-link"></i></a>RAID構成の基本思想 🎯</h2>
+<p data-sourcepos="18:1-18:53">まず、RAIDの2大要素を押さえましょう：</p>
+<iframe id="qiita-embed-content__6f1e65ed04aa1fe6718b54ff8aae885b" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__6f1e65ed04aa1fe6718b54ff8aae885b" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n RAID[RAID技術]\n STRIPE[ストライプ化&lt;br/&gt;📈 高速化]\n MIRROR[ミラーリング&lt;br/&gt;🛡️ 冗長化]\n \n RAID --&gt; STRIPE\n RAID --&gt; MIRROR\n \n STRIPE --&gt; PERF[読み書き性能UP]\n MIRROR --&gt; SAFE[データ保護]\n \n style STRIPE fill:#ff9999\n style MIRROR fill:#99ccff","key":"17752305a0013d086254dd33ba135526"}'>
+</iframe>
+
+<p data-sourcepos="36:1-36:22"><strong>ストーリー：</strong></p>
+<ul data-sourcepos="37:1-39:0">
+<li data-sourcepos="37:1-37:79">
+<strong>ストライプ化</strong> = 「みんなで手分けして作業」→ 早い！</li>
+<li data-sourcepos="38:1-39:0">
+<strong>ミラーリング</strong> = 「同じ作業を2人でやる」→ 安全！</li>
+</ul>
+<hr data-sourcepos="40:1-41:0">
+<h2 data-sourcepos="42:1-42:78">
+<span id="raid-01-raid-01---高速チーム全体をバックアップ作戦" class="fragment"></span><a href="#raid-01-raid-01---%E9%AB%98%E9%80%9F%E3%83%81%E3%83%BC%E3%83%A0%E5%85%A8%E4%BD%93%E3%82%92%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E4%BD%9C%E6%88%A6"><i class="fa fa-link"></i></a>RAID 0+1 (RAID 01) - 「高速チーム全体をバックアップ」作戦</h2>
+<h3 data-sourcepos="44:1-44:27">
+<span id="-構成の考え方" class="fragment"></span><a href="#-%E6%A7%8B%E6%88%90%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9"><i class="fa fa-link"></i></a>📋 構成の考え方</h3>
+<iframe id="qiita-embed-content__16ee0be935d6b5dbb91f17788feccc98" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__16ee0be935d6b5dbb91f17788feccc98" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph \"ステップ1: まずRAID 0を作る\"\n A1[💾 A1] --- A2[💾 A2]\n A3[💾 A3] --- A4[💾 A4]\n A1 -.-&gt;|ストライプ化| A2\n A3 -.-&gt;|ストライプ化| A4\n end\n \n subgraph \"ステップ2: RAID 0チーム全体をミラー\"\n B1[💾 B1] --- B2[💾 B2]\n B3[💾 B3] --- B4[💾 B4]\n B1 -.-&gt;|ストライプ化| B2\n B3 -.-&gt;|ストライプ化| B4\n end\n \n A1 -.-&gt;|完全コピー| B1\n A2 -.-&gt;|完全コピー| B2\n A3 -.-&gt;|完全コピー| B3\n A4 -.-&gt;|完全コピー| B4\n \n style A1 fill:#ff9999\n style A2 fill:#ff9999\n style A3 fill:#ff9999\n style A4 fill:#ff9999\n style B1 fill:#99ccff\n style B2 fill:#99ccff\n style B3 fill:#99ccff\n style B4 fill:#99ccff","key":"0ac7a15f6920ae037d04e0569a290378"}'>
+</iframe>
+
+<p data-sourcepos="77:1-78:122"><strong>人間で例えると：</strong><br>
+「4人の高速作業チーム（RAID 0）を作って、その全員の作業を別の4人チームが完全コピー」</p>
+<h3 data-sourcepos="80:1-80:23">
+<span id="-性能と容量" class="fragment"></span><a href="#-%E6%80%A7%E8%83%BD%E3%81%A8%E5%AE%B9%E9%87%8F"><i class="fa fa-link"></i></a>⚡ 性能と容量</h3>
+<ul data-sourcepos="81:1-84:0">
+<li data-sourcepos="81:1-81:46">
+<strong>使用可能容量</strong>: 50%（4TB → 2TB）</li>
+<li data-sourcepos="82:1-82:34">
+<strong>読み取り</strong>: 超高速 🚀</li>
+<li data-sourcepos="83:1-84:0">
+<strong>書き込み</strong>: 高速（でも2倍の作業が必要）</li>
+</ul>
+<h3 data-sourcepos="85:1-85:27">
+<span id="-障害時の現実" class="fragment"></span><a href="#-%E9%9A%9C%E5%AE%B3%E6%99%82%E3%81%AE%E7%8F%BE%E5%AE%9F"><i class="fa fa-link"></i></a>💥 障害時の現実</h3>
+<iframe id="qiita-embed-content__1442f28ae5e2a1c8ce6f4a77000315e1" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__1442f28ae5e2a1c8ce6f4a77000315e1" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph \"チームA（1人故障で全滅）\"\n A1[💀 A1故障]\n A2[😵 A2停止]\n A3[😵 A3停止]\n A4[😵 A4停止]\n end\n \n subgraph \"チームB（正常だけど孤軍奮闘）\"\n B1[😅 B1頑張る]\n B2[😅 B2頑張る]\n B3[😅 B3頑張る]\n B4[😅 B4頑張る]\n end\n \n style A1 fill:#ff0000\n style A2 fill:#ffcccc\n style A3 fill:#ffcccc\n style A4 fill:#ffcccc\n style B1 fill:#ffffcc\n style B2 fill:#ffffcc\n style B3 fill:#ffffcc\n style B4 fill:#ffffcc","key":"b04f7f0364503f0030e5d9b523c01024"}'>
+</iframe>
+
+<p data-sourcepos="113:1-113:113"><strong>問題点：</strong> チームワークが裏目に！1人倒れると連鎖的にチーム全体が機能停止 😱</p>
+<hr data-sourcepos="115:1-116:0">
+<h2 data-sourcepos="117:1-117:60">
+<span id="raid-10-raid-10---最強ペア複数体制作戦" class="fragment"></span><a href="#raid-10-raid-10---%E6%9C%80%E5%BC%B7%E3%83%9A%E3%82%A2%E8%A4%87%E6%95%B0%E4%BD%93%E5%88%B6%E4%BD%9C%E6%88%A6"><i class="fa fa-link"></i></a>RAID 1+0 (RAID 10) - 「最強ペア複数体制」作戦</h2>
+<h3 data-sourcepos="119:1-119:27">
+<span id="-構成の考え方-1" class="fragment"></span><a href="#-%E6%A7%8B%E6%88%90%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9-1"><i class="fa fa-link"></i></a>📋 構成の考え方</h3>
+<iframe id="qiita-embed-content__31e4e0147b52efe9a64ed0701762b328" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__31e4e0147b52efe9a64ed0701762b328" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph \"ステップ1: 最強ペアを作る\"\n A1[💾 A1] -.-&gt;|完全同期| A2[💾 A2]\n B1[💾 B1] -.-&gt;|完全同期| B2[💾 B2]\n end\n \n subgraph \"ステップ2: ペア間で高速分担\"\n A1 -.-&gt;|ストライプ化| B1\n A2 -.-&gt;|ストライプ化| B2\n end\n \n style A1 fill:#ff9999\n style A2 fill:#ff9999\n style B1 fill:#99ccff\n style B2 fill:#99ccff","key":"71420b117f351fd8a9fbfdfc4060b0c1"}'>
+</iframe>
+
+<p data-sourcepos="139:1-140:82"><strong>人間で例えると：</strong><br>
+「完璧に息の合ったペアを2組作って、ペア同士で作業分担」</p>
+<h3 data-sourcepos="142:1-142:23">
+<span id="-性能と容量-1" class="fragment"></span><a href="#-%E6%80%A7%E8%83%BD%E3%81%A8%E5%AE%B9%E9%87%8F-1"><i class="fa fa-link"></i></a>⚡ 性能と容量</h3>
+<ul data-sourcepos="143:1-146:0">
+<li data-sourcepos="143:1-143:46">
+<strong>使用可能容量</strong>: 50%（4TB → 2TB）</li>
+<li data-sourcepos="144:1-144:34">
+<strong>読み取り</strong>: 超高速 🚀</li>
+<li data-sourcepos="145:1-146:0">
+<strong>書き込み</strong>: 高速（ペア内で同期）</li>
+</ul>
+<h3 data-sourcepos="147:1-147:30">
+<span id="-障害時の安定感" class="fragment"></span><a href="#-%E9%9A%9C%E5%AE%B3%E6%99%82%E3%81%AE%E5%AE%89%E5%AE%9A%E6%84%9F"><i class="fa fa-link"></i></a>💪 障害時の安定感</h3>
+<iframe id="qiita-embed-content__c4901cb6369dca46a865be1f365fbe9c" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__c4901cb6369dca46a865be1f365fbe9c" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph \"ペア1（1人故障でも相方でカバー）\"\n A1[💀 A1故障]\n A2[💪 A2奮闘中]\n end\n \n subgraph \"ペア2（通常営業）\"\n B1[😊 B1正常]\n B2[😊 B2正常]\n end\n \n A2 -.-&gt;|ストライプ継続| B1\n \n style A1 fill:#ff0000\n style A2 fill:#ffff99\n style B1 fill:#ccffcc\n style B2 fill:#ccffcc","key":"3649d90e49186d9396550871d94e6e78"}'>
+</iframe>
+
+<p data-sourcepos="169:1-169:101"><strong>利点：</strong> ペアが独立してるから安心！1人倒れても相方が即座にカバー 💪</p>
+<hr data-sourcepos="171:1-172:0">
+<h2 data-sourcepos="173:1-173:48">
+<span id="raid-5---みんなで支え合う作戦" class="fragment"></span><a href="#raid-5---%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E6%94%AF%E3%81%88%E5%90%88%E3%81%86%E4%BD%9C%E6%88%A6"><i class="fa fa-link"></i></a>RAID 5 - 「みんなで支え合う」作戦</h2>
+<h3 data-sourcepos="175:1-175:27">
+<span id="-構成の考え方-2" class="fragment"></span><a href="#-%E6%A7%8B%E6%88%90%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9-2"><i class="fa fa-link"></i></a>📋 構成の考え方</h3>
+<iframe id="qiita-embed-content__9def9b3c598419882ff47c540cc8cb80" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__9def9b3c598419882ff47c540cc8cb80" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph A[\"RAID 5の分散配置\"]\n D1[データ1] --&gt; P1[パリティ1]\n D2[データ2] --&gt; P1\n D3[データ3] --&gt; P2[パリティ2]\n D1 --&gt; P2\n end\n \n subgraph B[\"実際のディスク配置\"]\n DISK1[💾1&lt;br/&gt;D1 D4 P3]\n DISK2[💾2&lt;br/&gt;D2 P1 D5]\n DISK3[💾3&lt;br/&gt;P2 D3 D6]\n end\n \n style D1 fill:#ff9999\n style D2 fill:#ff9999\n style D3 fill:#ff9999\n style P1 fill:#99ccff\n style P2 fill:#99ccff","key":"59c75f9a49cf37a3d690749bb260f627"}'>
+</iframe>
+
+<p data-sourcepos="199:1-199:45"><strong>📊 ディスク配置の詳細表示：</strong></p>
+<table data-sourcepos="201:1-205:37">
+<thead>
+<tr data-sourcepos="201:1-201:64">
+<th data-sourcepos="201:2-201:15">ディスク</th>
+<th data-sourcepos="201:17-201:31">ブロック1</th>
+<th data-sourcepos="201:33-201:47">ブロック2</th>
+<th data-sourcepos="201:49-201:63">ブロック3</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="203:1-203:37">
+<td data-sourcepos="203:2-203:21">💾 ディスク1</td>
+<td data-sourcepos="203:23-203:26">D1</td>
+<td data-sourcepos="203:28-203:31">D4</td>
+<td data-sourcepos="203:33-203:36">P3</td>
+</tr>
+<tr data-sourcepos="204:1-204:37">
+<td data-sourcepos="204:2-204:21">💾 ディスク2</td>
+<td data-sourcepos="204:23-204:26">D2</td>
+<td data-sourcepos="204:28-204:31">P1</td>
+<td data-sourcepos="204:33-204:36">D5</td>
+</tr>
+<tr data-sourcepos="205:1-205:37">
+<td data-sourcepos="205:2-205:21">💾 ディスク3</td>
+<td data-sourcepos="205:23-205:26">P2</td>
+<td data-sourcepos="205:28-205:31">D3</td>
+<td data-sourcepos="205:33-205:36">D6</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="207:1-207:62"><em>凡例: D=データブロック、P=パリティブロック</em></p>
+<p data-sourcepos="209:1-210:158"><strong>人間で例えると：</strong><br>
+「3人チームで、2人が作業して1人が『答え合わせ用のメモ』を作成。誰か1人休んでも、残り2人のメモから復元可能」</p>
+<h3 data-sourcepos="212:1-212:30">
+<span id="-パリティの魔法" class="fragment"></span><a href="#-%E3%83%91%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AE%E9%AD%94%E6%B3%95"><i class="fa fa-link"></i></a>🧮 パリティの魔法</h3>
+<iframe id="qiita-embed-content__946afe804e1b960370c6d60a136c872e" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__946afe804e1b960370c6d60a136c872e" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n DATA1[データ1: 101] --&gt; XOR{⊕&lt;br/&gt;XOR演算}\n DATA2[データ2: 011] --&gt; XOR\n XOR --&gt; PARITY[パリティ: 110]\n \n subgraph \"復元の仕組み\"\n LOST[❓ 失われたデータ]\n REMAIN1[残りデータ1]\n REMAIN2[残りデータ2]\n REMAIN1 --&gt; CALC{⊕}\n REMAIN2 --&gt; CALC\n CALC --&gt; RECOVER[💡 復元完了]\n end","key":"a6b4d94213cd6fc2c070b863ef2b3f05"}'>
+</iframe>
+
+<p data-sourcepos="230:1-230:133"><strong>魔法の原理：</strong> <code>データ1 ⊕ データ2 = パリティ</code> だから、どれか1つが分かれば残りが計算できる！</p>
+<h3 data-sourcepos="232:1-232:30">
+<span id="-容量効率の良さ" class="fragment"></span><a href="#-%E5%AE%B9%E9%87%8F%E5%8A%B9%E7%8E%87%E3%81%AE%E8%89%AF%E3%81%95"><i class="fa fa-link"></i></a>💰 容量効率の良さ</h3>
+<iframe id="qiita-embed-content__5ed2405eba7f7f4badc0928a57e21fa9" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__5ed2405eba7f7f4badc0928a57e21fa9" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"pie title 3台構成での容量効率\n \"使用可能容量\" : 67\n \"パリティ領域\" : 33","key":"0be75b564f5cc7766c0df77bbc73e06b"}'>
+</iframe>
+
+<ul data-sourcepos="240:1-242:0">
+<li data-sourcepos="240:1-240:46">
+<strong>使用可能容量</strong>: 67%（3TB → 2TB）</li>
+<li data-sourcepos="241:1-242:0">
+<strong>台数が増えるほど効率UP</strong>: 4台なら75%、5台なら80%</li>
+</ul>
+<h3 data-sourcepos="243:1-243:41">
+<span id="️-障害時のドキドキ体験" class="fragment"></span><a href="#%EF%B8%8F-%E9%9A%9C%E5%AE%B3%E6%99%82%E3%81%AE%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E4%BD%93%E9%A8%93"><i class="fa fa-link"></i></a>⚠️ 障害時のドキドキ体験</h3>
+<iframe id="qiita-embed-content__0d51ef6edb9b6ced9665709b567b8988" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__0d51ef6edb9b6ced9665709b567b8988" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n NORMAL[😊 正常運用中] --&gt; FAILURE[💀 1台故障発生]\n FAILURE --&gt; DEGRADED[😰 性能低下モード]\n DEGRADED --&gt; REBUILD[🔧 復旧作業開始]\n REBUILD --&gt; DANGER{復旧中に&lt;br/&gt;もう1台故障？}\n DANGER --&gt;|YES| DISASTER[💥 全データ消失]\n DANGER --&gt;|NO| RECOVER[😅 復旧完了]\n \n style NORMAL fill:#ccffcc\n style FAILURE fill:#ffcc99\n style DEGRADED fill:#ffff99\n style REBUILD fill:#ffff99\n style DISASTER fill:#ff9999\n style RECOVER fill:#ccffcc","key":"52393ff91504ec8a68c459c736bc684f"}'>
+</iframe>
+
+<p data-sourcepos="262:1-262:83"><strong>注意点：</strong> 復旧中は綱渡り状態！もう1台故障すると全滅 😱</p>
+<hr data-sourcepos="264:1-265:0">
+<h2 data-sourcepos="266:1-266:41">
+<span id="-総合比較---どれを選ぶ" class="fragment"></span><a href="#-%E7%B7%8F%E5%90%88%E6%AF%94%E8%BC%83---%E3%81%A9%E3%82%8C%E3%82%92%E9%81%B8%E3%81%B6"><i class="fa fa-link"></i></a>🏆 総合比較 - どれを選ぶ？</h2>
+<h3 data-sourcepos="268:1-268:31">
+<span id="パフォーマンス対決" class="fragment"></span><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E5%AF%BE%E6%B1%BA"><i class="fa fa-link"></i></a>パフォーマンス対決</h3>
+<iframe id="qiita-embed-content__74d135c88b337d3367f3c507bbe41179" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__74d135c88b337d3367f3c507bbe41179" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n subgraph \"読み取り性能 📖\"\n R01[RAID 0+1&lt;br/&gt;🚀🚀🚀]\n R10[RAID 1+0&lt;br/&gt;🚀🚀🚀]\n R5[RAID 5&lt;br/&gt;🚀🚀🚀]\n end\n \n subgraph \"書き込み性能 ✍️\"\n W01[RAID 0+1&lt;br/&gt;🚀🚀🚀]\n W10[RAID 1+0&lt;br/&gt;🚀🚀🚀]\n W5[RAID 5&lt;br/&gt;🚀⭐⭐]\n end\n \n style W5 fill:#ffcc99","key":"2cd8566cb786f008cf7a4969223e77bc"}'>
+</iframe>
+
+<h3 data-sourcepos="287:1-287:19">
+<span id="安全性対決" class="fragment"></span><a href="#%E5%AE%89%E5%85%A8%E6%80%A7%E5%AF%BE%E6%B1%BA"><i class="fa fa-link"></i></a>安全性対決</h3>
+<iframe id="qiita-embed-content__9e37a4f61faba9fab36116252ff47b4d" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__9e37a4f61faba9fab36116252ff47b4d" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n subgraph \"耐障害性 🛡️\"\n S01[RAID 0+1&lt;br/&gt;🛡️⭐⭐&lt;br/&gt;チーム全滅リスク]\n S10[RAID 1+0&lt;br/&gt;🛡️🛡️🛡️&lt;br/&gt;ペア独立で安心]\n S5[RAID 5&lt;br/&gt;🛡️🛡️⭐&lt;br/&gt;1台まで OK]\n end\n \n style S01 fill:#ffcc99\n style S10 fill:#ccffcc","key":"87f3b5520960f8fd31ea21c74b91f65e"}'>
+</iframe>
+
+<h3 data-sourcepos="301:1-301:19">
+<span id="コスト対決" class="fragment"></span><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E5%AF%BE%E6%B1%BA"><i class="fa fa-link"></i></a>コスト対決</h3>
+<iframe id="qiita-embed-content__806e3be70c19840bfd4f535542be695c" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__806e3be70c19840bfd4f535542be695c" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"pie title コスト効率（4台構成）\n \"RAID 0+1（50%効率）\" : 50\n \"RAID 1+0（50%効率）\" : 50\n \"RAID 5（75%効率）\" : 75","key":"a1db02592ad79eb75a8402a43f93fc5a"}'>
+</iframe>
+
+<hr data-sourcepos="310:1-311:0">
+<h2 data-sourcepos="312:1-312:32">
+<span id="-実務での選択指針" class="fragment"></span><a href="#-%E5%AE%9F%E5%8B%99%E3%81%A7%E3%81%AE%E9%81%B8%E6%8A%9E%E6%8C%87%E9%87%9D"><i class="fa fa-link"></i></a>💡 実務での選択指針</h2>
+<h3 data-sourcepos="314:1-314:30">
+<span id="-用途別おすすめ" class="fragment"></span><a href="#-%E7%94%A8%E9%80%94%E5%88%A5%E3%81%8A%E3%81%99%E3%81%99%E3%82%81"><i class="fa fa-link"></i></a>🎯 用途別おすすめ</h3>
+<iframe id="qiita-embed-content__0cf1189900b4326384ba4ea0ba2486f8" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__0cf1189900b4326384ba4ea0ba2486f8" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n MISSION[ミッションクリティカル] --&gt; DB[データベース&lt;br/&gt;高トランザクション]\n MISSION --&gt; REALTIME[リアルタイム処理]\n DB --&gt; RAID10[🏆 RAID 1+0推奨]\n REALTIME --&gt; RAID10\n \n GENERAL[一般業務] --&gt; FILE[ファイルサーバー]\n GENERAL --&gt; BACKUP[バックアップ]\n FILE --&gt; RAID5[💰 RAID 5推奨]\n BACKUP --&gt; RAID5\n \n LEGACY[レガシー] --&gt; OLD[古いシステム]\n OLD --&gt; AVOID[❌ RAID 0+1&lt;br/&gt;非推奨]\n \n style RAID10 fill:#ccffcc\n style RAID5 fill:#ffffcc\n style AVOID fill:#ffcccc","key":"d7bcb9af318ead01c2a5af8098c8d475"}'>
+</iframe>
+
+<h3 data-sourcepos="336:1-336:42">
+<span id="-絶対に避けるべきケース" class="fragment"></span><a href="#-%E7%B5%B6%E5%AF%BE%E3%81%AB%E9%81%BF%E3%81%91%E3%82%8B%E3%81%B9%E3%81%8D%E3%82%B1%E3%83%BC%E3%82%B9"><i class="fa fa-link"></i></a>🚨 絶対に避けるべきケース</h3>
+<table data-sourcepos="338:1-343:60">
+<thead>
+<tr data-sourcepos="338:1-338:63">
+<th data-sourcepos="338:2-338:27">シチュエーション</th>
+<th data-sourcepos="338:29-338:53">❌ 避けるべきRAID</th>
+<th data-sourcepos="338:55-338:62">理由</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="340:1-340:62">
+<td data-sourcepos="340:2-340:27">新規システム設計</td>
+<td data-sourcepos="340:29-340:38">RAID 0+1</td>
+<td data-sourcepos="340:40-340:61">RAID 1+0の劣化版</td>
+</tr>
+<tr data-sourcepos="341:1-341:61">
+<td data-sourcepos="341:2-341:21">書き込み重視</td>
+<td data-sourcepos="341:23-341:30">RAID 5</td>
+<td data-sourcepos="341:32-341:60">パリティ計算で遅延</td>
+</tr>
+<tr data-sourcepos="342:1-342:55">
+<td data-sourcepos="342:2-342:21">復旧時間重視</td>
+<td data-sourcepos="342:23-342:30">RAID 5</td>
+<td data-sourcepos="342:32-342:54">復旧時間が長い</td>
+</tr>
+<tr data-sourcepos="343:1-343:60">
+<td data-sourcepos="343:2-343:15">予算極限</td>
+<td data-sourcepos="343:17-343:26">RAID 1+0</td>
+<td data-sourcepos="343:28-343:59">容量効率50%でコスト高</td>
+</tr>
+</tbody>
+</table>
+<hr data-sourcepos="345:1-346:0">
+<h2 data-sourcepos="347:1-347:30">
+<span id="-raidあるある劇場" class="fragment"></span><a href="#-raid%E3%81%82%E3%82%8B%E3%81%82%E3%82%8B%E5%8A%87%E5%A0%B4"><i class="fa fa-link"></i></a>🎭 RAIDあるある劇場</h2>
+<h3 data-sourcepos="349:1-349:37">
+<span id="第1話raid-01の悲劇" class="fragment"></span><a href="#%E7%AC%AC1%E8%A9%B1raid-01%E3%81%AE%E6%82%B2%E5%8A%87"><i class="fa fa-link"></i></a>第1話：「RAID 0+1の悲劇」</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="351:1-361:3"><div class="highlight"><pre><code>👨‍💼 部長「RAIDで安心だな！」
+👨‍💻 エンジニア「はい、RAID 0+1です」
+
+（ある日、1台故障）
+💾 ディスク「ガリガリ...💀」
+👨‍💻 エンジニア「え...チーム全体が止まった...」
+👨‍💼 部長「RAIDなのになぜ？！」
+
+💡 教訓：名前が似てても中身は別物！
+</code></pre></div></div>
+<h3 data-sourcepos="363:1-363:38">
+<span id="第2話raid-5の長い夜" class="fragment"></span><a href="#%E7%AC%AC2%E8%A9%B1raid-5%E3%81%AE%E9%95%B7%E3%81%84%E5%A4%9C"><i class="fa fa-link"></i></a>第2話：「RAID 5の長い夜」</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="365:1-379:3"><div class="highlight"><pre><code>🌙 深夜2時
+👨‍💻 エンジニア「RAID 5で1台故障...復旧開始」
+
+🌅 朝8時
+👨‍💻 エンジニア「まだ30%...」
+☀️ 昼12時
+👨‍💻 エンジニア「やっと70%...」
+
+😱 午後2時
+💾 別のディスク「ガリガリ...💀」
+👨‍💻 エンジニア「うわあああああ」
+
+💡 教訓：復旧中は祈るしかない！
+</code></pre></div></div>
+<hr data-sourcepos="381:1-382:0">
+<h2 data-sourcepos="383:1-383:35">
+<span id="-決定フローチャート" class="fragment"></span><a href="#-%E6%B1%BA%E5%AE%9A%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88"><i class="fa fa-link"></i></a>📊 決定フローチャート</h2>
+<p data-sourcepos="385:1-385:51">迷ったらこのフローで決めましょう！</p>
+<iframe id="qiita-embed-content__80c0346b0ccdede3e444274a5a7006c1" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__80c0346b0ccdede3e444274a5a7006c1" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n START[RAIDを選ぶ] --&gt; BUDGET{予算は？}\n BUDGET --&gt;|潤沢| PERFORMANCE{性能重視？}\n BUDGET --&gt;|限定的| EFFICIENCY{容量効率重視？}\n \n PERFORMANCE --&gt;|YES| RAID10[🏆 RAID 1+0]\n PERFORMANCE --&gt;|NO| SAFETY{安全性重視？}\n SAFETY --&gt;|YES| RAID10\n SAFETY --&gt;|NO| RAID5[💰 RAID 5]\n \n EFFICIENCY --&gt;|YES| RAID5\n EFFICIENCY --&gt;|NO| RAID10\n \n style RAID10 fill:#ccffcc\n style RAID5 fill:#ffffcc","key":"6372454021ad09c7e13bafcbf6877a8d"}'>
+</iframe>
+
+<hr data-sourcepos="405:1-406:0">
+<h2 data-sourcepos="407:1-407:38">
+<span id="-まとめ一言で覚える" class="fragment"></span><a href="#-%E3%81%BE%E3%81%A8%E3%82%81%E4%B8%80%E8%A8%80%E3%81%A7%E8%A6%9A%E3%81%88%E3%82%8B"><i class="fa fa-link"></i></a>📝 まとめ：一言で覚える</h2>
+<h3 data-sourcepos="409:1-409:33">
+<span id="-キャッチフレーズ" class="fragment"></span><a href="#-%E3%82%AD%E3%83%A3%E3%83%83%E3%83%81%E3%83%95%E3%83%AC%E3%83%BC%E3%82%BA"><i class="fa fa-link"></i></a>🎯 キャッチフレーズ</h3>
+<ul data-sourcepos="411:1-414:0">
+<li data-sourcepos="411:1-411:77">
+<strong>RAID 0+1</strong>: 「チーム全滅リスクの高速構成」→ 使わない</li>
+<li data-sourcepos="412:1-412:80">
+<strong>RAID 1+0</strong>: 「最強ペアの安心構成」→ 性能重視ならコレ！</li>
+<li data-sourcepos="413:1-414:0">
+<strong>RAID 5</strong>: 「みんなで支え合う節約構成」→ 一般的ならコレ！</li>
+</ul>
+<h3 data-sourcepos="415:1-415:27">
+<span id="-選択の決め手" class="fragment"></span><a href="#-%E9%81%B8%E6%8A%9E%E3%81%AE%E6%B1%BA%E3%82%81%E6%89%8B"><i class="fa fa-link"></i></a>🔑 選択の決め手</h3>
+<iframe id="qiita-embed-content__4d07c58324e6f80b61c2327a14236c89" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__4d07c58324e6f80b61c2327a14236c89" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n QUESTION[何を重視する？] --&gt; PERF[性能・安全性]\n QUESTION --&gt; COST[コスト・容量]\n \n PERF --&gt; RAID10[RAID 1+0]\n COST --&gt; RAID5[RAID 5]\n \n style RAID10 fill:#ccffcc\n style RAID5 fill:#ffffcc","key":"e0529d1b5a716a2183651afa4a0be9d1"}'>
+</iframe>
+
+<div data-sourcepos="429:1-431:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="430:1-430:210">ベースの記事はスクリーンショットメインだったのが、スクショは良くないよね！っていう話を聞いて納得したので、その辺りの話を書き含めておきます。</p>
+</div>
+</div>
+<h2 data-sourcepos="433:1-433:55">
+<span id="第1稿スクリーンショット中心の構成" class="fragment"></span><a href="#%E7%AC%AC1%E7%A8%BF%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E4%B8%AD%E5%BF%83%E3%81%AE%E6%A7%8B%E6%88%90"><i class="fa fa-link"></i></a>第1稿：スクリーンショット中心の構成</h2>
+<div class="code-frame" data-lang="markdown" data-sourcepos="435:1-440:3"><div class="highlight"><pre><code><span class="gh"># 元記事の特徴</span>
+<span class="p">-</span> スクリーンショット4枚でRAID構成を説明
+<span class="p">-</span> Claude.AIで生成した図表を画像として貼付
+<span class="p">-</span> 分かりやすいが「見るだけ」の記事
+</code></pre></div></div>
+<p data-sourcepos="442:1-442:25"><strong>問題点を発見：</strong></p>
+<ul data-sourcepos="443:1-447:0">
+<li data-sourcepos="443:1-443:38">読者が図を再利用できない</li>
+<li data-sourcepos="444:1-444:47">情報更新時に画像作り直しが必要</li>
+<li data-sourcepos="445:1-445:35">アクセシビリティの問題</li>
+<li data-sourcepos="446:1-447:0">バージョン管理が困難</li>
+</ul>
+<h2 data-sourcepos="448:1-448:41">
+<span id="第2稿mermaid中心への大改造" class="fragment"></span><a href="#%E7%AC%AC2%E7%A8%BFmermaid%E4%B8%AD%E5%BF%83%E3%81%B8%E3%81%AE%E5%A4%A7%E6%94%B9%E9%80%A0"><i class="fa fa-link"></i></a>第2稿：mermaid中心への大改造</h2>
+<iframe id="qiita-embed-content__c8f3656fca02601f49c96e34c6a09a23" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__c8f3656fca02601f49c96e34c6a09a23" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n SCREENSHOT[スクリーンショット] --&gt; MERMAID[mermaid図表]\n MERMAID --&gt; REUSABLE[再利用可能]\n MERMAID --&gt; MAINTAINABLE[保守しやすい]\n MERMAID --&gt; ACCESSIBLE[アクセシブル]\n \n style SCREENSHOT fill:#ffcccc\n style MERMAID fill:#ccffcc","key":"1c1e6605e042252202ada8714577088e"}'>
+</iframe>
+
+<p data-sourcepos="461:1-461:22"><strong>改善の狙い：</strong></p>
+<ol data-sourcepos="462:1-466:0">
+<li data-sourcepos="462:1-462:73">
+<strong>再現性の確保</strong>：読者がコードをコピーして使える</li>
+<li data-sourcepos="463:1-463:61">
+<strong>技術的品質</strong>：GitHubでバージョン管理可能</li>
+<li data-sourcepos="464:1-464:53">
+<strong>教育効果</strong>：mermaidスキルも同時習得</li>
+<li data-sourcepos="465:1-466:0">
+<strong>保守性向上</strong>：テキストベースで編集が簡単</li>
+</ol>
+<h2 data-sourcepos="467:1-467:30">
+<span id="画像分析と要件定義" class="fragment"></span><a href="#%E7%94%BB%E5%83%8F%E5%88%86%E6%9E%90%E3%81%A8%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9"><i class="fa fa-link"></i></a>画像分析と要件定義</h2>
+<div class="code-frame" data-lang="markdown" data-sourcepos="468:1-474:3"><div class="highlight"><pre><code>【元画像の役割分析】
+<span class="p">1.</span> RAID構成の概念図 → mermaidのgraph構文で再現
+<span class="p">2.</span> データ配置の詳細 → 表形式で構造化
+<span class="p">3.</span> 障害時の動作 → フローチャート + 感情表現
+<span class="p">4.</span> 性能比較 → 比較表 + 視覚的グラフ
+</code></pre></div></div>
+<div class="code-frame" data-lang="markdown" data-sourcepos="476:1-483:3"><div class="highlight"><pre><code><span class="gh"># Before: 硬い技術解説</span>
+RAID 1+0は冗長性に優れています。
+
+<span class="gh"># After: 親しみやすい表現</span>
+RAID 1+0は「最強ペア複数体制」作戦！
+ペアが独立してるから安心！1人倒れても相方が即座にカバー 💪
+</code></pre></div></div>
+<h3 data-sourcepos="485:1-485:39">
+<span id="-記事品質の定量的改善" class="fragment"></span><a href="#-%E8%A8%98%E4%BA%8B%E5%93%81%E8%B3%AA%E3%81%AE%E5%AE%9A%E9%87%8F%E7%9A%84%E6%94%B9%E5%96%84"><i class="fa fa-link"></i></a>📊 記事品質の定量的改善</h3>
+<table data-sourcepos="487:1-492:115">
+<thead>
+<tr data-sourcepos="487:1-487:42">
+<th data-sourcepos="487:2-487:9">指標</th>
+<th data-sourcepos="487:11-487:18">Before</th>
+<th data-sourcepos="487:20-487:26">After</th>
+<th data-sourcepos="487:28-487:41">改善効果</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="489:1-489:76">
+<td data-sourcepos="489:2-489:19"><strong>再利用性</strong></td>
+<td data-sourcepos="489:21-489:32">❌ 不可</td>
+<td data-sourcepos="489:34-489:51">✅ 完全対応</td>
+<td data-sourcepos="489:53-489:75">コピペで即利用</td>
+</tr>
+<tr data-sourcepos="490:1-490:91">
+<td data-sourcepos="490:2-490:16"><strong>保守性</strong></td>
+<td data-sourcepos="490:18-490:41">❌ 画像編集必要</td>
+<td data-sourcepos="490:43-490:72">✅ テキスト編集のみ</td>
+<td data-sourcepos="490:74-490:90">工数90%削減</td>
+</tr>
+<tr data-sourcepos="491:1-491:109">
+<td data-sourcepos="491:2-491:31"><strong>アクセシビリティ</strong></td>
+<td data-sourcepos="491:33-491:50">❌ 画像のみ</td>
+<td data-sourcepos="491:52-491:72">✅ テキスト化</td>
+<td data-sourcepos="491:74-491:108">スクリーンリーダー対応</td>
+</tr>
+<tr data-sourcepos="492:1-492:115">
+<td data-sourcepos="492:2-492:28"><strong>バージョン管理</strong></td>
+<td data-sourcepos="492:30-492:59">❌ バイナリファイル</td>
+<td data-sourcepos="492:61-492:90">✅ テキストファイル</td>
+<td data-sourcepos="492:92-492:114">Git差分表示可能</td>
+</tr>
+</tbody>
+</table>
+<h2 data-sourcepos="494:1-494:41">
+<span id="-技術記事執筆者への学び" class="fragment"></span><a href="#-%E6%8A%80%E8%A1%93%E8%A8%98%E4%BA%8B%E5%9F%B7%E7%AD%86%E8%80%85%E3%81%B8%E3%81%AE%E5%AD%A6%E3%81%B3"><i class="fa fa-link"></i></a>🎯 技術記事執筆者への学び</h2>
+<h3 data-sourcepos="496:1-496:45">
+<span id="1-画像-vs-コードの選択基準" class="fragment"></span><a href="#1-%E7%94%BB%E5%83%8F-vs-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E9%81%B8%E6%8A%9E%E5%9F%BA%E6%BA%96"><i class="fa fa-link"></i></a>1. <strong>画像 vs コードの選択基準</strong>
+</h3>
+<iframe id="qiita-embed-content__520b98254748ea949781f49ee166fbb3" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__520b98254748ea949781f49ee166fbb3" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph TD\n CONTENT[コンテンツの性質] --&gt; STATIC{静的な説明？}\n STATIC --&gt;|YES| IMAGE[画像でOK]\n STATIC --&gt;|NO| INTERACTIVE{インタラクティブ？}\n \n INTERACTIVE --&gt;|YES| CODE[コードで実装]\n INTERACTIVE --&gt;|NO| REUSABLE{再利用される？}\n \n REUSABLE --&gt;|YES| CODE\n REUSABLE --&gt;|NO| IMAGE\n \n style CODE fill:#ccffcc\n style IMAGE fill:#ffffcc","key":"d2f7f0d8aa92e2587a879e1ed459aaf4"}'>
+</iframe>
+
+<h3 data-sourcepos="514:1-514:50">
+<span id="2-読者層を意識した段階的改善" class="fragment"></span><a href="#2-%E8%AA%AD%E8%80%85%E5%B1%A4%E3%82%92%E6%84%8F%E8%AD%98%E3%81%97%E3%81%9F%E6%AE%B5%E9%9A%8E%E7%9A%84%E6%94%B9%E5%96%84"><i class="fa fa-link"></i></a>2. <strong>読者層を意識した段階的改善</strong>
+</h3>
+<div class="code-frame" data-lang="markdown" data-sourcepos="516:1-521:3"><div class="highlight"><pre><code>【読者層の拡張戦略】
+<span class="p">1.</span> 初学者 → 分かりやすい図表と例え話
+<span class="p">2.</span> 実務者 → コピペできるコードと実用情報  
+<span class="p">3.</span> 執筆者 → 改善プロセスの公開（この章）
+</code></pre></div></div>
+<h3 data-sourcepos="523:1-523:41">
+<span id="3-継続的改善のサイクル" class="fragment"></span><a href="#3-%E7%B6%99%E7%B6%9A%E7%9A%84%E6%94%B9%E5%96%84%E3%81%AE%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB"><i class="fa fa-link"></i></a>3. <strong>継続的改善のサイクル</strong>
+</h3>
+<iframe id="qiita-embed-content__ff4a6c27c32f60c9c7519e44b40e821f" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__ff4a6c27c32f60c9c7519e44b40e821f" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"graph LR\n PUBLISH[記事公開] --&gt; FEEDBACK[フィードバック収集]\n FEEDBACK --&gt; ANALYZE[問題点分析]\n ANALYZE --&gt; IMPROVE[改善実装]\n IMPROVE --&gt; PUBLISH\n \n style IMPROVE fill:#ccffcc","key":"c67a73f1ae4d5b9281055a67233e6c5a"}'>
+</iframe>
+
+<h2 data-sourcepos="535:1-535:62">
+<span id="-今後の記事執筆で活用できるテクニック" class="fragment"></span><a href="#-%E4%BB%8A%E5%BE%8C%E3%81%AE%E8%A8%98%E4%BA%8B%E5%9F%B7%E7%AD%86%E3%81%A7%E6%B4%BB%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF"><i class="fa fa-link"></i></a>💡 今後の記事執筆で活用できるテクニック</h2>
+<div data-sourcepos="536:1-538:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="537:1-537:144">お節介感があったのでリライトまたは削除も検討したが、考えさせられる事もあったので残すことにした。</p>
+</div>
+</div>
+<h3 data-sourcepos="540:1-540:31">
+<span id="図表選択の判断基準" class="fragment"></span><a href="#%E5%9B%B3%E8%A1%A8%E9%81%B8%E6%8A%9E%E3%81%AE%E5%88%A4%E6%96%AD%E5%9F%BA%E6%BA%96"><i class="fa fa-link"></i></a>図表選択の判断基準</h3>
+<ol data-sourcepos="541:1-546:0">
+<li data-sourcepos="541:1-541:39">概念の関係性 → mermaid graph</li>
+<li data-sourcepos="542:1-542:44">時系列の流れ → mermaid timeline</li>
+<li data-sourcepos="543:1-543:38">数値の比較 → 表 + グラフ</li>
+<li data-sourcepos="544:1-544:32">詳細データ → 表形式</li>
+<li data-sourcepos="545:1-546:0">感情・印象 → 絵文字 + ストーリー</li>
+</ol>
+<h3 data-sourcepos="547:1-547:31">
+<span id="親しみやすさの演出" class="fragment"></span><a href="#%E8%A6%AA%E3%81%97%E3%81%BF%E3%82%84%E3%81%99%E3%81%95%E3%81%AE%E6%BC%94%E5%87%BA"><i class="fa fa-link"></i></a>親しみやすさの演出</h3>
+<ul data-sourcepos="548:1-552:0">
+<li data-sourcepos="548:1-548:57">キャラクター設定（部長 vs エンジニア）</li>
+<li data-sourcepos="549:1-549:44">あるある体験談（失敗談含む）</li>
+<li data-sourcepos="550:1-550:32">感情豊かな絵文字活用</li>
+<li data-sourcepos="551:1-552:0">「〜作戦」「〜劇場」などの命名</li>
+</ul>
+<h3 data-sourcepos="553:1-553:31">
+<span id="持続可能な記事作成" class="fragment"></span><a href="#%E6%8C%81%E7%B6%9A%E5%8F%AF%E8%83%BD%E3%81%AA%E8%A8%98%E4%BA%8B%E4%BD%9C%E6%88%90"><i class="fa fa-link"></i></a>持続可能な記事作成</h3>
+<ul data-sourcepos="554:1-558:0">
+<li data-sourcepos="554:1-554:47">テキストベースの図表（保守性）</li>
+<li data-sourcepos="555:1-555:47">再利用可能なコード片（実用性）</li>
+<li data-sourcepos="556:1-556:47">段階的な難易度設計（教育効果）</li>
+<li data-sourcepos="557:1-558:0">メタ情報の併記（学習効果）</li>
+</ul>
+<h3 data-sourcepos="559:1-559:16">
+<span id="執筆技術" class="fragment"></span><a href="#%E5%9F%B7%E7%AD%86%E6%8A%80%E8%A1%93"><i class="fa fa-link"></i></a>執筆技術</h3>
+<ul data-sourcepos="560:1-563:0">
+<li data-sourcepos="560:1-560:39"><strong>図表の効果的な使い分け</strong></li>
+<li data-sourcepos="561:1-561:39"><strong>読者層に応じた表現調整</strong></li>
+<li data-sourcepos="562:1-563:0"><strong>継続的な品質改善手法</strong></li>
+</ul>
+<h3 data-sourcepos="564:1-564:19">
+<span id="メタスキル" class="fragment"></span><a href="#%E3%83%A1%E3%82%BF%E3%82%B9%E3%82%AD%E3%83%AB"><i class="fa fa-link"></i></a>メタスキル</h3>
+<ul data-sourcepos="565:1-567:51">
+<li data-sourcepos="565:1-565:54">
+<strong>情報の再利用可能性</strong>を意識した設計</li>
+<li data-sourcepos="566:1-566:66">
+<strong>アクセシビリティ</strong>を考慮したコンテンツ作成</li>
+<li data-sourcepos="567:1-567:51">
+<strong>技術記事の資産価値</strong>を高める手法</li>
+</ul>
