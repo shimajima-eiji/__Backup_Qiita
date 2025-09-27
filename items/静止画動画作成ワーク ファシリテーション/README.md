@@ -69,6 +69,13 @@ https://www.canva.com/
 
 ---
 
+## 発表案内
+- 使ったツール（うまく行ったものも失敗したものなど、まとめられる限り）
+- うまく行った例・失敗例
+  - キャプチャとか画面があれば共有があると嬉しいです
+
+---
+
 ## AI利用ガイドライン
 - AIの利用OK、ただし成果物の品質は安定しないのでやりすぎ注意
   - 動画再生アイコンが２つある
@@ -83,3 +90,5 @@ https://www.canva.com/
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/2d266ce4-109a-451b-9cc2-6b534d27ed7a.png)
 
 </details>
+
+
