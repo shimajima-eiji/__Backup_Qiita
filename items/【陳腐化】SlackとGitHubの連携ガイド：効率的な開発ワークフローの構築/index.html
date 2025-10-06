@@ -1,0 +1,38 @@
+<p data-sourcepos="1:1-1:329">開発チームの効率を高めるために、GitHubからの通知をSlackで受け取るための連携設定方法を解説します。これにより、コードの変更やプルリクエスト、イシューなどの重要な情報をチームのコミュニケーションハブで確認できるようになります。</p>
+<h3 data-sourcepos="3:1-3:52">
+<span id="1-slackにgithub-appをインストールする" class="fragment"></span><a href="#1-slack%E3%81%ABgithub-app%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>1. SlackにGitHub Appをインストールする</h3>
+<p data-sourcepos="4:1-4:81">まず、SlackワークスペースにGitHub Appをインストールします。</p>
+<p data-sourcepos="6:1-7:81">以下のURLにアクセスします：<br>
+https://&lt;あなたのワークスペース&gt;.slack.com/marketplace/search?q=github</p>
+<p data-sourcepos="9:1-10:108">検索結果から「GitHub」アプリを選択し、「Slackに追加」ボタンをクリックします。<br>
+必要な権限を確認し、「許可する」をクリックしてインストールを完了します。</p>
+<p data-sourcepos="13:1-13:166">注意: この段階では、SlackとGitHubの接続が確立されただけであり、まだ特定のリポジトリからの通知は設定されていません。</p>
+<ol data-sourcepos="15:1-24:0">
+<li data-sourcepos="15:1-24:0">監視対象のリポジトリを設定する<br>
+2.1 個別リポジトリの購読設定<br>
+通知を受け取りたいSlackチャンネルで以下のコマンドを実行します：<br>
+/github subscribe &lt;組織名&gt;/&lt;リポジトリ名&gt;<br>
+例：<br>
+/github subscribe microsoft/vscode<br>
+複数のリポジトリを監視したい場合は、それぞれのリポジトリに対して同じコマンドを実行します。<br>
+2.2 GitHub Organizationレベルでの設定<br>
+すでにSlackアプリをインストールしている場合は、GitHub側から連携を設定できます：</li>
+</ol>
+<p data-sourcepos="25:1-26:63">GitHub Organizationの設定ページに移動します：<br>
+<a href="https://github.com/organizations/" class="autolink" rel="nofollow noopener" target="_blank">https://github.com/organizations/</a>&lt;組織名&gt;/settings/reminders</p>
+<p data-sourcepos="28:1-30:69">「Create reminder」ボタンをクリックします。<br>
+Slackワークスペースとチャンネルを選択し、通知を受け取りたいイベントタイプやリポジトリを指定します。<br>
+「Create reminder」をクリックして設定を完了します。</p>
+<ol data-sourcepos="32:1-39:0">
+<li data-sourcepos="32:1-36:47">通知のカスタマイズ<br>
+特定のイベントタイプのみを購読するには、以下のようにフィルターを追加できます：<br>
+/github subscribe &lt;組織名&gt;/&lt;リポジトリ名&gt; [issues|pulls|deployments|statuses|commits|releases]<br>
+例えば、プルリクエストとイシューのみを購読するには：<br>
+/github subscribe microsoft/vscode issues,pulls</li>
+<li data-sourcepos="37:1-39:0">動作確認<br>
+設定が完了したら、以下のいずれかの方法で動作確認ができます：</li>
+</ol>
+<p data-sourcepos="40:1-42:54">テスト用のイシューを作成する<br>
+既存のプルリクエストにコメントを追加する<br>
+リポジトリに小さな変更をプッシュする</p>
+<p data-sourcepos="44:1-44:125">正しく設定されていれば、対応するイベントの通知がSlackチャンネルに表示されるはずです。</p>

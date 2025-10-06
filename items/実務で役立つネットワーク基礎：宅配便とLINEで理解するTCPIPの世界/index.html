@@ -1,0 +1,304 @@
+<div data-sourcepos="1:1-3:3" class="note warn">
+<span class="fa fa-fw fa-exclamation-circle"></span><div>
+<p data-sourcepos="2:1-2:96">前記事と比較しながら見てもらうとチューニングの重要性が見えます。</p>
+</div>
+</div>
+<p data-sourcepos="5:1-5:54"><iframe id="qiita-embed-content__c6d9449ac3975bb5dd21458a4e57bb43" src="https://qiita.com/embed-contents/link-card#qiita-embed-content__c6d9449ac3975bb5dd21458a4e57bb43" data-content="https%3A%2F%2Fqiita.com%2Fnomurasan%2Fitems%2F5a690baaaa54c524d9ad" frameborder="0" scrolling="no" loading="lazy" style="width:100%;" height="29">
+</iframe>
+</p>
+<h2 data-sourcepos="7:1-7:75">
+<span id="はじめにネットワークは見えない宅配システム" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AF%E8%A6%8B%E3%81%88%E3%81%AA%E3%81%84%E5%AE%85%E9%85%8D%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0"><i class="fa fa-link"></i></a>はじめに：ネットワークは「見えない宅配システム」</h2>
+<p data-sourcepos="9:1-9:126">あなたがスマートフォンでWebサイトを開く時、画面の裏側では何が起きているのでしょうか？</p>
+<p data-sourcepos="11:1-11:393">考えてみてください。Amazonで商品を注文すると、あなたの手元に届くまでにいくつもの段階があります。倉庫から商品が取り出され、段ボールに梱包され、配送センターを経由し、配達員が最後にあなたの家のドアまで運んでくれます。追跡番号を使えば、今どこにあるのかを確認できます。</p>
+<p data-sourcepos="13:1-13:123">実は、インターネットでデータが届く仕組みは、この宅配便のシステムとよく似ています。</p>
+<p data-sourcepos="15:1-15:420">「サイトが表示されない」「メールが送れない」「動画が途中で止まる」。こうした日常的なトラブルに遭遇した時、多くの人は「ネットワークの問題かな？」と漠然と感じます。しかし、具体的に何が起きているのかを説明できる人は少ないでしょう。それは当然です。ネットワークは目に見えないからです。</p>
+<p data-sourcepos="17:1-17:572">だから、ITパスポート試験の中でも、ネットワーク分野は最も理解しにくい単元の一つとされています。多くの参考書では用語の定義が並び、「これを暗記しましょう」という説明になりがちです。しかし、仕組みが分からないまま暗記しても、すぐに忘れてしまいます。試験が終わった瞬間に頭から消えてしまうのは、あなたの記憶力が悪いからではありません。理解していないものを無理に覚えようとしているからです。</p>
+<p data-sourcepos="19:1-19:487">そこで、この記事では少し違うアプローチを取ります。ネットワークを「宅配便のシステム」や「LINEでメッセージを送る時の仕組み」に例えて理解していきます。あなたがAmazonで商品を注文してから、配達員が玄関に届けるまでの流れを思い浮かべながら読んでみてください。TCP/IPモデルやプロトコルといった抽象的な概念が、急に身近に感じられるはずです。</p>
+<p data-sourcepos="21:1-21:237">暗記ではなく、理解を目指しましょう。理解できれば、忘れても思い出せます。そして、実際の生活の中で「ああ、これがあの時学んだことか」と気づく瞬間が来るはずです。</p>
+<hr data-sourcepos="23:1-24:0">
+<h2 data-sourcepos="25:1-25:52">
+<span id="tcpipモデル宅配便の4つの役割分担" class="fragment"></span><a href="#tcpip%E3%83%A2%E3%83%87%E3%83%AB%E5%AE%85%E9%85%8D%E4%BE%BF%E3%81%AE4%E3%81%A4%E3%81%AE%E5%BD%B9%E5%89%B2%E5%88%86%E6%8B%85"><i class="fa fa-link"></i></a>TCP/IPモデル：宅配便の4つの役割分担</h2>
+<h3 data-sourcepos="27:1-27:49">
+<span id="なぜ層に分ける必要があるのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E5%B1%A4%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B%E5%BF%85%E8%A6%81%E3%81%8C%E3%81%82%E3%82%8B%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜ層に分ける必要があるのか？</h3>
+<p data-sourcepos="29:1-29:96">もし宅配便が「一人ですべてやる」システムだったらどうでしょうか？</p>
+<p data-sourcepos="31:1-31:336">商品を倉庫から探して、梱包して、住所を確認して、配送ルートを考えて、トラックを運転して、最後に玄関まで届ける。これを一人でやると、どこかで失敗した時に全部やり直しになります。しかも、どの段階で失敗したのか分からなくなります。</p>
+<p data-sourcepos="33:1-33:441">そこで、宅配便のシステムは役割を分担しています。倉庫の担当者が商品を探し、梱包担当者が段ボールに詰め、配送センターが配送ルートを決め、ドライバーが実際に運びます。それぞれが専門の仕事に集中することで、効率が上がります。そして、何か問題が起きた時に「どの段階で失敗したか」を特定しやすくなります。</p>
+<p data-sourcepos="35:1-35:196">ネットワークも同じです。TCP/IPモデルは、通信を4つの役割に分けることで、問題が起きた時にどの役割で失敗したかを特定しやすくしています。</p>
+<h3 data-sourcepos="37:1-37:46">
+<span id="tcpipモデルを宅配便で理解する" class="fragment"></span><a href="#tcpip%E3%83%A2%E3%83%87%E3%83%AB%E3%82%92%E5%AE%85%E9%85%8D%E4%BE%BF%E3%81%A7%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>TCP/IPモデルを宅配便で理解する</h3>
+<iframe id="qiita-embed-content__182db77c7a18813874fb6ff027034aec" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__182db77c7a18813874fb6ff027034aec" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"flowchart TB\n subgraph \"TCP/IPモデル = 宅配便システム\"\n direction TB\n L4[アプリケーション層&lt;br/&gt;📦 何を送るか決める&lt;br/&gt;商品の中身]\n L3[トランスポート層&lt;br/&gt;🏷️ 追跡番号をつける&lt;br/&gt;ちゃんと届いたか確認]\n L2[インターネット層&lt;br/&gt;🗺️ 配送ルートを決める&lt;br/&gt;どの道を通るか]\n L1[ネットワークインターフェース層&lt;br/&gt;🚚 トラックで実際に運ぶ&lt;br/&gt;物理的に運ぶ手段]\n \n L4 --&gt; L3\n L3 --&gt; L2\n L2 --&gt; L1\n end","key":"5fd361a8de7ade7d372a33df6a8d3e13"}'>
+</iframe>
+
+<p data-sourcepos="54:1-54:63">それぞれを日常生活に置き換えてみましょう。</p>
+<p data-sourcepos="56:1-56:58"><strong>アプリケーション層：何を送るか決める</strong></p>
+<p data-sourcepos="58:1-58:246">これは「何を配送するか」を決める層です。本なのか、服なのか、食品なのか。内容によって梱包方法が変わります。食品なら冷蔵便、割れ物ならワレモノ注意のシールが必要です。</p>
+<p data-sourcepos="60:1-60:245">ネットワークでも同じです。Webページを表示するならHTTP、メールを送るならSMTP、ファイルを転送するならFTPと、目的によってプロトコルという「配送方法のルール」が変わります。</p>
+<p data-sourcepos="62:1-62:55"><strong>トランスポート層：追跡番号をつける</strong></p>
+<p data-sourcepos="64:1-64:288">梱包した荷物に追跡番号をつけます。もし途中で失くなったら「追跡番号〇〇の荷物が届いていません」と問い合わせできます。Amazonのアプリで「今どこにあるか」を確認できるのも、この追跡番号のおかげです。</p>
+<p data-sourcepos="66:1-66:234">ネットワークでは、TCPというプロトコルがこの役割を担います。データを小分けにして番号をつけ、全部届いたか確認します。もし途中で失くなったら、再送してくれます。</p>
+<p data-sourcepos="68:1-68:319">ただし、YouTubeのライブ配信のように「多少データが失くなってもいいから、とにかく速く届けてほしい」場合もあります。その時は、追跡番号なしのUDPという方法を使います。多少画質が乱れても、リアルタイム性を優先するわけです。</p>
+<p data-sourcepos="70:1-70:58"><strong>インターネット層：配送ルートを決める</strong></p>
+<p data-sourcepos="72:1-72:246">荷物の送り先住所を見て、どの配送センターを経由するか決めます。東京から大阪なら、名古屋の配送センターを経由するかもしれません。最短ルートを自動的に計算してくれます。</p>
+<p data-sourcepos="74:1-74:266">ネットワークでは、IPアドレスという「住所」を元に、どのルーター（配送センター）を経由するか決めます。あなたがWebサイトにアクセスする時、データは何台ものルーターを経由して届きます。</p>
+<p data-sourcepos="76:1-76:82"><strong>ネットワークインターフェース層：トラックで実際に運ぶ</strong></p>
+<p data-sourcepos="78:1-78:251">実際にトラックで運びます。道路が封鎖されていたら（LANケーブルが抜けていたら）、そもそも運べません。Wi-Fiが切れている状態は、トラックのエンジンがかからない状態と同じです。</p>
+<h3 data-sourcepos="80:1-80:85">
+<span id="トラブルが起きた時どこで詰まっているか順番に確認する" class="fragment"></span><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%81%8C%E8%B5%B7%E3%81%8D%E3%81%9F%E6%99%82%E3%81%A9%E3%81%93%E3%81%A7%E8%A9%B0%E3%81%BE%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B%E9%A0%86%E7%95%AA%E3%81%AB%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>トラブルが起きた時、どこで詰まっているか順番に確認する</h3>
+<p data-sourcepos="82:1-82:111">Webサイトが表示されない時、宅配便のシステムで考えると分かりやすくなります。</p>
+<p data-sourcepos="84:1-84:453">まず、トラックは動いているか確認します。これが「ネットワークインターフェース層」のチェックです。Wi-Fiに繋がっているか、LANケーブルは挿さっているか。スマホの画面右上に、Wi-Fiや4Gのマークが出ていますか？もし出ていなければ、そもそも物理的に繋がっていません。これは、トラックのエンジンがかかっていない状態です。</p>
+<p data-sourcepos="86:1-86:338">次に、住所は正しいか確認します。これが「インターネット層」のチェックです。IPアドレスが間違っていないか、ルーターは正しく動作しているか。宅配便で言えば、送り先の住所が存在するか、配送センターが営業しているかを確認する作業です。</p>
+<p data-sourcepos="88:1-88:372">それから、荷物は届いているか確認します。これが「トランスポート層」のチェックです。ポート番号（後で説明します）が開いているか、通信が遮断されていないか。宅配便で言えば、マンションの入り口は開いているか、警備員に止められていないかを確認する作業です。</p>
+<p data-sourcepos="90:1-90:307">最後に、中身は正しいか確認します。これが「アプリケーション層」のチェックです。Webサーバーは動いているか、正しいHTMLを返しているか。宅配便で言えば、届いた箱の中に注文した商品が入っているかを確認する作業です。</p>
+<p data-sourcepos="92:1-92:177">この順序で調べることで、効率的に原因を特定できます。下の層から順番に確認していけば、どこで詰まっているかが分かります。</p>
+<hr data-sourcepos="94:1-95:0">
+<h2 data-sourcepos="96:1-96:56">
+<span id="ipアドレス住所がないと届けられない" class="fragment"></span><a href="#ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E4%BD%8F%E6%89%80%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E5%B1%8A%E3%81%91%E3%82%89%E3%82%8C%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>IPアドレス：住所がないと届けられない</h2>
+<h3 data-sourcepos="98:1-98:45">
+<span id="なぜipアドレスが必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜIPアドレスが必要なのか？</h3>
+<p data-sourcepos="100:1-100:87">もし宅配便に住所がなかったら、どうやって荷物を届けますか？</p>
+<p data-sourcepos="102:1-102:314">「田中さんに届けて」だけでは、どこの田中さんか分かりません。全国の田中さんの家を順番に回る？それは非現実的です。だから、住所という仕組みがあります。「東京都〇〇区〇〇1-2-3」と書けば、配達員は迷わず届けられます。</p>
+<p data-sourcepos="104:1-104:380">ネットワークも同じです。「Googleのサーバーにアクセスしたい」だけでは、インターネット上のどのコンピューターか特定できません。世界中に何億台ものコンピューターがあるのに、どうやって目的地を見つけるのでしょうか？だから、IPアドレスという「住所」が必要なのです。</p>
+<h3 data-sourcepos="106:1-106:47">
+<span id="開発環境で出会う3つの住所" class="fragment"></span><a href="#%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%A7%E5%87%BA%E4%BC%9A%E3%81%863%E3%81%A4%E3%81%AE%E4%BD%8F%E6%89%80"><i class="fa fa-link"></i></a>開発環境で出会う3つの「住所」</h3>
+<p data-sourcepos="108:1-108:225">スマホでWebサイトを開く時、あなたは「google.com」のような分かりやすい名前を入力します。しかし、実際には裏側でIPアドレスという数字の住所に変換されています。</p>
+<p data-sourcepos="110:1-110:96">たとえば、プログラミングを学び始めると、こんな住所に出会います。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="112:1-116:3"><div class="highlight"><pre><code>http://localhost:3000
+http://192.168.1.10:3000
+http://203.0.113.45:3000
+</code></pre></div></div>
+<p data-sourcepos="118:1-118:120">これらは、それぞれ違う場所を指しています。宅配便の住所で例えると、こうなります。</p>
+<p data-sourcepos="120:1-120:304"><code>127.0.0.1</code>または<code>localhost</code>は、「自分の家」です。あなたが自分のパソコンで作ったWebサイトを、自分のパソコンで開く時に使います。宅配便で言えば、家の中で荷物を別の部屋に運ぶようなものです。外からは届けられません。</p>
+<p data-sourcepos="122:1-122:381"><code>192.168.1.x</code>は、「同じマンション内の他の部屋」です。あなたのパソコンとスマホが同じWi-Fiに繋がっている時、スマホからパソコンで作ったWebサイトを開けます。宅配便で言えば、マンションの101号室から201号室に荷物を届けるイメージです。マンションの外からは届けられません。</p>
+<p data-sourcepos="124:1-124:297"><code>203.0.113.x</code>のような数字は、「別の町の住所」です。インターネット上のどこからでもアクセスできます。これがグローバルIPアドレスと呼ばれるものです。宅配便で言えば、全国どこからでも届けられる正式な住所です。</p>
+<p data-sourcepos="126:1-126:576">実際に使い分けを考えてみましょう。あなたがパソコンで作ったWebサイトを、スマホで動作確認したいとします。この時、<code>localhost</code>を使うとどうなるでしょうか？スマホのブラウザは「スマホ自身の家」を探してしまうので、パソコンで作ったサイトにアクセスできません。だから、<code>192.168.1.10</code>のように、パソコンのマンション内住所を使う必要があります。ただし、パソコンとスマホが同じWi-Fiに繋がっていることが前提です。</p>
+<h3 data-sourcepos="128:1-128:48">
+<span id="ipアドレスが足りなくなった理由" class="fragment"></span><a href="#ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%8C%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%8F%E3%81%AA%E3%81%A3%E3%81%9F%E7%90%86%E7%94%B1"><i class="fa fa-link"></i></a>IPアドレスが足りなくなった理由</h3>
+<p data-sourcepos="130:1-130:184">IPアドレスは<code>192.168.1.1</code>のように、4つの数字で構成されます。それぞれの数字は0から255までなので、理論上は約43億個の住所が作れます。</p>
+<p data-sourcepos="132:1-132:512">しかし考えてみてください。世界人口は80億人を超えています。しかも、一人あたり何台のデバイスを持っているでしょうか？スマートフォン、パソコン、タブレット、スマートウォッチ。さらに、家にはスマートスピーカー、スマートテレビ、ゲーム機もあります。冷蔵庫やエアコンがインターネットに繋がる時代です。一人で5台、10台のデバイスを持つのは珍しくありません。</p>
+<p data-sourcepos="134:1-134:120">明らかに43億個では足りません。だから、IPv6という新しい住所システムが登場しました。</p>
+<p data-sourcepos="136:1-136:264">IPv6は128ビットという桁数で、約340澗個（かん＝兆の1兆倍の1兆倍）の住所が作れます。これは、地球上の全ての砂粒に住所を割り当てても余るほどの数です。事実上、無限と言っていいでしょう。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="138:1-141:3"><div class="highlight"><pre><code>http://[::1]/
+http://[fe80::1]:8080/
+</code></pre></div></div>
+<p data-sourcepos="143:1-143:81">ただし、実際には普及が進んでいません。なぜでしょうか？</p>
+<p data-sourcepos="145:1-145:463">まず、住所が長すぎて覚えられません。宅配便で言えば、郵便番号が100桁あるようなものです。配達員も困ります。それから、既存のシステムが古い住所システム（IPv4）前提で作られています。急に新しい住所システムに切り替えると、古いシステムと通信できなくなります。新旧の住所が混在して、かえって複雑になっているのが現状です。</p>
+<hr data-sourcepos="147:1-148:0">
+<h2 data-sourcepos="149:1-149:51">
+<span id="ポート番号マンションの部屋番号" class="fragment"></span><a href="#%E3%83%9D%E3%83%BC%E3%83%88%E7%95%AA%E5%8F%B7%E3%83%9E%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E9%83%A8%E5%B1%8B%E7%95%AA%E5%8F%B7"><i class="fa fa-link"></i></a>ポート番号：マンションの部屋番号</h2>
+<h3 data-sourcepos="151:1-151:46">
+<span id="なぜポート番号が必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E3%83%9D%E3%83%BC%E3%83%88%E7%95%AA%E5%8F%B7%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜポート番号が必要なのか？</h3>
+<p data-sourcepos="153:1-153:177">宅配便で荷物を送る時、住所だけではマンションまでしか届きません。「〇〇マンション101号室」のように、部屋番号が必要です。</p>
+<p data-sourcepos="155:1-155:371">ネットワークも同じです。一台のサーバー（マンション）で、Webサーバー（101号室）とメールサーバー（201号室）を両方動かしたい場合があります。IPアドレスだけでは、どちらのサービスに繋げばいいか分かりません。だから、ポート番号という「部屋番号」で区別します。</p>
+<div class="code-frame" data-lang="text" data-sourcepos="157:1-161:3"><div class="highlight"><pre><code>http://example.com:80    → Webサーバー（80番の部屋）
+http://example.com:443   → HTTPSサーバー（443番の部屋）
+http://example.com:3000  → 開発中のアプリ（3000番の部屋）
+</code></pre></div></div>
+<p data-sourcepos="163:1-163:302">実際には、Webブラウザでサイトを開く時、ポート番号を入力していませんよね？それは、HTTPなら80番、HTTPSなら443番という部屋番号が自動的に使われるからです。<code>https://example.com</code>と書けば、自動的に443番の部屋に繋がります。</p>
+<p data-sourcepos="165:1-165:304">しかし、プログラミングを学び始めると、開発用のサーバーを<code>localhost:3000</code>で起動することがあります。これは、開発中のアプリ専用に3000番の部屋を用意したということです。本番環境では、通常の443番（HTTPS）に配置します。</p>
+<p data-sourcepos="167:1-167:486">実務でよく使われるポート番号を、マンションの部屋に例えると理解しやすくなります。80番と443番は、マンションの管理室のようなものです。誰でも入れる、公式の入り口です。22番は、管理人専用の裏口です。サーバー管理者だけが使う、SSH接続用の入り口です。3000番から8000番あたりは、工事中の部屋です。開発者が動作確認に使う、一時的な入り口です。</p>
+<hr data-sourcepos="169:1-170:0">
+<h2 data-sourcepos="171:1-171:73">
+<span id="dnslineの連絡先がないとアカウントを調べられない" class="fragment"></span><a href="#dnsline%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%89%E3%82%8C%E3%81%AA%E3%81%84"><i class="fa fa-link"></i></a>DNS：LINEの連絡先がないとアカウントを調べられない</h2>
+<h3 data-sourcepos="173:1-173:34">
+<span id="なぜdnsが必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cdns%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜDNSが必要なのか？</h3>
+<p data-sourcepos="175:1-175:204">LINEで友達にメッセージを送る時、相手のアカウントIDを暗記していますか？していませんよね。連絡先に登録された名前を見て、タップするだけです。</p>
+<p data-sourcepos="177:1-177:364">もしLINEに連絡先機能がなかったら、どうなるでしょうか？友達全員のアカウントID（ランダムな英数字の羅列）を覚える必要があります。しかも、友達がアカウントを作り直したら、IDが変わります。そのたびに、新しいIDを聞いて、メモして、覚え直す必要があります。</p>
+<p data-sourcepos="179:1-179:81">DNSは、インターネット上の連絡先アプリのようなものです。</p>
+<iframe id="qiita-embed-content__837836eb470e1482335eb2427a839150" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__837836eb470e1482335eb2427a839150" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"sequenceDiagram\n participant User as あなた\n participant Browser as ブラウザ&lt;br/&gt;（スマホ）\n participant DNS as DNS&lt;br/&gt;（連絡先）\n participant Web as Webサーバー&lt;br/&gt;（友達）\n \n User-&gt;&gt;Browser: google.comにアクセスしたい\n Browser-&gt;&gt;DNS: google.comのIDは？\n DNS-&gt;&gt;Browser: 142.250.196.78です\n Browser-&gt;&gt;Web: 142.250.196.78に繋ぐ\n Web-&gt;&gt;Browser: HTMLを送る\n Browser-&gt;&gt;User: ページを表示","key":"ed0739ca926969249949c7c1402cba2d"}'>
+</iframe>
+
+<p data-sourcepos="196:1-196:285">あなたが「google.com」と入力すると、ブラウザは裏側でDNSに問い合わせます。「google.comのIPアドレスは何番ですか？」DNSが「142.250.196.78です」と答えます。ブラウザはその番号に接続して、Webページを表示します。</p>
+<p data-sourcepos="198:1-198:111">この仕組みのおかげで、私たちは覚えやすい名前でWebサイトにアクセスできます。</p>
+<h3 data-sourcepos="200:1-200:37">
+<span id="dnsがないとどうなるか" class="fragment"></span><a href="#dns%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>DNSがないとどうなるか？</h3>
+<p data-sourcepos="202:1-202:244">もしDNSがなかったら、<code>https://google.com</code>ではなく、<code>https://142.250.196.78</code>のように、毎回IPアドレスを覚えて入力する必要があります。数字の羅列は覚えにくいですし、間違えやすいです。</p>
+<p data-sourcepos="204:1-204:307">しかも、Googleがサーバーを引っ越したら、IPアドレスが変わります。友達全員がLINEアカウントを作り直してIDが変わるようなものです。そのたびに、新しいIPアドレスを調べて、ブックマークを更新して...考えただけで大変です。</p>
+<p data-sourcepos="206:1-206:216">DNSがあるおかげで、私たちは「google.com」という名前だけ覚えていればいいのです。裏側でIPアドレスが変わっても、DNSが自動的に新しい番号を教えてくれます。</p>
+<h3 data-sourcepos="208:1-208:46">
+<span id="トラブル反映に時間がかかる" class="fragment"></span><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E5%8F%8D%E6%98%A0%E3%81%AB%E6%99%82%E9%96%93%E3%81%8C%E3%81%8B%E3%81%8B%E3%82%8B"><i class="fa fa-link"></i></a>トラブル：反映に時間がかかる</h3>
+<p data-sourcepos="210:1-210:255">新しいWebサイトを作って、ドメインを取得したとします。DNS設定を済ませて、さあアクセスしようとしたら...「サイトが見つかりません」というエラーが出ました。よくあるトラブルです。</p>
+<p data-sourcepos="212:1-212:289">これは、LINEで新しい友達を追加した時のことを思い浮かべると分かります。あなたのスマホには新しい友達が追加されましたが、友達のスマホにあなたの情報が表示されるまで、少し時間がかかることがあります。</p>
+<p data-sourcepos="214:1-214:399">DNSの場合、世界中のサーバーに情報が広がるまで、最大48時間かかることがあります。これはTTLという仕組みによるもので、古い情報がキャッシュとして残っているからです。あなたのパソコンは新しいIPアドレスを知っているけど、他の人のパソコンはまだ古いIPアドレスを覚えている状態です。</p>
+<p data-sourcepos="216:1-216:171">だから、ドメインを設定した直後にサイトが表示されなくても、慌てる必要はありません。時間が経てば、自然に解決します。</p>
+<h2 data-sourcepos="218:1-218:70">
+<span id="プロトコルlineとinstagramでは会話のルールが違う" class="fragment"></span><a href="#%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%ABline%E3%81%A8instagram%E3%81%A7%E3%81%AF%E4%BC%9A%E8%A9%B1%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%8C%E9%81%95%E3%81%86"><i class="fa fa-link"></i></a>プロトコル：LINEとInstagramでは会話のルールが違う</h2>
+<h3 data-sourcepos="220:1-220:46">
+<span id="なぜプロトコルが必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9C%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜプロトコルが必要なのか？</h3>
+<p data-sourcepos="222:1-222:168">日本語しか話せない人と、英語しか話せない人が会話できますか？できません。お互いに理解できる共通の言語が必要です。</p>
+<p data-sourcepos="224:1-224:253">SNSも同じです。あなたがLINEでメッセージを送ろうとしているのに、相手がInstagramしか使っていなかったら、やり取りできません。お互いに同じアプリ、同じルールを使う必要があります。</p>
+<p data-sourcepos="226:1-226:303">ネットワークも同じです。Webページを表示するのと、メールを送るのでは、全く違うルールが必要です。だから、目的ごとに「プロトコル」という共通のルールが決まっています。プロトコルとは、通信のための約束事です。</p>
+<h3 data-sourcepos="228:1-228:64">
+<span id="実務で遭遇するプロトコルを日常で例えると" class="fragment"></span><a href="#%E5%AE%9F%E5%8B%99%E3%81%A7%E9%81%AD%E9%81%87%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB%E3%82%92%E6%97%A5%E5%B8%B8%E3%81%A7%E4%BE%8B%E3%81%88%E3%82%8B%E3%81%A8"><i class="fa fa-link"></i></a>実務で遭遇するプロトコルを日常で例えると</h3>
+<p data-sourcepos="230:1-230:446">HTTPとHTTPSは、Webページを表示するためのプロトコルです。あなたがブラウザでサイトを開く時、HTTPまたはHTTPSというルールで通信しています。HTTPSは、暗号化されたHTTPです。LINEで例えるなら、普通のメッセージと、Letter Sealingで暗号化されたメッセージの違いです。HTTPSを使うと、途中で誰かに盗み見られても、内容が読めません。</p>
+<p data-sourcepos="232:1-232:329">SMTPは、メールを送信するためのプロトコルです。お問い合わせフォームから送信ボタンを押した時、裏側でSMTPというルールでメールサーバーに送られます。Amazonで注文確定ボタンを押して、配送センターに荷物の情報が送られるイメージです。</p>
+<p data-sourcepos="234:1-234:242">POP3とIMAPは、メールを受信するためのプロトコルです。メールサーバーから自分のメールアプリにメールをダウンロードします。配送センターから自宅に荷物が届くイメージです。</p>
+<p data-sourcepos="236:1-236:284">FTPとSFTPは、ファイルを転送するためのプロトコルです。Webサイトを作った後、サーバーにファイルをアップロードする時に使います。大きなファイルを宅配便で送るイメージです。SFTPは、暗号化されたFTPです。</p>
+<p data-sourcepos="238:1-238:183">SSHは、サーバーに遠隔操作で接続するためのプロトコルです。自宅から会社のパソコンをリモート操作する時のような、遠隔接続です。</p>
+<p data-sourcepos="240:1-240:156">DNSは、ドメイン名をIPアドレスに変換するためのプロトコルです。先ほど説明した、LINEの連絡先のような役割です。</p>
+<h3 data-sourcepos="242:1-242:67">
+<span id="tcpとudp追跡ありの宅配便と追跡なしの配送" class="fragment"></span><a href="#tcp%E3%81%A8udp%E8%BF%BD%E8%B7%A1%E3%81%82%E3%82%8A%E3%81%AE%E5%AE%85%E9%85%8D%E4%BE%BF%E3%81%A8%E8%BF%BD%E8%B7%A1%E3%81%AA%E3%81%97%E3%81%AE%E9%85%8D%E9%80%81"><i class="fa fa-link"></i></a>TCPとUDP：追跡ありの宅配便と、追跡なしの配送</h3>
+<p data-sourcepos="244:1-244:199">トランスポート層には、TCPとUDPという2つの主要なプロトコルがあります。どちらもデータを運ぶという点では同じですが、運び方が全く違います。</p>
+<p data-sourcepos="246:1-246:390">TCPは、追跡番号つきの宅配便です。荷物を送った後、配送状況を追跡できます。荷物が届いたかどうか確認できます。もし届かなければ、再送してくれます。確実に届けたいデータには、TCPを使います。Webページ、メール、ファイル転送などです。データが一部でも欠けると困るからです。</p>
+<p data-sourcepos="248:1-248:180">ただし、確認作業がある分、時間がかかります。荷物を送るたびに「届きましたか？」「届きました」というやり取りが発生します。</p>
+<p data-sourcepos="250:1-250:204">UDPは、追跡番号なしの配送です。届いたかどうか確認しません。もし途中で失くなっても、再送しません。その代わり、確認作業がない分、速いです。</p>
+<p data-sourcepos="252:1-252:601">どんな時にUDPを使うのでしょうか？YouTubeのライブ配信やオンラインゲームです。これらは「多少データが失くなってもいいから、とにかく速く届けてほしい」という要求があります。ライブ配信で一瞬画質が乱れても、次のフレームがすぐに来れば問題ありません。再送を待っていたら、リアルタイム性が失われます。オンラインゲームで、一瞬前のキャラクターの位置情報が届いても意味がありません。今の位置情報が速く届く方が重要です。</p>
+<p data-sourcepos="254:1-254:129">判断基準は簡単です。データが欠けると困る場合はTCP、多少欠けても速度優先の場合はUDPです。</p>
+<hr data-sourcepos="256:1-257:0">
+<h2 data-sourcepos="258:1-258:57">
+<span id="natマンションの宅配ロッカーの仕組み" class="fragment"></span><a href="#nat%E3%83%9E%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%AE%85%E9%85%8D%E3%83%AD%E3%83%83%E3%82%AB%E3%83%BC%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF"><i class="fa fa-link"></i></a>NAT：マンションの宅配ロッカーの仕組み</h2>
+<h3 data-sourcepos="260:1-260:34">
+<span id="なぜnatが必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cnat%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜNATが必要なのか？</h3>
+<p data-sourcepos="262:1-262:264">大型マンションに宅配便が届く時のことを考えてみてください。配達員は、マンションの入り口にある宅配ロッカーに荷物を入れます。住民は、自分の部屋番号を入力して、荷物を取り出します。</p>
+<p data-sourcepos="264:1-264:261">配達員から見ると、マンション全体が一つの住所です。しかし、マンションの中には何十戸、何百戸もの部屋があります。宅配ロッカーが、どの荷物をどの部屋に届けるか振り分けてくれます。</p>
+<p data-sourcepos="266:1-266:63">NATは、この宅配ロッカーの仕組みと同じです。</p>
+<p data-sourcepos="268:1-268:256">あなたの自宅のWi-Fiに、パソコン、スマホ、タブレットが繋がっています。それぞれ<code>192.168.1.10</code>、<code>192.168.1.11</code>、<code>192.168.1.12</code>という部屋番号を持っています。これがプライベートIPアドレスです。</p>
+<p data-sourcepos="270:1-270:278">しかし、インターネットから見ると、すべて同じマンション（グローバルIPアドレス）に見えます。ルーター（宅配ロッカー）が、どのデバイスから来た通信か管理して、返信を正しい部屋番号に戻します。</p>
+<h3 data-sourcepos="272:1-272:37">
+<span id="natがないとどうなるか" class="fragment"></span><a href="#nat%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>NATがないとどうなるか？</h3>
+<p data-sourcepos="274:1-274:210">もしNATがなかったら、マンションの住民全員が、それぞれ個別の住所を持つ必要があります。100世帯いたら、100個の住所が必要です。これは非現実的です。</p>
+<p data-sourcepos="276:1-276:199">IPアドレスは有限です。世界中の人がデバイスを何台も持っているのに、一台ごとにグローバルIPアドレスを割り当てていたら、すぐに枯渇します。</p>
+<p data-sourcepos="278:1-278:321">NATがあることで、一つのグローバルIPアドレスを複数のデバイスで共有できます。家庭のWi-Fiルーターは、必ずNAT機能を持っています。だから、あなたの家に何台デバイスがあっても、外から見ると一つのグローバルIPアドレスで済みます。</p>
+<hr data-sourcepos="280:1-281:0">
+<h2 data-sourcepos="282:1-282:54">
+<span id="webページの仕組みurlは宅配便の伝票" class="fragment"></span><a href="#web%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BFurl%E3%81%AF%E5%AE%85%E9%85%8D%E4%BE%BF%E3%81%AE%E4%BC%9D%E7%A5%A8"><i class="fa fa-link"></i></a>Webページの仕組み：URLは宅配便の伝票</h2>
+<h3 data-sourcepos="284:1-284:43">
+<span id="なぜurlがこんなに長いのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Curl%E3%81%8C%E3%81%93%E3%82%93%E3%81%AA%E3%81%AB%E9%95%B7%E3%81%84%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜURLがこんなに長いのか？</h3>
+<div class="code-frame" data-lang="text" data-sourcepos="286:1-288:3"><div class="highlight"><pre><code>https://api.example.com:8080/v1/users/123?sort=name#profile
+</code></pre></div></div>
+<p data-sourcepos="290:1-290:168">一見複雑ですが、これは宅配便の伝票を詳しく書いているだけです。それぞれの部分が、配送に必要な情報を表しています。</p>
+<p data-sourcepos="292:1-292:205"><code>https://</code>は、「追跡番号つきの宅配便で、しかも内容を暗号化して送ってください」という指示です。HTTPSのSは、Secureの頭文字で、暗号化を意味します。</p>
+<p data-sourcepos="294:1-294:128"><code>api.example.com</code>は、配送先の住所です。正確には、DNSで変換される前の「覚えやすい名前」です。</p>
+<p data-sourcepos="296:1-296:145"><code>:8080</code>は、マンションの部屋番号です。80番や443番ではなく、8080番の部屋に届けてくださいという指示です。</p>
+<p data-sourcepos="298:1-298:181"><code>/v1/users/123</code>は、マンション内での経路です。建物に入って、1階のユーザー管理室に行って、123番の棚を見てくださいという指示です。</p>
+<p data-sourcepos="300:1-300:120"><code>?sort=name</code>は、追加の指示です。データを名前順に並べて渡してくださいという注文です。</p>
+<p data-sourcepos="302:1-302:136"><code>#profile</code>は、書類の特定箇所を指定しています。プロフィール欄だけ見せてくださいという指示です。</p>
+<h3 data-sourcepos="304:1-304:46">
+<span id="相対パスと絶対パスの使い分け" class="fragment"></span><a href="#%E7%9B%B8%E5%AF%BE%E3%83%91%E3%82%B9%E3%81%A8%E7%B5%B6%E5%AF%BE%E3%83%91%E3%82%B9%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91"><i class="fa fa-link"></i></a>相対パスと絶対パスの使い分け</h3>
+<p data-sourcepos="306:1-306:103">WebサイトでCSSやJavaScriptを読み込む時、パスの書き方で迷うことがあります。</p>
+<div class="code-frame" data-lang="html" data-sourcepos="308:1-317:3"><div class="highlight"><pre><code><span class="c">&lt;!-- 絶対パス：完全な住所 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://example.com/css/style.css"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- ルート相対パス：同じマンション内の別の部屋 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/css/style.css"</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- 相対パス：隣の部屋 --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"../css/style.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<p data-sourcepos="319:1-319:269">絶対パスは、完全な住所を書く方法です。「東京都千代田区千代田1-1 カフェA」のように、どこから見ても一意に場所が特定できます。CDNという外部のサーバーからファイルを読み込む時に使います。</p>
+<p data-sourcepos="321:1-321:349">ルート相対パスは、「千代田マンションの1階カフェ」のように、同じ建物内の場所を指定します。自分のWebサイト内のファイルを読み込む時に使います。サーバーを引っ越ししても、相対的な位置関係が変わらないので、パスを書き換える必要がありません。</p>
+<p data-sourcepos="323:1-323:270">相対パスは、「隣の建物」のように、今いる場所から見た相対的な位置を指定します。ファイルを移動すると、相対的な位置関係が変わるので、パスが壊れやすいです。なるべく避けた方が無難です。</p>
+<p data-sourcepos="325:1-325:153">実務では、自サイト内のファイルはルート相対パス、外部のライブラリは絶対パスという使い分けが一般的です。</p>
+<hr data-sourcepos="327:1-328:0">
+<h2 data-sourcepos="329:1-329:47">
+<span id="電子メールinstagramのdmとの違い" class="fragment"></span><a href="#%E9%9B%BB%E5%AD%90%E3%83%A1%E3%83%BC%E3%83%ABinstagram%E3%81%AEdm%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>電子メール：InstagramのDMとの違い</h2>
+<h3 data-sourcepos="331:1-331:73">
+<span id="メール送信の仕組み配送センターを経由して届く" class="fragment"></span><a href="#%E3%83%A1%E3%83%BC%E3%83%AB%E9%80%81%E4%BF%A1%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E9%85%8D%E9%80%81%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%92%E7%B5%8C%E7%94%B1%E3%81%97%E3%81%A6%E5%B1%8A%E3%81%8F"><i class="fa fa-link"></i></a>メール送信の仕組み：配送センターを経由して届く</h3>
+<p data-sourcepos="333:1-333:171">メールを送る時、あなたは送信ボタンを押すだけです。しかし、裏側では宅配便のような仕組みでメールが届けられています。</p>
+<iframe id="qiita-embed-content__df2371d16935b65ff23f58081bc848df" src="https://qiita.com/embed-contents/mermaid#qiita-embed-content__df2371d16935b65ff23f58081bc848df" style="width:100%;" frameborder="0" scrolling="no" loading="lazy" data-content='{"data":"sequenceDiagram\n participant User as あなた\n participant Client as メールアプリ\n participant SMTP as 送信サーバー&lt;br/&gt;（配送センター）\n participant POP as 受信サーバー&lt;br/&gt;（配達先の配送センター）\n participant Recipient as 受信者\n \n User-&gt;&gt;Client: メールを書く\n Client-&gt;&gt;SMTP: 送信（SMTP）\n SMTP-&gt;&gt;POP: サーバー間で配送\n POP-&gt;&gt;Recipient: 受信ボックスに配達\n Recipient-&gt;&gt;POP: メールを取り出す（POP/IMAP）","key":"209d19949ee03cc88a0cd5d9fb437611"}'>
+</iframe>
+
+<p data-sourcepos="350:1-350:280">あなたがメールを書いて送信ボタンを押すと、メールアプリがSMTPというプロトコルで送信サーバーに送ります。これは、Amazonで注文確定ボタンを押して、配送センターに荷物の情報が送られるイメージです。</p>
+<p data-sourcepos="352:1-352:201">送信サーバーは、宛先のメールアドレスを見て、相手の受信サーバーに配送します。これは、配送センター間でトラックが荷物を運ぶイメージです。</p>
+<p data-sourcepos="354:1-354:177">相手の受信サーバーに届いたメールは、受信ボックスに保管されます。これは、配達先の配送センターに荷物が到着した状態です。</p>
+<p data-sourcepos="356:1-356:221">受信者がメールアプリを開くと、POP3やIMAPというプロトコルで受信サーバーからメールを取り出します。これは、配送センターから自宅に荷物が届くイメージです。</p>
+<h3 data-sourcepos="358:1-358:30">
+<span id="instagramのdmとの違い" class="fragment"></span><a href="#instagram%E3%81%AEdm%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>InstagramのDMとの違い</h3>
+<p data-sourcepos="360:1-360:219">InstagramのDMは、リアルタイムで直接届きます。あなたが送信ボタンを押すと、相手のスマホにすぐに表示されます。これは、LINEでメッセージを送るのと同じです。</p>
+<p data-sourcepos="362:1-362:290">しかし、メールは違います。メールは、配送センター（サーバー）を必ず経由します。だから、送信してから相手に届くまで、数秒から数分かかることがあります。InstagramのDMのようなリアルタイム性はありません。</p>
+<p data-sourcepos="364:1-364:366">なぜこんな複雑な仕組みになっているのでしょうか？それは、メールが古い技術だからです。メールが発明された時代、インターネットは今ほど速くありませんでした。だから、サーバーに一時保管して、相手が受け取れる時に配送するという仕組みが必要だったのです。</p>
+<p data-sourcepos="366:1-366:205">今では、LINEやInstagram DMのようなリアルタイムメッセージアプリが主流になりました。しかし、ビジネスの世界では、まだメールが広く使われています。</p>
+<h3 data-sourcepos="368:1-368:72">
+<span id="pop3とimapの違いダウンロードかサーバー参照か" class="fragment"></span><a href="#pop3%E3%81%A8imap%E3%81%AE%E9%81%95%E3%81%84%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%8F%82%E7%85%A7%E3%81%8B"><i class="fa fa-link"></i></a>POP3とIMAPの違い：ダウンロードか、サーバー参照か</h3>
+<p data-sourcepos="370:1-370:292">POP3は、メールをパソコンにダウンロードする方法です。メールをダウンロードすると、サーバーからは削除されます。配送センターから自宅に荷物を持ち帰って、配送センターの荷物置き場は空になるイメージです。</p>
+<p data-sourcepos="372:1-372:378">メリットは、ダウンロードしたメールはオフラインでも読めることです。インターネットに繋がっていなくても、過去のメールを確認できます。デメリットは、別のデバイス（スマホ）から見られないことです。パソコンにダウンロードしたメールは、パソコンにしかありません。</p>
+<p data-sourcepos="374:1-374:283">IMAPは、メールをサーバーに残したまま見る方法です。あなたのメールアプリは、サーバーのメールを参照しているだけです。配送センターの荷物置き場に荷物を置いたまま、スマホで写真を見るイメージです。</p>
+<p data-sourcepos="376:1-376:312">メリットは、どのデバイスからでも同じメールを見られることです。自宅のパソコンで読んだメールを、スマホでも既読として表示できます。デメリットは、オフラインでは読めないことと、サーバーの容量に制限があることです。</p>
+<p data-sourcepos="378:1-378:124">現代では、複数のデバイスでメールを確認するのが普通なので、IMAPが主流になっています。</p>
+<h3 data-sourcepos="380:1-380:28">
+<span id="toccbccの使い分け" class="fragment"></span><a href="#toccbcc%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91"><i class="fa fa-link"></i></a>To/Cc/Bccの使い分け</h3>
+<p data-sourcepos="382:1-382:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7632317a-2c9f-4f2a-a45b-5819ee7632ec.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=ff21dffb0e0148a00ba4227bc9ea65bf" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7632317a-2c9f-4f2a-a45b-5819ee7632ec.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=ff21dffb0e0148a00ba4227bc9ea65bf" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F7632317a-2c9f-4f2a-a45b-5819ee7632ec.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=236e5bc058907ccca94033f3132444aa 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/7632317a-2c9f-4f2a-a45b-5819ee7632ec.png" loading="lazy"></a></p>
+<p data-sourcepos="384:1-384:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F3e62f02f-c97e-423f-8e01-085704a5f25a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d8e2f288f625b9958d2cecdd7be9f2fd" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F3e62f02f-c97e-423f-8e01-085704a5f25a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=d8e2f288f625b9958d2cecdd7be9f2fd" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F3e62f02f-c97e-423f-8e01-085704a5f25a.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=eca978c667bd948ee471e4b56b4f6944 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/3e62f02f-c97e-423f-8e01-085704a5f25a.png" loading="lazy"></a></p>
+<p data-sourcepos="386:1-386:197">Toは、直接届けたい人です。「田中さん宛」と配送伝票に書くイメージです。この人に返信してほしい、この人が主な宛先だという意思表示です。</p>
+<p data-sourcepos="388:1-388:269">Ccは、参考までに見ておいてほしい人です。「佐藤さん（参考）」と配送伝票に書くイメージです。全員に見えます。「この人にも共有しておきたいけど、返信は求めていない」という時に使います。</p>
+<p data-sourcepos="390:1-390:121"><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F5db407d1-2cd0-4cd8-a368-90e622596942.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=60b53ae720356690bf7e9243eef42c54" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F5db407d1-2cd0-4cd8-a368-90e622596942.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=60b53ae720356690bf7e9243eef42c54" alt="image.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F122800%2F5db407d1-2cd0-4cd8-a368-90e622596942.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=9517759b2dcc8a5e697a65e99990bb19 1x" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/122800/5db407d1-2cd0-4cd8-a368-90e622596942.png" loading="lazy"></a></p>
+<p data-sourcepos="392:1-392:264">Bccは、他の人に知られたくない宛先です。「山田さん（秘密）」と書きますが、他の受信者には見えません。複数の人にメールを送る時、お互いのメールアドレスを見せたくない場合に使います。</p>
+<p data-sourcepos="394:1-394:377">ただし、実務での注意点があります。役職者や取引先に送ったメールは、想像以上に読まれていません。Cc機能が気軽に使われすぎて、一日に数百通のメールが届く人もいます。重要な連絡は、メールだけでなく、LINEやSlackなどのメッセージアプリでフォローするのが現実的です。</p>
+<hr data-sourcepos="396:1-397:0">
+<h2 data-sourcepos="398:1-398:60">
+<span id="dhcpホテルのwi-fiに繋ぐだけで使える理由" class="fragment"></span><a href="#dhcp%E3%83%9B%E3%83%86%E3%83%AB%E3%81%AEwi-fi%E3%81%AB%E7%B9%8B%E3%81%90%E3%81%A0%E3%81%91%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E7%90%86%E7%94%B1"><i class="fa fa-link"></i></a>DHCP：ホテルのWi-Fiに繋ぐだけで使える理由</h2>
+<h3 data-sourcepos="400:1-400:35">
+<span id="なぜdhcpが必要なのか" class="fragment"></span><a href="#%E3%81%AA%E3%81%9Cdhcp%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%AE%E3%81%8B"><i class="fa fa-link"></i></a>なぜDHCPが必要なのか？</h3>
+<p data-sourcepos="402:1-402:230">ホテルにチェックインして、Wi-Fiに接続しようとします。パスワードを入力すると、すぐにインターネットが使えるようになります。あなたは、こんな設定をしましたか？</p>
+<p data-sourcepos="404:1-404:161">「IPアドレスを192.168.1.45に設定」「サブネットマスクを255.255.255.0に設定」「デフォルトゲートウェイを192.168.1.1に設定」</p>
+<p data-sourcepos="406:1-406:141">していませんよね。Wi-Fiに接続するだけで、自動的にインターネットが使えます。これがDHCPの役割です。</p>
+<p data-sourcepos="408:1-408:431">DHCPは、ホテルのフロント係のようなものです。あなたがチェックインすると、空いている部屋番号を自動的に割り当ててくれます。もしDHCPがなかったら、自分で「私は301号室に泊まります」と決めなければなりません。しかし、その部屋にすでに他の人が泊まっていたらどうしますか？部屋番号が重複してしまいます。</p>
+<p data-sourcepos="410:1-410:290">DHCPは、空いているIPアドレス（部屋番号）を自動的に割り当てて、他のデバイスと重複しないように管理してくれます。だから、あなたは難しい設定をせずに、Wi-Fiに接続するだけでインターネットが使えるのです。</p>
+<h3 data-sourcepos="412:1-412:38">
+<span id="dhcpがないとどうなるか" class="fragment"></span><a href="#dhcp%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%A9%E3%81%86%E3%81%AA%E3%82%8B%E3%81%8B"><i class="fa fa-link"></i></a>DHCPがないとどうなるか？</h3>
+<p data-sourcepos="414:1-414:237">ネットワークに接続するたびに、手動で設定が必要になります。しかも、他のデバイスと番号が重複しないように、ネットワーク全体を把握しながら管理する必要があります。</p>
+<p data-sourcepos="416:1-416:219">ホテルで例えるなら、チェックインのたびに、全客室の宿泊状況を確認して、空いている部屋を自分で探さなければならないということです。非現実的ですよね。</p>
+<hr data-sourcepos="418:1-419:0">
+<h2 data-sourcepos="420:1-420:57">
+<span id="通信サービス高速道路と一般道の違い" class="fragment"></span><a href="#%E9%80%9A%E4%BF%A1%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E9%AB%98%E9%80%9F%E9%81%93%E8%B7%AF%E3%81%A8%E4%B8%80%E8%88%AC%E9%81%93%E3%81%AE%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>通信サービス：高速道路と一般道の違い</h2>
+<h3 data-sourcepos="422:1-422:55">
+<span id="ブロードバンド光ファイバーの速さ" class="fragment"></span><a href="#%E3%83%96%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%B3%E3%83%89%E5%85%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%90%E3%83%BC%E3%81%AE%E9%80%9F%E3%81%95"><i class="fa fa-link"></i></a>ブロードバンド：光ファイバーの速さ</h3>
+<p data-sourcepos="424:1-424:162">FTTHという言葉を聞いたことがあるでしょうか。Fiber To The Homeの略で、光ファイバーケーブルを家まで引き込む方式です。</p>
+<p data-sourcepos="426:1-426:270">光ファイバーは、光の信号でデータを送ります。電気信号よりも遥かに速く、大量のデータを運べます。宅配便で例えるなら、高速道路です。障害物がなく、直線的に、大量の荷物を高速で運べます。</p>
+<p data-sourcepos="428:1-428:178">実務では、オフィスや在宅勤務の標準です。Zoom会議、Googleドライブ、大容量ファイルの送受信など、現代の業務には欠かせません。</p>
+<p data-sourcepos="430:1-430:385">CATVは、ケーブルテレビの配線を使った通信方式です。既存のインフラを活用できるので、導入しやすいという利点があります。速度は光ファイバーに劣りますが、通常の用途には十分です。宅配便で例えるなら、一般道です。高速道路ほどではありませんが、実用的な速度で運べます。</p>
+<h3 data-sourcepos="432:1-432:41">
+<span id="モバイル通信4gと5gの違い" class="fragment"></span><a href="#%E3%83%A2%E3%83%90%E3%82%A4%E3%83%AB%E9%80%9A%E4%BF%A14g%E3%81%A85g%E3%81%AE%E9%81%95%E3%81%84"><i class="fa fa-link"></i></a>モバイル通信：4Gと5Gの違い</h3>
+<p data-sourcepos="434:1-434:290">4G/LTEは、広い範囲をカバーし、安定している通信方式です。Webサイトの閲覧、LINE、YouTube視聴など、通常の用途には十分です。宅配便で例えるなら、普通の道路です。全国どこでも使える、標準的な配送ルートです。</p>
+<p data-sourcepos="436:1-436:299">5Gは、超高速で、遅延が極端に少ない通信方式です。IoTデバイス、自動運転、遠隔医療など、リアルタイム性が求められる用途に向いています。宅配便で例えるなら、新幹線です。圧倒的な速さで、大量の荷物を運べます。</p>
+<p data-sourcepos="438:1-438:334">ただし、実務での判断としては、Webアプリを作る時は4Gでも快適に動作するように設計することが重要です。画像を圧縮する、遅延読み込みを使う、データ量を減らすなどの工夫です。5Gはまだ普及途上なので、「あればラッキー」程度に考えます。</p>
+<h3 data-sourcepos="440:1-440:22">
+<span id="その他の技術" class="fragment"></span><a href="#%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E6%8A%80%E8%A1%93"><i class="fa fa-link"></i></a>その他の技術</h3>
+<p data-sourcepos="442:1-442:245">テザリングは、スマホをWi-Fiルーターとして使う機能です。外出先でノートパソコンをインターネットに繋ぎたい時に便利です。スマホのモバイル通信を、パソコンと共有できます。</p>
+<p data-sourcepos="444:1-444:214">MVNOは、格安SIMと呼ばれるサービスです。大手キャリアの回線を借りて、低価格で通信サービスを提供します。コスト削減や、IoTデバイスの通信に使われます。</p>
+<p data-sourcepos="446:1-446:272">eSIMは、物理的なSIMカードを使わない方式です。スマホに内蔵されたチップに、通信契約の情報を書き込みます。海外旅行の時に、現地のeSIMを追加すれば、SIMカードを差し替えずにデータ通信できます。</p>
+<hr data-sourcepos="448:1-449:0">
+<h2 data-sourcepos="450:1-450:30">
+<span id="効率的な学習手引き" class="fragment"></span><a href="#%E5%8A%B9%E7%8E%87%E7%9A%84%E3%81%AA%E5%AD%A6%E7%BF%92%E6%89%8B%E5%BC%95%E3%81%8D"><i class="fa fa-link"></i></a>効率的な学習手引き</h2>
+<p data-sourcepos="452:1-453:254">ここまでの内容を読んで「覚えきれない」と感じた方へ。それは当然です。ネットワークは範囲が広く、専門用語も多いため、一度に全部理解するのは困難です。<br>
+重要なのは、一回で覚えることを目指さず、忘れながら覚えなおしていくことです。頻度が低いものは忘れてOKです。頻度が高いけど覚えられない物は、学習アプローチを見直しましょう。</p>
+<p data-sourcepos="455:1-455:115">脳のキャパシティを節約しながら学ぶために、以下の4段階で学習目標を設定します。</p>
+<h3 data-sourcepos="457:1-457:44">
+<span id="ステップ1イメージを固める" class="fragment"></span><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%971%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%82%92%E5%9B%BA%E3%82%81%E3%82%8B"><i class="fa fa-link"></i></a>ステップ1：イメージを固める</h3>
+<p data-sourcepos="459:1-460:64">まずは覚えることを目指します。細かい中身は後のステップでやります。<br>
+どこまで覚えるか？は「この1分間だけ」です。</p>
+<p data-sourcepos="462:1-462:241">資料を流し読みしながら、「つまり、〇〇ってこと？」とChatGPTやClaudeに確認してみましょう。全く想像もできないなら「日常生活で言うとどういうこと？」と聞いてしまいます。</p>
+<p data-sourcepos="464:1-464:265">たとえば、こんな質問です。「TCP/IPモデルって何？宅配便で例えたらどういうこと？」「DNSの仕組みを、LINEの連絡先で例えるとどうなる？」「プロトコルって何？SNSアプリの違いで例えられる？」</p>
+<p data-sourcepos="466:1-466:248">専門用語を自分なりにイメージしてから学習を始めます。理解できない箇所は「もっと簡単な言葉で」と聞き返しましょう。AIは何度でも答えてくれます。遠慮する必要はありません。</p>
+<h3 data-sourcepos="468:1-468:32">
+<span id="ステップ2理解する" class="fragment"></span><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%972%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B"><i class="fa fa-link"></i></a>ステップ2：理解する</h3>
+<p data-sourcepos="470:1-470:202">後で見て思い出せるレベルを目指します。ステップ1で覚えたものを忘れた後に見た時に、覚えていないけど何を言っているかは分かる状態にします。</p>
+<p data-sourcepos="472:1-472:292">たとえば、「TCP/IPモデル」という言葉を聞いた時に、「ああ、宅配便の仕組みを4つに分けたやつだ」と思い出せればOKです。4つの層の名前を正確に言えなくても構いません。詳細は、必要な時に調べればいいのです。</p>
+<h3 data-sourcepos="474:1-474:53">
+<span id="ステップ3自分の言葉に置き換える" class="fragment"></span><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%973%E8%87%AA%E5%88%86%E3%81%AE%E8%A8%80%E8%91%89%E3%81%AB%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B"><i class="fa fa-link"></i></a>ステップ3：自分の言葉に置き換える</h3>
+<p data-sourcepos="476:1-476:66">理解した内容を自分なりに説明してみましょう。</p>
+<p data-sourcepos="478:1-478:292">たとえば、「TCP/IPモデルは、宅配便を4つの役割に分けたもの。下から順に、トラックで運ぶ、配送ルートを決める、追跡番号をつける、何を送るか決める。これが分かれていると、どこで失敗したか切り分けやすい」</p>
+<p data-sourcepos="480:1-480:265">間違っていても良いです。後で修正できます。人に説明するつもりで言語化してみましょう。AIに「この理解で合ってる？」と確認してもらうのも有効です。AIは間違いを優しく指摘してくれます。</p>
+<h3 data-sourcepos="482:1-482:26">
+<span id="ステップ4知る" class="fragment"></span><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%974%E7%9F%A5%E3%82%8B"><i class="fa fa-link"></i></a>ステップ4：知る</h3>
+<div data-sourcepos="484:1-486:3" class="note info">
+<span class="fa fa-fw fa-check-circle"></span><div>
+<p data-sourcepos="485:1-485:70">ステップ2で理解したものを忘れた後がスタートです</p>
+</div>
+</div>
+<p data-sourcepos="488:1-488:102">「何か言ってたな」程度で十分です。「知らない」からの卒業が目的です。</p>
+<p data-sourcepos="490:1-490:348">ネットワーク分野は範囲が広いため、すべてを理解しようとすると挫折します。試験で頻出の項目だけ理解し、残りは「聞いたことがある」レベルで十分です。試験問題を見た時に、「ああ、これ読んだことがある」と思い出せれば、選択肢を絞り込めます。</p>
+<p data-sourcepos="492:1-492:392">このように、ITパスポートは範囲が広すぎるため、「覚えた後に理解して、忘れても内容は知っている状態」をゴールにおいています。この「知る」のが未経験・文系の方にとっては結構大変です。重要なのは忘れる前提で学習を進めることです。知識を詰め込むような覚え方は非推奨です。</p>
+<hr data-sourcepos="494:1-495:0">
+<h2 data-sourcepos="496:1-496:9">
+<span id="要約" class="fragment"></span><a href="#%E8%A6%81%E7%B4%84"><i class="fa fa-link"></i></a>要約</h2>
+<p data-sourcepos="498:1-498:222">ネットワークは「見えない宅配システム」です。Amazonで商品を注文してから届くまでの流れと、データがインターネットを通じて届く流れは、驚くほど似ています。</p>
+<p data-sourcepos="500:1-500:63">覚えておきたいポイントは、以下の通りです。</p>
+<p data-sourcepos="502:1-502:412">TCP/IPモデルは、宅配便を4つの役割に分けたものです。何を送るか決める（アプリケーション層）、追跡番号をつける（トランスポート層）、配送ルートを決める（インターネット層）、トラックで運ぶ（ネットワークインターフェース層）。問題が起きた時に、どの役割で失敗したかを切り分けられます。</p>
+<p data-sourcepos="504:1-504:190">IPアドレスは、住所です。<code>localhost</code>は自分の家、<code>192.168.1.x</code>は同じマンション内、グローバルIPは全国どこからでも届けられる正式な住所です。</p>
+<p data-sourcepos="506:1-506:171">ポート番号は、マンションの部屋番号です。一台のサーバーで複数のサービスを動かす時、どのサービスに繋ぐか区別します。</p>
+<p data-sourcepos="508:1-508:219">DNSは、LINEの連絡先です。覚えにくいIPアドレスを、覚えやすいドメイン名に変換します。「google.com」と入力すると、裏側でIPアドレスに変換されて接続されます。</p>
+<p data-sourcepos="510:1-510:243">プロトコルは、SNSアプリのルールです。HTTPはWebページ、SMTPはメール送信、SSHはリモート接続と、目的ごとにルールが変わります。LINEとInstagramで会話のルールが違うのと同じです。</p>
+<p data-sourcepos="512:1-512:183">TCPは追跡番号つきの宅配便、UDPは追跡なしの配送です。データが欠けると困る場合はTCP、多少欠けても速度優先の場合はUDPを使います。</p>
+<p data-sourcepos="514:1-514:199">NATは、マンションの宅配ロッカーです。複数のデバイスが一つのグローバルIPを共有できます。家庭のWi-Fiルーターは、必ずNAT機能を持っています。</p>
+<p data-sourcepos="516:1-516:301">すべてを暗記する必要はありません。「実務で困った時に、どこを調べればいいか分かる」状態を目指しましょう。宅配便やLINEの仕組みを思い浮かべれば、ネットワークの抽象的な概念も、急に身近に感じられるはずです。</p>
+<p data-sourcepos="518:1-518:338">ITパスポート試験対策としては、この記事の内容を「理解する」レベルにしておけば、後は過去問演習で十分です。理解できれば、忘れても思い出せます。そして、実際の生活の中で「ああ、これがあの時学んだことか」と気づく瞬間が来るはずです。</p>
